@@ -2,9 +2,12 @@ export default function FeaturesSection() {
   return (
     <section className="bg-[#FFEDE0] px-0 pt-9 pb-10 lg:pt-16 lg:pb-20" aria-labelledby="feat">
       <div className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-5 px-5 lg:gap-8">
-        <h2 className="m-0 text-center text-[24px] font-extrabold lg:text-[30px]" id="feat">
-          한우리 프로그램 특징
-        </h2>
+        <div className="text-center">
+          <p className="m-0 text-[13px] font-bold text-[#C2410C]">| 특징 |</p>
+          <h2 className="mx-0 mt-1.5 mb-0 text-[24px] font-extrabold lg:text-[30px]" id="feat">
+            글쓰기와 토론까지 한 번에!
+          </h2>
+        </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-6">
           <article className="relative isolate flex min-h-[170px] flex-col md:min-h-[190px] overflow-hidden rounded-[32px] bg-[#fff] p-7 text-left lg:min-h-[200px] lg:p-8">
             <img
