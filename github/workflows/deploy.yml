@@ -1,0 +1,53 @@
+# main 브랜치에 올라가면 Next.js 사이트를 빌드해서 GitHub Pages에 배포합니다.
+# 저장소 Settings → Pages → Build and deployment → Source 를 "GitHub Actions"로 설정해야 동작합니다.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # Actions 탭에서 수동 실행도 가능
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Pages 설정 (저장소 하위 경로 확인)
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - run: npm ci
+
+      - name: 빌드 (out/ 폴더에 정적 파일 생성)
+        run: npm run build
+        env:
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
