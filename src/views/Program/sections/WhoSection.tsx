@@ -12,7 +12,7 @@ export default function WhoSection() {
         <TitleIcon kind="who" />
         한우리 수업, 어떤 선생님이 가르치나요?
       </h2>
-      <p className="m-0 text-[14px] leading-[1.7] text-[#4A4A4A]">
+      <p className="m-0 text-[14px] leading-[1.7] text-[#333333]">
         전문적인 교육을 받고 자격증을 취득한 한우리 선생님이 가르칩니다. 한우리 선생님은 독서토론논술
         전문가입니다.
       </p>
@@ -23,7 +23,7 @@ export default function WhoSection() {
           </span>
           <div>
             <strong className="text-[16px] text-[#C2410C]">[독서지도사]</strong>
-            <p className="mx-0 mt-1.5 mb-0 text-[14px] leading-[1.6] text-[#4A4A4A]">
+            <p className="mx-0 mt-1.5 mb-0 text-[14px] leading-[1.6] text-[#333333]">
               아이들의 발달 단계와 수준에 맞는 교재와 교수법으로 독서를 지도합니다.
             </p>
           </div>
@@ -34,7 +34,7 @@ export default function WhoSection() {
           </span>
           <div>
             <strong className="text-[16px] text-[#C2410C]">[토론논술교사]</strong>
-            <p className="mx-0 mt-1.5 mb-0 text-[14px] leading-[1.6] text-[#4A4A4A]">
+            <p className="mx-0 mt-1.5 mb-0 text-[14px] leading-[1.6] text-[#333333]">
               토의·토론·논술 수업을 통해 스스로 사고하고 표현하는 능력을 키워줍니다.
             </p>
           </div>

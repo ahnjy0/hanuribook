@@ -63,7 +63,7 @@ export default function ApplySection({ done, selLabel, sessions, submit }: Props
             >
               <span className="flex flex-col gap-0.5">
                 <strong className="text-[15px] text-[#1F1F1F]">{s.date}</strong>
-                <span className="text-[13px] text-[#6B6B6B]">{s.time}</span>
+                <span className="text-[13px] text-[#555555]">{s.time}</span>
               </span>
               <span
                 className="rounded-[6px] px-2 py-0.75 text-[12px] font-bold"
@@ -75,7 +75,7 @@ export default function ApplySection({ done, selLabel, sessions, submit }: Props
           ))}
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className="text-[13px] font-semibold text-[#333333]" htmlFor="se-name">
+          <label className="text-[13px] font-semibold text-[#222222]" htmlFor="se-name">
             이름
           </label>
           <input
@@ -87,7 +87,7 @@ export default function ApplySection({ done, selLabel, sessions, submit }: Props
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className="text-[13px] font-semibold text-[#333333]" htmlFor="se-phone">
+          <label className="text-[13px] font-semibold text-[#222222]" htmlFor="se-phone">
             휴대폰 번호 (접속 링크 발송)
           </label>
           <input

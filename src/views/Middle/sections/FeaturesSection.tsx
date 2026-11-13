@@ -9,21 +9,21 @@ export default function FeaturesSection() {
           <div className="flex flex-col gap-2 rounded-[20px] bg-white p-5">
             <span className="text-[28px] font-extrabold text-[#F26522]">01</span>
             <strong className="text-[16px]">교과 연계 필독서</strong>
-            <p className="m-0 text-[13px] leading-[1.6] text-[#4A4A4A]">
+            <p className="m-0 text-[13px] leading-[1.6] text-[#333333]">
               학년별 국어·사회·과학 교과와 연계된 도서를 매월 선정합니다.
             </p>
           </div>
           <div className="flex flex-col gap-2 rounded-[20px] bg-white p-5">
             <span className="text-[28px] font-extrabold text-[#F26522]">02</span>
             <strong className="text-[16px]">내신 서술형 대비</strong>
-            <p className="m-0 text-[13px] leading-[1.6] text-[#4A4A4A]">
+            <p className="m-0 text-[13px] leading-[1.6] text-[#333333]">
               최신 서술형·수행평가 유형으로 근거 있는 답안 쓰기를 훈련합니다.
             </p>
           </div>
           <div className="flex flex-col gap-2 rounded-[20px] bg-white p-5">
             <span className="text-[28px] font-extrabold text-[#F26522]">03</span>
             <strong className="text-[16px]">1:1 첨삭 피드백</strong>
-            <p className="m-0 text-[13px] leading-[1.6] text-[#4A4A4A]">
+            <p className="m-0 text-[13px] leading-[1.6] text-[#333333]">
               매 차시 쓴 글을 선생님이 꼼꼼히 첨삭하여 돌려드립니다.
             </p>
           </div>

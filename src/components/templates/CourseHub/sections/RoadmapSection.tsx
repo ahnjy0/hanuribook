@@ -39,7 +39,7 @@ export default function RoadmapSection({ g, n, steps }: Props) {
               </p>
               <ul className="mx-0 mt-0 mb-1.5 flex list-none flex-col gap-1.5 p-0">
                 {s.items.map((it, j) => (
-                  <li key={j} className="flex gap-2 text-[14px] leading-[1.55] break-keep text-[#4A4A4A]">
+                  <li key={j} className="flex gap-2 text-[14px] leading-[1.55] break-keep text-[#333333]">
                     <span
                       className="mt-2.25 h-1 w-1 flex-none rounded-[50%] bg-[#8A8A8A]"
                       aria-hidden="true"

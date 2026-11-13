@@ -14,7 +14,7 @@ export default function InquirySection({ done, submit }: Props) {
         </h2>
         <div className="grid grid-cols-2 gap-2.5">
           <div className="flex flex-col gap-1.5">
-            <label className="text-[13px] font-semibold text-[#333333]" htmlFor="f-name">
+            <label className="text-[13px] font-semibold text-[#222222]" htmlFor="f-name">
               이름
             </label>
             <input
@@ -25,7 +25,7 @@ export default function InquirySection({ done, submit }: Props) {
             />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-[13px] font-semibold text-[#333333]" htmlFor="f-tel">
+            <label className="text-[13px] font-semibold text-[#222222]" htmlFor="f-tel">
               연락처
             </label>
             <input
@@ -37,7 +37,7 @@ export default function InquirySection({ done, submit }: Props) {
           </div>
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className="text-[13px] font-semibold text-[#333333]" htmlFor="f-area">
+          <label className="text-[13px] font-semibold text-[#222222]" htmlFor="f-area">
             희망 지역
           </label>
           <input
@@ -48,7 +48,7 @@ export default function InquirySection({ done, submit }: Props) {
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className="text-[13px] font-semibold text-[#333333]" htmlFor="f-msg">
+          <label className="text-[13px] font-semibold text-[#222222]" htmlFor="f-msg">
             문의 내용
           </label>
           <textarea
@@ -77,7 +77,7 @@ export default function InquirySection({ done, submit }: Props) {
             ✓ 개설 문의가 접수되었습니다. 담당자가 3영업일 이내에 연락드립니다.
           </p>
         )}
-        <p className="m-0 text-center text-[13px] text-[#6B6B6B]">
+        <p className="m-0 text-center text-[13px] text-[#555555]">
           {"사업 문의 전화 "}
           <a className="font-bold text-[#C2410C] hover:text-[#9A3412]" href="tel:15771909">
             1577-1909

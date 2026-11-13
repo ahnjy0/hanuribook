@@ -24,7 +24,7 @@ export default function SiblingsSection({ p, sibs }: Props) {
             )}
             {o.off && (
               <SmartLink
-                className="inline-flex min-h-11 items-center gap-1 rounded-full border border-[#E4E4E4] bg-white px-4 py-0 text-[14px] font-semibold text-[#333333] no-underline"
+                className="inline-flex min-h-11 items-center gap-1 rounded-full border border-[#E4E4E4] bg-white px-4 py-0 text-[14px] font-semibold text-[#222222] no-underline"
                 href={o.href}
               >{`${o.title} ›`}</SmartLink>
             )}

@@ -26,8 +26,8 @@ export default function CourseExplorerSection({ tabs }: Props) {
               </div>
               <div className="flex flex-col gap-1.5 p-4">
                 <h2 className="m-0 text-[19px] font-extrabold">{c.label}</h2>
-                <p className="m-0 text-[14px] font-semibold text-[#333333]">{c.slogan}</p>
-                <p className="m-0 text-[13px] leading-[1.6] text-[#4A4A4A]">{c.desc}</p>
+                <p className="m-0 text-[14px] font-semibold text-[#222222]">{c.slogan}</p>
+                <p className="m-0 text-[13px] leading-[1.6] text-[#333333]">{c.desc}</p>
               </div>
             </article>
           </li>

@@ -12,7 +12,7 @@ export default function WhereSection() {
         <TitleIcon kind="where" />
         한우리 수업, 어디서 받을 수 있나요?
       </h2>
-      <p className="m-0 text-[14px] leading-[1.7] text-[#4A4A4A]">
+      <p className="m-0 text-[14px] leading-[1.7] text-[#333333]">
         가까운 지역의 한우리 센터를 통해 수업을 받을 수 있습니다. 아이의 성향이나 상황에 맞춰 자유롭게 수업
         유형을 선택할 수 있습니다.
       </p>
@@ -35,7 +35,7 @@ export default function WhereSection() {
           </span>
           <div>
             <strong className="text-[16px]">방문 수업</strong>
-            <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#4A4A4A]">
+            <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#333333]">
               선생님이 회원의 가정으로 방문하여 수업
             </p>
           </div>
@@ -49,7 +49,7 @@ export default function WhereSection() {
           </span>
           <div>
             <strong className="text-[16px]">홈클럽 수업</strong>
-            <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#4A4A4A]">
+            <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#333333]">
               회원이 선생님의 가정으로 방문하여 수업
             </p>
           </div>
@@ -63,7 +63,7 @@ export default function WhereSection() {
           </span>
           <div>
             <strong className="text-[16px]">학원 수업</strong>
-            <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#4A4A4A]">회원이 학원으로 방문하여 수업</p>
+            <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#333333]">회원이 학원으로 방문하여 수업</p>
           </div>
         </div>
       </div>

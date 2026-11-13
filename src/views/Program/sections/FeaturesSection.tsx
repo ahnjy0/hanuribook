@@ -17,7 +17,7 @@ export default function FeaturesSection() {
             />
             <div>
               <h3 className="mx-0 mt-0 mb-3 text-[22px] font-extrabold tracking-[-0.02em] text-[#1A1A1A] lg:text-[24px]">학년별 교과 연계</h3>
-              <p className="m-0 text-[15px] leading-[1.7] text-[#333333] lg:text-[16px]">
+              <p className="m-0 text-[15px] leading-[1.7] text-[#222222] lg:text-[16px]">
                 학년별 교과 주제를 이해하여
                 <br />
                 학습 역량을 향상시킬 수 있습니다.
@@ -35,7 +35,7 @@ export default function FeaturesSection() {
             />
             <div>
               <h3 className="mx-0 mt-0 mb-3 text-[22px] font-extrabold tracking-[-0.02em] text-[#1A1A1A] lg:text-[24px]">최신 평가 유형 반영</h3>
-              <p className="m-0 text-[15px] leading-[1.7] text-[#333333] lg:text-[16px]">
+              <p className="m-0 text-[15px] leading-[1.7] text-[#222222] lg:text-[16px]">
                 최신 서술형 및 수행평가 유형을 반영하여
                 <br />
                 빠르게 대비할 수 있습니다.
@@ -53,7 +53,7 @@ export default function FeaturesSection() {
             />
             <div>
               <h3 className="mx-0 mt-0 mb-3 text-[22px] font-extrabold tracking-[-0.02em] text-[#1A1A1A] lg:text-[24px]">매달 새로운 교재</h3>
-              <p className="m-0 text-[15px] leading-[1.7] text-[#333333] lg:text-[16px]">
+              <p className="m-0 text-[15px] leading-[1.7] text-[#222222] lg:text-[16px]">
                 매달 새롭게 개정되는 교재로
                 <br />
                 다양한 독서를 할 수 있습니다.

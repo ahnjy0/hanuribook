@@ -11,7 +11,7 @@ export default function BodySection({ p, steps }: Props) {
         </h2>
         <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
           {p.points.map((pt, i) => (
-            <li key={i} className="flex gap-2.5 text-[15px] leading-[1.5] text-[#333333]">
+            <li key={i} className="flex gap-2.5 text-[15px] leading-[1.5] text-[#222222]">
               <svg
                 className="mt-0.25 flex-none"
                 aria-hidden="true"

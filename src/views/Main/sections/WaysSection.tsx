@@ -26,19 +26,19 @@ export default function WaysSection() {
               무작정 많이 읽는 것은 진짜 읽기가 아닙니다.
             </p>
             <ul className="m-0 mt-1 flex list-none flex-col gap-2 p-0 pt-3 lg:gap-2.5 lg:pt-4">
-              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#4A4A4A] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
+              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#333333] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
                 <strong className="flex-none text-[15px] font-extrabold text-[#D94E0F] lg:min-w-42.5 lg:text-[18px]">
                   스스로 읽고
                 </strong>
                 수업 전, 스스로 책을 읽으며 자발적인 읽기 습관을 기릅니다.
               </li>
-              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#4A4A4A] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
+              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#333333] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
                 <strong className="flex-none text-[15px] font-extrabold text-[#D94E0F] lg:min-w-42.5 lg:text-[18px]">
                   선생님과 함께 읽고
                 </strong>
                 선생님의 지도하에 제대로 정독하는 법을 배웁니다.
               </li>
-              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#4A4A4A] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
+              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#333333] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
                 <strong className="flex-none text-[15px] font-extrabold text-[#D94E0F] lg:min-w-42.5 lg:text-[18px]">
                   깊이 읽습니다
                 </strong>
@@ -68,19 +68,19 @@ export default function WaysSection() {
               연결성을 갖춘 긴 글 쓰기만이 <br className="lg:hidden" />사고력을 확장합니다.
             </p>
             <ul className="m-0 mt-1 flex list-none flex-col gap-2 p-0 pt-3 lg:gap-2.5 lg:pt-4">
-              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#4A4A4A] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
+              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#333333] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
                 <strong className="flex-none text-[15px] font-extrabold text-[#D94E0F] lg:min-w-42.5 lg:text-[18px]">
                   매 수업 쓰고
                 </strong>
                 일주일에 1번, 한달에 4번 매 수업마다 글쓰기를 합니다.
               </li>
-              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#4A4A4A] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
+              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#333333] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
                 <strong className="flex-none text-[15px] font-extrabold text-[#D94E0F] lg:min-w-42.5 lg:text-[18px]">
                   다양하게 쓰고
                 </strong>
                  논설문, 감상문, 설명문 등 다양한 갈래별로 씁니다.
               </li>
-              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#4A4A4A] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
+              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#333333] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
                 <strong className="flex-none text-[15px] font-extrabold text-[#D94E0F] lg:min-w-42.5 lg:text-[18px]">
                   논리적으로 씁니다
                 </strong>
@@ -110,19 +110,19 @@ export default function WaysSection() {
               한우리에는 틀린 답이 없습니다.
             </p>
             <ul className="m-0 mt-1 flex list-none flex-col gap-2 p-0 pt-3 lg:gap-2.5 lg:pt-4">
-              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#4A4A4A] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
+              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#333333] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
                 <strong className="flex-none text-[15px] font-extrabold text-[#D94E0F] lg:min-w-42.5 lg:text-[18px]">
                   좋은 질문에 답하고
                 </strong>
                 전문 연구원이 작성한 사고를 넓히는 질문에 답합니다.
               </li>
-              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#4A4A4A] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
+              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#333333] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
                 <strong className="flex-none text-[15px] font-extrabold text-[#D94E0F] lg:min-w-42.5 lg:text-[18px]">
                   자신 있게 말하고
                 </strong>
                 어떤 대답도 '해답'이 될 수 있기에 자신있게 말합니다.
               </li>
-              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#4A4A4A] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
+              <li className="reveal flex flex-col gap-1 rounded-[14px] border border-[#F1E4DA] bg-white px-4 py-3 text-[14px] leading-[1.5] text-[#333333] break-keep lg:flex-row lg:items-center lg:gap-4 lg:rounded-[16px] lg:px-5 lg:py-3.5 lg:text-[17px] xl:whitespace-nowrap">
                 <strong className="flex-none text-[15px] font-extrabold text-[#D94E0F] lg:min-w-42.5 lg:text-[18px]">
                   함께 의견을 나눕니다
                 </strong>

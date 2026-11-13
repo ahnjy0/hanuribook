@@ -21,12 +21,12 @@ export default function CourseListSection({ items }: Props) {
                 <span className="rounded-[6px] bg-[#FFF1E7] px-2 py-0.75 text-[12px] font-bold text-[#C2410C]">
                   {it.age}
                 </span>
-                <span className="rounded-[6px] bg-[#F1F1F2] px-2 py-0.75 text-[12px] font-bold text-[#4A4A4A]">
+                <span className="rounded-[6px] bg-[#F1F1F2] px-2 py-0.75 text-[12px] font-bold text-[#333333]">
                   {it.period}
                 </span>
               </div>
               <h2 className="m-0 text-[19px] font-extrabold">{it.title}</h2>
-              <p className="m-0 flex-auto text-[14px] leading-[1.6] text-[#4A4A4A]">{it.desc}</p>
+              <p className="m-0 flex-auto text-[14px] leading-[1.6] text-[#333333]">{it.desc}</p>
               <Link
                 className="mt-1.5 flex h-11.5 items-center justify-center rounded-[12px] border-[1.5px] border-[#F26522] text-[15px] font-bold text-[#C2410C] no-underline"
                 href="/consult"

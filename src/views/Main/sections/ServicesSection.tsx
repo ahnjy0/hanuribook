@@ -22,7 +22,7 @@ export default function ServicesSection() {
           <span className="h-9 w-9 flex-none rounded-[10px] bg-[#FFE6D5]" />
           <span className="flex flex-col">
             <strong className="text-[14px]">한우리 추천도서</strong>
-            <span className="text-[12px] text-[#6B6B6B]">학년별 필독서</span>
+            <span className="text-[12px] text-[#555555]">학년별 필독서</span>
           </span>
         </a>
         <a
@@ -36,7 +36,7 @@ export default function ServicesSection() {
           </span>
           <span className="flex flex-col">
             <strong className="text-[14px]">YouTube</strong>
-            <span className="text-[12px] text-[#6B6B6B]">공식 채널</span>
+            <span className="text-[12px] text-[#555555]">공식 채널</span>
           </span>
         </a>
         <a
@@ -59,7 +59,7 @@ export default function ServicesSection() {
           </span>
           <span className="flex flex-col">
             <strong className="text-[14px]">Instagram</strong>
-            <span className="text-[12px] text-[#6B6B6B]">@hanuribook</span>
+            <span className="text-[12px] text-[#555555]">@hanuribook</span>
           </span>
         </a>
       </div>

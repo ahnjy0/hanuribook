@@ -9,7 +9,7 @@ export default function IntroSection() {
         <br />
         교과 배경지식 심화 과정
       </h1>
-      <p className="m-0 text-[14px] leading-[1.7] text-[#4A4A4A]">
+      <p className="m-0 text-[14px] leading-[1.7] text-[#333333]">
         과학·역사·지리 분야의 책을 깊이 읽고 탐구하며, 교과서 너머의 배경지식과 융합적 사고력을 키웁니다.
       </p>
     </section>

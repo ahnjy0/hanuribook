@@ -26,7 +26,7 @@ export default function BenefitsSection() {
           </span>
           <div>
             <strong className="text-[16px]">교육 기간 단축</strong>
-            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#4A4A4A]">
+            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#333333]">
               경력 인정으로 일반 과정 대비 짧은 기간에 자격을 취득합니다.
             </p>
           </div>
@@ -49,7 +49,7 @@ export default function BenefitsSection() {
           </span>
           <div>
             <strong className="text-[16px]">우선 센터 배정</strong>
-            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#4A4A4A]">
+            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#333333]">
               수료 즉시 희망 지역 센터와 연결해 활동을 시작합니다.
             </p>
           </div>
@@ -71,7 +71,7 @@ export default function BenefitsSection() {
           </span>
           <div>
             <strong className="text-[16px]">수강료 지원</strong>
-            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#4A4A4A]">
+            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#333333]">
               특별반 수강생 대상 수강료 지원 혜택을 제공합니다. [지원 조건]
             </p>
           </div>

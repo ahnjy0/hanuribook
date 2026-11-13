@@ -13,10 +13,10 @@ export default function CoursesSection() {
             중1 ~ 중3
           </span>
           <h3 className="m-0 text-[21px] font-extrabold">중등정규</h3>
-          <p className="m-0 text-[14px] leading-[1.6] text-[#4A4A4A]">
+          <p className="m-0 text-[14px] leading-[1.6] text-[#333333]">
             교과서 문학·비문학을 깊이 읽고, 서술형과 수행평가에 강한 글쓰기 실력을 기릅니다.
           </p>
-          <ul className="m-0 flex list-none flex-col gap-2 rounded-[14px] bg-[#F7F7F8] p-3.5 text-[14px] text-[#333333]">
+          <ul className="m-0 flex list-none flex-col gap-2 rounded-[14px] bg-[#F7F7F8] p-3.5 text-[14px] text-[#222222]">
             <li>· 교과서 수록 작품 깊이 읽기</li>
             <li>· 비문학 구조 독해 훈련</li>
             <li>· 서술형·수행평가 실전 쓰기</li>
@@ -27,10 +27,10 @@ export default function CoursesSection() {
             고1 ~ 고2
           </span>
           <h3 className="m-0 text-[21px] font-extrabold">고등정규</h3>
-          <p className="m-0 text-[14px] leading-[1.6] text-[#4A4A4A]">
+          <p className="m-0 text-[14px] leading-[1.6] text-[#333333]">
             수능 독서 영역과 통합 교과 주제를 바탕으로 논리적 사고와 논술·면접 역량을 완성합니다.
           </p>
-          <ul className="m-0 flex list-none flex-col gap-2 rounded-[14px] bg-[#F7F7F8] p-3.5 text-[14px] text-[#333333]">
+          <ul className="m-0 flex list-none flex-col gap-2 rounded-[14px] bg-[#F7F7F8] p-3.5 text-[14px] text-[#222222]">
             <li>· 수능 독서 지문 분석</li>
             <li>· 통합 교과 주제 토론</li>
             <li>· 대입 논술·면접 기초</li>

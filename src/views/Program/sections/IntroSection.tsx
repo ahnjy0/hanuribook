@@ -10,7 +10,7 @@ export default function IntroSection() {
             <br />
             문해력을 탄탄하게!
           </h1>
-          <p className="m-0 text-[15px] leading-[1.6] text-[#4A4A4A]">
+          <p className="m-0 text-[15px] leading-[1.6] text-[#333333]">
             한우리독서토론논술 프로그램은
             <br />
             5력 1체 독서 교육 원리와 소그룹 협동 학습을 기반으로

@@ -11,7 +11,7 @@ export default function SearchSection({ count, listBg, listSel, mapBg, mapSel, s
       <h1 className="m-0 text-[28px] leading-[1.35] font-extrabold lg:text-[36px]" id="ct-h">
         전국 한우리 센터 찾기
       </h1>
-      <p className="mx-0 mt-0 mb-2 text-[15px] leading-[1.6] text-[#4A4A4A]">
+      <p className="mx-0 mt-0 mb-2 text-[15px] leading-[1.6] text-[#333333]">
         {"전국 "}
         <strong className="text-[#C2410C]">600개</strong>
         {" 센터에서 "}
@@ -61,7 +61,7 @@ export default function SearchSection({ count, listBg, listSel, mapBg, mapSel, s
         </label>
       </div>
       <div className="flex items-center justify-between pt-1">
-        <p className="m-0 text-[14px] text-[#4A4A4A]" aria-live="polite">
+        <p className="m-0 text-[14px] text-[#333333]" aria-live="polite">
           {"인근 탐색 결과 "}
           <strong className="text-[#C2410C]">{`${count}곳`}</strong>
         </p>

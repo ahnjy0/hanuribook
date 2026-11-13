@@ -61,7 +61,7 @@ export default function ProgramsSection({ progs }: Props) {
                 </span>
               </div>
               <div className="flex flex-auto flex-col gap-3 px-5 pt-4.5 pb-5">
-                <p className="m-0 text-[15px] leading-[1.55] text-[#333333]">{p.desc}</p>
+                <p className="m-0 text-[15px] leading-[1.55] text-[#222222]">{p.desc}</p>
                 <span className="text-[12px] font-bold" style={{ color: p.ink }}>
                   {p.tags}
                 </span>

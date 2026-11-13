@@ -20,7 +20,7 @@ export default function FeaturesSection({ feats }: Props) {
             </span>
             <div>
               <strong className="text-[15px] break-keep">{f.t}</strong>
-              <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] break-keep text-[#4A4A4A]">{f.d}</p>
+              <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] break-keep text-[#333333]">{f.d}</p>
             </div>
           </li>
         ))}

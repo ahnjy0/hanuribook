@@ -12,8 +12,8 @@ export default function GreetingSection() {
       </span>
       <span className="h-7 w-0.25 bg-[#F2A27A]" aria-hidden="true" />
       <h1 className="m-0 flex flex-col gap-2.5" id="t-hi">
-        <span className="text-[17px] font-medium text-[#333333]">안녕하세요,</span>
-        <span className="text-[19px] font-medium text-[#333333] lg:text-[24px]">
+        <span className="text-[17px] font-medium text-[#222222]">안녕하세요,</span>
+        <span className="text-[19px] font-medium text-[#222222] lg:text-[24px]">
           {"저는 "}
           <strong className="font-extrabold text-[#E8590C]">아이와 마음</strong>을 나누는
         </span>

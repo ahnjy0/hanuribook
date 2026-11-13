@@ -12,7 +12,7 @@ export default function HeroSection() {
           {"한우리 선생님 "}
           <span className="text-[#D94E0F]">온라인 설명회</span>
         </h1>
-        <p className="m-0 text-[15px] leading-[1.7] text-[#4A4A4A]">
+        <p className="m-0 text-[15px] leading-[1.7] text-[#333333]">
           독서지도사의 하루, 자격 취득 과정, 활동 방식까지 40분 안에 모두 알려드립니다.
         </p>
       </div>

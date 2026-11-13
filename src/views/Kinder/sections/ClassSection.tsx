@@ -12,7 +12,7 @@ export default function ClassSection() {
         <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[30px]" id="k-class">
           듣기와 표현, 놀이와 상상
         </h2>
-        <p className="m-0 text-[14px] leading-[1.6] text-[#4A4A4A]">
+        <p className="m-0 text-[14px] leading-[1.6] text-[#333333]">
           그림책 깊이 읽기, 언어 활동, 인성 교육 활동, 듣기 활동,
           <br />
           주제 통합 활동을 체계적으로 진행합니다.

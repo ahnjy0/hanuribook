@@ -87,7 +87,7 @@ export default function Header(props: HeaderProps) {
                     {g.items.map((it, j) => (
                       <SmartLink
                         key={j}
-                        className="flex min-h-11 items-center rounded-[10px] bg-[#F7F7F8] px-3 py-0 text-[14px] font-medium text-[#333333] no-underline"
+                        className="flex min-h-11 items-center rounded-[10px] bg-[#F7F7F8] px-3 py-0 text-[14px] font-medium text-[#222222] no-underline"
                         href={it.href}
                       >
                         {it.label}
@@ -116,7 +116,7 @@ export default function Header(props: HeaderProps) {
               )}
               {t.off && (
                 <SmartLink
-                  className="flex h-12 items-center justify-center border-b-2 border-b-transparent text-[15px] font-medium whitespace-nowrap text-[#333333] no-underline"
+                  className="flex h-12 items-center justify-center border-b-2 border-b-transparent text-[15px] font-medium whitespace-nowrap text-[#222222] no-underline"
                   href={t.href}
                 >
                   {t.label}
@@ -143,7 +143,7 @@ export default function Header(props: HeaderProps) {
                 )}
                 {s.off && (
                   <SmartLink
-                    className="box-border flex min-h-10 min-w-0 items-center justify-center rounded-[10px] border border-[#ECE4DE] bg-white px-1.5 py-1 text-center text-[14px] leading-[1.3] font-medium break-keep text-[#333333] no-underline"
+                    className="box-border flex min-h-10 min-w-0 items-center justify-center rounded-[10px] border border-[#ECE4DE] bg-white px-1.5 py-1 text-center text-[14px] leading-[1.3] font-medium break-keep text-[#222222] no-underline"
                     href={s.href}
                   >
                     {s.label}
@@ -157,7 +157,7 @@ export default function Header(props: HeaderProps) {
       {hasCrumbs && (
         // 로케이션(현재 위치) 영역: 데스크톱(lg, 1024px 이상)에서만 노출
         <nav className="hidden border-t border-t-[#EFEFEF] bg-[#F7F7F8] lg:block" aria-label="현재 위치">
-          <ol className="mx-auto my-0 box-border flex max-w-[1200px] list-none items-center gap-1.5 px-5 py-2.5 text-[13px] text-[#6B6B6B]">
+          <ol className="mx-auto my-0 box-border flex max-w-[1200px] list-none items-center gap-1.5 px-5 py-2.5 text-[13px] text-[#555555]">
             <li className="flex items-center">
               <svg role="img" aria-label="홈" width="15" height="15" viewBox="0 0 24 24" fill="#8A8A8A">
                 <path d="M12 3 3 10.5V21h6v-6h6v6h6V10.5z" />

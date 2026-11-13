@@ -12,7 +12,7 @@ export default function HeroSection({ steps }: Props) {
           <br />
           한우리와 상담하세요!
         </h1>
-        <p className="m-0 text-[15px] leading-[1.6] text-[#4A4A4A]">
+        <p className="m-0 text-[15px] leading-[1.6] text-[#333333]">
           30년 독서 전문 교육 노하우로 아이의 독서력 수준을 진단하고 딱 맞는 커리큘럼을 안내해 드립니다.
         </p>
         <ol
