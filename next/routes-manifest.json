@@ -1,0 +1,243 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "onMatchHeaders": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/advanced",
+      "regex": "^/advanced(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/advanced(?:/)?$"
+    },
+    {
+      "page": "/bottom-nav",
+      "regex": "^/bottom\\-nav(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/bottom\\-nav(?:/)?$"
+    },
+    {
+      "page": "/centers",
+      "regex": "^/centers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/centers(?:/)?$"
+    },
+    {
+      "page": "/consult",
+      "regex": "^/consult(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/consult(?:/)?$"
+    },
+    {
+      "page": "/course-hub",
+      "regex": "^/course\\-hub(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/course\\-hub(?:/)?$"
+    },
+    {
+      "page": "/desktop",
+      "regex": "^/desktop(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/desktop(?:/)?$"
+    },
+    {
+      "page": "/detail-geo",
+      "regex": "^/detail\\-geo(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/detail\\-geo(?:/)?$"
+    },
+    {
+      "page": "/detail-history",
+      "regex": "^/detail\\-history(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/detail\\-history(?:/)?$"
+    },
+    {
+      "page": "/detail-literature",
+      "regex": "^/detail\\-literature(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/detail\\-literature(?:/)?$"
+    },
+    {
+      "page": "/detail-logic",
+      "regex": "^/detail\\-logic(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/detail\\-logic(?:/)?$"
+    },
+    {
+      "page": "/detail-reading",
+      "regex": "^/detail\\-reading(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/detail\\-reading(?:/)?$"
+    },
+    {
+      "page": "/detail-science",
+      "regex": "^/detail\\-science(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/detail\\-science(?:/)?$"
+    },
+    {
+      "page": "/detail-socrates",
+      "regex": "^/detail\\-socrates(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/detail\\-socrates(?:/)?$"
+    },
+    {
+      "page": "/detail-vocab",
+      "regex": "^/detail\\-vocab(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/detail\\-vocab(?:/)?$"
+    },
+    {
+      "page": "/detail-world",
+      "regex": "^/detail\\-world(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/detail\\-world(?:/)?$"
+    },
+    {
+      "page": "/elementary",
+      "regex": "^/elementary(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/elementary(?:/)?$"
+    },
+    {
+      "page": "/footer",
+      "regex": "^/footer(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/footer(?:/)?$"
+    },
+    {
+      "page": "/franchise",
+      "regex": "^/franchise(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/franchise(?:/)?$"
+    },
+    {
+      "page": "/header",
+      "regex": "^/header(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/header(?:/)?$"
+    },
+    {
+      "page": "/kinder",
+      "regex": "^/kinder(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/kinder(?:/)?$"
+    },
+    {
+      "page": "/middle",
+      "regex": "^/middle(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/middle(?:/)?$"
+    },
+    {
+      "page": "/program",
+      "regex": "^/program(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/program(?:/)?$"
+    },
+    {
+      "page": "/program-detail",
+      "regex": "^/program\\-detail(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/program\\-detail(?:/)?$"
+    },
+    {
+      "page": "/seminar",
+      "regex": "^/seminar(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/seminar(?:/)?$"
+    },
+    {
+      "page": "/special",
+      "regex": "^/special(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/special(?:/)?$"
+    },
+    {
+      "page": "/style-guide",
+      "regex": "^/style\\-guide(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/style\\-guide(?:/)?$"
+    },
+    {
+      "page": "/tablet-centers",
+      "regex": "^/tablet\\-centers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tablet\\-centers(?:/)?$"
+    },
+    {
+      "page": "/teacher",
+      "regex": "^/teacher(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/teacher(?:/)?$"
+    },
+    {
+      "page": "/teacher-course",
+      "regex": "^/teacher\\-course(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/teacher\\-course(?:/)?$"
+    },
+    {
+      "page": "/teacher-special",
+      "regex": "^/teacher\\-special(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/teacher\\-special(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}
