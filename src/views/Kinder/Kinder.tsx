@@ -9,6 +9,7 @@ import VideoSection from "./sections/VideoSection";
 import HangulBannerSection from "./sections/HangulBannerSection";
 import Footer from "@/components/common/Footer/Footer";
 import BottomNav from "@/components/common/BottomNav/BottomNav";
+import { KINDER_FAQS } from "./kinderFaqs";
 
 export default function Kinder() {
   return (
@@ -21,7 +22,7 @@ export default function Kinder() {
         <ClassSection />
         <EffectsSection />
         <VideoSection />
-        <ProgramFaqSection labelColor="#B8326A" labelBg="#FDE7F0" accent="#B8326A" />
+        <ProgramFaqSection items={KINDER_FAQS} labelColor="#B8326A" labelBg="#FDE7F0" accent="#B8326A" />
         <HangulBannerSection />
       </main>
       <Footer />
