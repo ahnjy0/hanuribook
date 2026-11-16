@@ -1,5 +1,4 @@
 import Header from "@/components/common/Header/Header";
-import IntroSection from "./sections/IntroSection";
 import FeaturesSection from "./sections/FeaturesSection";
 import HowSection from "./sections/HowSection";
 import WhoSection from "./sections/WhoSection";
@@ -14,7 +13,6 @@ export default function Program() {
     <div className="flex min-h-screen w-full flex-col bg-white font-pretendard tracking-[-0.02em] text-[#1F1F1F]">
       <Header active="program" sub="소개" crumbs={"프로그램 > 소개"} />
       <main className="flex-[1_0_auto]">
-        <IntroSection />
         <FeaturesSection />
         <HowSection />
         <WhoSection />
