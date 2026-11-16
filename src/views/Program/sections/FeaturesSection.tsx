@@ -41,7 +41,7 @@ const FEATURES: Feature[] = [
 
 /**
  * 프로그램 소개 페이지 첫 섹션(히어로).
- * 연한 살구색 배경, 아래쪽 둥근 모서리, 그림자 있는 흰 카드.
+ * 연한 살구색 배경, 아래쪽 둥근 모서리, 흰 카드(그림자 없음).
  * 라벨·제목·설명 글자는 유아정규 '학습 효과' 섹션과 같은 스타일(흰 라운드 박스 라벨, 24/30px 제목, 14px 설명).
  */
 export default function FeaturesSection() {
@@ -69,7 +69,7 @@ export default function FeaturesSection() {
           {FEATURES.map((f) => (
             <article
               key={f.title}
-              className="relative isolate flex flex-col justify-center overflow-hidden rounded-[24px] bg-white py-5 pr-[108px] pl-6 text-left shadow-[0_12px_30px_rgba(150,50,10,0.2)] md:min-h-[190px] md:justify-start md:rounded-[28px] md:p-7 lg:min-h-[200px] lg:p-8"
+              className="relative isolate flex flex-col justify-center overflow-hidden rounded-[24px] bg-white py-5 pr-[108px] pl-6 text-left md:min-h-[190px] md:justify-start md:rounded-[28px] md:p-7 lg:min-h-[200px] lg:p-8"
             >
               <img
                 className="pointer-events-none absolute top-1/2 right-1 -z-10 block h-[100px] w-[100px] -translate-y-1/2 object-contain md:top-auto md:right-1 md:-bottom-3 md:h-[140px] md:w-[140px] md:translate-y-0 md:object-bottom lg:right-2 lg:h-[170px] lg:w-[170px]"
