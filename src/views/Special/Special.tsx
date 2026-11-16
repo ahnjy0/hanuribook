@@ -1,4 +1,5 @@
 import Header from "@/components/common/Header/Header";
+import ProgramFaqSection from "@/components/common/ProgramFaqSection";
 import IntroSection from "./sections/IntroSection";
 import CourseListSection from "./sections/CourseListSection";
 import InfoSection from "./sections/InfoSection";
@@ -15,6 +16,7 @@ export default function Special() {
         <IntroSection />
         <CourseListSection items={items} />
         <InfoSection />
+        <ProgramFaqSection last />
       </main>
       <Footer />
       <div className="sticky bottom-0 z-20">

@@ -1,4 +1,5 @@
 import Header from "@/components/common/Header/Header";
+import ProgramFaqSection from "@/components/common/ProgramFaqSection";
 import HeroSection from "./sections/HeroSection";
 import LevelsSection from "./sections/LevelsSection";
 import KitSection from "./sections/KitSection";
@@ -8,6 +9,7 @@ import VideoSection from "./sections/VideoSection";
 import BookBannerSection from "./sections/BookBannerSection";
 import Footer from "@/components/common/Footer/Footer";
 import BottomNav from "@/components/common/BottomNav/BottomNav";
+import { VOCAB_FAQS } from "./vocabData";
 
 /** 초등정규 어휘리더 상세 (유아정규 페이지와 같은 구성) */
 export default function Vocab() {
@@ -21,6 +23,7 @@ export default function Vocab() {
         <ClassSection />
         <EffectsSection />
         <VideoSection />
+        <ProgramFaqSection items={VOCAB_FAQS} labelColor="#C2410C" labelBg="#FFF4D6" />
         <BookBannerSection />
       </main>
       <Footer />

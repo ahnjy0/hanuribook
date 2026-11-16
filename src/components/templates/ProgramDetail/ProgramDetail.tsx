@@ -1,4 +1,5 @@
 import Header from "@/components/common/Header/Header";
+import ProgramFaqSection from "@/components/common/ProgramFaqSection";
 import HeroSection from "./sections/HeroSection";
 import BodySection from "./sections/BodySection";
 import InfoSection from "./sections/InfoSection";
@@ -17,6 +18,7 @@ export default function ProgramDetail(props: ProgramDetailProps) {
         <BodySection p={p} steps={steps} />
         <InfoSection p={p} />
         <SiblingsSection p={p} sibs={sibs} />
+        <ProgramFaqSection last />
       </main>
       <Footer />
       <div className="sticky bottom-0 z-20">

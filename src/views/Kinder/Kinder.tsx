@@ -1,4 +1,5 @@
 import Header from "@/components/common/Header/Header";
+import ProgramFaqSection from "@/components/common/ProgramFaqSection";
 import HeroSection from "./sections/HeroSection";
 import LevelsSection from "./sections/LevelsSection";
 import KitSection from "./sections/KitSection";
@@ -20,6 +21,7 @@ export default function Kinder() {
         <ClassSection />
         <EffectsSection />
         <VideoSection />
+        <ProgramFaqSection labelColor="#B8326A" labelBg="#FDE7F0" accent="#B8326A" />
         <HangulBannerSection />
       </main>
       <Footer />

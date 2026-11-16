@@ -1,5 +1,6 @@
 import { type CSSProperties } from "react";
 import Header from "@/components/common/Header/Header";
+import ProgramFaqSection from "@/components/common/ProgramFaqSection";
 import HeroSection from "./sections/HeroSection";
 import RoadmapSection from "./sections/RoadmapSection";
 import FeaturesSection from "./sections/FeaturesSection";
@@ -21,6 +22,7 @@ export default function CourseHub(props: CourseHubProps) {
         <RoadmapSection g={g} n={n} steps={steps} />
         <FeaturesSection feats={feats} />
         <SelfCheckSection />
+        <ProgramFaqSection last />
       </main>
       <Footer />
       <div className="sticky bottom-0 z-20">

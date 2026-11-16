@@ -1,4 +1,5 @@
 import Header from "@/components/common/Header/Header";
+import ProgramFaqSection from "@/components/common/ProgramFaqSection";
 import FeaturesSection from "./sections/FeaturesSection";
 import HowSection from "./sections/HowSection";
 import WhoSection from "./sections/WhoSection";
@@ -19,6 +20,7 @@ export default function Program() {
         <WhereSection />
         <StartSection />
         <ResultsSection />
+        <ProgramFaqSection last />
       </main>
       <Footer />
       <div className="sticky bottom-0 z-20">

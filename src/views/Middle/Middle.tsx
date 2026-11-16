@@ -1,4 +1,5 @@
 import Header from "@/components/common/Header/Header";
+import ProgramFaqSection from "@/components/common/ProgramFaqSection";
 import HeroSection from "./sections/HeroSection";
 import CoursesSection from "./sections/CoursesSection";
 import FeaturesSection from "./sections/FeaturesSection";
@@ -13,6 +14,7 @@ export default function Middle() {
         <HeroSection />
         <CoursesSection />
         <FeaturesSection />
+        <ProgramFaqSection last />
       </main>
       <Footer />
       <div className="sticky bottom-0 z-20">

@@ -40,7 +40,7 @@ export default function SearchSection({ count, listBg, listSel, mapBg, mapSel, s
           className="box-border h-13 w-full rounded-[14px] border border-[#E4E4E4] bg-white py-0 pr-4 pl-11.5 font-[family-name:inherit] text-[16px] text-[#1F1F1F] placeholder:text-[#8A8A8A]"
           id="ct-q"
           type="search"
-          placeholder="지점명, 지역명, 지하철역으로 검색"
+          placeholder="센터명, 지역명으로 검색"
         />
       </div>
       <div className="grid grid-cols-2 gap-2">

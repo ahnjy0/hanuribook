@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/common/Header/Header";
+import ProgramFaqSection from "@/components/common/ProgramFaqSection";
 import IntroSection from "./sections/IntroSection";
 import CourseExplorerSection from "./sections/CourseExplorerSection";
 import Footer from "@/components/common/Footer/Footer";
@@ -15,6 +16,7 @@ export default function Advanced() {
       <main className="flex-[1_0_auto]">
         <IntroSection />
         <CourseExplorerSection tabs={tabs} />
+        <ProgramFaqSection last />
       </main>
       <Footer />
       <div className="sticky bottom-0 z-20">

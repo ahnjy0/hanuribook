@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/common/Header/Header";
+import ProgramFaqSection from "@/components/common/ProgramFaqSection";
 import ProgramsSection from "./sections/ProgramsSection";
 import FeaturesSection from "./sections/FeaturesSection";
 import SelfCheckSection from "./sections/SelfCheckSection";
@@ -17,6 +18,7 @@ export default function Elementary() {
         <ProgramsSection progs={progs} />
         <FeaturesSection />
         <SelfCheckSection />
+        <ProgramFaqSection last />
       </main>
       <Footer />
       <div className="sticky bottom-0 z-20">
