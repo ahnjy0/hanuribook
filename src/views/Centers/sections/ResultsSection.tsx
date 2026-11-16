@@ -35,20 +35,17 @@ function MapMarker({
   );
 }
 
+/** 센터명 앞 유형 아이콘 (보이는 글자는 없고, 화면낭독기용으로만 유형명을 읽어 줌) */
 function CenterKindBadge({ kind }: { kind: CenterKind }) {
   const s = KIND_STYLE[kind];
   return (
-    <div className="flex flex-none flex-col items-center gap-1">
-      <span
-        className="flex h-14 w-14 items-center justify-center rounded-[16px]"
-        style={{ background: s.bg }}
-      >
-        <KindIcon kind={kind} size={32} color={s.fg} />
-      </span>
-      <span className="text-[12px] font-bold" style={{ color: s.fg }}>
-        {s.label}
-      </span>
-    </div>
+    <span
+      className="flex h-10 w-10 flex-none items-center justify-center rounded-[12px]"
+      style={{ background: s.bg }}
+    >
+      <KindIcon kind={kind} size={24} color={s.fg} />
+      <span className="sr-only">{s.label}</span>
+    </span>
   );
 }
 
@@ -116,22 +113,9 @@ export default function ResultsSection({ centers, isMap, showMap }: Props) {
         {centers.map((c, i) => (
           <li key={i}>
             <article className="flex flex-col gap-3 rounded-[22px] border border-[#EEEEEE] bg-white p-5">
-              <div className="flex justify-between gap-2.5">
-                <div className="flex flex-col gap-1.5">
-                  <div className="flex flex-wrap gap-1.5">
-                    {c.badges.map((b, j) => (
-                      <span
-                        key={j}
-                        className="rounded-[6px] px-2 py-0.75 text-[12px] font-bold"
-                        style={{ background: b.bg, color: b.fg }}
-                      >
-                        {b.t}
-                      </span>
-                    ))}
-                  </div>
-                  <h2 className="mx-0 mt-0.5 mb-0 text-[20px] font-extrabold">{c.name}</h2>
-                </div>
+              <div className="flex items-center gap-2.5">
                 <CenterKindBadge kind={c.kind} />
+                <h2 className="m-0 text-[20px] font-extrabold">{c.name}</h2>
               </div>
               <ul className="m-0 flex list-none flex-col gap-2 rounded-[14px] bg-[#F7F7F8] p-3.5 text-[14px] leading-[1.5] text-[#222222]">
                 <li className="flex gap-2">
@@ -183,21 +167,6 @@ export default function ResultsSection({ centers, isMap, showMap }: Props) {
                     <path d="M12 7v5l3 2" />
                   </svg>
                   {c.hours}
-                </li>
-                <li className="flex gap-2">
-                  <svg
-                    className="mt-0.25 flex-none"
-                    aria-hidden="true"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#4A4A4A"
-                    strokeWidth="2"
-                  >
-                    <path d="M9 17V7h4a3 3 0 0 1 0 6H9" />
-                  </svg>
-                  {c.extra}
                 </li>
               </ul>
               <div className="grid grid-cols-2 gap-2">
