@@ -40,26 +40,15 @@ const FEATURES: Feature[] = [
 
 /**
  * 프로그램 소개 페이지 첫 섹션(히어로).
- * 유아정규 페이지 히어로(Kinder/sections/HeroSection)와 같은 스타일 — 그라데이션 배경, 아래쪽 둥근 모서리,
- * 떠다니는 자모 장식, 반투명 흰색 알약 라벨, 흰 제목, 그림자 있는 흰 카드 — 를 프로그램 주황색으로 적용.
+ * 유아정규 페이지 히어로(Kinder/sections/HeroSection)와 같은 구성 — 아래쪽 둥근 모서리, 반투명 흰색 알약 라벨,
+ * 흰 제목, 그림자 있는 흰 카드 — 을 프로그램 주황 단색 배경으로 적용(그라데이션·자모 장식 없음).
  */
 export default function FeaturesSection() {
   return (
     <section
-      className="relative overflow-hidden rounded-t-none rounded-b-[32px] bg-[linear-gradient(180deg,#FF8A4C_0%,#F26522_100%)] px-0 pt-9 pb-10 lg:pt-16 lg:pb-20"
+      className="relative overflow-hidden rounded-t-none rounded-b-[32px] bg-[#F26522] px-0 pt-9 pb-10 lg:pt-16 lg:pb-20"
       aria-labelledby="feat"
     >
-      {/* 장식: 떠다니는 한글 자모·획 */}
-      <div className="pointer-events-none absolute inset-0 select-none" aria-hidden="true">
-        <span className="absolute top-2 left-[3%] rotate-[-14deg] text-[34px] leading-none font-black text-[#7FE0DA] lg:top-8 lg:left-[12%] lg:text-[52px]">
-          ㅎ
-        </span>
-        <span className="absolute top-[14%] right-[4%] rotate-[10deg] text-[34px] leading-none font-black text-[#FFD43B] lg:right-[13%] lg:text-[52px]">
-          ㅋ
-        </span>
-        <span className="absolute top-[24%] left-[13%] h-6 w-1.5 rotate-[22deg] rounded-full bg-[#C9B8FF] lg:left-[20%] lg:h-9 lg:w-2" />
-        <span className="absolute top-[24%] right-[14%] h-1.5 w-6 rotate-[28deg] rounded-full bg-[#FFE0B2] lg:right-[22%] lg:h-2 lg:w-9" />
-      </div>
       <div className="relative mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 text-center lg:gap-5">
         <span className="flex items-center gap-2 rounded-full bg-white/25 px-4 py-1.5 text-[14px] font-bold text-white">
           <span className="h-2.5 w-2.5 rounded-full bg-[#FFD43B]" aria-hidden="true" />
@@ -77,10 +66,10 @@ export default function FeaturesSection() {
           {FEATURES.map((f) => (
             <article
               key={f.title}
-              className="relative isolate flex flex-col justify-center overflow-hidden rounded-[24px] bg-white py-5 pr-[116px] pl-6 text-left shadow-[0_12px_30px_rgba(150,50,10,0.2)] md:min-h-[190px] md:justify-start md:rounded-[28px] md:p-7 lg:min-h-[200px] lg:p-8"
+              className="relative isolate flex flex-col justify-center overflow-hidden rounded-[24px] bg-white py-5 pr-[108px] pl-6 text-left shadow-[0_12px_30px_rgba(150,50,10,0.2)] md:min-h-[190px] md:justify-start md:rounded-[28px] md:p-7 lg:min-h-[200px] lg:p-8"
             >
               <img
-                className="pointer-events-none absolute top-1/2 right-3 -z-10 block h-[100px] w-[100px] -translate-y-1/2 object-contain md:top-auto md:right-4 md:-bottom-3 md:h-[140px] md:w-[140px] md:translate-y-0 md:object-bottom lg:right-5 lg:h-[170px] lg:w-[170px]"
+                className="pointer-events-none absolute top-1/2 right-1 -z-10 block h-[100px] w-[100px] -translate-y-1/2 object-contain md:top-auto md:right-1 md:-bottom-3 md:h-[140px] md:w-[140px] md:translate-y-0 md:object-bottom lg:right-2 lg:h-[170px] lg:w-[170px]"
                 src={f.icon}
                 width={1024}
                 height={1024}
