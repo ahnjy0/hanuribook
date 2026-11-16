@@ -6,6 +6,13 @@ export default function HeroSection() {
       className="relative overflow-hidden rounded-t-none rounded-b-[32px] bg-[linear-gradient(180deg,#FBB040_0%,#F59A0B_100%)] px-0 pt-9 pb-10 lg:pt-16 lg:pb-20"
       aria-labelledby="v-hero"
     >
+      {/* 배경 장식 이미지: 바둑판처럼 반복(투명도 40%), 위쪽 가운데 기준
+          - 모바일·태블릿: 한 장 너비 = 화면 너비
+          - 데스크톱: 한 장 너비 700px */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-[url(https://cdn.hanuribook.com/img/hanuribook/ele_hero.png)] bg-top bg-repeat [background-size:100%_auto] opacity-40 select-none lg:[background-size:700px_auto]"
+        aria-hidden="true"
+      />
       <div className="relative mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 text-center lg:gap-5">
         <span
           className="flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-[14px] font-bold"
