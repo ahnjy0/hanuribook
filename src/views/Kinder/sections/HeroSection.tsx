@@ -53,20 +53,16 @@ export default function HeroSection() {
       className="relative overflow-hidden rounded-t-none rounded-b-[32px] bg-[linear-gradient(180deg,#F27BAA_0%,#E9578F_100%)] px-0 pt-9 pb-10 lg:pt-16 lg:pb-20"
       aria-labelledby="k-hero"
     >
-      {/* 장식: 떠다니는 한글 자모·획 */}
-      <div className="pointer-events-none absolute inset-0 select-none" aria-hidden="true">
-        <span className="absolute top-2 left-[3%] rotate-[-14deg] text-[34px] leading-none font-black text-[#7FE0DA] lg:top-8 lg:left-[12%] lg:text-[52px]">
-          ㅎ
-        </span>
-        <span className="absolute top-[14%] right-[4%] rotate-[10deg] text-[34px] leading-none font-black text-[#FFD43B] lg:right-[13%] lg:text-[52px]">
-          ㅋ
-        </span>
-        <span className="absolute top-[24%] left-[13%] h-6 w-1.5 rotate-[22deg] rounded-full bg-[#C9B8FF] lg:left-[20%] lg:h-9 lg:w-2" />
-        <span className="absolute top-[24%] right-[14%] h-1.5 w-6 rotate-[28deg] rounded-full bg-[#FF9B4A] lg:right-[22%] lg:h-2 lg:w-9" />
-      </div>
+      {/* 배경 장식 이미지(투명 PNG 색종이·별 무늬): 분홍 그라데이션 위에 반복 없이 한 장, 투명도 40%
+          - 모바일·태블릿: 화면 너비의 150%로 위쪽 가운데에 둠(세로로 긴 섹션에 cover를 쓰면 이미지가 너무 커져
+            가운데 빈 부분만 보이므로, 너비 기준으로 맞춰 별·색종이가 보이게 함)
+          - 데스크톱: 섹션 전체를 덮도록 가운데 맞춤(cover) */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-[url(https://cdn.hanuribook.com/img/hanuribook/kinder_hero.png)] bg-top bg-no-repeat [background-size:150%_auto] opacity-40 select-none lg:bg-cover lg:bg-center"
+        aria-hidden="true"
+      />
       <div className="relative mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 text-center lg:gap-5">
-        <span className="flex items-center gap-2 rounded-full bg-white/25 px-4 py-1.5 text-[14px] font-bold text-white">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#FFD43B]" aria-hidden="true" />
+        <span className="flex items-center gap-2 rounded-full bg-white/25 px-4 py-1.5 text-[14px] font-bold text-white"> 
           유아 정규 프로그램
         </span>
         <h1 className="m-0" id="k-hero">
@@ -103,13 +99,17 @@ export default function HeroSection() {
                   />
                 </div>
               </div>
-              <div className="flex flex-1 flex-col items-center px-1.5 pt-4 pb-2 lg:px-3 lg:pt-5 lg:pb-3">
+              <div className="flex flex-1 flex-col items-center px-0.5 pt-4 pb-2 lg:px-3 lg:pt-5 lg:pb-3">
                 <strong className="text-[17px] text-[#1F1F1F] lg:text-[20px]">{b.title}</strong>
                 <span className="mt-0.5 text-[14px] font-bold lg:text-[16px]" style={{ color: b.accent }}>
                   {`${b.age} 권장`}
                 </span>
                 <span className="my-3 h-px w-full bg-[#EEEEEE] lg:my-4" aria-hidden="true" />
-                <span className="text-[13px] leading-[1.55] text-[#333333] lg:text-[15px]">{b.desc}</span>
+                {/* 모바일: 좌우 여백을 줄이고(카드 안쪽 여백까지 활용) 자간을 살짝 좁혀 한 줄이 중간에 끊기지 않게 함.
+                    그래도 좁은 화면에서 넘치면 단어 단위로만 줄바꿈(break-keep) */}
+                <span className="-mx-1.5 block text-[13px] leading-[1.55] tracking-[-0.04em] break-keep text-[#333333] lg:mx-0 lg:text-[15px] lg:tracking-normal">
+                  {b.desc}
+                </span>
               </div>
             </article>
           ))}

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HangulBannerSection() {
   return (
-    <section className="mx-auto my-0 box-border max-w-[1200px] px-5 pt-7 lg:pt-12" aria-labelledby="k-ban">
+    <section className="mx-auto my-0 box-border max-w-[1200px] px-5 pt-7 pb-12 lg:pt-12 lg:pb-24" aria-labelledby="k-ban">
       <div className="flex flex-col items-center gap-3 rounded-[24px] bg-[#1F1F1F] px-5 py-6 text-center text-white">
         <p className="m-0 text-[13px] text-[#D6D6D6]">아이 발달 수준에 맞춘</p>
         <h2 className="m-0 text-[20px] font-extrabold" id="k-ban">
