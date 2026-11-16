@@ -41,13 +41,13 @@ const FEATURES: Feature[] = [
 
 /**
  * 프로그램 소개 페이지 첫 섹션(히어로).
- * 주황 단색 배경, 아래쪽 둥근 모서리, 그림자 있는 흰 카드.
+ * 연한 살구색 배경, 아래쪽 둥근 모서리, 그림자 있는 흰 카드.
  * 라벨·제목·설명 글자는 유아정규 '학습 효과' 섹션과 같은 스타일(흰 라운드 박스 라벨, 24/30px 제목, 14px 설명).
  */
 export default function FeaturesSection() {
   return (
     <section
-      className="relative overflow-hidden rounded-t-none rounded-b-[32px] bg-[#F26522] px-0 pt-9 pb-10 lg:pt-16 lg:pb-20"
+      className="relative overflow-hidden rounded-t-none rounded-b-[32px] bg-[#FFEDE0] px-0 pt-9 pb-10 lg:pt-16 lg:pb-20"
       aria-labelledby="feat"
     >
       <div className="relative mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 text-center lg:gap-5">
@@ -91,7 +91,7 @@ export default function FeaturesSection() {
           ))}
         </div>
         <a
-          className="mt-1 flex h-13 w-full items-center justify-center rounded-[14px] bg-white text-[15px] font-bold text-[#C2410C] no-underline lg:w-[360px]"
+          className="mt-1 flex h-13 w-full items-center justify-center rounded-[14px] border-[1.5px] border-[#F26522] bg-white text-[15px] font-bold text-[#C2410C] no-underline lg:w-[360px]"
           href="#how"
         >
           프로그램 한눈에 보기 ⌄
