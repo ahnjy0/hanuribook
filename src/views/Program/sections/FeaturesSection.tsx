@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import SectionLabel from "@/components/common/SectionLabel";
 
 type Feature = { title: string; desc: ReactNode; icon: string };
 
@@ -40,8 +41,8 @@ const FEATURES: Feature[] = [
 
 /**
  * 프로그램 소개 페이지 첫 섹션(히어로).
- * 유아정규 페이지 히어로(Kinder/sections/HeroSection)와 같은 구성 — 아래쪽 둥근 모서리, 반투명 흰색 알약 라벨,
- * 흰 제목, 그림자 있는 흰 카드 — 을 프로그램 주황 단색 배경으로 적용(그라데이션·자모 장식 없음).
+ * 주황 단색 배경, 아래쪽 둥근 모서리, 그림자 있는 흰 카드.
+ * 라벨·제목·설명 글자는 유아정규 '학습 효과' 섹션과 같은 스타일(흰 라운드 박스 라벨, 24/30px 제목, 14px 설명).
  */
 export default function FeaturesSection() {
   return (
@@ -50,18 +51,20 @@ export default function FeaturesSection() {
       aria-labelledby="feat"
     >
       <div className="relative mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 text-center lg:gap-5">
-        <span className="flex items-center gap-2 rounded-full bg-white/25 px-4 py-1.5 text-[14px] font-bold text-white">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#FFD43B]" aria-hidden="true" />
-          프로그램 특징
-        </span>
-        <h1 className="m-0 text-[28px] leading-[1.35] font-extrabold text-white lg:text-[40px]" id="feat">
-          읽기·독서·토론·논술로
-          <br />
-          문해력을 탄탄하게!
-        </h1>
-        <p className="mx-0 mt-0 mb-2 text-[15px] leading-[1.6] font-medium text-white/90 lg:text-[17px]">
-          5력 1체 독서 교육 원리와 소그룹 협동 학습으로 키우는 한우리독서토론논술 프로그램
-        </p>
+        {/* 라벨·제목·설명: 유아정규 '학습 효과'(Kinder/sections/EffectsSection) 타이틀 영역과 같은 스타일 */}
+        <div className="mb-2 text-center">
+          <SectionLabel color="#C2410C" bg="#FFFFFF">
+            프로그램 특징
+          </SectionLabel>
+          <h1 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[30px]" id="feat">
+            읽기·독서·토론·논술로
+            <br />
+            문해력을 탄탄하게!
+          </h1>
+          <p className="m-0 text-[14px] leading-[1.6] text-[#333333]">
+            5력 1체 독서 교육 원리와 소그룹 협동 학습으로 키우는 한우리독서토론논술 프로그램
+          </p>
+        </div>
         <div className="grid w-full grid-cols-1 gap-3 md:grid-cols-3 lg:gap-5">
           {FEATURES.map((f) => (
             <article
