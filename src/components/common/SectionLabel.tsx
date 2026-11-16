@@ -16,7 +16,7 @@ type Props = {
 export default function SectionLabel({ children, color = "#B8326A", bg = "#FDE7F0" }: Props) {
   return (
     <p
-      className="m-0 inline-flex items-center self-center rounded-full px-3.5 py-1 text-[13px] leading-[1.5] font-bold lg:px-4 lg:text-[14px]"
+      className="m-0 inline-flex items-center self-center rounded-full px-3.5 py-1.5 text-[13px] leading-[1.5] font-bold lg:px-4 lg:py-2 lg:text-[14px]"
       style={{ color, background: bg }}
     >
       {children}

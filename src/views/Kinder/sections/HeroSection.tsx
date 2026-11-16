@@ -62,7 +62,7 @@ export default function HeroSection() {
         aria-hidden="true"
       />
       <div className="relative mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 text-center lg:gap-5">
-        <span className="flex items-center gap-2 rounded-full bg-white/25 px-4 py-1.5 text-[14px] font-bold text-white"> 
+        <span className="flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-[14px] font-bold text-[#B8326A]">
           유아 정규 프로그램
         </span>
         <h1 className="m-0" id="k-hero">
