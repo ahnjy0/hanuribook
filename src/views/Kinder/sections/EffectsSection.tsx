@@ -1,3 +1,5 @@
+import SectionLabel from "@/components/common/SectionLabel";
+
 export default function EffectsSection() {
   return (
     <section className="relative mt-13 bg-[#FDEEF4] px-0 py-10 lg:mt-24 lg:pt-16 lg:pb-20" aria-labelledby="k-eff">
@@ -14,7 +16,7 @@ export default function EffectsSection() {
       />
       <div className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-4 px-5 lg:gap-7">
         <div className="text-center">
-          <p className="m-0 text-[13px] font-bold text-[#B8326A]">| 학습 효과 |</p>
+          <SectionLabel bg="#FFFFFF">학습 효과</SectionLabel>
           <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[30px]" id="k-eff">
             독서 습관, 초등 학업 준비
           </h2>

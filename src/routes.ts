@@ -35,4 +35,4 @@ export const PATHS = {
 
 export type PageName = keyof typeof PATHS;
 
-export const SITE_TITLE = "한우리독서토론논술 프로토타입";
+export const SITE_TITLE = "한우리독서토론논술";

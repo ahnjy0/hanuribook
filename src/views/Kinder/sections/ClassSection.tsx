@@ -1,4 +1,5 @@
 import CharacterDeco from "./CharacterDeco";
+import SectionLabel from "@/components/common/SectionLabel";
 
 export default function ClassSection() {
   return (
@@ -8,7 +9,7 @@ export default function ClassSection() {
     >
       <div className="relative pt-16 text-center lg:py-6">
         <CharacterDeco n={2} side="left" />
-        <p className="m-0 text-[13px] font-bold text-[#B8326A]">| 수업 내용 |</p>
+        <SectionLabel>수업 내용</SectionLabel>
         <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[30px]" id="k-class">
           듣기와 표현, 놀이와 상상
         </h2>

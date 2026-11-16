@@ -68,9 +68,9 @@ export default function VideoSection() {
           ) : (
             <div className="flex h-full flex-col items-center justify-center gap-3 bg-[#FDEEF4]">
               <span className="text-center text-[22px] leading-[1.35] font-extrabold">
-                처음부터
+                시작이 중요한 독서교육
                 <br />
-                <span className="text-[#B8326A]">한우리</span>
+                <span className="text-[#B8326A]">처음부터 한우리</span>
                 {" 하세요"}
               </span>
               <button

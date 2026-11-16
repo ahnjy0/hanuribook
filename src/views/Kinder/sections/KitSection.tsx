@@ -1,3 +1,5 @@
+import SectionLabel from "@/components/common/SectionLabel";
+
 export default function KitSection() {
   return (
     <section
@@ -5,9 +7,7 @@ export default function KitSection() {
       aria-labelledby="k-kit"
     >
       <div className="text-center">
-        <p className="m-0 text-[13px] font-bold text-[#B8326A]">
-          | 교재 구성 |
-        </p>
+        <SectionLabel>교재 구성</SectionLabel>
         <h2
           className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[30px]"
           id="k-kit"
