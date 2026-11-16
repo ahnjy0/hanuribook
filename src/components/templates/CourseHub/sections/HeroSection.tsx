@@ -15,7 +15,7 @@ export default function HeroSection({ g }: Props) {
         >
           {g.title}
         </h1>
-        <p className="m-0 max-w-[640px] text-[15px] leading-[1.7] text-[#4A4A4A]">{g.desc}</p>
+        <p className="m-0 max-w-[640px] text-[15px] leading-[1.7] text-[#333333]">{g.desc}</p>
       </div>
     </section>
   );

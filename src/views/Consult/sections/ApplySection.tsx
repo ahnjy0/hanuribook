@@ -89,14 +89,14 @@ export default function ApplySection({
             </svg>
           </span>
           <h2 className="m-0 text-[22px] font-extrabold">무료 상담 신청이 완료되었습니다</h2>
-          <p className="m-0 text-[15px] leading-[1.6] text-[#4A4A4A]">
+          <p className="m-0 text-[15px] leading-[1.6] text-[#333333]">
             {`${grade}${lessonLabel ? ` · ${lessonLabel}` : ""} 맞춤 상담을 위해`}
             <br />
             2~3일 이내에 한우리 선생님이 상담전화를 드립니다.
           </p>
           <div className="grid w-full grid-cols-2 gap-2 pt-1.5">
             <Link
-              className="flex h-13 items-center justify-center rounded-[12px] bg-[#EEEEEF] text-[15px] font-bold text-[#333333] no-underline"
+              className="flex h-13 items-center justify-center rounded-[12px] bg-[#EEEEEF] text-[15px] font-bold text-[#222222] no-underline"
               href="/"
             >
               홈으로
@@ -117,7 +117,7 @@ export default function ApplySection({
               <span className="flex items-center gap-2 text-[20px] font-extrabold">
                 <span className="h-2 w-2 rounded-[50%] bg-[#F26522]" aria-hidden="true" />
                 자녀 학년 선택<span className="text-[13px] font-semibold text-[#C2410C]">(필수)</span>
-                <span className="text-[13px] font-medium text-[#6B6B6B]">중복 선택 가능</span>
+                <span className="text-[13px] font-medium text-[#555555]">중복 선택 가능</span>
               </span>
             </legend>
             <div className="grid grid-cols-4 gap-2" role="group" aria-label="자녀 학년 (중복 선택 가능)">
@@ -138,7 +138,7 @@ export default function ApplySection({
           <fieldset className="m-0 flex flex-col gap-3.5 rounded-[24px] border border-[#EEEEEE] bg-white px-5 py-5.5">
             <legend className="float-left flex w-full items-center gap-2 p-0 text-[20px] font-extrabold">
               <span className="h-2 w-2 rounded-[50%] bg-[#F26522]" aria-hidden="true" />
-              수업 형태 선택<span className="text-[13px] font-semibold text-[#6B6B6B]">(선택)</span>
+              수업 형태 선택<span className="text-[13px] font-semibold text-[#555555]">(선택)</span>
             </legend>
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-3" role="radiogroup" aria-label="수업 형태">
               {lessonTypes.map((t) => (
@@ -165,7 +165,7 @@ export default function ApplySection({
                     >
                       {t.label}
                     </span>
-                    <span className="text-[13px] leading-[1.5] text-[#6B6B6B]">{t.desc}</span>
+                    <span className="text-[13px] leading-[1.5] text-[#555555]">{t.desc}</span>
                   </span>
                   <span
                     className={`absolute top-3 right-3 flex h-5 w-5 items-center justify-center rounded-[50%] border-2 ${
@@ -188,11 +188,11 @@ export default function ApplySection({
               <span className="h-2 w-2 rounded-[50%] bg-[#F26522]" aria-hidden="true" />
               보호자 연락처 정보<span className="text-[13px] font-semibold text-[#C2410C]">(필수)</span>
             </legend>
-            <p className="m-0 text-[14px] text-[#4A4A4A]">
+            <p className="m-0 text-[14px] text-[#333333]">
               가까운 지역 센터 또는 전담 지도교사가 배정됩니다.
             </p>
             <div className="flex flex-col gap-1.5">
-              <label className="text-[13px] font-semibold text-[#333333]" htmlFor="c-name">
+              <label className="text-[13px] font-semibold text-[#222222]" htmlFor="c-name">
                 보호자 성함
               </label>
               <input
@@ -204,7 +204,7 @@ export default function ApplySection({
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-[13px] font-semibold text-[#333333]" htmlFor="c-phone">
+              <label className="text-[13px] font-semibold text-[#222222]" htmlFor="c-phone">
                 휴대폰 번호
               </label>
               <input
@@ -217,7 +217,7 @@ export default function ApplySection({
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <span className="text-[13px] font-semibold text-[#333333]">거주 지역 (가까운 지점 연결)</span>
+              <span className="text-[13px] font-semibold text-[#222222]">거주 지역 (가까운 지점 연결)</span>
               <div className="grid grid-cols-2 gap-2">
                 <label className="block">
                   <span className="absolute h-0.25 w-0.25 overflow-hidden [clip:rect(0_0_0_0)]">시/도</span>
@@ -250,7 +250,7 @@ export default function ApplySection({
                 <span className="text-[14px] leading-[1.5] font-semibold">
                   [필수] 개인정보 수집 및 상담 안내를 위한 연락에 동의합니다.
                 </span>
-                <span className="flex flex-col gap-0.5 text-[12px] leading-[1.5] text-[#6B6B6B]">
+                <span className="flex flex-col gap-0.5 text-[12px] leading-[1.5] text-[#555555]">
                   <span>
                     개인정보 수집·이용목적: 한우리독서토론논술 교육서비스 상담 및 무료체험 안내, 경품제공,
                     수강등록여부 확인, 무료체험 신청이력 관리
@@ -313,11 +313,11 @@ export default function ApplySection({
               onClick={f.toggle}
             >
               {`Q. ${f.q}`}
-              <span className="text-[#6B6B6B]" aria-hidden="true">
+              <span className="text-[#555555]" aria-hidden="true">
                 {f.icon}
               </span>
             </button>
-            {f.open && <p className="m-0 px-4 pt-0 pb-4 text-[14px] leading-[1.7] text-[#4A4A4A]">{f.a}</p>}
+            {f.open && <p className="m-0 px-4 pt-0 pb-4 text-[14px] leading-[1.7] text-[#333333]">{f.a}</p>}
           </div>
         ))}
       </aside>

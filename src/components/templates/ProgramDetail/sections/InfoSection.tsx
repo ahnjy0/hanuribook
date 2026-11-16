@@ -14,19 +14,19 @@ export default function InfoSection({ p }: Props) {
       </h2>
       <dl className="m-0 grid grid-cols-2 gap-2 md:grid-cols-4">
         <div className="rounded-[14px] border border-[#EEEEEE] p-3.5">
-          <dt className="text-[12px] text-[#6B6B6B]">대상</dt>
+          <dt className="text-[12px] text-[#555555]">대상</dt>
           <dd className="mx-0 mt-1 mb-0 text-[15px] font-bold">{p.grade}</dd>
         </div>
         <div className="rounded-[14px] border border-[#EEEEEE] p-3.5">
-          <dt className="text-[12px] text-[#6B6B6B]">수업 시간</dt>
+          <dt className="text-[12px] text-[#555555]">수업 시간</dt>
           <dd className="mx-0 mt-1 mb-0 text-[15px] font-bold">주 1회 · [00]분</dd>
         </div>
         <div className="rounded-[14px] border border-[#EEEEEE] p-3.5">
-          <dt className="text-[12px] text-[#6B6B6B]">월 교재</dt>
+          <dt className="text-[12px] text-[#555555]">월 교재</dt>
           <dd className="mx-0 mt-1 mb-0 text-[15px] font-bold">필독서 + 활동 교재</dd>
         </div>
         <div className="rounded-[14px] border border-[#EEEEEE] p-3.5">
-          <dt className="text-[12px] text-[#6B6B6B]">수업 형태</dt>
+          <dt className="text-[12px] text-[#555555]">수업 형태</dt>
           <dd className="mx-0 mt-1 mb-0 text-[15px] font-bold">방문·홈클럽·학원</dd>
         </div>
       </dl>

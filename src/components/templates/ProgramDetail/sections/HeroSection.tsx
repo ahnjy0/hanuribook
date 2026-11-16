@@ -8,7 +8,7 @@ export default function HeroSection({ p }: Props) {
     <section style={{ background: p.tint }} aria-labelledby="d-h">
       <div className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-4.5 px-5 pt-5 pb-8">
         <SmartLink
-          className="inline-flex min-h-11 items-center gap-1.5 self-start text-[14px] font-semibold text-[#4A4A4A] no-underline"
+          className="inline-flex min-h-11 items-center gap-1.5 self-start text-[14px] font-semibold text-[#333333] no-underline"
           href={p.back}
         >
           <svg
@@ -32,14 +32,14 @@ export default function HeroSection({ p }: Props) {
               <span className="rounded-[6px] bg-white px-2.5 py-1 text-[13px] font-bold text-[#C2410C]">
                 {p.grade}
               </span>
-              <span className="text-[13px] font-semibold text-[#4A4A4A]">{p.focus}</span>
+              <span className="text-[13px] font-semibold text-[#333333]">{p.focus}</span>
             </div>
             <h1 className="m-0 text-[32px] font-extrabold tracking-[-0.04em] lg:text-[42px]" id="d-h">
               {p.title}
             </h1>
             <p className="m-0 text-[18px] leading-[1.45] font-bold text-[#D94E0F]">{p.slogan}</p>
-            <p className="m-0 text-[15px] leading-[1.7] text-[#333333]">{p.long}</p>
-            <p className="m-0 text-[13px] font-semibold text-[#4A4A4A]">{p.tags}</p>
+            <p className="m-0 text-[15px] leading-[1.7] text-[#222222]">{p.long}</p>
+            <p className="m-0 text-[13px] font-semibold text-[#333333]">{p.tags}</p>
           </div>
           <div className="flex h-50 items-center justify-center rounded-[24px] border border-dashed border-[#D9C9BC] bg-white text-center text-[13px] text-[#6B5A4C] lg:h-80">{`[이미지] ${p.img}`}</div>
         </div>

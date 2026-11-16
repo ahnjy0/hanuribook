@@ -16,7 +16,7 @@ export default function ButtonChipSection() {
             </button>
           </div>
           <div className="flex items-center gap-3">
-            <button className="h-12 rounded-[12px] border-0 bg-[#EEEEEF] px-5.5 py-0 font-[family-name:inherit] text-[15px] font-semibold text-[#333333]">
+            <button className="h-12 rounded-[12px] border-0 bg-[#EEEEEF] px-5.5 py-0 font-[family-name:inherit] text-[15px] font-semibold text-[#222222]">
               Secondary · 전화 문의
             </button>
             <button className="h-12 rounded-[12px] border-[1.5px] border-[#F26522] bg-white px-5.5 py-0 font-[family-name:inherit] text-[15px] font-bold text-[#C2410C]">
@@ -32,7 +32,7 @@ export default function ButtonChipSection() {
               Disabled
             </button>
           </div>
-          <p className="m-0 text-[13px] text-[#6B6B6B]">
+          <p className="m-0 text-[13px] text-[#555555]">
             모든 버튼 높이 44px 이상 · 모서리 12–14px · 주 CTA는 화면당 1개
           </p>
         </div>
@@ -43,13 +43,13 @@ export default function ButtonChipSection() {
           <span className="inline-flex h-9 items-center rounded-full bg-[#F26522] px-3.5 py-0 text-[14px] font-bold text-white">
             필터 · 선택
           </span>
-          <span className="inline-flex h-9 items-center rounded-full border border-[#E4E4E4] bg-white px-3.5 py-0 text-[14px] font-medium text-[#333333]">
+          <span className="inline-flex h-9 items-center rounded-full border border-[#E4E4E4] bg-white px-3.5 py-0 text-[14px] font-medium text-[#222222]">
             필터 · 기본
           </span>
           <span className="inline-flex h-10 items-center rounded-[10px] bg-[#F26522] px-4 py-0 text-[14px] font-bold text-white">
             서브메뉴 · 선택
           </span>
-          <span className="inline-flex h-10 items-center rounded-[10px] border border-[#ECE4DE] bg-white px-4 py-0 text-[14px] text-[#333333]">
+          <span className="inline-flex h-10 items-center rounded-[10px] border border-[#ECE4DE] bg-white px-4 py-0 text-[14px] text-[#222222]">
             서브메뉴 · 기본
           </span>
         </div>
@@ -60,7 +60,7 @@ export default function ButtonChipSection() {
           <span className="rounded-[6px] bg-[#EAF2FF] px-2 py-1 text-[12px] font-bold text-[#2F5AA8]">
             전문 지도교사 8명
           </span>
-          <span className="rounded-[6px] bg-[#F1F1F2] px-2 py-1 text-[12px] font-bold text-[#4A4A4A]">
+          <span className="rounded-[6px] bg-[#F1F1F2] px-2 py-1 text-[12px] font-bold text-[#333333]">
             소그룹 / 1:1
           </span>
           <span className="rounded-[6px] bg-[#E8F5EE] px-2 py-1 text-[12px] font-bold text-[#1F7A4C]">
@@ -71,9 +71,9 @@ export default function ButtonChipSection() {
           <span className="flex h-11 items-center justify-center border-b-2 border-b-[#F26522] text-[15px] font-bold text-[#D94E0F]">
             프로그램
           </span>
-          <span className="flex h-11 items-center justify-center text-[15px] text-[#333333]">수업상담</span>
-          <span className="flex h-11 items-center justify-center text-[15px] text-[#333333]">센터찾기</span>
-          <span className="flex h-11 items-center justify-center text-[15px] text-[#333333]">
+          <span className="flex h-11 items-center justify-center text-[15px] text-[#222222]">수업상담</span>
+          <span className="flex h-11 items-center justify-center text-[15px] text-[#222222]">센터찾기</span>
+          <span className="flex h-11 items-center justify-center text-[15px] text-[#222222]">
             한우리선생님
           </span>
         </div>

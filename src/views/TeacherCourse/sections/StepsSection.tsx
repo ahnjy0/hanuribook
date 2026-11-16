@@ -9,22 +9,22 @@ export default function StepsSection() {
           <li className="flex flex-col gap-1.5 rounded-[18px] bg-white px-3 py-4.5 text-center">
             <span className="text-[12px] font-bold text-[#C2410C]">STEP 01</span>
             <strong className="text-[15px]">설명회 참석</strong>
-            <span className="text-[12px] text-[#6B6B6B]">온라인 설명회</span>
+            <span className="text-[12px] text-[#555555]">온라인 설명회</span>
           </li>
           <li className="flex flex-col gap-1.5 rounded-[18px] bg-white px-3 py-4.5 text-center">
             <span className="text-[12px] font-bold text-[#C2410C]">STEP 02</span>
             <strong className="text-[15px]">입문과정 수강</strong>
-            <span className="text-[12px] text-[#6B6B6B]">이론 + 실습</span>
+            <span className="text-[12px] text-[#555555]">이론 + 실습</span>
           </li>
           <li className="flex flex-col gap-1.5 rounded-[18px] bg-white px-3 py-4.5 text-center">
             <span className="text-[12px] font-bold text-[#C2410C]">STEP 03</span>
             <strong className="text-[15px]">자격 취득</strong>
-            <span className="text-[12px] text-[#6B6B6B]">필기·시연 평가</span>
+            <span className="text-[12px] text-[#555555]">필기·시연 평가</span>
           </li>
           <li className="flex flex-col gap-1.5 rounded-[18px] bg-white px-3 py-4.5 text-center">
             <span className="text-[12px] font-bold text-[#C2410C]">STEP 04</span>
             <strong className="text-[15px]">센터 활동</strong>
-            <span className="text-[12px] text-[#6B6B6B]">전국 네트워크</span>
+            <span className="text-[12px] text-[#555555]">전국 네트워크</span>
           </li>
         </ol>
       </div>

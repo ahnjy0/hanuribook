@@ -15,13 +15,13 @@ export default function SelfLearningSection() {
         <span className="font-extrabold text-[#E8590C]">아이 스스로 다다를 수 있도록</span>
       </h2>
       <div className="flex flex-col items-center">
-        <p className="m-0 box-border flex h-55 w-55 items-center justify-center rounded-[50%] border-2 border-dashed border-[#F7C66B] bg-[#FFF9EC] p-6 text-[16px] leading-[1.6] text-[#333333]">
+        <p className="m-0 box-border flex h-55 w-55 items-center justify-center rounded-[50%] border-2 border-dashed border-[#F7C66B] bg-[#FFF9EC] p-6 text-[16px] leading-[1.6] text-[#222222]">
           지율이가 주인공이라면
           <br />
           어떻게 행동했을까?
         </p>
         <span className="h-14 w-0.25 bg-[#F7C66B]" aria-hidden="true" />
-        <p className="m-0 box-border flex h-55 w-55 items-center justify-center rounded-[50%] border-2 border-dashed border-[#F7C66B] bg-[#FFF9EC] p-6 text-[16px] leading-[1.6] text-[#333333]">
+        <p className="m-0 box-border flex h-55 w-55 items-center justify-center rounded-[50%] border-2 border-dashed border-[#F7C66B] bg-[#FFF9EC] p-6 text-[16px] leading-[1.6] text-[#222222]">
           친구의 발표를 듣고
           <br />
           어떤 생각이 떠올라?

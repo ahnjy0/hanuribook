@@ -24,25 +24,25 @@ export default function CurriculumSection() {
               <th className="p-3 text-left text-[#C2410C]" scope="row">
                 독서 이론
               </th>
-              <td className="p-3 text-[#4A4A4A]">아동 발달과 독서 단계, 독서 교육의 이해</td>
+              <td className="p-3 text-[#333333]">아동 발달과 독서 단계, 독서 교육의 이해</td>
             </tr>
             <tr className="border-t border-t-[#EFEFEF]">
               <th className="p-3 text-left text-[#C2410C]" scope="row">
                 수업 설계
               </th>
-              <td className="p-3 text-[#4A4A4A]">필독서 분석, 발문 설계, 4차시 수업안 작성</td>
+              <td className="p-3 text-[#333333]">필독서 분석, 발문 설계, 4차시 수업안 작성</td>
             </tr>
             <tr className="border-t border-t-[#EFEFEF]">
               <th className="p-3 text-left text-[#C2410C]" scope="row">
                 토론·논술
               </th>
-              <td className="p-3 text-[#4A4A4A]">토의·토론 진행법, 갈래별 글쓰기 지도</td>
+              <td className="p-3 text-[#333333]">토의·토론 진행법, 갈래별 글쓰기 지도</td>
             </tr>
             <tr className="border-t border-t-[#EFEFEF]">
               <th className="p-3 text-left text-[#C2410C]" scope="row">
                 실무
               </th>
-              <td className="p-3 text-[#4A4A4A]">학부모 상담, 첨삭 실습, 수업 시연</td>
+              <td className="p-3 text-[#333333]">학부모 상담, 첨삭 실습, 수업 시연</td>
             </tr>
           </tbody>
         </table>

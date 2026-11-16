@@ -11,7 +11,7 @@ export default function HowSection() {
         <TitleIcon kind="how" />
         한우리 수업, 어떻게 진행되나요?
       </h2>
-      <p className="m-0 text-[14px] leading-[1.7] text-[#4A4A4A]">
+      <p className="m-0 text-[14px] leading-[1.7] text-[#333333]">
         한 달 4차시 수업에서 매달 새로운 필독서와 매달 바뀌는 교재로 수업합니다. 수업은
         읽기·말하기·듣기·쓰기·생각하기 영역을 고르게 활용하는 다양한 활동으로 구성됩니다.
       </p>
@@ -33,7 +33,7 @@ export default function HowSection() {
           <strong className="text-[16px]">문학 읽기</strong>
         </li>
       </ol>
-      <p className="m-0 text-right text-[12px] text-[#6B6B6B]">수업 예시 : 초등 4학년 프로그램 기준</p>
+      <p className="m-0 text-right text-[12px] text-[#555555]">수업 예시 : 초등 4학년 프로그램 기준</p>
     </section>
   );
 }

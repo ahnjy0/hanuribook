@@ -11,7 +11,7 @@ export default function StartSection() {
         <TitleIcon kind="start" />
         한우리 수업, 어떻게 시작하나요?
       </h2>
-      <p className="m-0 text-[14px] leading-[1.7] text-[#4A4A4A]">
+      <p className="m-0 text-[14px] leading-[1.7] text-[#333333]">
         한우리 수업을 시작하고 싶다면 고민하지 말고 상담 받아 보세요. 한우리 선생님이 친절하게 상담해 드립니다.
       </p>
       <ol className="m-0 grid list-none grid-cols-3 gap-2 p-0 md:gap-4">

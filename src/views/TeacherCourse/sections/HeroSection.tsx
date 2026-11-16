@@ -11,7 +11,7 @@ export default function HeroSection() {
         {"독서지도사 "}
         <span className="text-[#D94E0F]">입문과정</span>
       </h1>
-      <p className="m-0 text-[15px] leading-[1.7] text-[#4A4A4A]">
+      <p className="m-0 text-[15px] leading-[1.7] text-[#333333]">
         독서교육 경험이 없어도 체계적인 커리큘럼과 실습으로 아이들을 가르치는 전문 독서지도사가 될 수
         있습니다.
       </p>

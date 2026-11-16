@@ -83,7 +83,7 @@ export default function IsmsBadge() {
             type="button"
             aria-label="닫기"
             onClick={() => setOpen(false)}
-            className="absolute top-3.5 right-3.5 flex size-10 cursor-pointer items-center justify-center rounded-full border-0 bg-transparent text-[#6B6B6B] hover:bg-[#F4F4F5] hover:text-[#1F1F1F]"
+            className="absolute top-3.5 right-3.5 flex size-10 cursor-pointer items-center justify-center rounded-full border-0 bg-transparent text-[#555555] hover:bg-[#F4F4F5] hover:text-[#1F1F1F]"
           >
             <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <path d="M6 6l12 12M18 6 6 18" />
@@ -106,7 +106,7 @@ export default function IsmsBadge() {
             {INFO.map((row) => (
               <div key={row.label} className="flex gap-3 text-[14px] leading-[1.5]">
                 <dt className="w-16 flex-none font-bold text-[#2F5AA8]">{row.label}</dt>
-                <dd className="m-0 break-keep text-[#333333]">{row.value}</dd>
+                <dd className="m-0 break-keep text-[#222222]">{row.value}</dd>
               </div>
             ))}
           </dl>

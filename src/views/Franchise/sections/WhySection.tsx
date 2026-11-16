@@ -24,7 +24,7 @@ export default function WhySection() {
             </svg>
           </span>
           <strong className="text-[15px]">검증된 커리큘럼</strong>
-          <span className="text-[13px] leading-[1.5] text-[#4A4A4A]">유아~고등 전 학년 매월 교재 제공</span>
+          <span className="text-[13px] leading-[1.5] text-[#333333]">유아~고등 전 학년 매월 교재 제공</span>
         </li>
         <li className="flex flex-col gap-2 rounded-[18px] border border-[#EEEEEE] bg-white px-3.5 py-4.5">
           <span className="flex h-10 w-10 items-center justify-center rounded-[12px] bg-[#EAF2FF]">
@@ -42,7 +42,7 @@ export default function WhySection() {
             </svg>
           </span>
           <strong className="text-[15px]">교사 채용 지원</strong>
-          <span className="text-[13px] leading-[1.5] text-[#4A4A4A]">양성 과정 수료 교사 우선 연계</span>
+          <span className="text-[13px] leading-[1.5] text-[#333333]">양성 과정 수료 교사 우선 연계</span>
         </li>
         <li className="flex flex-col gap-2 rounded-[18px] border border-[#EEEEEE] bg-white px-3.5 py-4.5">
           <span className="flex h-10 w-10 items-center justify-center rounded-[12px] bg-[#FFF6DA]">
@@ -60,7 +60,7 @@ export default function WhySection() {
             </svg>
           </span>
           <strong className="text-[15px]">마케팅 지원</strong>
-          <span className="text-[13px] leading-[1.5] text-[#4A4A4A]">온라인 상담 신청 지역 배정</span>
+          <span className="text-[13px] leading-[1.5] text-[#333333]">온라인 상담 신청 지역 배정</span>
         </li>
         <li className="flex flex-col gap-2 rounded-[18px] border border-[#EEEEEE] bg-white px-3.5 py-4.5">
           <span className="flex h-10 w-10 items-center justify-center rounded-[12px] bg-[#E8F5EE]">
@@ -78,7 +78,7 @@ export default function WhySection() {
             </svg>
           </span>
           <strong className="text-[15px]">운영 시스템</strong>
-          <span className="text-[13px] leading-[1.5] text-[#4A4A4A]">회원·수업 관리 통합 플랫폼</span>
+          <span className="text-[13px] leading-[1.5] text-[#333333]">회원·수업 관리 통합 플랫폼</span>
         </li>
       </ul>
     </section>

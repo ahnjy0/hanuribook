@@ -13,30 +13,30 @@ export default function TypesSection() {
             학원형
           </span>
           <h3 className="m-0 text-[18px] font-extrabold">러닝센터</h3>
-          <p className="m-0 text-[14px] leading-[1.6] text-[#4A4A4A]">
+          <p className="m-0 text-[14px] leading-[1.6] text-[#333333]">
             독립 교실을 갖춘 학원형 센터. 소그룹 수업과 진단실 운영.
           </p>
-          <span className="text-[13px] text-[#6B6B6B]">권장 면적 [00]㎡ 이상</span>
+          <span className="text-[13px] text-[#555555]">권장 면적 [00]㎡ 이상</span>
         </article>
         <article className="flex flex-col gap-2 rounded-[20px] border border-[#EFEFEF] p-5">
           <span className="self-start rounded-[6px] bg-[#EAF2FF] px-2 py-0.75 text-[12px] font-bold text-[#2F5AA8]">
             지역 거점형
           </span>
           <h3 className="m-0 text-[18px] font-extrabold">지부</h3>
-          <p className="m-0 text-[14px] leading-[1.6] text-[#4A4A4A]">
+          <p className="m-0 text-[14px] leading-[1.6] text-[#333333]">
             지역 교사를 관리하며 방문·홈클럽 수업을 운영하는 거점.
           </p>
-          <span className="text-[13px] text-[#6B6B6B]">관할 지역 협의</span>
+          <span className="text-[13px] text-[#555555]">관할 지역 협의</span>
         </article>
         <article className="flex flex-col gap-2 rounded-[20px] border border-[#EFEFEF] p-5">
           <span className="self-start rounded-[6px] bg-[#E8F5EE] px-2 py-0.75 text-[12px] font-bold text-[#1F7A4C]">
             소규모형
           </span>
           <h3 className="m-0 text-[18px] font-extrabold">홈클럽</h3>
-          <p className="m-0 text-[14px] leading-[1.6] text-[#4A4A4A]">
+          <p className="m-0 text-[14px] leading-[1.6] text-[#333333]">
             선생님 자택에서 소수 정예로 운영하는 소규모 공부방.
           </p>
-          <span className="text-[13px] text-[#6B6B6B]">자격 취득 교사 대상</span>
+          <span className="text-[13px] text-[#555555]">자격 취득 교사 대상</span>
         </article>
       </div>
     </section>

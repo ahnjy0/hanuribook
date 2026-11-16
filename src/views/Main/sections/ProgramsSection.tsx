@@ -119,7 +119,7 @@ export default function ProgramsSection({ progTabs, progs }: Props) {
                     {p.age}
                   </span>
                   <span className="text-[17px] leading-[1.35] font-extrabold lg:text-[18px]">{p.title}</span>
-                  <span className="line-clamp-2 text-[13px] leading-[1.5] break-keep text-[#6B6B6B]">{p.desc}</span>
+                  <span className="line-clamp-2 text-[13px] leading-[1.5] break-keep text-[#555555]">{p.desc}</span>
                 </span>
                 <span className="flex size-9 flex-none items-center justify-center rounded-full bg-[#FFF1E7] text-[#C2410C] transition-colors duration-300 group-hover:bg-[#E6450F] group-hover:text-white">
                   <svg

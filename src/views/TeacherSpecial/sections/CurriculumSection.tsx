@@ -17,7 +17,7 @@ export default function CurriculumSection() {
           </div>
           <div>
             <strong className="text-[16px]">독서교육 이론</strong>
-            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#4A4A4A]">
+            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#333333]">
               아동 발달과 독서 단계, 한우리 교수법의 이해
             </p>
           </div>
@@ -31,7 +31,7 @@ export default function CurriculumSection() {
           </div>
           <div>
             <strong className="text-[16px]">발문·토론 실습</strong>
-            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#4A4A4A]">
+            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#333333]">
               학년별 필독서로 발문 설계와 토론 진행 실습
             </p>
           </div>
@@ -45,7 +45,7 @@ export default function CurriculumSection() {
           </div>
           <div>
             <strong className="text-[16px]">글쓰기 첨삭 훈련</strong>
-            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#4A4A4A]">
+            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#333333]">
               갈래별 글쓰기 평가 기준과 첨삭 실무
             </p>
           </div>
@@ -58,7 +58,7 @@ export default function CurriculumSection() {
           </div>
           <div>
             <strong className="text-[16px]">시연 평가 · 자격 취득</strong>
-            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#4A4A4A]">
+            <p className="mx-0 mt-1 mb-0 text-[13px] leading-[1.6] text-[#333333]">
               실기 시연 평가 통과 후 독서지도사 자격 취득 및 센터 연계
             </p>
           </div>

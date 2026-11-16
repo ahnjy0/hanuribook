@@ -109,7 +109,7 @@ export default function ResultsSection({ centers, isMap, showMap }: Props) {
               <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
             </svg>
           </button>
-          <span className="absolute bottom-3 left-3 text-[11px] text-[#6B6B6B]">[지도 API 영역]</span>
+          <span className="absolute bottom-3 left-3 text-[11px] text-[#555555]">[지도 API 영역]</span>
         </div>
       )}
       <ul className="m-0 grid list-none grid-cols-1 gap-3.5 p-0 md:grid-cols-2 lg:grid-cols-1">
@@ -133,7 +133,7 @@ export default function ResultsSection({ centers, isMap, showMap }: Props) {
                 </div>
                 <CenterKindBadge kind={c.kind} />
               </div>
-              <ul className="m-0 flex list-none flex-col gap-2 rounded-[14px] bg-[#F7F7F8] p-3.5 text-[14px] leading-[1.5] text-[#333333]">
+              <ul className="m-0 flex list-none flex-col gap-2 rounded-[14px] bg-[#F7F7F8] p-3.5 text-[14px] leading-[1.5] text-[#222222]">
                 <li className="flex gap-2">
                   <svg
                     className="mt-0.25 flex-none"
@@ -202,7 +202,7 @@ export default function ResultsSection({ centers, isMap, showMap }: Props) {
               </ul>
               <div className="grid grid-cols-2 gap-2">
                 <a
-                  className="flex h-12.5 items-center justify-center gap-1.5 rounded-[12px] bg-[#EEEEEF] text-[15px] font-semibold text-[#333333] no-underline"
+                  className="flex h-12.5 items-center justify-center gap-1.5 rounded-[12px] bg-[#EEEEEF] text-[15px] font-semibold text-[#222222] no-underline"
                   href="tel:0262762666"
                 >
                   전화 문의

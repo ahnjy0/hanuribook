@@ -14,7 +14,7 @@ export default function StyleGuide() {
             한우리독서토론논술 스타일가이드
           </h1>
         </div>
-        <p className="m-0 text-right text-[14px] leading-[1.6] text-[#6B6B6B]">
+        <p className="m-0 text-right text-[14px] leading-[1.6] text-[#555555]">
           Mobile first 390 → Tablet 768 → Desktop 1024+
           <br />
           콘텐츠 최대폭 1200px · 좌우 여백 20px

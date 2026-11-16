@@ -115,7 +115,7 @@ export default function HeroSection() {
                   {`${b.age} 권장`}
                 </span>
                 <span className="my-3 h-px w-full bg-[#EEEEEE] lg:my-4" aria-hidden="true" />
-                <span className="text-[13px] leading-[1.55] text-[#4A4A4A] lg:text-[15px]">{b.desc}</span>
+                <span className="text-[13px] leading-[1.55] text-[#333333] lg:text-[15px]">{b.desc}</span>
               </div>
             </article>
           ))}

@@ -18,11 +18,11 @@ export default function ModesSection() {
             </span>
           </div>
           <dl className="m-0 grid grid-cols-[80px_1fr] gap-2 text-[14px]">
-            <dt className="text-[#6B6B6B]">기간</dt>
+            <dt className="text-[#555555]">기간</dt>
             <dd className="m-0">[0]주 · 자율 수강</dd>
-            <dt className="text-[#6B6B6B]">방식</dt>
+            <dt className="text-[#555555]">방식</dt>
             <dd className="m-0">동영상 강의 + 실시간 실습</dd>
-            <dt className="text-[#6B6B6B]">수강료</dt>
+            <dt className="text-[#555555]">수강료</dt>
             <dd className="m-0">[수강료]</dd>
           </dl>
           <Link
@@ -40,11 +40,11 @@ export default function ModesSection() {
             </span>
           </div>
           <dl className="m-0 grid grid-cols-[80px_1fr] gap-2 text-[14px]">
-            <dt className="text-[#6B6B6B]">기간</dt>
+            <dt className="text-[#555555]">기간</dt>
             <dd className="m-0">[0]주 · 주 [0]회</dd>
-            <dt className="text-[#6B6B6B]">방식</dt>
+            <dt className="text-[#555555]">방식</dt>
             <dd className="m-0">대면 강의 + 현장 수업 참관</dd>
-            <dt className="text-[#6B6B6B]">수강료</dt>
+            <dt className="text-[#555555]">수강료</dt>
             <dd className="m-0">[수강료]</dd>
           </dl>
           <Link

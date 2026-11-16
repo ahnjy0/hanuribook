@@ -36,7 +36,7 @@ export default function VideoSection() {
                 type="button"
                 id={`k-vid-tab-${v.key}`}
                 className={`h-11.5 cursor-pointer border-0 font-[family-name:inherit] text-[14px] ${
-                  on ? "bg-[#D63F7C] font-bold text-white" : "bg-[#F7F7F8] font-semibold text-[#4A4A4A]"
+                  on ? "bg-[#D63F7C] font-bold text-white" : "bg-[#F7F7F8] font-semibold text-[#333333]"
                 }`}
                 role="tab"
                 aria-selected={on}
