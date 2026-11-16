@@ -7,7 +7,7 @@ type Book = {
   src: string;
   w: number;
   h: number;
-  /** 카드별 강조색: 칩·권장 연령 글자 / 표지 진열 영역 배경 */
+  /** 카드별 강조색: 권장 연령 글자 / 표지 진열 영역 배경 */
   accent: string;
   stage: string;
 };
@@ -67,7 +67,7 @@ export default function HeroSection() {
       <div className="relative mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 text-center lg:gap-5">
         <span className="flex items-center gap-2 rounded-full bg-white/25 px-4 py-1.5 text-[14px] font-bold text-white">
           <span className="h-2.5 w-2.5 rounded-full bg-[#FFD43B]" aria-hidden="true" />
-          유아 6, 7세 창의독서
+          유아 정규 프로그램
         </span>
         <h1 className="m-0" id="k-hero">
           <img
@@ -79,7 +79,7 @@ export default function HeroSection() {
           />
         </h1>
         <p className="mx-0 -mt-2 mb-2 text-[15px] leading-[1.6] font-medium text-white/90 lg:text-[17px]">
-          상상력과 언어 감각을 깨우는 한우리 유아 정규 프로그램
+          상상력과 언어 감각 키워주는 창의독서 프로그램
         </p>
         <div className="grid w-full max-w-[720px] grid-cols-2 gap-3 lg:gap-5">
           {BOOKS.map((b) => (
@@ -89,18 +89,12 @@ export default function HeroSection() {
             >
               {/* 표지 진열 영역 (카드별 연한 강조색) */}
               <div
-                className="relative flex flex-col items-center rounded-[18px] px-3 pt-8 pb-5 lg:rounded-[22px] lg:px-6 lg:pt-10 lg:pb-7"
+                className="relative flex flex-col items-center rounded-[18px] px-3 py-4 lg:rounded-[22px] lg:px-6 lg:py-7"
                 style={{ background: b.stage }}
               >
-                <span
-                  className="absolute top-2.5 left-2.5 rounded-full px-2.5 py-0.5 text-[12px] font-bold text-white lg:top-3.5 lg:left-3.5 lg:px-3 lg:py-1 lg:text-[13px]"
-                  style={{ background: b.accent }}
-                >
-                  {b.age}
-                </span>
                 <div className="relative">
                   <img
-                    className="block h-36 w-auto max-w-full rounded-[3px] outline outline-1 -outline-offset-1 outline-black/10 sm:h-48 lg:h-64"
+                    className="block h-28 w-auto max-w-full rounded-[3px] outline outline-1 -outline-offset-1 outline-black/10 sm:h-48 lg:h-64"
                     src={b.src}
                     width={b.w}
                     height={b.h}
