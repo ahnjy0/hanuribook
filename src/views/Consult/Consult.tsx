@@ -8,7 +8,7 @@ import BottomNav from "@/components/common/BottomNav/BottomNav";
 import { useConsult } from "./useConsult";
 
 export default function Consult() {
-  const { agree, done, faqs, grade, grades, lessonLabel, lessonTypes, notDone, steps, submit, toggleAgree } =
+  const { agree, done, faqs, grade, grades, notDone, steps, submit, toggleAgree, phoneAuth, address, hopeTimes } =
     useConsult();
   return (
     <div className="flex min-h-screen w-full flex-col bg-white font-pretendard tracking-[-0.02em] text-[#1F1F1F]">
@@ -21,11 +21,12 @@ export default function Consult() {
           faqs={faqs}
           grade={grade}
           grades={grades}
-          lessonLabel={lessonLabel}
-          lessonTypes={lessonTypes}
           notDone={notDone}
           submit={submit}
           toggleAgree={toggleAgree}
+          phoneAuth={phoneAuth}
+          address={address}
+          hopeTimes={hopeTimes}
         />
       </main>
       <Footer />

@@ -8,51 +8,20 @@ type Props = Pick<
   | "faqs"
   | "grade"
   | "grades"
-  | "lessonLabel"
-  | "lessonTypes"
   | "notDone"
   | "submit"
   | "toggleAgree"
+  | "phoneAuth"
+  | "address"
+  | "hopeTimes"
 >;
 
-/** 수업 형태별 아이콘 */
-function LessonIcon({ kind, color }: { kind: string; color: string }) {
-  const common = {
-    "aria-hidden": true,
-    width: 22,
-    height: 22,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: color,
-    strokeWidth: 2,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-  };
-  if (kind === "visit")
-    return (
-      <svg {...common}>
-        <path d="M3 10.5 12 3l9 7.5" />
-        <path d="M5 9.5V21h14V9.5" />
-        <path d="M10 21v-6h4v6" />
-      </svg>
-    );
-  if (kind === "academy")
-    return (
-      <svg {...common}>
-        <path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16" />
-        <path d="M15 10h4a1 1 0 0 1 1 1v10" />
-        <path d="M3 21h18M8 8h3M8 12h3M8 16h3" />
-      </svg>
-    );
-  return (
-    <svg {...common}>
-      <circle cx="9" cy="8" r="3" />
-      <path d="M3 20a6 6 0 0 1 12 0" />
-      <circle cx="17" cy="9" r="2.5" />
-      <path d="M16 14.2a5 5 0 0 1 5 5" />
-    </svg>
-  );
-}
+const INPUT =
+  "box-border h-13 w-full min-w-0 rounded-[12px] border border-[#E4E4E4] bg-[#F7F7F8] px-4 py-0 font-[family-name:inherit] text-[16px] text-[#1F1F1F] placeholder:text-[#8A8A8A]";
+// 입력칸 오른쪽 보조 버튼(인증번호 받기·확인·주소 검색): 모두 같은 너비(88px)로 고정해
+// 휴대폰 번호·인증번호·주소 입력칸의 너비도 서로 같아지게 함. 좌우 여백을 줄이려고 글자 13px
+const SIDE_BTN =
+  "h-13 w-[88px] flex-none cursor-pointer rounded-[12px] border border-[#F26522] bg-white px-0 font-[family-name:inherit] text-[13px] font-bold whitespace-nowrap text-[#C2410C] disabled:cursor-default disabled:border-[#E4E4E4] disabled:text-[#8A8A8A]";
 
 export default function ApplySection({
   agree,
@@ -60,11 +29,12 @@ export default function ApplySection({
   faqs,
   grade,
   grades,
-  lessonLabel,
-  lessonTypes,
   notDone,
   submit,
   toggleAgree,
+  phoneAuth: pa,
+  address,
+  hopeTimes,
 }: Props) {
   return (
     <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-1 gap-4 px-5 pt-5 pb-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-start lg:gap-7">
@@ -90,7 +60,7 @@ export default function ApplySection({
           </span>
           <h2 className="m-0 text-[22px] font-extrabold">무료 상담 신청이 완료되었습니다</h2>
           <p className="m-0 text-[15px] leading-[1.6] text-[#333333]">
-            {`${grade}${lessonLabel ? ` · ${lessonLabel}` : ""} 맞춤 상담을 위해`}
+            {`${grade} 맞춤 상담을 위해`}
             <br />
             2~3일 이내에 한우리 선생님이 상담전화를 드립니다.
           </p>
@@ -138,54 +108,6 @@ export default function ApplySection({
           <fieldset className="m-0 flex flex-col gap-3.5 rounded-[24px] border border-[#EEEEEE] bg-white px-5 py-5.5">
             <legend className="float-left flex w-full items-center gap-2 p-0 text-[20px] font-extrabold">
               <span className="h-2 w-2 rounded-[50%] bg-[#F26522]" aria-hidden="true" />
-              수업 형태 선택<span className="text-[13px] font-semibold text-[#555555]">(선택)</span>
-            </legend>
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-3" role="radiogroup" aria-label="수업 형태">
-              {lessonTypes.map((t) => (
-                <button
-                  key={t.key}
-                  className={`relative flex cursor-pointer items-center gap-3 rounded-[16px] border-2 px-4 py-3.5 text-left font-[family-name:inherit] sm:flex-col sm:items-start sm:gap-2.5 sm:py-4 ${
-                    t.sel ? "border-[#F26522] bg-[#FFF1E8]" : "border-transparent bg-[#F4F4F5]"
-                  }`}
-                  type="button"
-                  role="radio"
-                  aria-checked={t.sel}
-                  onClick={t.pick}
-                >
-                  <span
-                    className={`flex h-10 w-10 flex-none items-center justify-center rounded-[12px] ${
-                      t.sel ? "bg-[#F26522]" : "bg-white"
-                    }`}
-                  >
-                    <LessonIcon kind={t.key} color={t.sel ? "#FFFFFF" : "#F26522"} />
-                  </span>
-                  <span className="flex min-w-0 flex-col gap-1 pr-6 sm:pr-0">
-                    <span
-                      className={`text-[16px] font-bold ${t.sel ? "text-[#C2410C]" : "text-[#1F1F1F]"}`}
-                    >
-                      {t.label}
-                    </span>
-                    <span className="text-[13px] leading-[1.5] text-[#555555]">{t.desc}</span>
-                  </span>
-                  <span
-                    className={`absolute top-3 right-3 flex h-5 w-5 items-center justify-center rounded-[50%] border-2 ${
-                      t.sel ? "border-[#F26522] bg-[#F26522]" : "border-[#D4D4D8] bg-white"
-                    }`}
-                    aria-hidden="true"
-                  >
-                    {t.sel && (
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="3.5">
-                        <path d="m5 12 5 5L20 7" />
-                      </svg>
-                    )}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </fieldset>
-          <fieldset className="m-0 flex flex-col gap-3.5 rounded-[24px] border border-[#EEEEEE] bg-white px-5 py-5.5">
-            <legend className="float-left flex w-full items-center gap-2 p-0 text-[20px] font-extrabold">
-              <span className="h-2 w-2 rounded-[50%] bg-[#F26522]" aria-hidden="true" />
               보호자 연락처 정보<span className="text-[13px] font-semibold text-[#C2410C]">(필수)</span>
             </legend>
             <p className="m-0 text-[14px] text-[#333333]">
@@ -203,41 +125,127 @@ export default function ApplySection({
                 placeholder="예: 김민서"
               />
             </div>
+            {/* 휴대폰 번호 + 인증 */}
             <div className="flex flex-col gap-1.5">
               <label className="text-[13px] font-semibold text-[#222222]" htmlFor="c-phone">
                 휴대폰 번호
               </label>
-              <input
-                className="box-border h-13 w-full rounded-[12px] border border-[#E4E4E4] bg-[#F7F7F8] px-4 py-0 font-[family-name:inherit] text-[16px] text-[#1F1F1F] placeholder:text-[#8A8A8A]"
-                id="c-phone"
-                type="tel"
-                autoComplete="tel"
-                inputMode="numeric"
-                placeholder="010-1234-5678"
-              />
+              <div className="flex gap-2">
+                <input
+                  className={INPUT}
+                  id="c-phone"
+                  type="tel"
+                  autoComplete="tel"
+                  inputMode="numeric"
+                  placeholder="010-1234-5678"
+                  value={pa.phone}
+                  onChange={(e) => pa.changePhone(e.target.value)}
+                  readOnly={pa.verified}
+                />
+                <button className={SIDE_BTN} type="button" onClick={pa.sendCode} disabled={pa.verified}>
+                  {pa.codeSent ? "재전송" : "인증번호 받기"}
+                </button>
+              </div>
+              {pa.codeSent && !pa.verified && (
+                <div className="flex gap-2">
+                  <span className="relative block min-w-0 flex-1">
+                    <label className="absolute h-0.25 w-0.25 overflow-hidden [clip:rect(0_0_0_0)]" htmlFor="c-code">
+                      인증번호
+                    </label>
+                    <input
+                      className={`${INPUT} pr-16`}
+                      id="c-code"
+                      type="text"
+                      inputMode="numeric"
+                      autoComplete="one-time-code"
+                      placeholder="인증번호 6자리"
+                      value={pa.code}
+                      onChange={(e) => pa.changeCode(e.target.value)}
+                    />
+                    {/* 남은 시간 */}
+                    <span
+                      className="absolute top-1/2 right-4 -translate-y-1/2 text-[14px] font-semibold text-[#D93025]"
+                      aria-live="off"
+                    >
+                      {pa.timer}
+                    </span>
+                  </span>
+                  <button className={SIDE_BTN} type="button" onClick={pa.confirmCode}>
+                    확인
+                  </button>
+                </div>
+              )}
+              {pa.msg && (
+                <p
+                  className={`m-0 text-[13px] ${pa.verified ? "font-semibold text-[#15803D]" : "text-[#C2410C]"}`}
+                  role="status"
+                >
+                  {pa.verified ? "✓ " : ""}
+                  {pa.expired ? "입력 시간이 지났습니다. 인증번호를 다시 받아 주세요." : pa.msg}
+                </p>
+              )}
             </div>
+            {/* 거주 지역: 주소 검색으로 입력 */}
             <div className="flex flex-col gap-1.5">
               <span className="text-[13px] font-semibold text-[#222222]">거주 지역 (가까운 지점 연결)</span>
-              <div className="grid grid-cols-2 gap-2">
-                <label className="block">
-                  <span className="absolute h-0.25 w-0.25 overflow-hidden [clip:rect(0_0_0_0)]">시/도</span>
-                  <select className="h-13 w-full rounded-[12px] border border-[#E4E4E4] bg-white px-3.5 py-0 font-[family-name:inherit] text-[16px] text-[#1F1F1F]">
-                    <option>경기도</option>
-                    <option>서울특별시</option>
-                    <option>인천광역시</option>
-                  </select>
+              <div className="flex gap-2">
+                <label className="block min-w-0 flex-1">
+                  <span className="absolute h-0.25 w-0.25 overflow-hidden [clip:rect(0_0_0_0)]">주소</span>
+                  <input
+                    className={`${INPUT} cursor-pointer`}
+                    type="text"
+                    readOnly
+                    placeholder="주소 검색을 눌러 주세요"
+                    value={address.address ? `(${address.zonecode}) ${address.address}` : ""}
+                    onClick={address.search}
+                  />
                 </label>
-                <label className="block">
-                  <span className="absolute h-0.25 w-0.25 overflow-hidden [clip:rect(0_0_0_0)]">
-                    시/군/구
-                  </span>
-                  <select className="h-13 w-full rounded-[12px] border border-[#E4E4E4] bg-white px-3.5 py-0 font-[family-name:inherit] text-[16px] text-[#1F1F1F]">
-                    <option>성남시 분당구</option>
-                    <option>성남시 수정구</option>
-                    <option>용인시 수지구</option>
-                  </select>
-                </label>
+                <button className={SIDE_BTN} type="button" onClick={address.search}>
+                  주소 검색
+                </button>
               </div>
+              {address.address && (
+                <label className="block">
+                  <span className="absolute h-0.25 w-0.25 overflow-hidden [clip:rect(0_0_0_0)]">상세 주소</span>
+                  <input
+                    className={INPUT}
+                    type="text"
+                    autoComplete="address-line2"
+                    placeholder="상세 주소 (선택)"
+                    value={address.detail}
+                    onChange={(e) => address.changeDetail(e.target.value)}
+                  />
+                </label>
+              )}
+              {address.err && <p className="m-0 text-[13px] text-[#C2410C]">{address.err}</p>}
+            </div>
+            {/* 상담 희망 시간 (단일 선택) */}
+            <div className="flex flex-col gap-2">
+              <span className="text-[13px] font-semibold text-[#222222]" id="c-time">
+                상담 희망 시간
+              </span>
+              <div className="grid grid-cols-2 gap-2" role="radiogroup" aria-labelledby="c-time">
+                {hopeTimes.map((t) => (
+                  <label
+                    key={t.label}
+                    className={`flex h-12 cursor-pointer items-center gap-2.5 rounded-[12px] border px-3.5 text-[15px] ${
+                      t.sel ? "border-[#F26522] bg-[#FFF1E8] font-bold text-[#C2410C]" : "border-[#E4E4E4] bg-white text-[#1F1F1F]"
+                    }`}
+                  >
+                    <input
+                      className="m-0 h-5 w-5 flex-none accent-[#F26522]"
+                      type="radio"
+                      name="hope-time"
+                      checked={t.sel}
+                      onChange={t.pick}
+                    />
+                    {t.label}
+                  </label>
+                ))}
+              </div>
+              <p className="m-0 text-[12px] leading-[1.5] text-[#555555]">
+                ※ 담당교사가 수업 중이거나 최초 연락 시 연결되지 않은 경우, 희망 시간 외에 연락드릴 수 있습니다.
+              </p>
             </div>
             <label className="flex cursor-pointer items-start gap-3 rounded-[14px] bg-[#F7F7F8] p-4">
               <input
