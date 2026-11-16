@@ -5,7 +5,7 @@ import waySpeakImg from "@/assets/images/way-speak.webp";
 export default function WaysSection() {
   return (
     <div className="pt-10" aria-label="한우리의 읽기·쓰기·말하기">
-      <section className="bg-white px-0 py-12 lg:py-12" aria-labelledby="w-read">
+      <section className="bg-white px-0 pt-6 pb-12 lg:py-12" aria-labelledby="w-read">
         <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-1 items-center gap-6 px-5 lg:max-w-[1240px] lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-10">
           <div className="reveal flex h-60 items-center justify-center rounded-[28px] text-center text-[13px] text-[#8A5A3C] lg:order-2 lg:h-90">
             <img
@@ -48,7 +48,7 @@ export default function WaysSection() {
           </div>
         </div>
       </section>
-      <section className="bg-[#FFF7F1] px-0 py-12 lg:py-12" aria-labelledby="w-write">
+      <section className="bg-[#FFF7F1] px-0 pt-6 pb-12 lg:py-12" aria-labelledby="w-write">
         <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-1 items-center gap-6 px-5 lg:max-w-[1240px] lg:grid-cols-[400px_minmax(0,1fr)] lg:gap-10">
           <div className="reveal flex h-60 items-center justify-center rounded-[28px] text-center text-[13px] text-[#8A5A3C] lg:order-0 lg:h-90">
             <img
@@ -90,7 +90,7 @@ export default function WaysSection() {
           </div>
         </div>
       </section>
-      <section className="bg-white px-0 py-12 lg:py-12" aria-labelledby="w-speak">
+      <section className="bg-white px-0 pt-6 pb-12 lg:py-12" aria-labelledby="w-speak">
         <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-1 items-center gap-6 px-5 lg:max-w-[1240px] lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-10">
           <div className="reveal flex h-60 items-center justify-center rounded-[28px] text-center text-[13px] text-[#8A5A3C] lg:order-2 lg:h-90">
             <img

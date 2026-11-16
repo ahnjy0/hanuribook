@@ -10,7 +10,12 @@ export default function HistorySection() {
             <br />
             빠른 길이 아닌 바른 길을 가며
           </p>
-          <h2 className="m-0 text-[28px] leading-[1.35] font-extrabold lg:text-[34px]" id="hist-title">
+          {/* 모바일: '올곧은 교육 철학을 지켜왔습니다'(약 13글자 폭)가 한 줄에 들어가도록
+              글자 크기를 (화면 너비 - 좌우 여백 88px) ÷ 13 으로 맞춤(최대 28px), 줄바꿈 금지 */}
+          <h2
+            className="m-0 text-[min(28px,calc((100vw_-_88px)/13))] leading-[1.35] font-extrabold whitespace-nowrap lg:text-[34px]"
+            id="hist-title"
+          >
             <span className="text-[#FF8A4F]">35년간</span>
             <br />
             올곧은 교육 철학을 지켜왔습니다

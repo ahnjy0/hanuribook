@@ -113,13 +113,12 @@ export default function ProgramsSection({ progTabs, progs }: Props) {
                 </span>
                 <span className="flex min-w-0 flex-1 flex-col gap-1">
                   <span
-                    className="self-start rounded-full px-2.5 py-0.5 text-[12px] font-bold"
+                    className="self-start rounded-full px-2.5 py-1.5 text-[12px] font-bold"
                     style={{ background: p.tone.soft, color: p.tone.ink }}
                   >
                     {p.age}
                   </span>
                   <span className="text-[17px] leading-[1.35] font-extrabold lg:text-[18px]">{p.title}</span>
-                  <span className="line-clamp-2 text-[13px] leading-[1.5] break-keep text-[#555555]">{p.desc}</span>
                 </span>
                 <span className="flex size-9 flex-none items-center justify-center rounded-full bg-[#FFF1E7] text-[#C2410C] transition-colors duration-300 group-hover:bg-[#E6450F] group-hover:text-white">
                   <svg
@@ -142,7 +141,7 @@ export default function ProgramsSection({ progTabs, progs }: Props) {
 
         <div className="reveal flex justify-center pt-8">
           <Link
-            className="inline-flex h-12 items-center gap-1.5 rounded-full bg-[#E6450F] px-6 py-0 text-[15px] font-bold text-white no-underline shadow-[0_8px_20px_rgba(230,69,15,0.25)] transition-colors duration-300 hover:bg-[#C93A0B]"
+            className="inline-flex h-12 items-center gap-1.5 rounded-full bg-[#E6450F] px-6 py-0 text-[15px] font-bold text-white no-underline transition-colors duration-300 hover:bg-[#C93A0B]"
             href="/program"
           >
             전체 커리큘럼 자세히 보기 ›
