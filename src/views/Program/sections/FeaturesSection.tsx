@@ -51,19 +51,16 @@ export default function FeaturesSection() {
       aria-labelledby="feat"
     >
       <div className="relative mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 text-center lg:gap-5">
-        {/* 라벨·제목·설명: 유아정규 '학습 효과'(Kinder/sections/EffectsSection) 타이틀 영역과 같은 스타일 */}
+        {/* 라벨·제목: 유아정규 '학습 효과'(Kinder/sections/EffectsSection) 타이틀 영역과 같은 스타일 */}
         <div className="mb-2 text-center">
           <SectionLabel color="#C2410C" bg="#FFFFFF">
             프로그램 특징
           </SectionLabel>
-          <h1 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[30px]" id="feat">
+          <h1 className="mx-0 mt-1.5 mb-0 text-[24px] font-extrabold lg:text-[30px]" id="feat">
             읽기·독서·토론·논술로
             <br />
             문해력을 탄탄하게!
           </h1>
-          <p className="m-0 text-[14px] leading-[1.6] text-[#333333]">
-            5력 1체 독서 교육 원리와 소그룹 협동 학습으로 키우는 한우리독서토론논술 프로그램
-          </p>
         </div>
         <div className="grid w-full grid-cols-1 gap-3 md:grid-cols-3 lg:gap-5">
           {FEATURES.map((f) => (
@@ -80,9 +77,7 @@ export default function FeaturesSection() {
                 loading="lazy"
               />
               <div>
-                <h2 className="mx-0 mt-0 mb-1.5 text-[19px] font-extrabold tracking-[-0.02em] text-[#1A1A1A] md:mb-3 md:text-[22px] lg:text-[24px]">
-                  {f.title}
-                </h2>
+                <strong className="text-[16px] text-[#C2410C]">{f.title}</strong>
                 <p className="m-0 text-[14px] leading-[1.6] text-[#222222] md:text-[15px] md:leading-[1.7] lg:text-[16px]">
                   {f.desc}
                 </p>
