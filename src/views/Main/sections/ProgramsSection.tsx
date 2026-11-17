@@ -79,6 +79,12 @@ export default function ProgramsSection({ progTabs, progs }: Props) {
                   })()}
                 </span>
                 <span className="flex min-w-0 flex-1 flex-col gap-1">
+                  {/* 프로그램 분야(특강 탭): 제목 위에 연령 박스와 같은 색 글자로 */}
+                  {p.field && (
+                    <span className="text-[13px] leading-[1.3] font-bold lg:text-[14px]" style={{ color: p.tone.ink }}>
+                      {p.field}
+                    </span>
+                  )}
                   <span className="text-[17px] leading-[1.35] font-extrabold lg:text-[18px]">{p.title}</span>
                   {p.sub && (
                     <span className="text-[13px] leading-[1.45] break-keep text-[#555555] lg:text-[14px]">{p.sub}</span>
