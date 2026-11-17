@@ -1,6 +1,5 @@
 import Link from "next/link";
 import TitleIcon from "./TitleIcon";
-import Illust3D from "./Illust3D";
 
 export default function WhoSection() {
   return (
@@ -18,8 +17,16 @@ export default function WhoSection() {
       </p>
       <div className="grid grid-cols-1 gap-3">
         <div className="flex items-center gap-4 rounded-[18px] border border-[#FBE7DA] bg-[#FFF7F1] p-4.5">
-          <span className="flex h-20 w-20 flex-none items-center justify-center rounded-[20px] bg-white">
-            <Illust3D kind="reader" size={68} />
+          <span className="flex h-24 w-24 flex-none items-center justify-center rounded-[22px] bg-white lg:h-28 lg:w-28 lg:rounded-[24px]">
+            <img
+              className="block h-[88px] w-[88px] object-contain lg:h-[104px] lg:w-[104px]"
+              src="https://cdn.hanuribook.com/img/icon/teacher.png"
+              width={1024}
+              height={1024}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
           </span>
           <div>
             <strong className="text-[16px] text-[#C2410C]">[독서지도사]</strong>
@@ -29,8 +36,17 @@ export default function WhoSection() {
           </div>
         </div>
         <div className="flex items-center gap-4 rounded-[18px] border border-[#FBE7DA] bg-[#FFF7F1] p-4.5">
-          <span className="flex h-20 w-20 flex-none items-center justify-center rounded-[20px] bg-white">
-            <Illust3D kind="debater" size={68} />
+          <span className="flex h-24 w-24 flex-none items-center justify-center rounded-[22px] bg-white lg:h-28 lg:w-28 lg:rounded-[24px]">
+            <img
+              // master.png는 그림 안 여백이 teacher.png보다 넓어(그림 높이 약 89%) 같은 크기로 두면 작아 보임 → 1.13배 키워 맞춤
+              className="block h-[88px] w-[88px] scale-[1.13] object-contain lg:h-[104px] lg:w-[104px]"
+              src="https://cdn.hanuribook.com/img/icon/master.png"
+              width={1024}
+              height={1024}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
           </span>
           <div>
             <strong className="text-[16px] text-[#C2410C]">[토론논술교사]</strong>

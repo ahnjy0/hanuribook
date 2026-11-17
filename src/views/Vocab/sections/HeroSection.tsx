@@ -1,3 +1,4 @@
+import SectionLabel from "@/components/common/SectionLabel";
 import { ACCENT, BOOKS, SOFT } from "../vocabData";
 
 export default function HeroSection() {
@@ -14,12 +15,10 @@ export default function HeroSection() {
         aria-hidden="true"
       />
       <div className="relative mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 text-center lg:gap-5">
-        <span
-          className="flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-[14px] font-bold"
-          style={{ color: ACCENT }}
-        >
+        {/* 섹션 라벨: 아래 섹션들(학습 목표 등)과 같은 공통 라벨, 흰 배경 */}
+        <SectionLabel color={ACCENT} bg={SOFT}>
           초등 정규 프로그램
-        </span>
+        </SectionLabel>
         <h1 className="m-0 flex flex-col items-center gap-1 leading-[1.15] font-extrabold text-white" id="v-hero">
           {/* '생각하는 나무' 로고 (237×61) */}
           <img
@@ -31,11 +30,15 @@ export default function HeroSection() {
           />
           <span className="text-[44px] tracking-[-0.04em] lg:text-[72px]">어휘리더</span>
         </h1>
-        <p className="mx-0 mt-0 mb-2 text-[15px] leading-[1.6] font-medium break-keep text-white lg:text-[17px]">
-          {/* 데스크톱(lg)에서는 한 줄, 모바일·태블릿은 두 줄 */}
-          듣기 · 말하기 · 읽기 · 쓰기의 기초는 어휘력,
-          <br className="lg:hidden" />
-          {" 풍부한 어휘력 기르기"}
+        {/* 설명글: 박스 없이 진한 글자(로고와 같은 검정 계열) — 주황 배경 위에서 흰 글자보다 잘 읽힘.
+            보조 문구 + 핵심 문구(크고 굵게) */}
+        <p className="mx-0 mt-1 mb-2 flex flex-col items-center gap-0.5 break-keep lg:gap-1">
+          <span className="text-[15px] leading-[1.4] font-semibold text-[#3D2500] lg:text-[18px]">
+            듣기 · 말하기 · 읽기 · 쓰기의 기초는 어휘력
+          </span>
+          <span className="text-[20px] leading-[1.3] font-extrabold tracking-[-0.02em] text-[#1F1F1F] lg:text-[26px]">
+            풍부한 어휘력 기르기
+          </span>
         </p>
         <div className="grid w-full max-w-[720px] grid-cols-2 gap-3 lg:gap-5">
           {BOOKS.map((b, i) => (

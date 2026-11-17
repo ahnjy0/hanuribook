@@ -1,4 +1,5 @@
 import SectionLabel from "@/components/common/SectionLabel";
+import CheckIcon from "@/components/common/CheckIcon";
 import { ACCENT, SOFT } from "../vocabData";
 
 const GOALS = [
@@ -40,12 +41,8 @@ export default function LevelsSection() {
         style={{ background: SOFT }}
       >
         {GOALS.map((g) => (
-          <li key={g} className="flex gap-2 text-[15px] leading-[1.55] lg:text-[18px] break-keep text-[#333333]">
-            <span
-              className="mt-[0.55em] h-1.5 w-1.5 flex-none rounded-full"
-              style={{ background: ACCENT }}
-              aria-hidden="true"
-            />
+          <li key={g} className="flex gap-2.5 text-[15px] leading-[1.55] lg:text-[18px] break-keep text-[#333333]">
+            <CheckIcon color={ACCENT} />
             {g}
           </li>
         ))}

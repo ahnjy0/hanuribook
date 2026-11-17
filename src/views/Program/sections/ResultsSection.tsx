@@ -1,4 +1,5 @@
 import TitleIcon from "./TitleIcon";
+import CheckIcon from "@/components/common/CheckIcon";
 
 export default function ResultsSection() {
   return (
@@ -13,28 +14,49 @@ export default function ResultsSection() {
             한우리 효과, 이미 경험한 학부모님들이 말합니다.
           </p>
         </div>
-        <div className="flex h-45 items-center justify-center rounded-[20px] bg-[#FFE6D5] text-center text-[13px] text-[#8A5A3C]">
-          [이미지] 책상에서 글을 쓰는 아이
-        </div>
+        {/* 수업 사진(1200×762): 모바일은 원본 비율 그대로, 데스크톱은 너무 높지 않게 가로로 넓게 잘라(가운데 기준) 표시 */}
+        <img
+          className="block aspect-[1200/762] w-full rounded-[20px] object-cover lg:aspect-auto lg:h-[420px] lg:rounded-[24px]"
+          src="https://cdn.hanuribook.com/img/hanuribook/class_01.jpg"
+          width={1200}
+          height={762}
+          alt="선생님과 함께 웃으며 글을 쓰는 아이"
+          loading="lazy"
+        />
         <dl className="m-0 grid grid-cols-2 gap-2.5 md:grid-cols-5">
           <div className="rounded-[16px] bg-white p-4 text-center">
-            <dt className="text-[13px] text-[#333333]">독서 습관 형성</dt>
+            <dt className="flex items-center justify-center gap-1.5 text-[13px] font-bold text-[#333333]">
+              <CheckIcon color="#C2410C" inline />
+              독서 습관 형성
+            </dt>
             <dd className="mx-0 mt-1 mb-0 text-[26px] font-extrabold text-[#C2410C]">97.6%</dd>
           </div>
           <div className="rounded-[16px] bg-white p-4 text-center">
-            <dt className="text-[13px] text-[#333333]">학부모 만족도</dt>
+            <dt className="flex items-center justify-center gap-1.5 text-[13px] font-bold text-[#333333]">
+              <CheckIcon color="#C2410C" inline />
+              학부모 만족도
+            </dt>
             <dd className="mx-0 mt-1 mb-0 text-[26px] font-extrabold text-[#C2410C]">98.8%</dd>
           </div>
           <div className="rounded-[16px] bg-white p-4 text-center">
-            <dt className="text-[13px] text-[#333333]">문해력 향상</dt>
+            <dt className="flex items-center justify-center gap-1.5 text-[13px] font-bold text-[#333333]">
+              <CheckIcon color="#C2410C" inline />
+              문해력 향상
+            </dt>
             <dd className="mx-0 mt-1 mb-0 text-[26px] font-extrabold text-[#C2410C]">99.3%</dd>
           </div>
           <div className="rounded-[16px] bg-white p-4 text-center">
-            <dt className="text-[13px] text-[#333333]">학교 공부 자신감</dt>
+            <dt className="flex items-center justify-center gap-1.5 text-[13px] font-bold text-[#333333]">
+              <CheckIcon color="#C2410C" inline />
+              학교 공부 자신감
+            </dt>
             <dd className="mx-0 mt-1 mb-0 text-[26px] font-extrabold text-[#C2410C]">98.8%</dd>
           </div>
           <div className="rounded-[16px] bg-white p-4 text-center">
-            <dt className="text-[13px] text-[#333333]">글쓰기 능력 향상</dt>
+            <dt className="flex items-center justify-center gap-1.5 text-[13px] font-bold text-[#333333]">
+              <CheckIcon color="#C2410C" inline />
+              글쓰기 능력 향상
+            </dt>
             <dd className="mx-0 mt-1 mb-0 text-[26px] font-extrabold text-[#C2410C]">99.3%</dd>
           </div>
         </dl>

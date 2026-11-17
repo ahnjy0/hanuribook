@@ -16,9 +16,10 @@ export default function WhereSection() {
         가까운 지역의 한우리 센터를 통해 수업을 받을 수 있습니다. 아이의 성향이나 상황에 맞춰 자유롭게 수업
         유형을 선택할 수 있습니다.
       </p>
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-        <div className="flex items-center gap-3.5 rounded-[18px] border border-[#EEEEEE] bg-white p-4.5">
-          <span className="flex h-11 w-11 flex-none items-center justify-center rounded-[14px] bg-[#FFF6DA]">
+      {/* 데스크톱: 카드를 세로형으로 크게(아이콘 위, 글자 아래) */}
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-3 lg:gap-5">
+        <div className="flex items-center gap-3.5 rounded-[18px] border border-[#EEEEEE] bg-white p-4.5 lg:flex-col lg:items-start lg:justify-center lg:gap-4 lg:rounded-[24px] lg:px-7 lg:py-6">
+          <span className="flex h-11 w-11 flex-none items-center justify-center rounded-[14px] lg:h-16 lg:w-16 lg:rounded-[18px] lg:[&_svg]:h-8 lg:[&_svg]:w-8 bg-[#FFF6DA]">
             <svg
               aria-hidden="true"
               width="22"
@@ -34,36 +35,36 @@ export default function WhereSection() {
             </svg>
           </span>
           <div>
-            <strong className="text-[16px]">방문 수업</strong>
-            <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#333333]">
+            <strong className="text-[16px] lg:text-[21px]">방문 수업</strong>
+            <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#333333] lg:mt-1.5 lg:text-[17px]">
               선생님이 회원의 가정으로 방문하여 수업
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-3.5 rounded-[18px] border border-[#EEEEEE] bg-white p-4.5">
+        <div className="flex items-center gap-3.5 rounded-[18px] border border-[#EEEEEE] bg-white p-4.5 lg:flex-col lg:items-start lg:justify-center lg:gap-4 lg:rounded-[24px] lg:px-7 lg:py-6">
           <span
-            className="flex h-11 w-11 flex-none items-center justify-center rounded-[14px]"
+            className="flex h-11 w-11 flex-none items-center justify-center rounded-[14px] lg:h-16 lg:w-16 lg:rounded-[18px] lg:[&_svg]:h-8 lg:[&_svg]:w-8"
             style={{ background: CENTER_KIND_STYLE.room.bg }}
           >
             <CenterKindIcon kind="room" size={26} />
           </span>
           <div>
-            <strong className="text-[16px]">홈클럽 수업</strong>
-            <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#333333]">
+            <strong className="text-[16px] lg:text-[21px]">홈클럽 수업</strong>
+            <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#333333] lg:mt-1.5 lg:text-[17px]">
               회원이 선생님의 가정으로 방문하여 수업
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-3.5 rounded-[18px] border border-[#EEEEEE] bg-white p-4.5">
+        <div className="flex items-center gap-3.5 rounded-[18px] border border-[#EEEEEE] bg-white p-4.5 lg:flex-col lg:items-start lg:justify-center lg:gap-4 lg:rounded-[24px] lg:px-7 lg:py-6">
           <span
-            className="flex h-11 w-11 flex-none items-center justify-center rounded-[14px]"
+            className="flex h-11 w-11 flex-none items-center justify-center rounded-[14px] lg:h-16 lg:w-16 lg:rounded-[18px] lg:[&_svg]:h-8 lg:[&_svg]:w-8"
             style={{ background: CENTER_KIND_STYLE.branch.bg }}
           >
             <CenterKindIcon kind="branch" size={26} />
           </span>
           <div>
-            <strong className="text-[16px]">학원 수업</strong>
-            <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#333333]">회원이 학원으로 방문하여 수업</p>
+            <strong className="text-[16px] lg:text-[21px]">학원 수업</strong>
+            <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#333333] lg:mt-1.5 lg:text-[17px]">회원이 학원으로 방문하여 수업</p>
           </div>
         </div>
       </div>

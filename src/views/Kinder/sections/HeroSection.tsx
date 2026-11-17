@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import SectionLabel from "@/components/common/SectionLabel";
 
 type Book = {
   title: string;
@@ -62,9 +63,8 @@ export default function HeroSection() {
         aria-hidden="true"
       />
       <div className="relative mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 text-center lg:gap-5">
-        <span className="flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-[14px] font-bold text-[#B8326A]">
-          유아 정규 프로그램
-        </span>
+        {/* 섹션 라벨: 아래 섹션들(학습 목표 등)과 같은 공통 라벨, 흰 배경 */}
+        <SectionLabel>유아 정규 프로그램</SectionLabel>
         <h1 className="m-0" id="k-hero">
           <img
             className="mx-auto block h-24 w-auto max-w-full lg:h-44"
@@ -74,8 +74,15 @@ export default function HeroSection() {
             alt="꿈꾸는 새싹"
           />
         </h1>
-        <p className="mx-0 -mt-2 mb-2 text-[15px] leading-[1.6] font-medium text-white/90 lg:text-[17px]">
-          상상력과 언어 감각 키워주는 창의독서 프로그램
+        {/* 설명글: 박스 없이 진한 글자(로고와 같은 검정 계열) — 분홍 배경 위에서 흰 글자보다 잘 읽힘.
+            보조 문구 + 핵심 문구(크고 굵게) */}
+        <p className="mx-0 -mt-1 mb-2 flex flex-col items-center gap-0.5 break-keep lg:gap-1">
+          <span className="text-[15px] leading-[1.4] font-semibold text-[#3A1426] lg:text-[18px]">
+            상상력과 언어 감각 키워주는
+          </span>
+          <span className="text-[20px] leading-[1.3] font-extrabold tracking-[-0.02em] text-[#1F1F1F] lg:text-[26px]">
+            창의독서 프로그램
+          </span>
         </p>
         <div className="grid w-full max-w-[720px] grid-cols-2 gap-3 lg:gap-5">
           {BOOKS.map((b, i) => (

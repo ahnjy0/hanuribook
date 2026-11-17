@@ -1,4 +1,5 @@
 import SectionLabel from "@/components/common/SectionLabel";
+import CheckIcon from "@/components/common/CheckIcon";
 
 type Level = {
   title: string;
@@ -67,12 +68,8 @@ export default function LevelsSection() {
             <h3 className="m-0 text-[18px] font-extrabold text-[#1F1F1F] lg:text-[24px]">{lv.title}</h3>
             <ul className="m-0 flex list-none flex-col gap-2 p-0 lg:gap-2.5">
               {lv.points.map((pt) => (
-                <li key={pt} className="flex gap-2 text-[15px] leading-[1.55] lg:text-[18px] break-keep text-[#333333]">
-                  <span
-                    className="mt-[0.55em] h-1.5 w-1.5 flex-none rounded-full"
-                    style={{ background: lv.accent }}
-                    aria-hidden="true"
-                  />
+                <li key={pt} className="flex gap-2.5 text-[15px] leading-[1.55] lg:text-[18px] break-keep text-[#333333]">
+                  <CheckIcon color={lv.accent} />
                   {pt}
                 </li>
               ))}

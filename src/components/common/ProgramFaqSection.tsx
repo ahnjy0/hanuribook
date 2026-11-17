@@ -53,12 +53,12 @@ export default function ProgramFaqSection({
   last = false,
 }: Props) {
   return (
+    // 옅은 회색 배경을 화면 너비 전체로 깔고, 안쪽 내용만 본문 너비(1200px)로 맞춤
     <section
-      className={`mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 pt-13 lg:gap-5 lg:pt-24 ${
-        last ? "pb-12 lg:pb-24" : ""
-      }`}
+      className={`mt-13 bg-[#F5F5F7] px-0 py-12 lg:mt-24 lg:py-20 ${last ? "" : "mb-0"}`}
       aria-labelledby="prog-faq"
     >
+      <div className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 lg:gap-5">
       <div className="text-center">
         <SectionLabel color={labelColor} bg={labelBg}>
           FAQ
@@ -69,7 +69,7 @@ export default function ProgramFaqSection({
       </div>
       <div className="mx-auto mt-1.5 flex w-full max-w-[900px] flex-col gap-2.5">
         {items.map((f, i) => (
-          <details key={i} className="group rounded-[16px] border border-[#EEEEEE] bg-white open:bg-[#FAFAFA]">
+          <details key={i} className="group rounded-[16px] border border-[#EEEEEE] bg-white">
             <summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-4.5 py-3.5 text-[15px] font-bold text-[#1F1F1F] lg:px-6 lg:text-[18px] [&::-webkit-details-marker]:hidden">
               <span className="flex-none font-extrabold" style={{ color: accent }} aria-hidden="true">
                 Q.
@@ -105,6 +105,7 @@ export default function ProgramFaqSection({
             </div>
           </details>
         ))}
+      </div>
       </div>
     </section>
   );
