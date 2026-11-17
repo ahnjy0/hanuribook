@@ -128,7 +128,8 @@ export default function Header(props: HeaderProps) {
       </nav>
       {hasSubs && (
         <div className="border-t border-t-[#FBE7DA] bg-[#FCF9F8]">
-          <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-3 gap-2 px-4 py-3">
+          {/* 모바일·태블릿: 3열 격자 / 데스크톱: 메뉴 수와 상관없이 한 줄에 같은 너비로 나열 */}
+          <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-3 gap-2 px-4 py-3 lg:flex lg:px-5 lg:*:flex-1">
             {subs.map((s, i) => (
               <Fragment key={i}>
                 {s.on && (
