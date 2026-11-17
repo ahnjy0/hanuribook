@@ -55,7 +55,7 @@ export default function ProgramsSection({ progTabs, progs }: Props) {
             // reveal(등장 모션)은 바깥 래퍼에, hover 모션은 카드에 분리해 transition 이 충돌하지 않게 함
             <div key={i} className="reveal">
               <SmartLink
-                className="group box-border flex h-full items-center gap-4 rounded-[20px] bg-white p-4.5 text-[#1F1F1F] no-underline shadow-[0_4px_16px_rgba(230,69,15,0.06)] ring-1 ring-[#F6E1D3] transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(230,69,15,0.16)] lg:p-5"
+                className="group box-border flex h-full items-center gap-4 rounded-[20px] bg-white p-4.5 text-[#1F1F1F] no-underline shadow-[0_4px_16px_rgba(230,69,15,0.06)] ring-1 ring-[#F6E1D3] transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_8px_18px_rgba(0,0,0,0.10)] lg:p-5"
                 href={p.href}
               >
                 {/* 대상 연령 박스: '초등 1·2학년' → 초등 / 1·2학년 처럼 첫 단어와 나머지를 두 줄로.

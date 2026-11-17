@@ -68,7 +68,7 @@ export default function CourseExplorerSection({ tabs }: Props) {
         {tabs.map((c) => (
           <li key={c.id} className="flex">
             <article
-              className="flex flex-auto flex-col overflow-hidden rounded-[22px] text-[#1F1F1F] transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(230,69,15,0.16)] motion-reduce:transition-none lg:rounded-[28px]"
+              className="flex flex-auto flex-col overflow-hidden rounded-[22px] text-[#1F1F1F] transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_8px_18px_rgba(0,0,0,0.10)] motion-reduce:transition-none lg:rounded-[28px]"
               style={{ border: `1.5px solid ${c.line}`, background: c.tint }}
             >
               <div

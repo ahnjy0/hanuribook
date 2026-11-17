@@ -168,18 +168,16 @@ export default function Header(props: HeaderProps) {
                   {props.sub}
                   <span className="text-[#C9BDB4]">›</span>
                 </span>
-                {/* 모바일: 메뉴 수만큼 같은 너비 칸으로 한 줄(초등정규 3칸, 초등심화 5칸) / 데스크톱: 글자 길이만큼 나열 */}
-                <ul
-                  className="m-0 grid flex-auto list-none p-0 lg:flex lg:flex-none lg:items-center"
-                  style={{ gridTemplateColumns: `repeat(${thirds.length}, minmax(0, 1fr))` }}
-                >
+                {/* 모바일: 글자 길이만큼 차지하고 메뉴 사이 간격을 똑같이(양 끝 맞춤) — 메뉴명 길이가 달라도 간격이 고르게
+                    데스크톱: 글자 길이만큼 나열 + 세로 구분선 */}
+                <ul className="m-0 flex flex-auto list-none justify-between px-1 py-0 lg:flex-none lg:items-center lg:justify-start lg:px-0">
                   {thirds.map((t, i) => (
                     <li
                       key={i}
                       className="flex items-center lg:before:mx-1 lg:before:h-3 lg:before:w-px lg:before:bg-[#DDD2CA] lg:first:before:hidden"
                     >
                       <SmartLink
-                        className={`flex h-9 w-full items-center justify-center gap-1.5 text-[14px] px-1 whitespace-nowrap no-underline lg:w-auto lg:px-4 lg:text-[15px] ${
+                        className={`flex h-9 w-auto items-center justify-center gap-1.5 px-1 text-[14px] whitespace-nowrap no-underline lg:w-auto lg:px-4 lg:text-[15px] ${
                           t.on ? "font-extrabold" : "font-semibold text-[#666666] hover:text-[#1F1F1F]"
                         }`}
                         style={t.on ? { color: accentText } : undefined}

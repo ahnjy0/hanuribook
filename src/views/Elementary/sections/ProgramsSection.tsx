@@ -24,8 +24,8 @@ export default function ProgramsSection({ progs }: Props) {
           return (
           <li key={i} className="flex">
             <article
-              // 마우스오버: 메인홈 '한우리 프로그램' 카드와 같은 효과(살짝 위로 뜨며 주황빛 그림자)
-              className="flex flex-auto flex-col overflow-hidden rounded-[22px] text-[#1F1F1F] transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(230,69,15,0.16)] motion-reduce:transition-none lg:rounded-[28px]"
+              // 마우스오버: 메인홈 '한우리 프로그램' 카드와 같은 효과(살짝 위로 뜨며 옅은 회색 그림자)
+              className="flex flex-auto flex-col overflow-hidden rounded-[22px] text-[#1F1F1F] transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_8px_18px_rgba(0,0,0,0.10)] motion-reduce:transition-none lg:rounded-[28px]"
               // 카드 전체에 학년별 연한 색(초등심화 과정 카드와 같은 방식)
               style={{ border: `1.5px solid ${p.line}`, background: p.soft }}
             >
