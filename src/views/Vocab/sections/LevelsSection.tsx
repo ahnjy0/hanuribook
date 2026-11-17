@@ -19,7 +19,7 @@ export default function LevelsSection() {
         <SectionLabel color={ACCENT} bg={SOFT}>
           학습 목표
         </SectionLabel>
-        <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[30px]" id="v-levels">
+        <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[34px]" id="v-levels">
           교과 학습 대비 필수 어휘 익히기
         </h2>
       </div>
@@ -40,7 +40,7 @@ export default function LevelsSection() {
         style={{ background: SOFT }}
       >
         {GOALS.map((g) => (
-          <li key={g} className="flex gap-2 text-[15px] leading-[1.55] break-keep text-[#333333]">
+          <li key={g} className="flex gap-2 text-[15px] leading-[1.55] lg:text-[18px] break-keep text-[#333333]">
             <span
               className="mt-[0.55em] h-1.5 w-1.5 flex-none rounded-full"
               style={{ background: ACCENT }}

@@ -19,10 +19,10 @@ export default function KitSection() {
         <SectionLabel color={ACCENT} bg={SOFT}>
           교재 구성
         </SectionLabel>
-        <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[30px]" id="v-kit">
+        <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[34px]" id="v-kit">
           매월 바뀌는 필독서와 교재
         </h2>
-        <p className="m-0 text-[14px] leading-[1.6] text-[#333333]">
+        <p className="m-0 text-[14px] leading-[1.6] text-[#333333] lg:text-[18px]">
           교과 연계와 최신 평가 유형 반영을 위해
           <br />
           매월 새로운 교재와 엄선된 필독서로 수업합니다.
@@ -56,8 +56,8 @@ export default function KitSection() {
                   aria-hidden="true"
                 />
                 <div>
-                  <strong className="text-[15px]">{it.name}</strong>
-                  {it.sub && <p className="mx-0 mt-0.5 mb-0 text-[13px] text-[#555555]">{it.sub}</p>}
+                  <strong className="text-[15px] lg:text-[18px]">{it.name}</strong>
+                  {it.sub && <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#555555] lg:text-[16px]">{it.sub}</p>}
                 </div>
               </li>
             ))}

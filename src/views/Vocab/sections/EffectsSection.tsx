@@ -16,10 +16,10 @@ export default function EffectsSection() {
           <SectionLabel color={ACCENT} bg="#FFFFFF">
             학습 효과
           </SectionLabel>
-          <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[30px]" id="v-eff">
+          <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[34px]" id="v-eff">
             탄탄한 어휘력, 발표력 향상
           </h2>
-          <p className="m-0 text-[14px] leading-[1.6] text-[#333333]">
+          <p className="m-0 text-[14px] leading-[1.6] text-[#333333] lg:text-[18px]">
             다양한 어휘 활동, 말하기와 발표하기 수업을 하며
             <br />
             교과 학습 대비 필수 어휘를 익혀 국어 능력을 키웁니다.
@@ -29,10 +29,10 @@ export default function EffectsSection() {
           {EFFECTS.map((e) => (
             <li key={e.title} className="flex items-center gap-3.5 rounded-[20px] bg-white px-4 py-3.5">
               {/* 원 안에 항목명(두 줄): 예) 어휘력 / 키우기 */}
-              <span className="flex h-17 w-17 flex-none items-center justify-center rounded-[14px] bg-[#C2410C] px-1.5 text-center text-[13px] leading-[1.25] font-extrabold break-keep text-white">
+              <span className="flex h-[72px] w-[72px] flex-none lg:h-20 lg:w-20 items-center justify-center rounded-[14px] bg-[#C2410C] px-1.5 text-center text-[14px] leading-[1.25] lg:text-[16px] font-extrabold break-keep text-white">
                 {e.title}
               </span>
-              <span className="text-[13px] leading-[1.5] break-keep text-[#333333]">{e.desc}</span>
+              <span className="text-[14px] leading-[1.5] break-keep text-[#333333] lg:text-[16px]">{e.desc}</span>
             </li>
           ))}
         </ul>

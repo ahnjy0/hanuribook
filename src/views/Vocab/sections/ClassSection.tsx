@@ -18,10 +18,10 @@ export default function ClassSection() {
         <SectionLabel color={ACCENT} bg={SOFT}>
           수업 내용
         </SectionLabel>
-        <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[30px]" id="v-class">
+        <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[34px]" id="v-class">
           읽기와 쓰기, 경험과 이해
         </h2>
-        <p className="m-0 text-[14px] leading-[1.6] text-[#333333]">
+        <p className="m-0 text-[14px] leading-[1.6] text-[#333333] lg:text-[18px]">
           읽기·말하기·듣기·쓰기·생각하기 영역을
           <br />
           고르게 활용하는 다양한 활동으로 구성됩니다.
@@ -33,9 +33,9 @@ export default function ClassSection() {
             key={l.title}
             className="flex flex-col gap-1.5 rounded-[18px] bg-[#C2410C] px-3 py-4.5 text-center text-white"
           >
-            <span className="text-[12px] font-semibold opacity-90">{i + 1}차시</span>
-            <strong className="text-[16px]">{l.title}</strong>
-            <span className="text-[12px] leading-[1.5] break-keep text-[#FFE9D6]">{l.desc}</span>
+            <span className="text-[14px] font-semibold opacity-90 lg:text-[15px]">{i + 1}차시</span>
+            <strong className="text-[17px] lg:text-[19px]">{l.title}</strong>
+            <span className="text-[14px] leading-[1.5] lg:text-[15px] break-keep text-[#FFE9D6]">{l.desc}</span>
           </li>
         ))}
       </ol>

@@ -79,14 +79,14 @@ export default function HeroSection() {
         </p>
         <div className="grid w-full max-w-[720px] grid-cols-2 gap-3 lg:gap-5">
           {BOOKS.map((b, i) => (
-            // 모션: 바깥 래퍼는 페이지가 열릴 때 차례로 떠오르기, 안쪽 카드는 마우스를 올리면 살짝 위로 뜨기(표지는 살짝 기울며 커짐)
+            // 모션: 페이지가 열릴 때 카드가 차례로 떠오르기
             <div
               key={b.title}
               className="flex animate-card-rise motion-reduce:animate-none"
               style={{ animationDelay: `${150 + i * 150}ms` }}
             >
             <article
-              className="group flex w-full flex-col rounded-[24px] bg-white p-2.5 shadow-[0_12px_30px_rgba(120,20,60,0.2)] transition-[translate] duration-300 hover:-translate-y-1.5 motion-reduce:transition-none lg:rounded-[28px] lg:p-3.5"
+              className="flex w-full flex-col rounded-[24px] bg-white p-2.5 shadow-[0_12px_30px_rgba(120,20,60,0.2)] lg:rounded-[28px] lg:p-3.5"
             >
               {/* 표지 진열 영역 (카드별 연한 강조색) */}
               <div
@@ -95,7 +95,7 @@ export default function HeroSection() {
               >
                 <div className="relative">
                   <img
-                    className="block h-28 w-auto max-w-full rounded-[3px] outline outline-1 transition-[scale,rotate] duration-300 group-hover:scale-[1.04] group-hover:-rotate-2 motion-reduce:transition-none -outline-offset-1 outline-black/10 sm:h-48 lg:h-64"
+                    className="block h-28 w-auto max-w-full rounded-[3px] outline outline-1 -outline-offset-1 outline-black/10 sm:h-48 lg:h-64"
                     src={b.src}
                     width={b.w}
                     height={b.h}
@@ -105,14 +105,14 @@ export default function HeroSection() {
                 </div>
               </div>
               <div className="flex flex-1 flex-col items-center px-0.5 pt-4 pb-2 lg:px-3 lg:pt-5 lg:pb-3">
-                <strong className="text-[17px] text-[#1F1F1F] lg:text-[20px]">{b.title}</strong>
-                <span className="mt-0.5 text-[14px] font-bold lg:text-[16px]" style={{ color: b.accent }}>
+                <strong className="text-[17px] text-[#1F1F1F] lg:text-[22px]">{b.title}</strong>
+                <span className="mt-0.5 text-[14px] font-bold lg:text-[18px]" style={{ color: b.accent }}>
                   {`${b.age} 권장`}
                 </span>
                 <span className="my-3 h-px w-full bg-[#EEEEEE] lg:my-4" aria-hidden="true" />
                 {/* 모바일: 좌우 여백을 줄이고(카드 안쪽 여백까지 활용) 자간을 살짝 좁혀 한 줄이 중간에 끊기지 않게 함.
                     그래도 좁은 화면에서 넘치면 단어 단위로만 줄바꿈(break-keep) */}
-                <span className="-mx-1.5 block text-[13px] leading-[1.55] tracking-[-0.04em] break-keep text-[#333333] lg:mx-0 lg:text-[15px] lg:tracking-normal">
+                <span className="-mx-1.5 block text-[13px] leading-[1.55] tracking-[-0.04em] break-keep text-[#333333] lg:mx-0 lg:text-[17px] lg:tracking-normal">
                   {b.desc}
                 </span>
               </div>

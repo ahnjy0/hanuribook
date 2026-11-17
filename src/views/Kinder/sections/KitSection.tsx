@@ -9,12 +9,12 @@ export default function KitSection() {
       <div className="text-center">
         <SectionLabel>교재 구성</SectionLabel>
         <h2
-          className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[30px]"
+          className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[34px]"
           id="k-kit"
         >
           매월 바뀌는 필독서와 교재
         </h2>
-        <p className="m-0 text-[14px] leading-[1.6] text-[#333333]">
+        <p className="m-0 text-[14px] leading-[1.6] text-[#333333] lg:text-[18px]">
           교과 연계와 최신 평가 유형 반영을 위해
           <br />
           매월 새로운 교재와 엄선된 필독서로 수업합니다.
@@ -47,7 +47,7 @@ export default function KitSection() {
               aria-hidden="true"
             />
             <div>
-              <strong className="text-[15px]">워크북 1권</strong>
+              <strong className="text-[15px] lg:text-[18px]">워크북 1권</strong>
             </div>
           </li>
           <li className="flex gap-2.5">
@@ -56,8 +56,8 @@ export default function KitSection() {
               aria-hidden="true"
             />
             <div>
-              <strong className="text-[15px]">필독서 3권</strong>
-              <p className="mx-0 mt-0.5 mb-0 text-[13px] text-[#555555]">
+              <strong className="text-[15px] lg:text-[18px]">필독서 3권</strong>
+              <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#555555] lg:text-[16px]">
                 옛이야기 1권, 누리과정 연계 그림책 2권
               </p>
             </div>
@@ -68,8 +68,8 @@ export default function KitSection() {
               aria-hidden="true"
             />
             <div>
-              <strong className="text-[15px]">활동 자료</strong>
-              <p className="mx-0 mt-0.5 mb-0 text-[13px] text-[#555555]">
+              <strong className="text-[15px] lg:text-[18px]">활동 자료</strong>
+              <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#555555] lg:text-[16px]">
                 활동지 / 붙임 딱지 / 쓰기 부록
               </p>
             </div>
@@ -80,8 +80,8 @@ export default function KitSection() {
               aria-hidden="true"
             />
             <div>
-              <strong className="text-[15px]">꿈꾸는 책장</strong>
-              <p className="mx-0 mt-0.5 mb-0 text-[13px] text-[#555555]">
+              <strong className="text-[15px] lg:text-[18px]">꿈꾸는 책장</strong>
+              <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#555555] lg:text-[16px]">
                 스스로 스티커를 붙이는 독서 기록 보드
               </p>
             </div>
@@ -92,8 +92,8 @@ export default function KitSection() {
               aria-hidden="true"
             />
             <div>
-              <strong className="text-[15px]">포트폴리오</strong>
-              <p className="mx-0 mt-0.5 mb-0 text-[13px] text-[#555555]">
+              <strong className="text-[15px] lg:text-[18px]">포트폴리오</strong>
+              <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#555555] lg:text-[16px]">
                 아이의 소중한 학습 결과물 보관첩
               </p>
             </div>

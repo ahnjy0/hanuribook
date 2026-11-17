@@ -63,14 +63,14 @@ export default function ProgramFaqSection({
         <SectionLabel color={labelColor} bg={labelBg}>
           FAQ
         </SectionLabel>
-        <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[30px]" id="prog-faq">
+        <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[34px]" id="prog-faq">
           자주 묻는 질문
         </h2>
       </div>
       <div className="mx-auto mt-1.5 flex w-full max-w-[900px] flex-col gap-2.5">
         {items.map((f, i) => (
           <details key={i} className="group rounded-[16px] border border-[#EEEEEE] bg-white open:bg-[#FAFAFA]">
-            <summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-4.5 py-3.5 text-[15px] font-bold text-[#1F1F1F] lg:px-6 lg:text-[17px] [&::-webkit-details-marker]:hidden">
+            <summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-4.5 py-3.5 text-[15px] font-bold text-[#1F1F1F] lg:px-6 lg:text-[18px] [&::-webkit-details-marker]:hidden">
               <span className="flex-none font-extrabold" style={{ color: accent }} aria-hidden="true">
                 Q.
               </span>
@@ -90,7 +90,7 @@ export default function ProgramFaqSection({
                 <path d="M12 5v14M5 12h14" />
               </svg>
             </summary>
-            <div className="flex gap-3 px-4.5 pt-0 pb-4.5 text-[14px] leading-[1.7] break-keep text-[#333333] lg:px-6 lg:pb-5.5 lg:text-[16px]">
+            <div className="flex gap-3 px-4.5 pt-0 pb-4.5 text-[14px] leading-[1.7] break-keep text-[#333333] lg:px-6 lg:pb-5.5 lg:text-[17px]">
               <span className="flex-none font-extrabold text-[#8A8A8A]" aria-hidden="true">
                 A.
               </span>

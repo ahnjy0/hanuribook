@@ -24,7 +24,7 @@ export default function HistorySection() {
         <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[340px_minmax(0,1fr)] lg:items-stretch">
           <dl className="m-0 grid grid-cols-3 gap-2 lg:grid-cols-1 lg:gap-3">
             <div className="reveal rounded-[14px] bg-[#2B2B2B] px-1 py-3 max-lg:flex max-lg:flex-col max-lg:items-center max-lg:justify-start max-lg:text-center lg:rounded-[18px] lg:p-4.5">
-              <dt className="text-[11px] text-[#C9C9C9] max-lg:flex max-lg:min-h-[2.7em] max-lg:items-center max-lg:justify-center max-lg:leading-[1.35] max-lg:break-keep lg:text-[13px]">
+              <dt className="text-[11px] text-[#C9C9C9] max-lg:flex max-lg:min-h-[2.7em] max-lg:items-center max-lg:justify-center max-lg:leading-[1.35] max-lg:break-keep lg:text-[14px]">
                 전국 센터 수
               </dt>
               <dd className="mx-0 mt-1.5 mb-0 text-[17px] font-extrabold text-[#FF8A4F] max-lg:leading-[1.2] max-lg:tracking-[-0.03em] max-lg:whitespace-nowrap lg:mx-0 lg:mt-1.5 lg:mb-0 lg:text-[34px]">
@@ -32,7 +32,7 @@ export default function HistorySection() {
               </dd>
             </div>
             <div className="reveal rounded-[14px] bg-[#2B2B2B] px-1 py-3 max-lg:flex max-lg:flex-col max-lg:items-center max-lg:justify-start max-lg:text-center lg:rounded-[18px] lg:p-4.5">
-              <dt className="text-[11px] text-[#C9C9C9] max-lg:flex max-lg:min-h-[2.7em] max-lg:items-center max-lg:justify-center max-lg:leading-[1.35] max-lg:break-keep lg:text-[13px]">
+              <dt className="text-[11px] text-[#C9C9C9] max-lg:flex max-lg:min-h-[2.7em] max-lg:items-center max-lg:justify-center max-lg:leading-[1.35] max-lg:break-keep lg:text-[14px]">
                 전국 교사 수
               </dt>
               <dd className="mx-0 mt-1.5 mb-0 text-[17px] font-extrabold text-[#FF8A4F] max-lg:leading-[1.2] max-lg:tracking-[-0.03em] max-lg:whitespace-nowrap lg:mx-0 lg:mt-1.5 lg:mb-0 lg:text-[34px]">
@@ -40,7 +40,7 @@ export default function HistorySection() {
               </dd>
             </div>
             <div className="reveal rounded-[14px] bg-[#2B2B2B] px-1 py-3 max-lg:flex max-lg:flex-col max-lg:items-center max-lg:justify-start max-lg:text-center lg:rounded-[18px] lg:p-4.5">
-              <dt className="text-[11px] text-[#C9C9C9] max-lg:flex max-lg:min-h-[2.7em] max-lg:items-center max-lg:justify-center max-lg:leading-[1.35] max-lg:break-keep lg:text-[13px]">
+              <dt className="text-[11px] text-[#C9C9C9] max-lg:flex max-lg:min-h-[2.7em] max-lg:items-center max-lg:justify-center max-lg:leading-[1.35] max-lg:break-keep lg:text-[14px]">
                 한우리 회원 누적 회원 수
               </dt>
               <dd className="mx-0 mt-1.5 mb-0 text-[17px] font-extrabold text-[#FF8A4F] max-lg:leading-[1.2] max-lg:tracking-[-0.03em] max-lg:whitespace-nowrap lg:mx-0 lg:mt-1.5 lg:mb-0 lg:text-[34px]">

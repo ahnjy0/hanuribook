@@ -64,15 +64,14 @@ export default function FeaturesSection() {
         </div>
         <div className="grid w-full grid-cols-1 gap-3 md:grid-cols-3 lg:gap-5">
           {FEATURES.map((f, i) => (
-            // 모션: 바깥 래퍼는 페이지가 열릴 때 차례로 떠오르기(0.15초 간격),
-            // 안쪽 카드는 마우스를 올리면 살짝 위로 뜨며 그림자 — 둘 다 이동(translate)을 써서 요소를 나눠 충돌을 막음
+            // 모션: 페이지가 열릴 때 카드가 차례로 떠오르기(0.15초 간격)
             <div
               key={f.title}
               className="flex animate-card-rise motion-reduce:animate-none"
               style={{ animationDelay: `${150 + i * 150}ms` }}
             >
             <article
-              className="relative isolate flex w-full flex-col justify-center overflow-hidden rounded-[24px] bg-white py-5 pr-[108px] pl-6 text-left transition-[translate,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-[0_14px_30px_rgba(230,69,15,0.14)] motion-reduce:transition-none md:min-h-[190px] md:justify-start md:rounded-[28px] md:p-7 lg:min-h-[200px] lg:p-8"
+              className="relative isolate flex w-full flex-col justify-center overflow-hidden rounded-[24px] bg-white py-5 pr-[108px] pl-6 text-left md:min-h-[190px] md:justify-start md:rounded-[28px] md:p-7 lg:min-h-[200px] lg:p-8"
             >
               {/* 아이콘: 카드마다 박자를 달리해 천천히 둥실 떠다님 */}
               <img
