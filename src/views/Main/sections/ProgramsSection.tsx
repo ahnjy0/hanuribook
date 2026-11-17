@@ -1,55 +1,8 @@
 import SmartLink from "@/components/common/SmartLink";
 import Link from "next/link";
-import type { MainVals, Stage } from "../useMain";
+import type { MainVals } from "../useMain";
 
 type Props = Pick<MainVals, "progTabs" | "progs">;
-
-/** 대상 연령대별 아이콘 (유아: 새싹, 초등: 책, 중등: 말풍선, 고등: 펜) */
-function StageIcon({ stage }: { stage: Stage }) {
-  const common = {
-    width: 28,
-    height: 28,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.9,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    "aria-hidden": true,
-  };
-  switch (stage) {
-    case "kinder":
-      return (
-        <svg {...common}>
-          <path d="M12 21v-9" />
-          <path d="M12 12c0-4 2.5-6.5 7-6.5 0 4.5-2.5 7-7 6.5Z" />
-          <path d="M12 14.5C12 11 10 9 6 9c0 3.5 2 5.5 6 5.5Z" />
-        </svg>
-      );
-    case "elementary":
-      return (
-        <svg {...common}>
-          <path d="M12 6.5C10.3 5.2 8 4.5 4 4.5v13c4 0 6.3.7 8 2 1.7-1.3 4-2 8-2v-13c-4 0-6.3.7-8 2Z" />
-          <path d="M12 6.5v13" />
-        </svg>
-      );
-    case "middle":
-      return (
-        <svg {...common}>
-          <path d="M4 5.5h11a2 2 0 0 1 2 2V13a2 2 0 0 1-2 2H9l-4 3.5V15H4a2 2 0 0 1-2-2V7.5a2 2 0 0 1 2-2Z" />
-          <path d="M19 9h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-.5V21L16 18h-3" />
-        </svg>
-      );
-    case "high":
-      return (
-        <svg {...common}>
-          <path d="M15.5 4.5 19.5 8.5 9 19H5v-4L15.5 4.5Z" />
-          <path d="M13.5 6.5l4 4" />
-          <path d="M5 21h14" />
-        </svg>
-      );
-  }
-}
 
 export default function ProgramsSection({ progTabs, progs }: Props) {
   return (
@@ -105,20 +58,31 @@ export default function ProgramsSection({ progTabs, progs }: Props) {
                 className="group box-border flex h-full items-center gap-4 rounded-[20px] bg-white p-4.5 text-[#1F1F1F] no-underline shadow-[0_4px_16px_rgba(230,69,15,0.06)] ring-1 ring-[#F6E1D3] transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(230,69,15,0.16)] lg:p-5"
                 href={p.href}
               >
+                {/* 대상 연령 박스: '초등 1·2학년' → 초등 / 1·2학년 처럼 첫 단어와 나머지를 두 줄로.
+                    띄어쓰기 없이 긴 연령('예비중·중등')은 가운뎃점 뒤에서 나눔 → 예비중· / 중등 */}
                 <span
-                  className="flex size-14 flex-none items-center justify-center rounded-[16px] lg:size-16"
+                  className="flex size-16 flex-none flex-col items-center justify-center rounded-[16px] text-center text-[13px] leading-[1.25] font-extrabold tracking-[-0.03em] lg:size-18 lg:text-[14px]"
                   style={{ background: p.tone.soft, color: p.tone.ink }}
                 >
-                  <StageIcon stage={p.stage} />
+                  {(() => {
+                    const dot = p.age.indexOf("·");
+                    const [first, ...rest] =
+                      !p.age.includes(" ") && p.age.length > 4 && dot > 0
+                        ? [p.age.slice(0, dot + 1), p.age.slice(dot + 1)]
+                        : p.age.split(" ");
+                    return (
+                      <>
+                        <span>{first}</span>
+                        {rest.length > 0 && <span className="whitespace-nowrap">{rest.join(" ")}</span>}
+                      </>
+                    );
+                  })()}
                 </span>
                 <span className="flex min-w-0 flex-1 flex-col gap-1">
-                  <span
-                    className="self-start rounded-full px-2.5 py-1.5 text-[12px] font-bold"
-                    style={{ background: p.tone.soft, color: p.tone.ink }}
-                  >
-                    {p.age}
-                  </span>
                   <span className="text-[17px] leading-[1.35] font-extrabold lg:text-[18px]">{p.title}</span>
+                  {p.sub && (
+                    <span className="text-[13px] leading-[1.45] break-keep text-[#555555] lg:text-[14px]">{p.sub}</span>
+                  )}
                 </span>
                 <span className="flex size-9 flex-none items-center justify-center rounded-full bg-[#FFF1E7] text-[#C2410C] transition-colors duration-300 group-hover:bg-[#E6450F] group-hover:text-white">
                   <svg

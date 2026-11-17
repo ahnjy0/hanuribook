@@ -23,28 +23,29 @@ const stageOf = (age: string): Stage =>
   age.startsWith("유아") ? "kinder" : age.startsWith("초등") ? "elementary" : age.startsWith("고") ? "high" : "middle";
 
 // desc: 각 프로그램 상세·소개 화면의 기존 문구를 그대로 사용
-const PROGRAMS: Record<TabKey, { age: string; title: string; desc: string; href: string }[]> = {
+// sub: 카드에 보이는 한 줄 설명(정규·정규 심화 탭)
+const PROGRAMS: Record<TabKey, { age: string; title: string; sub?: string; desc: string; href: string }[]> = {
   regular: [
-    { age: "유아 6~7세", title: "꿈꾸는 새싹", desc: "듣기·말하기·읽기·쓰기 생각하기 기본 다지기", href: PATHS.Kinder },
-    { age: "초등 1·2학년", title: "어휘리더", desc: "책 읽기의 즐거움과 교과 기초 어휘·표현력 다지기", href: PATHS.DetailVocab },
-    { age: "초등 3·4학년", title: "독서리더", desc: "과목별 심화 배경지식 확장 및 갈래별 글쓰기 기초 훈련", href: PATHS.DetailReading },
-    { age: "초등 5·6학년", title: "논리리더", desc: "비판적 미디어 읽기, 실전 찬반토론 및 중등 서술형 완벽 대비", href: PATHS.DetailLogic },
-    { age: "중학생", title: "중등 소크라테스", desc: "질문하고 토론하며 논리를 세우는 중등 독서토론", href: PATHS.DetailSocrates },
-    { age: "고등학생", title: "고등 문학", desc: "교과서·수능 문학 작품을 깊이 읽고 해석하는 힘", href: PATHS.DetailLiterature },
+    { age: "유아 6~7세", title: "꿈꾸는 새싹", sub: "누리과정·초등교과 연계 학습", desc: "듣기·말하기·읽기·쓰기 생각하기 기본 다지기", href: PATHS.Kinder },
+    { age: "초등 1·2학년", title: "어휘리더", sub: "교과 학습 대비 필수 어휘 익히기", desc: "책 읽기의 즐거움과 교과 기초 어휘·표현력 다지기", href: PATHS.DetailVocab },
+    { age: "초등 3·4학년", title: "독서리더", sub: "교과 배경지식을 쌓는 문학·비문학 읽기", desc: "과목별 심화 배경지식 확장 및 갈래별 글쓰기 기초 훈련", href: PATHS.DetailReading },
+    { age: "초등 5·6학년", title: "논리리더", sub: "근거로 설득하는 서술형 글쓰기 학습", desc: "비판적 미디어 읽기, 실전 찬반토론 및 중등 서술형 완벽 대비", href: PATHS.DetailLogic },
+    { age: "중등", title: "소크라테스", sub: "중등 내신 대비 단계별 독해 훈련", desc: "질문하고 토론하며 논리를 세우는 중등 독서토론", href: PATHS.DetailSocrates },
+    { age: "고등", title: "소클 고등 문학", sub: "심층 독서·논구술로 내신·입시 대비", desc: "교과서·수능 문학 작품을 깊이 읽고 해석하는 힘", href: PATHS.DetailLiterature },
   ],
   advanced: [
-    { age: "초등 3~6학년", title: "과학탐탐", desc: "궁금증을 탐구로, 탐구를 글로", href: PATHS.DetailScience },
-    { age: "초등 3~6학년", title: "똑똑한국사", desc: "이야기로 읽고 흐름으로 이해하는 우리 역사", href: PATHS.DetailHistory },
-    { age: "초등 3~6학년", title: "세계문화지리", desc: "지도를 펼치면 세계가 보여요", href: PATHS.DetailGeo },
-    { age: "초등 5~6학년", title: "세계사", desc: "세계의 흐름 속에서 오늘을 읽다", href: PATHS.DetailWorld },
+    { age: "초등 3학년", title: "과학탐탐", sub: "비주얼씽킹을 통한 과학 핵심 개념 및 어휘 이해", desc: "궁금증을 탐구로, 탐구를 글로", href: PATHS.DetailScience },
+    { age: "초등 4학년", title: "똑똑 한국사", sub: "한국사 진도 대비 전체 역사 흐름 정복", desc: "이야기로 읽고 흐름으로 이해하는 우리 역사", href: PATHS.DetailHistory },
+    { age: "초등 5학년", title: "세계 문화·지리", sub: "세계 주요 나라 질, 정치, 경제, 사회, 문화 이해", desc: "지도를 펼치면 세계가 보여요", href: PATHS.DetailGeo },
+    { age: "초등 6학년", title: "세계사", sub: "중학교 역사 교육 과정 반영 세계 곳곳의 환경과 생활모습 이해", desc: "세계의 흐름 속에서 오늘을 읽다", href: PATHS.DetailWorld },
   ],
   special: [
     { age: "유아", title: "참깨한글", desc: "그림책과 놀이로 자음·모음을 익히고 읽기 독립을 준비하는 유아 맞춤 한글 과정.", href: PATHS.Special },
     { age: "초등", title: "다다어휘", desc: "교과서 필수 어휘와 한자어를 집중적으로 익혀 독해의 기초 체력을 다집니다.", href: PATHS.Special },
     { age: "초등", title: "똑독해", desc: "문단 구조와 핵심어 찾기로 비문학 지문을 정확하게 읽는 독해 전략 특강.", href: PATHS.Special },
-    { age: "초등", title: "한국사봄 | 한국사람", desc: "시대 흐름과 인물 중심으로 한국사를 정리하고 탐구 활동으로 기억에 남깁니다.", href: PATHS.Special },
-    { age: "중·고등", title: "별별문학독해 | 교과문학탐독", desc: "교과서 수록 문학 작품을 갈래별로 깊이 읽고 내신 서술형까지 대비합니다.", href: PATHS.Special },
-    { age: "고등", title: "고등 통합사회", desc: "통합사회 핵심 개념을 시사 이슈와 연결해 읽고 토론·논술로 정리합니다.", href: PATHS.Special },
+    { age: "초·중등", title: "한국사봄 | 한국사람", desc: "시대 흐름과 인물 중심으로 한국사를 정리하고 탐구 활동으로 기억에 남깁니다.", href: PATHS.Special },
+    { age: "예비중·중등", title: "별별문학독해 | 교과문학탐독", desc: "교과서 수록 문학 작품을 갈래별로 깊이 읽고 내신 서술형까지 대비합니다.", href: PATHS.Special },
+    { age: "고등", title: "소클 고등 통합사회", desc: "통합사회 핵심 개념을 시사 이슈와 연결해 읽고 토론·논술로 정리합니다.", href: PATHS.Special },
   ],
 };
 

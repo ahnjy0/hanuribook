@@ -1,6 +1,5 @@
-import wayReadImg from "@/assets/images/way-read.webp";
-import wayWriteImg from "@/assets/images/way-write.webp";
-import waySpeakImg from "@/assets/images/way-speak.webp";
+// 섹션 일러스트 (CDN, 2048×2048)
+const IMG = "https://cdn.hanuribook.com/img/hanuribook";
 
 export default function WaysSection() {
   return (
@@ -10,7 +9,10 @@ export default function WaysSection() {
           <div className="reveal flex h-60 items-center justify-center rounded-[28px] text-center text-[13px] text-[#8A5A3C] lg:order-2 lg:h-90">
             <img
               className="h-[92%] w-auto max-w-[92%] animate-way-float-a mask-x-from-92% mask-y-from-92% object-contain mix-blend-multiply will-change-transform motion-reduce:animate-none lg:h-full lg:max-w-full"
-              src={wayReadImg.src}
+              src={`${IMG}/main_read.png`}
+              width={2048}
+              height={2048}
+              loading="lazy"
               alt="펼쳐진 책 일러스트"
             />
           </div>
@@ -53,7 +55,10 @@ export default function WaysSection() {
           <div className="reveal flex h-60 items-center justify-center rounded-[28px] text-center text-[13px] text-[#8A5A3C] lg:order-0 lg:h-90">
             <img
               className="h-[92%] w-auto max-w-[92%] animate-way-float-b mask-x-from-92% mask-y-from-92% object-contain mix-blend-multiply will-change-transform motion-reduce:animate-none lg:h-full lg:max-w-full"
-              src={wayWriteImg.src}
+              src={`${IMG}/main_write.png`}
+              width={2048}
+              height={2048}
+              loading="lazy"
               alt="노트와 연필, 전구 일러스트"
             />
           </div>
@@ -95,7 +100,10 @@ export default function WaysSection() {
           <div className="reveal flex h-60 items-center justify-center rounded-[28px] text-center text-[13px] text-[#8A5A3C] lg:order-2 lg:h-90">
             <img
               className="h-[92%] w-auto max-w-[92%] animate-way-float-c mask-x-from-92% mask-y-from-92% object-contain mix-blend-multiply will-change-transform motion-reduce:animate-none lg:h-full lg:max-w-full"
-              src={waySpeakImg.src}
+              src={`${IMG}/main_say.png`}
+              width={2048}
+              height={2048}
+              loading="lazy"
               alt="물음표와 느낌표 말풍선 일러스트"
             />
           </div>
