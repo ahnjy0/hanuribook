@@ -6,18 +6,17 @@ type Props = Pick<ElementaryVals, "progs">;
 export default function ProgramsSection({ progs }: Props) {
   return (
     <section
-      className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 pt-7 lg:gap-5 lg:pt-16"
-      aria-labelledby="e-h"
+      // 위 타이틀 영역(IntroSection) 바로 아래 카드 목록 — 초등심화 과정 카드 영역과 같은 위 간격
+      className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 pt-5 lg:gap-5 lg:pt-10"
+      aria-label="학년별 프로그램"
     >
-      <h1 className="m-0 text-[24px] font-extrabold lg:text-[30px]" id="e-h">
-        학년별 프로그램
-      </h1>
       {/* 데스크톱: 카드 안쪽 여백·글자·아이콘·버튼을 키워 크게 보이게 */}
       <ul className="m-0 grid list-none grid-cols-1 gap-3 p-0 md:grid-cols-3 lg:gap-5">
         {progs.map((p, i) => (
           <li key={i} className="flex">
             <article
-              className="flex flex-auto flex-col overflow-hidden rounded-[22px] bg-white text-[#1F1F1F] lg:rounded-[28px]"
+              // 마우스오버: 메인홈 '한우리 프로그램' 카드와 같은 효과(살짝 위로 뜨며 주황빛 그림자)
+              className="flex flex-auto flex-col overflow-hidden rounded-[22px] bg-white text-[#1F1F1F] transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(230,69,15,0.16)] motion-reduce:transition-none lg:rounded-[28px]"
               style={{ border: `1.5px solid ${p.line}` }}
             >
               <div

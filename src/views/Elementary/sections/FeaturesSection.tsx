@@ -1,3 +1,7 @@
+import Link from "next/link";
+import { PATHS } from "@/routes";
+
+// 카드를 누르면 프로그램 소개 페이지로 이동(마우스오버 효과 없음)
 export default function FeaturesSection() {
   return (
     <section
@@ -9,7 +13,11 @@ export default function FeaturesSection() {
         프로그램의 특징
       </h2>
       <ol className="m-0 grid list-none grid-cols-1 gap-3 p-0 md:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-        <li className="flex gap-3 rounded-[18px] border border-[#EFEFEF] bg-white p-5 lg:gap-4 lg:rounded-[24px] lg:p-8">
+        <li className="flex">
+          <Link
+            className="flex flex-auto gap-3 rounded-[18px] border border-[#EFEFEF] bg-white p-5 text-[#1F1F1F] no-underline lg:gap-4 lg:rounded-[24px] lg:p-8"
+            href={PATHS.Program}
+          >
           <span className="flex h-8 w-8 flex-none items-center justify-center rounded-[9px] bg-[#F26522] text-[15px] font-extrabold text-white lg:h-10 lg:w-10 lg:rounded-[11px] lg:text-[18px]">
             1
           </span>
@@ -20,8 +28,13 @@ export default function FeaturesSection() {
               활동을 합니다.
             </p>
           </div>
+          </Link>
         </li>
-        <li className="flex gap-3 rounded-[18px] border border-[#EFEFEF] bg-white p-5 lg:gap-4 lg:rounded-[24px] lg:p-8">
+        <li className="flex">
+          <Link
+            className="flex flex-auto gap-3 rounded-[18px] border border-[#EFEFEF] bg-white p-5 text-[#1F1F1F] no-underline lg:gap-4 lg:rounded-[24px] lg:p-8"
+            href={PATHS.Program}
+          >
           <span className="flex h-8 w-8 flex-none items-center justify-center rounded-[9px] bg-[#F26522] text-[15px] font-extrabold text-white lg:h-10 lg:w-10 lg:rounded-[11px] lg:text-[18px]">
             2
           </span>
@@ -32,8 +45,13 @@ export default function FeaturesSection() {
               나선형 활동을 합니다.
             </p>
           </div>
+          </Link>
         </li>
-        <li className="flex gap-3 rounded-[18px] border border-[#EFEFEF] bg-white p-5 lg:gap-4 lg:rounded-[24px] lg:p-8">
+        <li className="flex">
+          <Link
+            className="flex flex-auto gap-3 rounded-[18px] border border-[#EFEFEF] bg-white p-5 text-[#1F1F1F] no-underline lg:gap-4 lg:rounded-[24px] lg:p-8"
+            href={PATHS.Program}
+          >
           <span className="flex h-8 w-8 flex-none items-center justify-center rounded-[9px] bg-[#F26522] text-[15px] font-extrabold text-white lg:h-10 lg:w-10 lg:rounded-[11px] lg:text-[18px]">
             3
           </span>
@@ -44,8 +62,13 @@ export default function FeaturesSection() {
               능동적으로 소통합니다.
             </p>
           </div>
+          </Link>
         </li>
-        <li className="flex gap-3 rounded-[18px] border border-[#EFEFEF] bg-white p-5 lg:gap-4 lg:rounded-[24px] lg:p-8">
+        <li className="flex">
+          <Link
+            className="flex flex-auto gap-3 rounded-[18px] border border-[#EFEFEF] bg-white p-5 text-[#1F1F1F] no-underline lg:gap-4 lg:rounded-[24px] lg:p-8"
+            href={PATHS.Program}
+          >
           <span className="flex h-8 w-8 flex-none items-center justify-center rounded-[9px] bg-[#F26522] text-[15px] font-extrabold text-white lg:h-10 lg:w-10 lg:rounded-[11px] lg:text-[18px]">
             4
           </span>
@@ -56,8 +79,13 @@ export default function FeaturesSection() {
               훈련합니다.
             </p>
           </div>
+          </Link>
         </li>
-        <li className="flex gap-3 rounded-[18px] border border-[#EFEFEF] bg-white p-5 lg:gap-4 lg:rounded-[24px] lg:p-8">
+        <li className="flex">
+          <Link
+            className="flex flex-auto gap-3 rounded-[18px] border border-[#EFEFEF] bg-white p-5 text-[#1F1F1F] no-underline lg:gap-4 lg:rounded-[24px] lg:p-8"
+            href={PATHS.Program}
+          >
           <span className="flex h-8 w-8 flex-none items-center justify-center rounded-[9px] bg-[#F26522] text-[15px] font-extrabold text-white lg:h-10 lg:w-10 lg:rounded-[11px] lg:text-[18px]">
             5
           </span>
@@ -67,8 +95,13 @@ export default function FeaturesSection() {
               QR 코드 등의 멀티미디어를 활용하여 흥미진진하고 입체적인 독서 토의·토론 탐구 활동을 진행합니다.
             </p>
           </div>
+          </Link>
         </li>
-        <li className="flex gap-3 rounded-[18px] border border-[#EFEFEF] bg-white p-5 lg:gap-4 lg:rounded-[24px] lg:p-8">
+        <li className="flex">
+          <Link
+            className="flex flex-auto gap-3 rounded-[18px] border border-[#EFEFEF] bg-white p-5 text-[#1F1F1F] no-underline lg:gap-4 lg:rounded-[24px] lg:p-8"
+            href={PATHS.Program}
+          >
           <span className="flex h-8 w-8 flex-none items-center justify-center rounded-[9px] bg-[#F26522] text-[15px] font-extrabold text-white lg:h-10 lg:w-10 lg:rounded-[11px] lg:text-[18px]">
             6
           </span>
@@ -79,6 +112,7 @@ export default function FeaturesSection() {
               제공합니다.
             </p>
           </div>
+          </Link>
         </li>
       </ol>
     </section>

@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/common/Header/Header";
+import IntroSection from "./sections/IntroSection";
 import ProgramsSection from "./sections/ProgramsSection";
 import FeaturesSection from "./sections/FeaturesSection";
 import SelfCheckSection from "./sections/SelfCheckSection";
@@ -14,6 +15,7 @@ export default function Elementary() {
     <div className="flex min-h-screen w-full flex-col bg-white font-pretendard tracking-[-0.02em] text-[#1F1F1F]">
       <Header active="program" sub="초등정규" crumbs={"프로그램 > 초등정규"} />
       <main className="flex-[1_0_auto]">
+        <IntroSection />
         <ProgramsSection progs={progs} />
         <FeaturesSection />
         <SelfCheckSection />

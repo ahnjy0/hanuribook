@@ -155,28 +155,50 @@ export default function Header(props: HeaderProps) {
               </Fragment>
             ))}
           </div>
-        </div>
-      )}
-      {hasThirds && (
-        // 3뎁스 메뉴: 2뎁스(알약 버튼) 아래 흰 줄에 글자 탭 + 현재 메뉴 밑줄 — 2뎁스와 위계가 구분되도록 가볍게
-        <nav className="border-t border-t-[#F1E6DE] bg-white" aria-label={`${props.sub ?? ""} 하위 메뉴`}>
-          <ul className="mx-auto my-0 box-border grid max-w-[1200px] list-none grid-cols-3 px-4 py-0 lg:flex lg:justify-center lg:gap-2 lg:px-5">
-            {thirds.map((t, i) => (
-              <li key={i} className="flex lg:block">
-                <SmartLink
-                  className={`flex h-11 w-full items-center justify-center border-b-2 px-1 text-[14px] whitespace-nowrap no-underline lg:h-12 lg:w-auto lg:px-8 lg:text-[15px] ${
-                    t.on ? "font-extrabold" : "border-b-transparent font-bold text-[#555555] hover:text-[#1F1F1F]"
-                  }`}
-                  style={t.on ? { color: accentText, borderBottomColor: accent } : undefined}
-                  href={t.href}
-                  aria-current={t.on ? "page" : undefined}
+          {hasThirds && (
+            // 3뎁스 메뉴: 2뎁스(박스 버튼)와 구분되도록 박스 없이 점선 구분선 아래 글자 메뉴로 가볍게.
+            // 데스크톱은 왼쪽에 상위 메뉴명(예: 초등정규 ›)을 붙여 위계를 보여 주고, 메뉴 사이는 세로 구분선
+            <nav
+              className="mx-auto my-0 box-border max-w-[1200px] px-4 lg:px-5"
+              aria-label={`${props.sub ?? ""} 하위 메뉴`}
+            >
+              <div
+                className="flex items-center py-1.5 lg:gap-4 lg:py-2"
+                style={{ borderTop: "1px dashed #E8DCD3" }}
+              >
+                <span
+                  className="hidden flex-none items-center gap-1.5 text-[14px] font-bold whitespace-nowrap text-[#8A7E76] lg:flex"
+                  aria-hidden="true"
                 >
-                  {t.label}
-                </SmartLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
+                  {props.sub}
+                  <span className="text-[#C9BDB4]">›</span>
+                </span>
+                <ul className="m-0 grid flex-auto list-none grid-cols-3 p-0 lg:flex lg:flex-none lg:items-center">
+                  {thirds.map((t, i) => (
+                    <li
+                      key={i}
+                      className="flex items-center lg:before:mx-1 lg:before:h-3 lg:before:w-px lg:before:bg-[#DDD2CA] lg:first:before:hidden"
+                    >
+                      <SmartLink
+                        className={`flex h-9 w-full items-center justify-center gap-1.5 px-1 text-[14px] whitespace-nowrap no-underline lg:w-auto lg:px-4 lg:text-[15px] ${
+                          t.on ? "font-extrabold" : "font-semibold text-[#666666] hover:text-[#1F1F1F]"
+                        }`}
+                        style={t.on ? { color: accentText } : undefined}
+                        href={t.href}
+                        aria-current={t.on ? "page" : undefined}
+                      >
+                        {t.on && (
+                          <span className="h-1.5 w-1.5 flex-none rounded-full" style={{ background: accent }} aria-hidden="true" />
+                        )}
+                        {t.label}
+                      </SmartLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </nav>
+          )}
+        </div>
       )}
       {hasCrumbs && (
         // 로케이션(현재 위치) 영역: 데스크톱(lg, 1024px 이상)에서만 노출
