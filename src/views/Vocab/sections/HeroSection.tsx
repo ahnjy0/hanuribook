@@ -38,10 +38,15 @@ export default function HeroSection() {
           {" 풍부한 어휘력 기르기"}
         </p>
         <div className="grid w-full max-w-[720px] grid-cols-2 gap-3 lg:gap-5">
-          {BOOKS.map((b) => (
-            <article
+          {BOOKS.map((b, i) => (
+            // 모션: 바깥 래퍼는 페이지가 열릴 때 차례로 떠오르기, 안쪽 카드는 마우스를 올리면 살짝 위로 뜨기(표지는 살짝 기울며 커짐)
+            <div
               key={b.title}
-              className="flex flex-col rounded-[24px] bg-white p-2.5 shadow-[0_12px_30px_rgba(150,80,0,0.2)] lg:rounded-[28px] lg:p-3.5"
+              className="flex animate-card-rise motion-reduce:animate-none"
+              style={{ animationDelay: `${150 + i * 150}ms` }}
+            >
+            <article
+              className="group flex w-full flex-col rounded-[24px] bg-white p-2.5 shadow-[0_12px_30px_rgba(150,80,0,0.2)] transition-[translate] duration-300 hover:-translate-y-1.5 motion-reduce:transition-none lg:rounded-[28px] lg:p-3.5"
             >
               {/* 표지 진열 영역 */}
               <div
@@ -49,7 +54,7 @@ export default function HeroSection() {
                 style={{ background: SOFT }}
               >
                 <img
-                  className="block h-28 w-auto max-w-full rounded-[3px] outline outline-1 -outline-offset-1 outline-black/10 sm:h-48 lg:h-64"
+                  className="block h-28 w-auto max-w-full rounded-[3px] outline outline-1 transition-[scale,rotate] duration-300 group-hover:scale-[1.04] group-hover:-rotate-2 motion-reduce:transition-none -outline-offset-1 outline-black/10 sm:h-48 lg:h-64"
                   src={b.src}
                   width={b.w}
                   height={b.h}
@@ -68,6 +73,7 @@ export default function HeroSection() {
                 </span>
               </div>
             </article>
+            </div>
           ))}
         </div>
       </div>
