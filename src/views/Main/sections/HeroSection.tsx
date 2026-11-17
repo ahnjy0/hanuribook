@@ -13,9 +13,11 @@ export default function HeroSection() {
         // 모바일(~767px): 화면 너비 전체로 아래쪽에 깔고 (이미지 비율 1247:661 → 높이 53.01vw), 위쪽 그라데이션 없이 그대로 표시
         // 태블릿(md): 높이 220px(너비 415px)로 오른쪽 아래에 두고, 마스크 없이 이미지 전체를 그대로 표시
         // 데스크톱(lg): 섹션 높이 전체(최소 500px → 너비 약 943px)로 두되, 이미지 왼쪽 끝을 기준으로 배치
-        //   넓은 화면: 오른쪽 끝에 맞춤 / 좁은 화면(1024px 등): 섹션 45% 지점에서 시작 → 왼쪽(여자아이)은 항상 보이고 오른쪽이 잘림
-        //   이미지 왼쪽 끝 80px만 살짝 투명하게 해서 책·책상 경계가 딱 끊겨 보이지 않게 함
-        className="pointer-events-none absolute inset-0 -z-10 bg-no-repeat [background-image:url(https://cdn.hanuribook.com/img/hanuribook/kv_study.png)] [background-size:100%_auto] [background-position:center_bottom] [mask-repeat:no-repeat] md:[background-size:auto_220px] md:[background-position:right_bottom] lg:left-[max(45%,calc(100%_-_943px))] lg:[background-size:auto_100%] lg:[background-position:left_center] lg:[mask-image:linear-gradient(90deg,transparent_0px,black_80px)] lg:[mask-size:100%_100%] lg:[mask-position:0_0]"
+        //   이미지 영역 = 본문(최대 1200px)의 45% 지점 ~ 본문 오른쪽 끝. 화면 끝이 아니라 본문 오른쪽 끝에 맞춰
+        //   넓은 모니터에서도 글과 함께 가운데에 묶여 보임
+        //   그 영역 안에 이미지 전체가 잘리지 않게 들어가도록 맞추고(contain) 오른쪽 아래에 붙임
+        //   이미지 왼쪽 끝 80px, 오른쪽 끝 60px을 살짝 투명하게 해서 책·책상 경계가 딱 끊겨 보이지 않게 함
+        className="pointer-events-none absolute inset-0 -z-10 bg-no-repeat [background-image:url(https://cdn.hanuribook.com/img/hanuribook/kv_study.png)] [background-size:100%_auto] [background-position:center_bottom] [mask-repeat:no-repeat] md:[background-size:auto_220px] md:[background-position:right_bottom] lg:right-[max(0px,calc((100%_-_1200px)/2))] lg:left-[max(45%,calc((100%_-_1200px)/2_+_540px))] lg:[background-size:contain] lg:[background-position:right_bottom] lg:[mask-image:linear-gradient(90deg,transparent_0px,black_80px,black_calc(100%_-_60px),transparent_100%)] lg:[mask-size:100%_100%] lg:[mask-position:0_0]"
       />
       <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-1 items-center gap-7 px-5 pt-10 pb-[calc(53vw_-_12px)] md:pb-44 lg:min-h-[500px] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-14 lg:py-14">
         <div className="flex flex-col gap-4.5">

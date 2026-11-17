@@ -1,4 +1,4 @@
-// 섹션 일러스트 (CDN, 2048×2048)
+// 섹션 일러스트 (CDN, 여백 없이 잘린 투명 PNG)
 const IMG = "https://cdn.hanuribook.com/img/hanuribook";
 
 export default function WaysSection() {
@@ -6,12 +6,12 @@ export default function WaysSection() {
     <div className="pt-10" aria-label="한우리의 읽기·쓰기·말하기">
       <section className="bg-white px-0 pt-6 pb-12 lg:py-12" aria-labelledby="w-read">
         <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-1 items-center gap-6 px-5 lg:max-w-[1240px] lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-10">
-          <div className="reveal flex h-60 items-center justify-center rounded-[28px] text-center text-[13px] text-[#8A5A3C] lg:order-2 lg:h-90">
+          <div className="reveal flex items-center justify-center rounded-[28px] py-3 text-center text-[13px] text-[#8A5A3C] lg:order-2 lg:py-4">
             <img
-              className="h-[92%] w-auto max-w-[92%] animate-way-float-a mask-x-from-92% mask-y-from-92% object-contain mix-blend-multiply will-change-transform motion-reduce:animate-none lg:h-full lg:max-w-full"
+              className="h-[125px] w-auto max-w-[62%] animate-way-float-a object-contain will-change-transform motion-reduce:animate-none lg:h-[194px] lg:max-w-[62%]"
               src={`${IMG}/main_read.png`}
-              width={2048}
-              height={2048}
+              width={571}
+              height={446}
               loading="lazy"
               alt="펼쳐진 책 일러스트"
             />
@@ -52,12 +52,12 @@ export default function WaysSection() {
       </section>
       <section className="bg-[#FFF7F1] px-0 pt-6 pb-12 lg:py-12" aria-labelledby="w-write">
         <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-1 items-center gap-6 px-5 lg:max-w-[1240px] lg:grid-cols-[400px_minmax(0,1fr)] lg:gap-10">
-          <div className="reveal flex h-60 items-center justify-center rounded-[28px] text-center text-[13px] text-[#8A5A3C] lg:order-0 lg:h-90">
+          <div className="reveal flex items-center justify-center rounded-[28px] py-3 text-center text-[13px] text-[#8A5A3C] lg:order-0 lg:py-4">
             <img
-              className="h-[92%] w-auto max-w-[92%] animate-way-float-b mask-x-from-92% mask-y-from-92% object-contain mix-blend-multiply will-change-transform motion-reduce:animate-none lg:h-full lg:max-w-full"
+              className="h-[144px] w-auto max-w-[70%] animate-way-float-b object-contain will-change-transform motion-reduce:animate-none lg:h-[223px] lg:max-w-[72%]"
               src={`${IMG}/main_write.png`}
-              width={2048}
-              height={2048}
+              width={518}
+              height={558}
               loading="lazy"
               alt="노트와 연필, 전구 일러스트"
             />
@@ -97,12 +97,12 @@ export default function WaysSection() {
       </section>
       <section className="bg-white px-0 pt-6 pb-12 lg:py-12" aria-labelledby="w-speak">
         <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-1 items-center gap-6 px-5 lg:max-w-[1240px] lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-10">
-          <div className="reveal flex h-60 items-center justify-center rounded-[28px] text-center text-[13px] text-[#8A5A3C] lg:order-2 lg:h-90">
+          <div className="reveal flex items-center justify-center rounded-[28px] py-3 text-center text-[13px] text-[#8A5A3C] lg:order-2 lg:py-4">
             <img
-              className="h-[92%] w-auto max-w-[92%] animate-way-float-c mask-x-from-92% mask-y-from-92% object-contain mix-blend-multiply will-change-transform motion-reduce:animate-none lg:h-full lg:max-w-full"
+              className="h-[144px] w-auto max-w-[70%] animate-way-float-c object-contain will-change-transform motion-reduce:animate-none lg:h-[223px] lg:max-w-[72%]"
               src={`${IMG}/main_say.png`}
-              width={2048}
-              height={2048}
+              width={570}
+              height={380}
               loading="lazy"
               alt="물음표와 느낌표 말풍선 일러스트"
             />
