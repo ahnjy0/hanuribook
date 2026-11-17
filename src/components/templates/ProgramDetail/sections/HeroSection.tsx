@@ -107,7 +107,14 @@ export default function HeroSection({ p }: Props) {
             // 실제 이미지가 있으면 자리표시 박스 대신 이미지(세로형)를 영역 가운데에 표시
             <div className="box-border flex h-52 items-center justify-center lg:h-[352px] lg:py-8">
               {/* 데스크톱: 영역 높이는 늘리고 위아래 안쪽 여백(32px)을 줘서 표지 크기(288px)는 그대로, 위아래 여백만 넓게 */}
-              <img className="block h-full w-auto max-w-full rounded-[10px] object-contain shadow-[0_14px_30px_rgba(0,0,0,0.18)]" src={p.src} alt={`${p.title} 교재 표지`} />
+              {/* 모션: 유아정규 히어로 교재 카드와 같게 — 페이지가 열릴 때 아래에서 떠오르며 나타남(card-rise, 0.15초 뒤). 동작 줄이기 설정 시 없음 */}
+              <div className="h-full animate-card-rise motion-reduce:animate-none" style={{ animationDelay: "150ms" }}>
+                <img
+                  className="block h-full w-auto max-w-full rounded-[10px] object-contain shadow-[0_14px_30px_rgba(0,0,0,0.18)]"
+                  src={p.src}
+                  alt={`${p.title} 교재 표지`}
+                />
+              </div>
             </div>
           ) : (
             <div className="flex h-50 items-center justify-center rounded-[24px] border border-dashed border-[#D9C9BC] bg-white text-center text-[13px] text-[#6B5A4C] lg:h-80">{`[이미지] ${p.img}`}</div>
