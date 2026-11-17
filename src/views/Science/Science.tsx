@@ -25,7 +25,7 @@ export default function Science() {
         <KitSection />
         <ClassSection />
         <EffectsSection />
-        <ProgramFaqSection items={SCIENCE_FAQS} labelColor={ACCENT} labelBg={SOFT} flush />
+        <ProgramFaqSection items={SCIENCE_FAQS} labelColor={ACCENT} labelBg={SOFT} accent={ACCENT} flush />
       </main>
       <Footer />
       <div className="sticky bottom-0 z-20">
