@@ -39,6 +39,8 @@ type Props = {
   accent?: string;
   /** 페이지 맨 끝(푸터 바로 위)에 올 때 아래 여백 추가 */
   last?: boolean;
+  /** 바로 위 섹션도 배경색 띠일 때 위 여백 없이 붙임 */
+  flush?: boolean;
 };
 
 /**
@@ -51,11 +53,12 @@ export default function ProgramFaqSection({
   labelBg = "#FFF1E7",
   accent = "#C2410C",
   last = false,
+  flush = false,
 }: Props) {
   return (
     // 옅은 회색 배경을 화면 너비 전체로 깔고, 안쪽 내용만 본문 너비(1200px)로 맞춤
     <section
-      className={`mt-13 bg-[#F5F5F7] px-0 py-12 lg:mt-24 lg:py-20 ${last ? "" : "mb-0"}`}
+      className={`bg-[#F5F5F7] px-0 py-12 lg:py-20 ${flush ? "mt-0" : "mt-13 lg:mt-24"} ${last ? "" : "mb-0"}`}
       aria-labelledby="prog-faq"
     >
       <div className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 lg:gap-5">

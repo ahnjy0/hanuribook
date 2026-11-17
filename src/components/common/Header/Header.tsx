@@ -11,8 +11,6 @@ export default function Header(props: HeaderProps) {
     accent,
     accentFill,
     accentText,
-    crumbs,
-    hasCrumbs,
     hasSubs,
     hasThirds,
     thirds,
@@ -156,16 +154,13 @@ export default function Header(props: HeaderProps) {
             ))}
           </div>
           {hasThirds && (
-            // 3뎁스 메뉴: 2뎁스(박스 버튼)와 구분되도록 박스 없이 점선 구분선 아래 글자 메뉴로 가볍게.
+            // 3뎁스 메뉴: 2뎁스(박스 버튼)와 구분되도록 박스 없이 글자 메뉴로 가볍게.
             // 데스크톱은 왼쪽에 상위 메뉴명(예: 초등정규 ›)을 붙여 위계를 보여 주고, 메뉴 사이는 세로 구분선
             <nav
               className="mx-auto my-0 box-border max-w-[1200px] px-4 lg:px-5"
               aria-label={`${props.sub ?? ""} 하위 메뉴`}
             >
-              <div
-                className="flex items-center py-1.5 lg:gap-4 lg:py-2"
-                style={{ borderTop: "1px dashed #E8DCD3" }}
-              >
+              <div className="flex items-center pb-1.5 lg:gap-4 lg:pb-2">
                 <span
                   className="hidden flex-none items-center gap-1.5 text-[14px] font-bold whitespace-nowrap text-[#8A7E76] lg:flex"
                   aria-hidden="true"
@@ -173,14 +168,18 @@ export default function Header(props: HeaderProps) {
                   {props.sub}
                   <span className="text-[#C9BDB4]">›</span>
                 </span>
-                <ul className="m-0 grid flex-auto list-none grid-cols-3 p-0 lg:flex lg:flex-none lg:items-center">
+                {/* 모바일: 메뉴 수만큼 같은 너비 칸으로 한 줄(초등정규 3칸, 초등심화 5칸) / 데스크톱: 글자 길이만큼 나열 */}
+                <ul
+                  className="m-0 grid flex-auto list-none p-0 lg:flex lg:flex-none lg:items-center"
+                  style={{ gridTemplateColumns: `repeat(${thirds.length}, minmax(0, 1fr))` }}
+                >
                   {thirds.map((t, i) => (
                     <li
                       key={i}
                       className="flex items-center lg:before:mx-1 lg:before:h-3 lg:before:w-px lg:before:bg-[#DDD2CA] lg:first:before:hidden"
                     >
                       <SmartLink
-                        className={`flex h-9 w-full items-center justify-center gap-1.5 px-1 text-[14px] whitespace-nowrap no-underline lg:w-auto lg:px-4 lg:text-[15px] ${
+                        className={`flex h-9 w-full items-center justify-center gap-1.5 text-[14px] px-1 whitespace-nowrap no-underline lg:w-auto lg:px-4 lg:text-[15px] ${
                           t.on ? "font-extrabold" : "font-semibold text-[#666666] hover:text-[#1F1F1F]"
                         }`}
                         style={t.on ? { color: accentText } : undefined}
@@ -200,24 +199,7 @@ export default function Header(props: HeaderProps) {
           )}
         </div>
       )}
-      {hasCrumbs && (
-        // 로케이션(현재 위치) 영역: 데스크톱(lg, 1024px 이상)에서만 노출
-        <nav className="hidden border-t border-t-[#EFEFEF] bg-[#F7F7F8] lg:block" aria-label="현재 위치">
-          <ol className="mx-auto my-0 box-border flex max-w-[1200px] list-none items-center gap-1.5 px-5 py-2.5 text-[13px] text-[#555555]">
-            <li className="flex items-center">
-              <svg role="img" aria-label="홈" width="15" height="15" viewBox="0 0 24 24" fill="#8A8A8A">
-                <path d="M12 3 3 10.5V21h6v-6h6v6h6V10.5z" />
-              </svg>
-            </li>
-            {crumbs.map((c, i) => (
-              <li key={i} className="flex items-center gap-1.5">
-                <span aria-hidden="true">›</span>
-                <span style={{ fontWeight: c.weight, color: c.color }}>{c.label}</span>
-              </li>
-            ))}
-          </ol>
-        </nav>
-      )}
+      {/* 로케이션(현재 위치) 영역은 표시하지 않음. 브레드크럼(crumbs) 값은 3뎁스 현재 메뉴 판별에만 사용 */}
     </header>
   );
 }

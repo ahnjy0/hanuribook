@@ -19,7 +19,7 @@ const GROUPS: Record<GroupKey, { sub: string; back: string }> = {
 
 const PROGRAMS: {
   id: ProgramId; group: GroupKey; href: string; title: string; grade: string; focus: string;
-  tint: string; img: string; slogan: string; tags: string; long: string; points: string[]; steps: string[];
+  tint: string; img: string; src?: string; info?: [string, string][]; slogan: string; tags: string; long: string; points: string[]; steps: string[];
 }[] = [
   { id: "vocab", group: "elementary", href: PATHS.DetailVocab, title: "어휘리더", grade: "초등 1·2학년", focus: "★ 어휘력·기초 문해력", tint: "#FFF4EC", img: "그림책을 읽으며 어휘 카드를 고르는 아이",
     slogan: "책 읽기의 즐거움과 교과 기초 어휘·표현력 다지기", tags: "#그림책  #교과기초어휘  #초등입학적응",
@@ -33,9 +33,10 @@ const PROGRAMS: {
     slogan: "비판적 미디어 읽기, 실전 찬반토론 및 중등 서술형 완벽 대비", tags: "#찬반토론  #미디어리터러시  #중등논술대비",
     long: "비문학과 미디어 텍스트를 비판적으로 읽고, 근거를 갖춘 찬반 토론과 논술 쓰기로 중학교 서술형·수행평가를 준비합니다.",
     points: ["뉴스·광고 등 미디어를 비판적으로 읽어요", "근거를 들어 주장하는 찬반 토론에 익숙해져요", "중학교 서술형·수행평가를 미리 준비해요"], steps: ["비문학 독해", "미디어 읽기", "찬반 토론", "논술 쓰기"] },
-  { id: "science", group: "advanced", href: PATHS.DetailScience, title: "과학탐탐", grade: "초등 3~6학년", focus: "과학 탐구", tint: "#E9F6EE", img: "실험 관찰 노트를 쓰는 아이",
-    slogan: "궁금증을 탐구로, 탐구를 글로", tags: "#과학교과  #탐구보고서  #실험관찰",
-    long: "과학 교과와 연계된 도서를 읽고 관찰·실험 활동을 통해 원리를 이해한 뒤, 탐구 보고서와 설명문으로 정리합니다.",
+  { id: "science", group: "advanced", href: PATHS.DetailScience, title: "과학탐탐", grade: "초등 3학년", focus: "", tint: "#E9F6EE", img: "실험 관찰 노트를 쓰는 아이", src: "https://cdn.hanuribook.com/img/hanuribook/advance_01.png",
+    info: [["대상", "초등 3학년"], ["학습 기간", "12개월"]],
+    slogan: "비주얼씽킹을 통한 과학 핵심 개념 및 어휘 이해", tags: "#탐구 역량  #지식 향상  #과학 문해력",
+    long: "과학 원리를 읽기와 연결하고 탐구적 사고력을 키웁니다.",
     points: ["교과서 핵심 과학 개념을 책으로 먼저 이해해요", "관찰·실험 과정을 논리적인 글로 표현해요", "과학 관련 시사 이슈를 토론해요"], steps: ["개념 도서 읽기", "탐구 활동", "실험 관찰 기록", "탐구 보고서 쓰기"] },
   { id: "history", group: "advanced", href: PATHS.DetailHistory, title: "똑똑한국사", grade: "초등 3~6학년", focus: "역사 이해", tint: "#FFF3E3", img: "역사책과 유물 사진 카드",
     slogan: "이야기로 읽고 흐름으로 이해하는 우리 역사", tags: "#시대흐름  #인물탐구  #역사논술",

@@ -22,7 +22,8 @@ const SUB_MAP: Record<string, [string, string][]> = {
   program: [
     ["소개", PATHS.Program],
     ["유아정규", PATHS.Kinder],
-    ["초등정규", PATHS.Elementary],
+    // 초등정규 메뉴는 첫 3뎁스(초등 1 · 2학년 = 어휘리더 상세페이지)로 바로 연결
+    ["초등정규", PATHS.DetailVocab],
     ["초등심화", PATHS.Advanced],
     ["중고등정규", PATHS.Middle],
     ["단기특강", PATHS.Special],
@@ -45,6 +46,14 @@ const THIRD_MAP: Record<string, [string, string, string][]> = {
     ["초등 1 · 2학년", PATHS.DetailVocab, "어휘리더"],
     ["초등 3 · 4학년", PATHS.DetailReading, "독서리더"],
     ["초등 5 · 6학년", PATHS.DetailLogic, "논리리더"],
+  ],
+  // 페이지 이름 ""(빈 값) = 브레드크럼이 2단계인 2뎁스 대표 페이지(초등심화 소개)
+  초등심화: [
+    ["전체", PATHS.Advanced, ""],
+    ["초등 3", PATHS.DetailScience, "과학탐탐"],
+    ["초등 4", PATHS.DetailHistory, "똑똑한국사"],
+    ["초등 5", PATHS.DetailGeo, "세계문화지리"],
+    ["초등 6", PATHS.DetailWorld, "세계사"],
   ],
 };
 
