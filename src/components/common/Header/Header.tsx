@@ -106,7 +106,7 @@ export default function Header(props: HeaderProps) {
             <Fragment key={i}>
               {t.on && (
                 <SmartLink
-                  className="flex h-12 items-center justify-center text-[15px] font-bold whitespace-nowrap no-underline"
+                  className="flex h-12 items-center justify-center text-[15px] font-bold whitespace-nowrap no-underline lg:h-14 lg:text-[17px] lg:font-extrabold"
                   style={{ color: accentText, borderBottom: `2px solid ${accent}` }}
                   href={t.href}
                   aria-current="page"
@@ -116,7 +116,7 @@ export default function Header(props: HeaderProps) {
               )}
               {t.off && (
                 <SmartLink
-                  className="flex h-12 items-center justify-center border-b-2 border-b-transparent text-[15px] font-medium whitespace-nowrap text-[#222222] no-underline"
+                  className="flex h-12 items-center justify-center border-b-2 border-b-transparent text-[15px] font-medium whitespace-nowrap text-[#222222] no-underline lg:h-14 lg:text-[17px] lg:font-bold"
                   href={t.href}
                 >
                   {t.label}
