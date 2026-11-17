@@ -47,24 +47,35 @@ export default function ProgramsSection({ progs }: Props) {
                     <path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z" />
                   </svg>
                 </span>
+                {/* 학년 라벨: 공통 섹션 라벨(SectionLabel)과 같은 크기·여백(모바일 13px·데스크톱 16px), 카드 왼쪽 정렬 */}
                 <span
-                  className="self-start rounded-full bg-white px-2.5 py-1 text-[12px] font-extrabold"
+                  className="inline-flex items-center self-start rounded-full bg-white px-3.5 py-1.5 text-[13px] leading-[1.5] font-bold lg:px-4.5 lg:py-2 lg:text-[16px]"
                   style={{ color: p.ink }}
                 >
                   {p.grade}
                 </span>
-                <h3 className="m-0 text-[23px] font-extrabold tracking-[-0.03em] text-[#1F1F1F]">
-                  {p.short}
+                {/* 제목: '생각하는 나무' + 프로그램명 */}
+                <h3 className="m-0 flex flex-col text-[#1F1F1F]">
+                  <span className="text-[14px] font-bold" style={{ color: p.ink }}>
+                    {p.brand}
+                  </span>
+                  <span className="text-[23px] leading-[1.25] font-extrabold tracking-[-0.03em]">{p.short}</span>
                 </h3>
-                <span className="text-[13px] font-bold" style={{ color: p.ink }}>
-                  {p.focus}
-                </span>
               </div>
               <div className="flex flex-auto flex-col gap-3 px-5 pt-4.5 pb-5">
-                <p className="m-0 text-[15px] leading-[1.55] text-[#222222]">{p.desc}</p>
-                <span className="text-[12px] font-bold" style={{ color: p.ink }}>
-                  {p.tags}
-                </span>
+                {/* 설명: 쉼표 앞(보조 문구)과 뒤(핵심 문구)를 두 줄로 나누고 핵심 문구는 굵게 */}
+                <p className="m-0 flex flex-col text-[15px] leading-[1.55] break-keep text-[#222222]">
+                  {(() => {
+                    const i = p.desc.indexOf(", ");
+                    if (i < 0) return p.desc;
+                    return (
+                      <>
+                        <span>{p.desc.slice(0, i + 1)}</span>
+                        <strong className="font-extrabold">{p.desc.slice(i + 2)}</strong>
+                      </>
+                    );
+                  })()}
+                </p>
                 <SmartLink
                   className="mt-auto flex h-12 items-center justify-center gap-1 rounded-[12px] text-[15px] font-extrabold text-[#C2410C] no-underline hover:text-[#9A3412]"
                   style={{ background: p.btnBg, color: p.btnFg }}
