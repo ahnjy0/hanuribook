@@ -57,7 +57,17 @@ export default function ClassSection() {
       </ol>
 
       {/* 과학 독서 차시 수업 흐름 */}
-      <div className="mt-6 flex flex-col gap-3.5 rounded-[20px] p-5 lg:mt-10 lg:gap-5 lg:rounded-[24px] lg:p-8" style={{ background: SOFT }}>
+      <div className="relative mt-12 flex flex-col gap-3.5 rounded-[20px] p-5 lg:mt-20 lg:gap-5 lg:rounded-[24px] lg:p-8" style={{ background: SOFT }}>
+        {/* 장식 캐릭터: 박스 왼쪽 위 모서리에 걸쳐 위로 살짝 올라옴(제목은 가운데라 겹치지 않음) */}
+        <img
+          className="pointer-events-none absolute -top-[64px] left-3 z-10 block h-20 w-auto select-none lg:-top-[104px] lg:left-6 lg:h-32"
+          src="https://cdn.hanuribook.com/img/hanuribook/advance_cha_02.png"
+          width={372}
+          height={314}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+        />
         <h3 className="m-0 text-center text-[18px] font-extrabold lg:text-[24px]">
           <span style={{ color: ACCENT }}>과학 독서</span> 수업은 이렇게 진행돼요
         </h3>

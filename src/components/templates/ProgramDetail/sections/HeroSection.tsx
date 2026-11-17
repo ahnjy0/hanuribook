@@ -71,6 +71,14 @@ export default function HeroSection({ p }: Props) {
             {/* 정보 묶음 구분(수업 정보가 있는 페이지, 예: 과학탐탐):
                 ① 제목 + 슬로건 ② 설명 + 태그 ③ (구분선) 대상·학습 기간 — 묶음 안은 촘촘히, 묶음 사이는 넓게 */}
             <div className={`flex flex-col ${p.info ? "gap-1.5 lg:gap-2" : "gap-3"}`}>
+              {/* 프로그램 구분 라벨(예: 과학 독서 프로그램): 유아정규·어휘리더 히어로 라벨과 같은 공통 섹션 라벨, 색은 과학탐탐 강조색(초록 글자 + 강조색을 옅게(10%) 깐 반투명 바탕 — 어휘리더 라벨처럼 강조색의 연한 톤), 왼쪽 정렬 */}
+              {p.label && (
+                <div className="mb-1">
+                  <SectionLabel color="#1F7A4C" bg="rgba(31,122,76,0.1)">
+                    {p.label}
+                  </SectionLabel>
+                </div>
+              )}
               <h1 className="m-0 text-[32px] font-extrabold tracking-[-0.04em] lg:text-[42px]" id="d-h">
                 {p.title}
               </h1>
@@ -78,7 +86,7 @@ export default function HeroSection({ p }: Props) {
             </div>
             <div className={p.info ? "mt-2 lg:mt-3" : ""}>
               <div className={`flex min-w-0 flex-col ${p.info ? "gap-2" : "gap-3"}`}>
-                <p className="m-0 text-[15px] leading-[1.7] text-[#222222]">{p.long}</p>
+                {p.long && <p className="m-0 text-[15px] leading-[1.7] text-[#222222]">{p.long}</p>}
                 {/* 태그: "  "(공백 두 칸)으로 나눠 각각 따로 표시 — 띄어쓰기가 있는 태그(예: #탐구 역량)도 구분되게 */}
                 <ul className="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0 text-[13px] font-semibold text-[#333333]">
                   {p.tags.split(/\s{2,}/).map((t) => (
