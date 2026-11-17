@@ -25,7 +25,12 @@ export default function HeroSection({ p }: Props) {
       </dl>
     );
   return (
-    <section style={{ background: p.tint }} aria-labelledby="d-h">
+    <section
+      // 초등심화 상세: 유아정규 히어로처럼 아래 좌우 모서리 둥글게
+      className={adv ? "overflow-hidden rounded-b-[32px]" : undefined}
+      style={{ background: p.tint }}
+      aria-labelledby="d-h"
+    >
       <div className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-4.5 px-5 pt-5 pb-8">
         {!adv && (
         <SmartLink

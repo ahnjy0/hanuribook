@@ -22,8 +22,7 @@ const SUB_MAP: Record<string, [string, string][]> = {
   program: [
     ["소개", PATHS.Program],
     ["유아정규", PATHS.Kinder],
-    // 초등정규 메뉴는 첫 3뎁스(초등 1 · 2학년 = 어휘리더 상세페이지)로 바로 연결
-    ["초등정규", PATHS.DetailVocab],
+    ["초등정규", PATHS.Elementary],
     ["초등심화", PATHS.Advanced],
     ["중고등정규", PATHS.Middle],
     ["단기특강", PATHS.Special],
@@ -43,6 +42,7 @@ const SUB_MAP: Record<string, [string, string][]> = {
  */
 const THIRD_MAP: Record<string, [string, string, string][]> = {
   초등정규: [
+    ["전체", PATHS.Elementary, ""],
     ["초등 1 · 2학년", PATHS.DetailVocab, "어휘리더"],
     ["초등 3 · 4학년", PATHS.DetailReading, "독서리더"],
     ["초등 5 · 6학년", PATHS.DetailLogic, "논리리더"],

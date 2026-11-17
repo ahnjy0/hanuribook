@@ -3,6 +3,13 @@ import type { ElementaryVals } from "../useElementary";
 
 type Props = Pick<ElementaryVals, "progs">;
 
+/**
+ * 카드별 강조색(학년 라벨·브랜드명 글자, 상세보기 버튼)
+ * - 어휘리더: 어휘리더 페이지 강조색(진한 주황)
+ * - 독서리더·논리리더: 카드 색과 어울리는 진한 색(진한 초록 / 진한 파랑, 흰 글자와 대비 충분)
+ */
+const ACCENT_OF: Record<string, string> = { vocab: "#C2410C" };
+
 export default function ProgramsSection({ progs }: Props) {
   return (
     <section
@@ -12,12 +19,15 @@ export default function ProgramsSection({ progs }: Props) {
     >
       {/* 데스크톱: 카드 안쪽 여백·글자·아이콘·버튼을 키워 크게 보이게 */}
       <ul className="m-0 grid list-none grid-cols-1 gap-3 p-0 md:grid-cols-3 lg:gap-5">
-        {progs.map((p, i) => (
+        {progs.map((p, i) => {
+          const ACCENT = ACCENT_OF[p.id] ?? p.ink;
+          return (
           <li key={i} className="flex">
             <article
               // 마우스오버: 메인홈 '한우리 프로그램' 카드와 같은 효과(살짝 위로 뜨며 주황빛 그림자)
-              className="flex flex-auto flex-col overflow-hidden rounded-[22px] bg-white text-[#1F1F1F] transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(230,69,15,0.16)] motion-reduce:transition-none lg:rounded-[28px]"
-              style={{ border: `1.5px solid ${p.line}` }}
+              className="flex flex-auto flex-col overflow-hidden rounded-[22px] text-[#1F1F1F] transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(230,69,15,0.16)] motion-reduce:transition-none lg:rounded-[28px]"
+              // 카드 전체에 학년별 연한 색(초등심화 과정 카드와 같은 방식)
+              style={{ border: `1.5px solid ${p.line}`, background: p.soft }}
             >
               <div
                 className="relative flex flex-col gap-2.5 overflow-hidden px-5 pt-5 pb-4.5 lg:gap-3.5 lg:px-8 lg:pt-8 lg:pb-7"
@@ -50,21 +60,22 @@ export default function ProgramsSection({ progs }: Props) {
                 {/* 학년 라벨: 공통 섹션 라벨(SectionLabel)과 같은 크기·여백(모바일 13px·데스크톱 16px), 카드 왼쪽 정렬 */}
                 <span
                   className="inline-flex items-center self-start rounded-full bg-white px-3.5 py-1.5 text-[13px] leading-[1.5] font-bold lg:px-4.5 lg:py-2 lg:text-[16px]"
-                  style={{ color: p.ink }}
+                  style={{ color: ACCENT }}
                 >
                   {p.grade}
                 </span>
                 {/* 제목: '생각하는 나무' + 프로그램명 */}
                 <h3 className="m-0 flex flex-col text-[#1F1F1F]">
-                  <span className="text-[14px] font-bold lg:text-[17px]" style={{ color: p.ink }}>
+                  <span className="text-[14px] font-bold lg:text-[17px]" style={{ color: ACCENT }}>
                     {p.brand}
                   </span>
                   <span className="text-[23px] leading-[1.25] font-extrabold tracking-[-0.03em] lg:text-[32px]">{p.short}</span>
                 </h3>
               </div>
-              <div className="flex flex-auto flex-col gap-3 px-5 pt-4.5 pb-5 lg:gap-5 lg:px-8 lg:pt-6 lg:pb-8">
+              {/* 아래쪽: 설명 + 상세보기 버튼(오른쪽 정렬). 3열 카드라 폭이 좁아 설명은 한 줄 전체, 버튼은 그 아래 오른쪽 */}
+              <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-3 px-5 pt-1 pb-5 lg:px-8 lg:pb-8">
                 {/* 설명: 쉼표 앞(보조 문구)과 뒤(핵심 문구)를 두 줄로 나누고 핵심 문구는 굵게 */}
-                <p className="m-0 flex flex-col text-[15px] leading-[1.55] break-keep text-[#222222] lg:text-[18px]">
+                <p className="m-0 flex min-w-0 basis-full flex-col text-[15px] leading-[1.55] break-keep text-[#222222] lg:text-[18px]">
                   {(() => {
                     const i = p.desc.indexOf(", ");
                     if (i < 0) return p.desc;
@@ -76,15 +87,17 @@ export default function ProgramsSection({ progs }: Props) {
                     );
                   })()}
                 </p>
+                {/* 상세보기 버튼: 초등심화와 같은 작은 알약 버튼(페이지 강조색 + 흰 글자) */}
                 <SmartLink
-                  className="mt-auto flex h-12 items-center justify-center gap-1 rounded-[12px] text-[15px] font-extrabold lg:h-14 lg:rounded-[14px] lg:text-[17px] text-[#C2410C] no-underline hover:text-[#9A3412]"
-                  style={{ background: p.btnBg, color: p.btnFg }}
+                  className="ml-auto inline-flex h-10 flex-none items-center justify-center gap-1 rounded-full px-5 text-[14px] font-bold text-white no-underline lg:h-11 lg:px-6 lg:text-[15px]"
+                  style={{ background: ACCENT }}
                   href={p.href}
                 >{`${p.short} 상세보기 ›`}</SmartLink>
               </div>
             </article>
           </li>
-        ))}
+          );
+        })}
       </ul>
     </section>
   );

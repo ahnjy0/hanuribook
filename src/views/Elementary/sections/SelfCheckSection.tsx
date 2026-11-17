@@ -25,7 +25,7 @@ export default function SelfCheckSection() {
           className="inline-flex h-11 flex-none items-center rounded-[10px] bg-[#1E3A5F] px-4 py-0 text-[14px] font-bold text-white no-underline"
           href="/consult"
         >
-          자가진단
+          상담 신청하기
         </Link>
       </div>
     </section>
