@@ -12,24 +12,25 @@ export default function ProgramsSection({ progs }: Props) {
       <h1 className="m-0 text-[24px] font-extrabold lg:text-[30px]" id="e-h">
         학년별 프로그램
       </h1>
-      <ul className="m-0 grid list-none grid-cols-1 gap-3 p-0 md:grid-cols-3">
+      {/* 데스크톱: 카드 안쪽 여백·글자·아이콘·버튼을 키워 크게 보이게 */}
+      <ul className="m-0 grid list-none grid-cols-1 gap-3 p-0 md:grid-cols-3 lg:gap-5">
         {progs.map((p, i) => (
           <li key={i} className="flex">
             <article
-              className="flex flex-auto flex-col overflow-hidden rounded-[22px] bg-white text-[#1F1F1F]"
+              className="flex flex-auto flex-col overflow-hidden rounded-[22px] bg-white text-[#1F1F1F] lg:rounded-[28px]"
               style={{ border: `1.5px solid ${p.line}` }}
             >
               <div
-                className="relative flex flex-col gap-2.5 overflow-hidden px-5 pt-5 pb-4.5"
+                className="relative flex flex-col gap-2.5 overflow-hidden px-5 pt-5 pb-4.5 lg:gap-3.5 lg:px-8 lg:pt-8 lg:pb-7"
                 style={{ background: p.soft }}
               >
                 <span
-                  className="absolute -top-4.5 -right-4.5 h-24 w-24 rounded-[50%] opacity-22"
+                  className="absolute -top-4.5 -right-4.5 h-24 w-24 rounded-[50%] opacity-22 lg:-top-6 lg:-right-6 lg:h-32 lg:w-32"
                   style={{ background: p.accent }}
                   aria-hidden="true"
                 />
                 <span
-                  className="absolute top-4.5 right-4.5 flex h-11 w-11 items-center justify-center rounded-[14px]"
+                  className="absolute top-4.5 right-4.5 flex h-11 w-11 items-center justify-center rounded-[14px] lg:top-7 lg:right-7 lg:h-14 lg:w-14 lg:rounded-[16px] lg:[&_svg]:h-7 lg:[&_svg]:w-7"
                   style={{ background: p.accent }}
                   aria-hidden="true"
                 >
@@ -56,15 +57,15 @@ export default function ProgramsSection({ progs }: Props) {
                 </span>
                 {/* 제목: '생각하는 나무' + 프로그램명 */}
                 <h3 className="m-0 flex flex-col text-[#1F1F1F]">
-                  <span className="text-[14px] font-bold" style={{ color: p.ink }}>
+                  <span className="text-[14px] font-bold lg:text-[17px]" style={{ color: p.ink }}>
                     {p.brand}
                   </span>
-                  <span className="text-[23px] leading-[1.25] font-extrabold tracking-[-0.03em]">{p.short}</span>
+                  <span className="text-[23px] leading-[1.25] font-extrabold tracking-[-0.03em] lg:text-[32px]">{p.short}</span>
                 </h3>
               </div>
-              <div className="flex flex-auto flex-col gap-3 px-5 pt-4.5 pb-5">
+              <div className="flex flex-auto flex-col gap-3 px-5 pt-4.5 pb-5 lg:gap-5 lg:px-8 lg:pt-6 lg:pb-8">
                 {/* 설명: 쉼표 앞(보조 문구)과 뒤(핵심 문구)를 두 줄로 나누고 핵심 문구는 굵게 */}
-                <p className="m-0 flex flex-col text-[15px] leading-[1.55] break-keep text-[#222222]">
+                <p className="m-0 flex flex-col text-[15px] leading-[1.55] break-keep text-[#222222] lg:text-[18px]">
                   {(() => {
                     const i = p.desc.indexOf(", ");
                     if (i < 0) return p.desc;
@@ -77,7 +78,7 @@ export default function ProgramsSection({ progs }: Props) {
                   })()}
                 </p>
                 <SmartLink
-                  className="mt-auto flex h-12 items-center justify-center gap-1 rounded-[12px] text-[15px] font-extrabold text-[#C2410C] no-underline hover:text-[#9A3412]"
+                  className="mt-auto flex h-12 items-center justify-center gap-1 rounded-[12px] text-[15px] font-extrabold lg:h-14 lg:rounded-[14px] lg:text-[17px] text-[#C2410C] no-underline hover:text-[#9A3412]"
                   style={{ background: p.btnBg, color: p.btnFg }}
                   href={p.href}
                 >{`${p.short} 상세보기 ›`}</SmartLink>
