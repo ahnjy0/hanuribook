@@ -14,6 +14,8 @@ export default function Header(props: HeaderProps) {
     crumbs,
     hasCrumbs,
     hasSubs,
+    hasThirds,
+    thirds,
     menuClosed,
     menuExp,
     menuGroups,
@@ -154,6 +156,27 @@ export default function Header(props: HeaderProps) {
             ))}
           </div>
         </div>
+      )}
+      {hasThirds && (
+        // 3뎁스 메뉴: 2뎁스(알약 버튼) 아래 흰 줄에 글자 탭 + 현재 메뉴 밑줄 — 2뎁스와 위계가 구분되도록 가볍게
+        <nav className="border-t border-t-[#F1E6DE] bg-white" aria-label={`${props.sub ?? ""} 하위 메뉴`}>
+          <ul className="mx-auto my-0 box-border grid max-w-[1200px] list-none grid-cols-3 px-4 py-0 lg:flex lg:justify-center lg:gap-2 lg:px-5">
+            {thirds.map((t, i) => (
+              <li key={i} className="flex lg:block">
+                <SmartLink
+                  className={`flex h-11 w-full items-center justify-center border-b-2 px-1 text-[14px] whitespace-nowrap no-underline lg:h-12 lg:w-auto lg:px-8 lg:text-[15px] ${
+                    t.on ? "font-extrabold" : "border-b-transparent font-bold text-[#555555] hover:text-[#1F1F1F]"
+                  }`}
+                  style={t.on ? { color: accentText, borderBottomColor: accent } : undefined}
+                  href={t.href}
+                  aria-current={t.on ? "page" : undefined}
+                >
+                  {t.label}
+                </SmartLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
       )}
       {hasCrumbs && (
         // 로케이션(현재 위치) 영역: 데스크톱(lg, 1024px 이상)에서만 노출

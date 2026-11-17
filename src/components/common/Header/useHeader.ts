@@ -36,6 +36,18 @@ const SUB_MAP: Record<string, [string, string][]> = {
   ],
 };
 
+/**
+ * 3뎁스 메뉴: 2뎁스 라벨 → [메뉴 이름, 경로, 해당 페이지 이름(브레드크럼 마지막 항목과 비교해 현재 메뉴 표시)]
+ * 2뎁스 메뉴 아래 줄에 나타남
+ */
+const THIRD_MAP: Record<string, [string, string, string][]> = {
+  초등정규: [
+    ["초등 1 · 2학년", PATHS.DetailVocab, "어휘리더"],
+    ["초등 3 · 4학년", PATHS.DetailReading, "독서리더"],
+    ["초등 5 · 6학년", PATHS.DetailLogic, "논리리더"],
+  ],
+};
+
 const toItems = (arr: [string, string][]) => arr.map(([label, href]) => ({ label, href }));
 
 const MENU_GROUPS = [
@@ -60,6 +72,13 @@ export function useHeader(props: HeaderProps) {
     off: label !== sub,
   }));
   const parts = crumbStr ? crumbStr.split(">").map((s) => s.trim()).filter(Boolean) : [];
+  // 3뎁스: 현재 2뎁스(sub)에 하위 메뉴가 있을 때만. 브레드크럼이 3단계 이상이면 마지막 항목이 현재 페이지
+  const curPage = parts.length >= 3 ? parts[parts.length - 1] : "";
+  const thirds = (SUB_MAP[active] ? THIRD_MAP[sub] || [] : []).map(([label, href, page]) => ({
+    label,
+    href,
+    on: page === curPage,
+  }));
   const crumbs = parts.map((label, i) => ({
     label,
     weight: i === parts.length - 1 ? 700 : 400,
@@ -76,6 +95,8 @@ export function useHeader(props: HeaderProps) {
     tabs,
     subs,
     hasSubs: subs.length > 0,
+    thirds,
+    hasThirds: thirds.length > 0,
     crumbs,
     hasCrumbs: crumbs.length > 0,
     accent: pink ? "#EE6D9F" : "#F26522",
