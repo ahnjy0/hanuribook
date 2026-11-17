@@ -15,6 +15,30 @@
   --animate-way-float-b: wayFloatB 5.5s ease-in-out infinite; /* 노트·연필: 대각선으로 흔들리며 떠오르기 */
   --animate-way-float-c: wayFloatC 3.6s ease-in-out infinite; /* 말풍선: 통통 튀며 착지할 때 찌그러짐 */
 
+  /* 프로그램 소개 '프로그램 특징' 카드: 페이지가 열릴 때 아래에서 차례로 떠오르기 / 아이콘이 천천히 둥실 */
+  --animate-card-rise: cardRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-icon-bob: iconBob 4s ease-in-out infinite;
+
+  @keyframes cardRise {
+    from {
+      opacity: 0;
+      translate: 0 40px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+  @keyframes iconBob {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-8px) rotate(-4deg);
+    }
+  }
+
   @keyframes wayFloatA {
     0%,
     100% {

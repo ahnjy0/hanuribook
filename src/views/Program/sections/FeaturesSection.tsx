@@ -63,13 +63,21 @@ export default function FeaturesSection() {
           </h1>
         </div>
         <div className="grid w-full grid-cols-1 gap-3 md:grid-cols-3 lg:gap-5">
-          {FEATURES.map((f) => (
-            <article
+          {FEATURES.map((f, i) => (
+            // 모션: 바깥 래퍼는 페이지가 열릴 때 차례로 떠오르기(0.15초 간격),
+            // 안쪽 카드는 마우스를 올리면 살짝 위로 뜨며 그림자 — 둘 다 이동(translate)을 써서 요소를 나눠 충돌을 막음
+            <div
               key={f.title}
-              className="relative isolate flex flex-col justify-center overflow-hidden rounded-[24px] bg-white py-5 pr-[108px] pl-6 text-left md:min-h-[190px] md:justify-start md:rounded-[28px] md:p-7 lg:min-h-[200px] lg:p-8"
+              className="flex animate-card-rise motion-reduce:animate-none"
+              style={{ animationDelay: `${150 + i * 150}ms` }}
             >
+            <article
+              className="relative isolate flex w-full flex-col justify-center overflow-hidden rounded-[24px] bg-white py-5 pr-[108px] pl-6 text-left transition-[translate,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-[0_14px_30px_rgba(230,69,15,0.14)] motion-reduce:transition-none md:min-h-[190px] md:justify-start md:rounded-[28px] md:p-7 lg:min-h-[200px] lg:p-8"
+            >
+              {/* 아이콘: 카드마다 박자를 달리해 천천히 둥실 떠다님 */}
               <img
-                className="pointer-events-none absolute top-1/2 right-1 -z-10 block h-[100px] w-[100px] -translate-y-1/2 object-contain md:top-auto md:right-1 md:-bottom-3 md:h-[140px] md:w-[140px] md:translate-y-0 md:object-bottom lg:right-2 lg:h-[170px] lg:w-[170px]"
+                className="pointer-events-none absolute top-1/2 right-1 -z-10 block h-[100px] w-[100px] -translate-y-1/2 animate-icon-bob object-contain motion-reduce:animate-none md:top-auto md:right-1 md:-bottom-3 md:h-[140px] md:w-[140px] md:translate-y-0 md:object-bottom lg:right-2 lg:h-[170px] lg:w-[170px]"
+                style={{ animationDelay: `${i * -1.3}s` }}
                 src={f.icon}
                 width={1024}
                 height={1024}
@@ -83,6 +91,7 @@ export default function FeaturesSection() {
                 </p>
               </div>
             </article>
+            </div>
           ))}
         </div>
         <a
