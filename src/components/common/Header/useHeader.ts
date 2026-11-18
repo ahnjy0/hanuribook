@@ -51,8 +51,8 @@ const THIRD_MAP: Record<string, [string, string, string][]> = {
   초등심화: [
     ["전체", PATHS.Advanced, ""],
     ["초등 3", PATHS.DetailScience, "과학탐탐"],
-    ["초등 4", PATHS.DetailHistory, "똑똑한국사"],
-    ["초등 5", PATHS.DetailGeo, "세계문화지리"],
+    ["초등 4", PATHS.DetailHistory, "똑똑 한국사"],
+    ["초등 5", PATHS.DetailGeo, "세계 문화 · 지리"],
     ["초등 6", PATHS.DetailWorld, "세계사"],
   ],
 };

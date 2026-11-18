@@ -19,7 +19,7 @@ const GROUPS: Record<GroupKey, { sub: string; back: string }> = {
 
 const PROGRAMS: {
   id: ProgramId; group: GroupKey; href: string; title: string; grade: string; focus: string;
-  tint: string; img: string; src?: string; label?: string; info?: [string, string][]; slogan: string; tags: string; long: string; points: string[]; steps: string[];
+  tint: string; img: string; src?: string; label?: string; info?: [string, string][]; sloganSub?: string; slogan: string; tags: string; long: string; points: string[]; steps: string[];
 }[] = [
   { id: "vocab", group: "elementary", href: PATHS.DetailVocab, title: "어휘리더", grade: "초등 1·2학년", focus: "★ 어휘력·기초 문해력", tint: "#FFF4EC", img: "그림책을 읽으며 어휘 카드를 고르는 아이",
     slogan: "책 읽기의 즐거움과 교과 기초 어휘·표현력 다지기", tags: "#그림책  #교과기초어휘  #초등입학적응",
@@ -36,20 +36,27 @@ const PROGRAMS: {
   { id: "science", group: "advanced", href: PATHS.DetailScience, title: "과학탐탐", grade: "초등 3학년", focus: "", tint: "#E9F6EE", img: "실험 관찰 노트를 쓰는 아이", src: "https://cdn.hanuribook.com/img/hanuribook/advance_01.png",
     label: "과학 독서 프로그램",
     info: [["대상", "초등 3학년"], ["학습 기간", "12개월"]],
-    slogan: "비주얼씽킹을 통한 과학 핵심 개념 및 어휘 이해", tags: "#탐구 역량  #지식 향상  #과학 문해력",
+    // 유아정규식 타이틀: 보조 문구(sloganSub) + 핵심 문구(slogan)
+    sloganSub: "", slogan: "과학 기초 탐구 역량 기르기", tags: "",
     long: "",
     points: ["교과서 핵심 과학 개념을 책으로 먼저 이해해요", "관찰·실험 과정을 논리적인 글로 표현해요", "과학 관련 시사 이슈를 토론해요"], steps: ["개념 도서 읽기", "탐구 활동", "실험 관찰 기록", "탐구 보고서 쓰기"] },
-  { id: "history", group: "advanced", href: PATHS.DetailHistory, title: "똑똑한국사", grade: "초등 3~6학년", focus: "역사 이해", tint: "#FFF3E3", img: "역사책과 유물 사진 카드",
-    slogan: "이야기로 읽고 흐름으로 이해하는 우리 역사", tags: "#시대흐름  #인물탐구  #역사논술",
-    long: "선사 시대부터 근현대까지 시대별 역사 도서를 읽으며 인물과 사건을 이해하고, 역사적 사고력과 판단력을 기릅니다.",
+  { id: "history", group: "advanced", href: PATHS.DetailHistory, title: "똑똑 한국사", grade: "초등 4학년", focus: "", tint: "#FFF3E3", img: "역사책과 유물 사진 카드",
+    label: "한우리 통합사회 1",
+    info: [["대상", "초등 4학년"], ["학습 기간", "12개월 (인물편 9개월, 통사편 3개월)"]],
+    sloganSub: "", slogan: "올바른 역사관 확립하기", tags: "",
+    long: "",
     points: ["5·6학년 사회 역사 단원을 미리 이해해요", "인물과 사건을 시대 흐름으로 연결해요", "역사 인물 가상 인터뷰로 생각을 넓혀요"], steps: ["시대 개관 읽기", "인물 탐구", "사건 토론", "역사 논술 쓰기"] },
-  { id: "geo", group: "advanced", href: PATHS.DetailGeo, title: "세계문화지리", grade: "초등 3~6학년", focus: "세계 이해", tint: "#EAF3FC", img: "세계 지도와 여러 나라 문화 카드",
-    slogan: "지도를 펼치면 세계가 보여요", tags: "#지도활동  #문화비교  #세계시민",
-    long: "대륙별 자연환경과 문화를 다룬 도서를 읽고, 지도 활동과 문화 비교를 통해 세계를 이해하는 넓은 시야를 키웁니다.",
+  { id: "geo", group: "advanced", href: PATHS.DetailGeo, title: "세계 문화 · 지리", grade: "초등 5학년", focus: "", tint: "#EAF3FC", img: "세계 지도와 여러 나라 문화 카드",
+    label: "한우리 통합사회 2",
+    info: [["대상", "초등 5학년"], ["학습 기간", "12개월"]],
+    sloganSub: "", slogan: "올바른 세계 시민 의식 기르기", tags: "",
+    long: "",
     points: ["대륙·나라별 자연환경과 생활을 이해해요", "지도 읽기와 문화 비교 활동을 해요", "세계시민의 관점으로 토론해요"], steps: ["대륙 탐험 읽기", "지도 활동", "문화 비교", "여행기·소개문 쓰기"] },
-  { id: "world", group: "advanced", href: PATHS.DetailWorld, title: "세계사", grade: "초등 5~6학년", focus: "역사 심화", tint: "#F2EEFA", img: "세계사 연표와 고대 문명 그림",
-    slogan: "세계의 흐름 속에서 오늘을 읽다", tags: "#세계문명  #연표정리  #중등역사대비",
-    long: "고대 문명부터 현대까지 세계사의 주요 장면을 책으로 읽고, 한국사와 연결하여 시대를 입체적으로 이해합니다.",
+  { id: "world", group: "advanced", href: PATHS.DetailWorld, title: "세계사", grade: "초등 6학년", focus: "", tint: "#F2EEFA", img: "세계사 연표와 고대 문명 그림",
+    label: "한우리 통합사회 3",
+    info: [["대상", "초등 6학년"], ["학습 기간", "12개월"]],
+    sloganSub: "", slogan: "올바른 세계관 확립하기", tags: "",
+    long: "",
     points: ["중학교 역사 과목에 필요한 배경지식을 쌓아요", "한국사와 세계사를 연결해 이해해요", "역사적 쟁점에 대한 논술을 훈련해요"], steps: ["문명 읽기", "연표 정리", "쟁점 토론", "역사 논술 쓰기"] },
   { id: "socrates", group: "middle", href: PATHS.DetailSocrates, title: "중등 소크라테스", grade: "중1 ~ 중3", focus: "질문·토론·논증", tint: "#EEF1F6", img: "토론 수업 중인 중학생들",
     slogan: "질문하고 토론하며 논리를 세우는 중등 독서토론", tags: "#소크라테스대화법  #비문학독해  #서술형대비",

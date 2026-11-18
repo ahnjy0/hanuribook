@@ -1,33 +1,33 @@
 import SectionLabel from "@/components/common/SectionLabel";
-import { ACCENT, SOFT, KIT_IMG, KIT } from "../scienceData";
+import type { AdvancedCourse } from "../advancedData";
 
 /** 교재 구성: 어휘리더 '교재 구성'과 같은 디자인(왼쪽 교재 이미지 + 오른쪽 구성 목록) */
-export default function KitSection() {
+export default function KitSection({ d }: { d: AdvancedCourse }) {
   return (
     <section
       className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 pt-13 lg:gap-5 lg:pt-24"
       aria-labelledby="s-kit"
     >
       <div className="text-center">
-        <SectionLabel color={ACCENT} bg={SOFT}>
+        <SectionLabel color={d.accent} bg={d.soft}>
           교재 구성
         </SectionLabel>
-        <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[34px]" id="s-kit">
-          매월 바뀌는 과학 필독서와 교재
+        <h2 className="mx-0 my-1.5 text-[24px] font-extrabold break-keep lg:text-[34px]" id="s-kit">
+          {d.kitTitle}
         </h2>
-        <p className="m-0 text-[14px] leading-[1.6] text-[#333333] lg:text-[18px]">
-          과학 교과와 연계된 주제로
+        <p className="m-0 text-[14px] leading-[1.6] break-keep text-[#333333] lg:text-[18px]">
+          {d.kitDesc[0]}
           <br />
-          매월 새로운 교재와 엄선된 과학 필독서로 수업합니다.
+          {d.kitDesc[1]}
         </p>
       </div>
       <div className="mt-1.5 grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-10">
         <img
           className="block h-auto w-full"
-          src={KIT_IMG.src}
-          width={KIT_IMG.w}
-          height={KIT_IMG.h}
-          alt="매월 교재 구성: 워크북, 필독서, 활동 자료"
+          src={d.kitImg.src}
+          width={d.kitImg.w}
+          height={d.kitImg.h}
+          alt={`매월 교재 구성: ${d.kit.map((k) => k.name).join(", ")}`}
           loading="lazy"
         />
         <div className="relative rounded-[20px] bg-[#F7F7F8] p-5 lg:p-7">
@@ -42,9 +42,9 @@ export default function KitSection() {
             loading="lazy"
           />
           <ul className="relative m-0 flex list-none flex-col gap-3.5 p-0">
-            {KIT.map((it) => (
+            {d.kit.map((it) => (
               <li key={it.name} className="flex gap-2.5">
-                <span className="mt-1.75 h-2 w-2 flex-none rounded-[50%]" style={{ background: ACCENT }} aria-hidden="true" />
+                <span className="mt-1.75 h-2 w-2 flex-none rounded-[50%]" style={{ background: d.accent }} aria-hidden="true" />
                 <div>
                   <strong className="text-[15px] lg:text-[18px]">{it.name}</strong>
                   {it.sub && <p className="mx-0 mt-0.5 mb-0 text-[14px] text-[#555555] lg:text-[16px]">{it.sub}</p>}
