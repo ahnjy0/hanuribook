@@ -76,7 +76,7 @@ export default function ClassSection({ d }: { d: AdvancedCourse }) {
           loading="lazy"
         />
         <h3 className="m-0 text-center text-[18px] font-extrabold lg:text-[24px]">
-          <span style={{ color: d.accent }}>{d.flowName}</span> 수업은 이렇게 진행돼요
+          <span style={{ color: d.accent }}>{d.flowName}</span> 수업{d.flowTag ?? ""}은 이렇게 진행돼요
         </h3>
         <ol className="m-0 flex list-none flex-col gap-2 p-0 lg:flex-row lg:gap-0">
           {d.flow.map((s, i) => (

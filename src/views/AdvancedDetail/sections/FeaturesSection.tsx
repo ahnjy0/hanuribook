@@ -83,7 +83,8 @@ export default function FeaturesSection({ d }: { d: AdvancedCourse }) {
             {d.featTitle[0]}
             {d.featTitle[1] && (
               <>
-                <br className="lg:hidden" /> {d.featTitle[1]}
+                {/* 둘째 줄: 과정 주요 색 */}
+                <br className="lg:hidden" /> <span style={{ color: d.accent }}>{d.featTitle[1]}</span>
               </>
             )}
           </h2>

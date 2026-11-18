@@ -29,6 +29,8 @@ export type AdvancedCourse = {
   classDesc: (string | string[])[]; // 줄마다 나눠 표시. 배열로 묶은 줄은 모바일에서만 나눠 쓰고 데스크톱에서는 한 줄로 이어 씀
   lessons: { title: string; desc: string[] }[]; // desc: 줄마다 나눠 표시(2~3줄)
   flowName: string;
+  /** 흐름 박스 제목의 '수업' 뒤 구분(예: "(인물편)" → "역사 독서 수업(인물편)은 이렇게 진행돼요") */
+  flowTag?: string;
   /** 수업 흐름 박스 왼쪽 위 장식 캐릭터(없으면 기본 advance_cha_02) */
   flowCha?: { src: string; w: number; h: number; cls?: string }; // cls: 크기·위치 조정(없으면 기본)
   flow: { title: string; desc: string[] }[];
@@ -142,6 +144,7 @@ export const ADVANCED: Record<AdvancedId, AdvancedCourse> = {
       { title: "문학 독서", desc: ["문학 작품의 내용과", "주제 깊이 감상하기"] },
     ],
     flowName: "역사 독서",
+    flowTag: "(인물편)",
     flowCha: { src: "https://cdn.hanuribook.com/img/hanuribook/advance_cha_01.png", w: 266, h: 313,
       // 세로로 좁은 그림이라 기본보다 크게(높이 96/144px), 박스에 더 걸치도록 아래로
       cls: "-top-[66px] h-24 lg:-top-[100px] lg:h-36" },
@@ -251,36 +254,39 @@ export const ADVANCED: Record<AdvancedId, AdvancedCourse> = {
     soft: "#F1ECFA",
     strong: "#44287F",
     heroKit: true,
-    featTitle: ["세계를 읽는 힘 키워주는", "세계사 독서 프로그램"],
+    featTitle: ["중학교 역사 교육 과정 반영", "세계 곳곳의 환경과 생활모습 이해"],
     features: [
-      { sub: "고대 문명부터 현대까지", text: "세계사 흐름 이해", icon: "globe" },
-      { sub: "한국사 · 세계사를 비교하며", text: "시대를 입체적으로 이해", icon: "timeline" },
-      { sub: "중학교 역사 교과와 연계된", text: "역사 배경지식 확장", icon: "book" },
+      { text: "세계 역사의 체계적 이해", icon: "globe" },
+      { text: "역사의식과 문제 해결력 향상", icon: "mindmap" },
+      { text: "중등 역사 교과 대비", icon: "book" },
     ],
     kitTitle: "매월 바뀌는 세계사 필독서와 교재",
     kitDesc: ["문명과 시대 흐름에 따라 구성된 주제로", "매월 새로운 교재와 엄선된 세계사 필독서로 수업합니다."],
     kit: [
       { name: "워크북 1권" },
-      { name: "필독서 3권", sub: "역사 / 정보 / 문학" },
-      { name: "활동 자료", sub: "역사 개념 카드 별지" },
-      { name: "한국사 · 세계사 비교 연표" },
+      { name: "필독서 3권", sub: "세계사 / 문학 / 비문학" },
+      { name: "활동 자료", sub: "세계사 탐구 별지 / 역사 개념 카드 등" },
       { name: "포트폴리오" },
     ],
     kitImg: { src: "https://cdn.hanuribook.com/img/program/advance4_set_1.png", w: 900, h: 398 },
-    classTitle: "세계사 공부와 독서토론논술을 함께!",
-    classDesc: ["세계사의 주요 장면을 책으로 읽고 한국사와 연결하여", "시대를 입체적으로 이해하는 통합적 독서 활동을 합니다."],
-    lessons: [{ title: "세계사 독서", desc: ["세계사 도서 읽고", "시대 흐름 이해하기"] }, ...COMMON_LESSONS],
-    flowName: "세계사 독서",
+    classTitle: "세계사와 독서토론논술을 함께!",
+    classDesc: ["흥미로운 역사 도서를 읽으며 역사 읽는 방법을 익히고", "세계사를 단계적으로 이해할 수 있는 통합적 독서 활동을 합니다."],
+    lessons: [
+      { title: "역사 독서", desc: ["시대 배경을 파악하며", "세계사 흐름 이해하기"] },
+      { title: "비문학 독서", desc: ["교과 관련 도서 읽고", "배경지식 확장하기"] },
+      { title: "토의 · 토론", desc: ["주제에 대해", "토의 · 토론하며", "자신의 생각 표현하기"] },
+      { title: "문학 독서", desc: ["문학 작품 감상하고", "문제해결력 키우기"] },
+    ],
+    flowName: "역사 독서",
+    flowTag: "(주제편)",
     flowCha: { src: "https://cdn.hanuribook.com/img/hanuribook/ele_cha_05.png", w: 605, h: 502 },
     flow: [
-      GOAL,
-      EXPLORE,
-      { title: "시대 흐름 정리", desc: ["한국사 · 세계사 비교 연표로 같은 시대 세계 곳곳의 모습을 정리합니다."] },
-      { title: "역사 탐구", desc: ["문명과 사건의 배경을 깊이 탐구하며 역사 속 쟁점을 살펴봅니다."] },
-      {
-        title: "역사 글쓰기",
-        desc: ["학습한 내용을 역사 논술 등 다양한 형식의 글로 정리합니다.", "주제와 관련된 책과 유적 · 유물을 확인합니다."],
-      },
+      { title: "오늘 해결할 문제는?", desc: ["오늘의 학습을 통해 어린이가 스스로 해결할 문제가 무엇인지 확인합니다."] },
+      { title: "역사 지식", desc: ["해당 시대의 특징을 설명하는 만화 또는 읽기 자료를 살펴봅니다."] },
+      { title: "한눈에 보기", desc: ["책의 핵심적인 정보를 간결하게 나타내며 내용을 간추립니다."] },
+      { title: "내용 펼치기", desc: ["책의 내용과 주제를 깊이 있게 이해하며 배경지식을 확장합니다."] },
+      { title: "세계사 탐구", desc: ["다양한 매체 읽기를 통해 역사 지식을 탄탄히 하고, 오늘의 미션을 해결합니다."] },
+      { title: "정리하기", desc: ["여러 가지 형식의 글로 표현하며 오늘의 활동을 갈무리합니다."] },
     ],
     effTitle: "올바른 세계관 확립",
     effDesc: [["세계사 배경지식을 쌓아 중학교 역사를 대비하고", "독서토론논술 실력도 함께 키웁니다."]],
@@ -304,7 +310,7 @@ export const ADVANCED: Record<AdvancedId, AdvancedCourse> = {
       },
       {
         q: "학습 기간은 얼마나 되나요?",
-        a: "세계사는 12개월 과정입니다. 매월 새로운 문명과 시대를 주제로 한 도서와 교재로 수업하며, 1년 동안 고대 문명부터 현대까지 세계사의 흐름을 정리합니다.",
+        a: "세계사는 12개월 과정으로, 주제편 9개월과 통사편 3개월로 구성됩니다. 매월 새로운 문명과 시대를 주제로 한 도서와 교재로 수업하며, 1년 동안 고대 문명부터 현대까지 세계사의 흐름을 정리합니다.",
       },
     ],
   },
