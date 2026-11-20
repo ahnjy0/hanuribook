@@ -1,4 +1,6 @@
-export default function BookBannerSection() {
+import type { ElementaryCourse } from "../elementaryData";
+
+export default function BookBannerSection({ d }: { d: ElementaryCourse }) {
   return (
     <section className="mx-auto my-0 box-border max-w-[1200px] px-5 pt-7 pb-12 lg:pt-12 lg:pb-24" aria-labelledby="v-ban">
       {/* 배경·글자색: 유아정규 배너(HangulBannerSection)와 동일 */}
@@ -8,8 +10,9 @@ export default function BookBannerSection() {
           다양한 세상을 선물해주세요
         </h2>
         <a
-          // 버튼: 어휘리더 페이지 강조색(vocabData ACCENT #C2410C) + 흰 글자
-          className="inline-flex h-12 items-center rounded-full bg-[#C2410C] px-5.5 py-0 text-[15px] font-bold text-white no-underline"
+          // 버튼: 과정 강조색 + 흰 글자
+          className="inline-flex h-12 items-center rounded-full px-5.5 py-0 text-[15px] font-bold text-white no-underline"
+          style={{ background: d.accent }}
           href="https://www.hanuribook.com/pickbook"
           target="_blank"
           rel="noopener noreferrer"

@@ -9,7 +9,7 @@ export default function IntroSection() {
       <h1 className="m-0 text-[24px] leading-[1.35] font-extrabold lg:text-[30px]" id="e-h">
         학년별로 차근차근,
         <br />
-        교과 연계 초등 정규 과정
+        초등정규 독서토론논술 프로그램
       </h1>
       <p className="m-0 text-[14px] leading-[1.7] text-[#333333]">
         생각하는 나무 어휘리더부터 논리리더까지, 학년별 발달 단계에 맞춘 필독서와 교재로 어휘력부터 논리적

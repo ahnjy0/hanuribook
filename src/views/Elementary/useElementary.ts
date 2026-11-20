@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PATHS } from "@/routes";
+import { ELEMENTARY } from "@/views/ElementaryDetail/elementaryData";
 
 type ProgId = "vocab" | "reading" | "logic";
 
@@ -26,8 +27,10 @@ const LINKS: Record<ProgId, [string, string]> = {
 
 const PALETTE: Record<ProgId, { soft: string; line: string; accent: string; ink: string; iconFg: string; btnBg: string; btnFg: string }> = {
   vocab: { soft: "#FFF6D6", line: "#F7E3A1", accent: "#FFC926", ink: "#7A5600", iconFg: "#5C4100", btnBg: "#FFC926", btnFg: "#3D2B00" },
-  reading: { soft: "#EEF8DF", line: "#D3EBB0", accent: "#8CC63F", ink: "#3E6B10", iconFg: "#22400A", btnBg: "#8CC63F", btnFg: "#1C3306" },
-  logic: { soft: "#E7F0FD", line: "#C3D8F7", accent: "#3B7DDD", ink: "#1E4E9C", iconFg: "#FFFFFF", btnBg: "#2F6FD6", btnFg: "#FFFFFF" },
+  // 독서리더·논리리더: 상세 페이지(ElementaryDetail) 주요 색과 연결 — 상세 색을 바꾸면 카드도 함께 바뀜
+  // soft: 카드 배경 / accent: 아이콘 네모·장식 원(히어로 색) / ink: 학년 라벨·브랜드명·상세보기 버튼(주요 색)
+  reading: { soft: ELEMENTARY.reading.soft, line: "#D3EBB0", accent: ELEMENTARY.reading.dot, ink: ELEMENTARY.reading.accent, iconFg: "#22400A", btnBg: ELEMENTARY.reading.accent, btnFg: "#FFFFFF" },
+  logic: { soft: ELEMENTARY.logic.soft, line: "#CFE3FD", accent: ELEMENTARY.logic.heroBg, ink: ELEMENTARY.logic.accent, iconFg: "#FFFFFF", btnBg: ELEMENTARY.logic.accent, btnFg: "#FFFFFF" },
 };
 
 // brand: 카드 제목 위에 붙는 브랜드명(생각하는 나무 어휘리더/독서리더/논리리더)

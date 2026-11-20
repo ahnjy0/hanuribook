@@ -55,6 +55,11 @@ const THIRD_MAP: Record<string, [string, string, string][]> = {
     ["초등 5", PATHS.DetailGeo, "세계 문화 · 지리"],
     ["초등 6", PATHS.DetailWorld, "세계사"],
   ],
+  중고등정규: [
+    ["전체", PATHS.Middle, ""],
+    ["중등", PATHS.DetailSocrates, "소크라테스"],
+    ["고등", PATHS.DetailLiterature, "고등 문학"],
+  ],
 };
 
 const toItems = (arr: [string, string][]) => arr.map(([label, href]) => ({ label, href }));

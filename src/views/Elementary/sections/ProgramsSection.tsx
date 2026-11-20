@@ -1,7 +1,22 @@
 import SmartLink from "@/components/common/SmartLink";
-import type { ElementaryVals } from "../useElementary";
 
-type Props = Pick<ElementaryVals, "progs">;
+/** 과정 카드 한 장에 필요한 값(초등정규 · 중고등정규 전체 페이지 공통) */
+export type ProgCard = {
+  id: string;
+  grade: string; // 학년 라벨
+  brand: string; // 제목 위 브랜드명
+  short: string; // 과정명(제목)
+  desc: string; // "보조 문구, 핵심 문구" — 쉼표 뒤는 굵게
+  href: string;
+  soft: string; // 카드 배경
+  line: string; // 카드 테두리
+  accent: string; // 아이콘 네모·장식 원
+  iconFg: string; // 아이콘 선 색
+  ink: string; // 학년 라벨·브랜드명·버튼 색
+};
+
+/** cols: 데스크톱·태블릿 열 수(기본 3 — 초등정규 3과정, 중고등정규는 2) */
+type Props = { progs: ProgCard[]; cols?: 2 | 3 };
 
 /**
  * 카드별 강조색(학년 라벨·브랜드명 글자, 상세보기 버튼)
@@ -10,7 +25,7 @@ type Props = Pick<ElementaryVals, "progs">;
  */
 const ACCENT_OF: Record<string, string> = { vocab: "#C2410C" };
 
-export default function ProgramsSection({ progs }: Props) {
+export default function ProgramsSection({ progs, cols = 3 }: Props) {
   return (
     <section
       // 위 타이틀 영역(IntroSection) 바로 아래 카드 목록 — 초등심화 과정 카드 영역과 같은 위 간격
@@ -18,7 +33,7 @@ export default function ProgramsSection({ progs }: Props) {
       aria-label="학년별 프로그램"
     >
       {/* 데스크톱: 카드 안쪽 여백·글자·아이콘·버튼을 키워 크게 보이게 */}
-      <ul className="m-0 grid list-none grid-cols-1 gap-3 p-0 md:grid-cols-3 lg:gap-5">
+      <ul className={`m-0 grid list-none grid-cols-1 gap-3 p-0 lg:gap-5 ${cols === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
         {progs.map((p, i) => {
           const ACCENT = ACCENT_OF[p.id] ?? p.ink;
           return (
@@ -66,9 +81,12 @@ export default function ProgramsSection({ progs }: Props) {
                 </span>
                 {/* 제목: '생각하는 나무' + 프로그램명 */}
                 <h3 className="m-0 flex flex-col text-[#1F1F1F]">
-                  <span className="text-[14px] font-bold lg:text-[17px]" style={{ color: ACCENT }}>
-                    {p.brand}
-                  </span>
+                  {/* 브랜드명: 비어 있으면 표시하지 않음(예: 중고등정규 전체) */}
+                  {p.brand && (
+                    <span className="text-[14px] font-bold lg:text-[17px]" style={{ color: ACCENT }}>
+                      {p.brand}
+                    </span>
+                  )}
                   <span className="text-[23px] leading-[1.25] font-extrabold tracking-[-0.03em] lg:text-[32px]">{p.short}</span>
                 </h3>
               </div>

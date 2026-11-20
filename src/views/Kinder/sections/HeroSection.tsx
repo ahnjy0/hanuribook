@@ -76,6 +76,7 @@ export default function HeroSection() {
         </h1>
         {/* 설명글: 박스 없이 진한 글자(로고와 같은 검정 계열) — 분홍 배경 위에서 흰 글자보다 잘 읽힘.
             보조 문구 + 핵심 문구(크고 굵게) */}
+       
         <p className="mx-0 -mt-1 mb-2 flex flex-col items-center gap-0.5 break-keep lg:gap-1">
           <span className="text-[15px] leading-[1.4] font-semibold text-[#3A1426] lg:text-[18px]">
             상상력과 언어 감각 키워주는

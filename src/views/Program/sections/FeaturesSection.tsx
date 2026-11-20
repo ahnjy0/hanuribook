@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import SectionLabel from "@/components/common/SectionLabel";
+import OverviewModal from "./OverviewModal";
 
 type Feature = { title: string; desc: ReactNode; icon: string };
 
@@ -93,12 +94,8 @@ export default function FeaturesSection() {
             </div>
           ))}
         </div>
-        <a
-          className="mt-1 flex h-13 w-full items-center justify-center rounded-[14px] border-[1.5px] border-[#F26522] bg-white text-[15px] font-bold text-[#C2410C] no-underline lg:w-[360px]"
-          href="#how"
-        >
-          프로그램 한눈에 보기 ⌄
-        </a>
+        {/* 누르면 전체 커리큘럼 이미지를 모달로 보여 줌 */}
+        <OverviewModal />
       </div>
     </section>
   );

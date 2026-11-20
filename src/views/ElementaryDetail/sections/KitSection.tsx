@@ -1,22 +1,14 @@
 import SectionLabel from "@/components/common/SectionLabel";
-import { ACCENT, SOFT } from "../vocabData";
+import type { ElementaryCourse } from "../elementaryData";
 
-const ITEMS: { name: string; sub?: string }[] = [
-  { name: "워크북 1권" },
-  { name: "필독서 2권", sub: "문학 1권, 비문학 1권" },
-  { name: "단편 도서 1권" },
-  { name: "활동 자료", sub: "별지 / 붙임딱지" },
-  { name: "포트폴리오" },
-];
-
-export default function KitSection() {
+export default function KitSection({ d }: { d: ElementaryCourse }) {
   return (
     <section
       className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 pt-13 lg:gap-5 lg:pt-24"
       aria-labelledby="v-kit"
     >
       <div className="text-center">
-        <SectionLabel color={ACCENT} bg={SOFT}>
+        <SectionLabel color={d.accent} bg={d.soft}>
           교재 구성
         </SectionLabel>
         <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[34px]" id="v-kit">
@@ -31,9 +23,9 @@ export default function KitSection() {
       <div className="mt-1.5 grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-10">
         <img
           className="block h-auto w-full"
-          src="https://cdn.hanuribook.com/img/program/level2_set_3.png"
-          width={900}
-          height={354}
+          src={d.kitImg.src}
+          width={d.kitImg.w}
+          height={d.kitImg.h}
           alt="매월 교재 구성: 워크북, 필독서, 단편 도서, 활동 자료"
           loading="lazy"
         />
@@ -41,18 +33,19 @@ export default function KitSection() {
           {/* 장식 캐릭터: 카드 안 오른쪽 아래. 글자 뒤에 깔림 */}
           <img
             className="pointer-events-none absolute right-4 bottom-4 block h-20 w-auto select-none lg:right-6 lg:bottom-5 lg:h-32"
-            src="https://cdn.hanuribook.com/img/hanuribook/ele_cha_02.png"
-            width={683}
-            height={650}
+            src={d.cha?.kit?.src ?? "https://cdn.hanuribook.com/img/hanuribook/ele_cha_02.png"}
+            width={d.cha?.kit?.w ?? 683}
+            height={d.cha?.kit?.h ?? 650}
             alt=""
             aria-hidden="true"
             loading="lazy"
           />
           <ul className="relative m-0 flex list-none flex-col gap-3.5 p-0">
-            {ITEMS.map((it) => (
+            {d.kit.map((it) => (
               <li key={it.name} className="flex gap-2.5">
                 <span
-                  className="mt-1.75 h-2 w-2 flex-none rounded-[50%] bg-[#F59A0B]"
+                  className="mt-1.75 h-2 w-2 flex-none rounded-[50%]"
+                  style={{ background: d.dot }}
                   aria-hidden="true"
                 />
                 <div>
@@ -64,6 +57,18 @@ export default function KitSection() {
           </ul>
         </div>
       </div>
+      {/* 교재 구성 안내 문구(있는 과정만, 예: 논리리더): 이미지·목록 아래 연한 과정색 띠 */}
+      {d.kitNote && (
+        <p
+          className="m-0 flex items-start gap-2 rounded-[14px] px-4 py-3 text-[14px] leading-[1.6] font-semibold break-keep text-[#333333] lg:items-center lg:justify-center lg:px-6 lg:py-4 lg:text-[16px]"
+          style={{ background: d.soft }}
+        >
+          <span className="flex-none font-extrabold" style={{ color: d.accent }} aria-hidden="true">
+            ※
+          </span>
+          {d.kitNote}
+        </p>
+      )}
     </section>
   );
 }

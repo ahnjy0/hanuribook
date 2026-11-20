@@ -1,10 +1,12 @@
+import CheckIcon from "@/components/common/CheckIcon";
+
 /**
  * 과정 안내: 소크라테스 4단계 과정(진로 독서 → 1 독해 원리 → 2 독해 심화 → 3 독해 융합)
  * 카드 디자인은 기존 과정 안내 카드 스타일(학년 라벨 → 과정명·부제 → 목표 → 설명/학습 내용 회색 박스)
  */
 type Course = {
   name: string;
-  sub: string;
+  sub?: string; // 과정명 옆 부제(없으면 표시 안 함)
   grade: string;
   goal: string;
   desc?: string;
@@ -14,7 +16,6 @@ type Course = {
 const COURSES: Course[] = [
   {
     name: "소크라테스 진로 독서",
-    sub: "진로 독서 1, 2 (특강)",
     grade: "예비 중학생",
     goal: "중학 교과와 연계해 진로 탐색하기",
     desc: "중학교 《기술 · 가정》과 《진로와 직업》 교과의 진로 활동 내용을 접목하고, 홀랜드 6개 직업 흥미 유형을 기준으로 진로 탐색 활동을 합니다.",
@@ -42,10 +43,15 @@ const COURSES: Course[] = [
   },
 ];
 
-/** 학년 라벨 색: 기존 카드처럼 주황 / 파랑을 번갈아 */
+/**
+ * 학년 라벨 색: 중등 페이지 주요 색(부드러운 퍼플)으로 예비 중학생 → 중등 3학년까지 점점 진하게(과정 순서와 같음)
+ * 밝은 두 단계는 보라 글자, 진한 두 단계는 흰 글자(글자가 잘 읽히는 대비)
+ */
 const CHIPS = [
-  { bg: "#FFF1E7", fg: "#C2410C" },
-  { bg: "#EAF2FF", fg: "#2F5AA8" },
+  { bg: "#F3F0FA", fg: "#5B4596" }, // 예비 중학생
+  { bg: "#DCD2F0", fg: "#45366F" }, // 중등 1학년
+  { bg: "#7A62B8", fg: "#FFFFFF" }, // 중등 2학년
+  { bg: "#45366F", fg: "#FFFFFF" }, // 중등 3학년
 ];
 
 export default function CoursesSection() {
@@ -68,20 +74,26 @@ export default function CoursesSection() {
               >
                 {c.grade}
               </span>
-              <h3 className="m-0 flex flex-wrap items-baseline gap-x-2 text-[21px] font-extrabold">
+              <h3 className="m-0 flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-[21px] font-extrabold">
                 {c.name}
-                <span className="text-[15px] font-bold text-[#555555]">{c.sub}</span>
+                {/* 부제(독해 원리·심화·융합): 박스 없이 글자에만 보라색 */}
+                {c.sub && <span className="text-[15px] font-bold text-[#6A54A6]">{c.sub}</span>}
               </h3>
-              <p className="m-0 text-[14px] leading-[1.6] text-[#333333]">{c.goal}</p>
+              {/* 설명글(과정 목표): 진한 글자 + 굵게 강조 */}
+              <p className="m-0 text-[15px] leading-[1.55] font-bold text-[#1F1F1F] lg:text-[17px]">{c.goal}</p>
               {c.desc && (
                 <p className="m-0 rounded-[14px] bg-[#F7F7F8] p-3.5 text-[14px] leading-[1.6] break-keep text-[#222222]">
                   {c.desc}
                 </p>
               )}
               {c.points && (
+                // 정보 박스 항목: 앞에 체크 아이콘(중등 페이지 보라)
                 <ul className="m-0 flex list-none flex-col gap-2 rounded-[14px] bg-[#F7F7F8] p-3.5 text-[14px] text-[#222222]">
                   {c.points.map((pt) => (
-                    <li key={pt}>· {pt}</li>
+                    <li key={pt} className="flex items-start gap-2 leading-[1.5]">
+                      <CheckIcon color="#6A54A6" />
+                      <span className="min-w-0 break-keep">{pt}</span>
+                    </li>
                   ))}
                 </ul>
               )}
