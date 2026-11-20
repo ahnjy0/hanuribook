@@ -129,7 +129,7 @@ export default function HeroSection({ p, kit }: Props) {
               {center ? (
                 // 유아정규 히어로와 같은 타이틀 스타일: 큰 제목(36/56px) → 보조 문구(작고 중간 굵기) + 핵심 문구(크고 굵게)
                 <>
-                  <h1 className="mx-0 mt-1 mb-1 text-[36px] leading-[1.2] font-extrabold tracking-[-0.03em] lg:mt-2 lg:mb-2 lg:text-[56px]" id="d-h">
+                  <h1 className="mx-0 mt-1 mb-1 animate-pop-in text-[36px] leading-[1.2] font-extrabold tracking-[-0.03em] motion-reduce:animate-none lg:mt-2 lg:mb-2 lg:text-[56px]" id="d-h">
                     {p.title}
                   </h1>
                   <p className="m-0 flex flex-col items-center gap-0.5 break-keep lg:gap-1">
@@ -146,7 +146,7 @@ export default function HeroSection({ p, kit }: Props) {
                 </>
               ) : (
                 <>
-                  <h1 className="m-0 text-[32px] font-extrabold tracking-[-0.04em] lg:text-[42px]" id="d-h">
+                  <h1 className="m-0 animate-pop-in text-[32px] font-extrabold tracking-[-0.04em] motion-reduce:animate-none lg:text-[42px]" id="d-h">
                     {p.title}
                   </h1>
                   <p className="m-0 text-[18px] leading-[1.45] font-bold text-[#D94E0F]">{p.slogan}</p>
@@ -174,7 +174,7 @@ export default function HeroSection({ p, kit }: Props) {
           </div>
           {kit ? (
             // 교재 구성 세트 이미지(구성 상세는 대상·학습 기간과 같은 정보 카드에 표시). 모션은 표지와 같은 card-rise
-            <div className="w-full max-w-[720px] animate-card-rise motion-reduce:animate-none" style={{ animationDelay: "150ms" }}>
+            <div className="w-full max-w-[720px] animate-card-rise motion-reduce:animate-none" style={{ animationDelay: "300ms" }}>
               <img
                 className="block h-auto w-full"
                 src={kit.img.src}
@@ -188,7 +188,7 @@ export default function HeroSection({ p, kit }: Props) {
             <div className="box-border flex h-52 items-center justify-center lg:h-[352px] lg:py-8">
               {/* 데스크톱: 영역 높이는 늘리고 위아래 안쪽 여백(32px)을 줘서 표지 크기(288px)는 그대로, 위아래 여백만 넓게 */}
               {/* 모션: 유아정규 히어로 교재 카드와 같게 — 페이지가 열릴 때 아래에서 떠오르며 나타남(card-rise, 0.15초 뒤). 동작 줄이기 설정 시 없음 */}
-              <div className="h-full animate-card-rise motion-reduce:animate-none" style={{ animationDelay: "150ms" }}>
+              <div className="h-full animate-card-rise motion-reduce:animate-none" style={{ animationDelay: "300ms" }}>
                 <img
                   className="block h-full w-auto max-w-full rounded-[10px] object-contain shadow-[0_14px_30px_rgba(0,0,0,0.18)]"
                   src={p.src}

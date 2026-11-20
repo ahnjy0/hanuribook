@@ -21,15 +21,21 @@ export default function HeroSection({ d }: { d: ElementaryCourse }) {
           초등 정규 프로그램
         </SectionLabel>
         <h1 className="m-0 flex flex-col items-center gap-1 leading-[1.15] font-extrabold text-white" id="v-hero">
-          {/* '생각하는 나무' 로고 (237×61) */}
+          {/* '생각하는 나무' 로고 (237×61)
+              모션: 페이지가 열릴 때 로고는 통통 튀듯 나타나고(pop-in), 이어서 과정명이 아래에서 떠오름(card-rise) → 그다음 교재 카드 */}
           <img
-            className="block h-8 w-auto lg:h-12"
+            className="block h-8 w-auto animate-pop-in motion-reduce:animate-none lg:h-12"
             src="https://cdn.hanuribook.com/img/hanuribook/ele_logo.png"
             width={237}
             height={61}
             alt="생각하는 나무"
           />
-          <span className="text-[44px] tracking-[-0.04em] lg:text-[72px]">{d.name}</span>
+          <span
+            className="animate-card-rise text-[44px] tracking-[-0.04em] motion-reduce:animate-none lg:text-[72px]"
+            style={{ animationDelay: "120ms" }}
+          >
+            {d.name}
+          </span>
         </h1>
         {/* 설명글: 박스 없이 보조 문구 + 핵심 문구(크고 굵게). 글자색은 배경에 맞춰 과정별로 */}
         <p className="mx-0 mt-1 mb-2 flex flex-col items-center gap-0.5 break-keep lg:gap-1">
@@ -49,7 +55,7 @@ export default function HeroSection({ d }: { d: ElementaryCourse }) {
             <div
               key={b.title}
               className="flex animate-card-rise motion-reduce:animate-none"
-              style={{ animationDelay: `${150 + i * 150}ms` }}
+              style={{ animationDelay: `${300 + i * 150}ms` }}
             >
               <article
                 className="flex w-full flex-col rounded-[24px] bg-white p-2.5 lg:rounded-[28px] lg:p-3.5"

@@ -18,7 +18,8 @@ export default function HeroSection() {
         {/* 제목: 소크라테스 로고 이미지(흰 글자, 473×110) — 유아정규 히어로처럼 h1 안에 로고, 대체 글로 과정명 */}
         <h1 className="m-0" id="m-h">
           <img
-            className="mx-auto block h-11 w-auto max-w-full lg:h-[68px]"
+            // 모션: 페이지가 열릴 때 로고가 통통 튀듯 나타남(pop-in)
+            className="mx-auto block h-11 w-auto max-w-full animate-pop-in motion-reduce:animate-none lg:h-[68px]"
             src="https://cdn.hanuribook.com/img/hanuribook/middle_logo.png"
             width={473}
             height={110}

@@ -66,8 +66,9 @@ export default function HeroSection() {
         {/* 섹션 라벨: 아래 섹션들(학습 목표 등)과 같은 공통 라벨, 흰 배경 */}
         <SectionLabel>유아 정규 프로그램</SectionLabel>
         <h1 className="m-0" id="k-hero">
+          {/* 교재 로고(타이틀) 모션: 페이지가 열릴 때 통통 튀듯 나타남(pop-in) → 이어서 교재 카드가 떠오름 */}
           <img
-            className="mx-auto block h-24 w-auto max-w-full lg:h-44"
+            className="mx-auto block h-24 w-auto max-w-full animate-pop-in motion-reduce:animate-none lg:h-44"
             src="https://cdn.hanuribook.com/img/hanuribook/level1_logo.png"
             width={256}
             height={169}
@@ -91,7 +92,7 @@ export default function HeroSection() {
             <div
               key={b.title}
               className="flex animate-card-rise motion-reduce:animate-none"
-              style={{ animationDelay: `${150 + i * 150}ms` }}
+              style={{ animationDelay: `${300 + i * 150}ms` }}
             >
             <article
               className="flex w-full flex-col rounded-[24px] bg-white p-2.5 shadow-[0_12px_30px_rgba(120,20,60,0.2)] lg:rounded-[28px] lg:p-3.5"
