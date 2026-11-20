@@ -60,7 +60,26 @@ export default function CoursesSection() {
       className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 pt-11 lg:gap-5 lg:pt-24"
       aria-labelledby="m-course"
     >
-      <h2 className="m-0 text-[22px] font-extrabold lg:text-[30px]" id="m-course">
+      <h2 className="m-0 flex items-center gap-2.5 text-[22px] font-extrabold lg:gap-3 lg:text-[30px]" id="m-course">
+        {/* 제목 앞 아이콘: 프로그램 소개 페이지 섹션 제목 아이콘과 같은 타일 모양, 색은 중등 보라.
+            그림은 한 단계씩 올라가는 계단(예비 중학생 → 중3 단계별 과정) */}
+        <span
+          className="inline-flex h-9 w-9 flex-none items-center justify-center rounded-[12px] bg-[#6A54A6] lg:h-11 lg:w-11 lg:rounded-[14px]"
+          aria-hidden="true"
+        >
+          <svg
+            className="h-5 w-5 lg:h-6 lg:w-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#FFFFFF"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M3 20h4v-4h4v-4h4V8h4V4" />
+            <path d="M3 20h18" />
+          </svg>
+        </span>
         과정 안내
       </h2>
       <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">

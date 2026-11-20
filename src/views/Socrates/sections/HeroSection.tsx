@@ -33,8 +33,16 @@ export default function HeroSection() {
             중등 내신 대비 <span className="text-[#D6C8FA]">단계별 독해 훈련</span>
           </span>
         </p>
-        <div className="flex h-42.5 w-full max-w-[720px] items-center justify-center rounded-[20px] border border-dashed border-[#7563A3] bg-[#554480] text-[13px] text-[#DCD3F0] lg:h-60">
-          [이미지] 토론 수업 중인 중학생들
+        {/* 교재 표지 이미지(소크라테스 교과독서·심화독서·통합독서, 584×343 투명 PNG)
+            모션: 로고 다음에 아래에서 떠오르며 나타남(card-rise, 0.3초 뒤 — 다른 상세 히어로 교재와 같은 순서) */}
+        <div className="w-full max-w-[584px] animate-card-rise motion-reduce:animate-none" style={{ animationDelay: "300ms" }}>
+          <img
+            className="block h-auto w-full"
+            src="https://cdn.hanuribook.com/img/hanuribook/middle_book.png"
+            width={584}
+            height={343}
+            alt="소크라테스 교재 표지: 중등 교과독서, 심화독서, 통합독서"
+          />
         </div>
       </div>
     </section>
