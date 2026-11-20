@@ -8,6 +8,7 @@ type Course = {
   name: string;
   sub?: string; // 과정명 옆 부제(없으면 표시 안 함)
   grade: string;
+  period?: string; // 학습 기간 뱃지(학년 라벨 옆, 없으면 표시 안 함)
   goal: string;
   desc?: string;
   points?: string[];
@@ -17,6 +18,7 @@ const COURSES: Course[] = [
   {
     name: "소크라테스 진로 독서",
     grade: "예비 중학생",
+    period: "학습 기간 2개월",
     goal: "중학 교과와 연계해 진로 탐색하기",
     desc: "중학교 《기술 · 가정》과 《진로와 직업》 교과의 진로 활동 내용을 접목하고, 홀랜드 6개 직업 흥미 유형을 기준으로 진로 탐색 활동을 합니다.",
   },
@@ -87,12 +89,20 @@ export default function CoursesSection() {
           const chip = CHIPS[i % CHIPS.length];
           return (
             <article key={c.name} className="flex flex-col gap-3 rounded-[24px] border border-[#EEEEEE] bg-white px-5 py-5.5">
-              <span
-                className="self-start rounded-[6px] px-2 py-1 text-[12px] font-bold"
-                style={{ background: chip.bg, color: chip.fg }}
-              >
-                {c.grade}
-              </span>
+              {/* 학년 라벨 + (있으면) 학습 기간 뱃지: 학년 라벨과 구분되게 흰 바탕 + 보라 테두리 */}
+              <div className="flex flex-wrap items-center gap-1.5">
+                <span
+                  className="rounded-[6px] px-2 py-1 text-[12px] font-bold"
+                  style={{ background: chip.bg, color: chip.fg }}
+                >
+                  {c.grade}
+                </span>
+                {c.period && (
+                  <span className="rounded-[6px] border border-solid border-[#B9A9E0] bg-white px-2 py-[3px] text-[12px] font-bold text-[#5B4596]">
+                    {c.period}
+                  </span>
+                )}
+              </div>
               <h3 className="m-0 flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-[21px] font-extrabold">
                 {c.name}
                 {/* 부제(독해 원리·심화·융합): 박스 없이 글자에만 보라색 */}
