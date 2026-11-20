@@ -28,11 +28,9 @@ export default function HeroSection() {
         </h1>
         {/* 설명글: 보조 문구 + 핵심 문구(크고 굵게) — 유아정규 히어로 설명과 같은 구성 */}
         <p className="mx-0 -mt-1 mb-2 flex flex-col items-center gap-0.5 break-keep lg:gap-1">
-          <span className="text-[15px] leading-[1.4] font-semibold text-[#E2DAF5] lg:text-[18px]">
-            원리 이해부터 수능형 지문까지
-          </span>
+
           <span className="text-[20px] leading-[1.3] font-extrabold tracking-[-0.02em] text-white lg:text-[26px]">
-            단계별 중등 <span className="text-[#D6C8FA]">독해력 완성하기</span>
+            중등 내신 대비 <span className="text-[#D6C8FA]">단계별 독해 훈련</span>
           </span>
         </p>
         <div className="flex h-42.5 w-full max-w-[720px] items-center justify-center rounded-[20px] border border-dashed border-[#7563A3] bg-[#554480] text-[13px] text-[#DCD3F0] lg:h-60">
