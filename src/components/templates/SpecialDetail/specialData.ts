@@ -39,6 +39,7 @@ export type SpecialBlock =
       em?: string;
       sub?: string; // 제목 아래 작은 문구(subEm 부분은 강조 글자색)
       subEm?: string;
+      subAlert?: boolean; // true 면 subEm 앞에 경고 아이콘(삼각형 + 느낌표, emColor 색)
       emColor?: string; // 제목 아래 문구 · 말풍선 강조 글자색(없으면 강조 글자색 ink)
       bubbleBg?: [string, string]; // 말풍선 바탕(왼쪽 줄, 오른쪽 줄) — 없으면 강조색을 옅게
       figures?: SpecialImage[]; // 있으면 모아 보기: 2열 칸마다 말풍선 + 그 아래 고민하는 인물(figures[i])
@@ -46,11 +47,13 @@ export type SpecialBlock =
       answer?: { text: string; em?: string; icon?: SpecialImage };
     }
   // 학습 효과 띠: 진한 배경 띠 + 가운데 라벨 · 노란 제목 · 설명 + 노란 카드(카드 문장 속 em 부분을 굵게)
-  | { kind: "effects"; label: string; title: string; desc: string; items: { text: string; em: string }[] }
+  // items.title: 카드 굵은 제목(있으면 번호 아래 · 설명 위) / em: 설명 안 굵게 할 부분(빈 문자열이면 없음)
+  | { kind: "effects"; label: string; title: string; desc: string; items: { title?: string; text: string; em: string }[] }
   // 과정 카드: 가운데 라벨 + 3열 카드(과정 로고 → 회색 대상 설명(\n 줄바꿈) → 구분선 → 굵은 과정명)
   | { kind: "courses"; label: string; items: { name: string; logo: SpecialImage; desc: string; title: string }[] }
   // 단계 카드: 왼쪽 진한 칸(작은 문구 + 'N단계') + 오른쪽 제목 · 설명
-  | { kind: "stages"; label: string; items: { pre: string; step: string; title: string; desc: string }[] }
+  // heading: 라벨 아래 큰 제목(줄바꿈 시 첫 줄 강조색) / pre · desc 는 없으면 생략
+  | { kind: "stages"; label: string; heading?: string; items: { pre?: string; step: string; title: string; desc?: string }[] }
   // 교재 구성: 가운데 라벨 + 연한 박스 안 교재 이미지(없으면 생략) → 아래 구성 목록 가로 한 줄
   | { kind: "kit"; label: string; image?: SpecialImage; items: string[] }
   // 수업 흐름 박스(초등심화 '…수업은 이렇게 진행돼요'와 같은 모양): 제목(em 부분 강조색) + 호(단계)별 열 → 차시별 활동명 · 설명
@@ -173,17 +176,6 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         items: ["워크북 3권", "필독서 6권", "쓰기 공책 3권", "붙임딱지"],
       },
       {
-        kind: "effects",
-        label: "학습 효과",
-        title: "한글 완전 정복",
-        desc: "한글 기초부터 완전 학습까지,\n초등 입학 전 필요한 읽기 역량을 확실히 길러요.",
-        items: [
-          { text: "체계적인 한글 학습으로 문해력 기초를 다져요.", em: "문해력 기초" },
-          { text: "필독서와 연계한 주제별 한글 해득 활동으로 복잡한 한글도 쉽게 이해해요.", em: "한글도 쉽게" },
-          { text: "여러 가지 낱말을 익히고 문장 짓기를 통하여 바르게 읽고 쓰며 한글의 자신감을 길러요.", em: "한글의 자신감" },
-        ],
-      },
-      {
         kind: "stages",
         label: "수업 내용",
         items: [
@@ -244,13 +236,24 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
           },
         ],
       },
+      {
+        kind: "effects",
+        label: "학습 효과",
+        title: "한글 완전 정복",
+        desc: "한글 기초부터 완전 학습까지,\n초등 입학 전 필요한 읽기 역량을 확실히 길러요.",
+        items: [
+          { text: "체계적인 한글 학습으로 문해력 기초를 다져요.", em: "문해력 기초" },
+          { text: "필독서와 연계한 주제별 한글 해득 활동으로 복잡한 한글도 쉽게 이해해요.", em: "한글도 쉽게" },
+          { text: "여러 가지 낱말을 익히고 문장 짓기를 통하여 바르게 읽고 쓰며 한글의 자신감을 길러요.", em: "한글의 자신감" },
+        ],
+      },
     ],
   },
 
   vocab: {
     name: "다다어휘",
     // 참깨한글과 같은 구성: 프로그램 구분 태그 → 정보 타일 2개(대상 · 수업 기간) → 가운데 라벨 섹션들
-    tag: "어휘력 집중 향상 프로그램",
+    tag: "어휘력 향상 프로그램",
     title: "다다어휘",
     logo: { src: "https://cdn.hanuribook.com/img/hanuribook/logo_special6.png", w: 518, h: 183 },
     // 가로로 긴 로고라 기본보다 조금 작게
@@ -271,6 +274,7 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         em: "'어휘력 부족'",
         sub: "놓치면 안 되는 아이의 어휘력 '빨간불' 신호",
         subEm: "'빨간불'",
+        subAlert: true,
         // '빨간불' 신호 · 고민 강조는 붉은색
         emColor: "#E03131",
         // 말풍선: 연한 노랑 두 톤을 번갈아
@@ -295,17 +299,13 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         },
       },
       {
-        kind: "steps",
-        title: "다다어휘 살펴보기",
-        items: [{ title: "어휘를 문맥과 상황에 맞게 체득하기" }, { title: "필독서 어휘 익히기" }, { title: "어휘를 통합하여 표현하기" }],
-      },
-      {
         kind: "points",
         title: "주요 특징",
         items: [
-          { label: "Point.1", desc: "교과서 이해에 꼭 필요한", em: "어휘 285개 수록" },
-          { label: "Point.2", desc: "읽으면서 뜻이 잡히는", em: "맥락 중심 학습" },
-          { label: "Point.3", desc: "평가에 바로 적용 가능한", em: "쓰기 / 말하기 훈련" },
+          // 설명과 강조 문구를 한 줄로(강조 부분만 더 굵게)
+          { label: "Point.1", desc: "교과서 이해에 꼭 필요한 어휘 285개 수록", descEm: "어휘 285개 수록" },
+          { label: "Point.2", desc: "읽으면서 뜻이 잡히는 맥락 중심 학습", descEm: "맥락 중심 학습" },
+          { label: "Point.3", desc: "평가에 바로 적용 가능한 쓰기 / 말하기 훈련", descEm: "쓰기 / 말하기 훈련" },
         ],
       },
       {
@@ -314,13 +314,24 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         items: ["각 호당 교재 1권", "필독서 2권"],
       },
       {
-        kind: "steps",
-        title: "한우리와 함께 문해력을 더 탄탄하게!",
-        sub: "어휘에서 시작해 읽고, 쓰고, 토론할 수 있기까지",
+        kind: "effects",
+        label: "학습 효과",
+        title: "교과서 필수 어휘학습",
+        desc: "어휘력이 자라면 독해력과\n교과 자신감이 함께 올라갑니다.",
         items: [
-          { title: "다다어휘", desc: "교과서 필수 어휘를 학습하고" },
-          { title: "한우리 몰입독서", desc: "읽는 과정에 집중하며" },
-          { title: "한우리 독서토론논술", desc: "글쓰기 · 토론으로 확장하는" },
+          { title: "학교 교과서가 쉬워져요", text: "교과 어휘를 미리 익혀 수업 내용을 쉽게 이해해요.", em: "" },
+          { title: "독해력이 함께 자라나요", text: "문장을 읽고 파악하는 힘이 눈에 띄게 좋아져요.", em: "" },
+          { title: "교실에서 바로 활용해요", text: "배운 단어를 학교 발표와 글쓰기에 표현해요.", em: "" },
+        ],
+      },
+      {
+        kind: "stages",
+        label: "수업 내용",
+        heading: "초등 필수 교과 어휘부터\n글쓰기 활용까지 탄탄하게!",
+        items: [
+          { step: "1", title: "어휘를 문맥과 상황에 맞게 체득하기" },
+          { step: "2", title: "필독서 어휘 익히기" },
+          { step: "3", title: "어휘를 통합하여 표현하기" },
         ],
       },
     ],

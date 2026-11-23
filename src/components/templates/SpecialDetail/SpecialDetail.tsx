@@ -20,7 +20,8 @@ export default function SpecialDetail(props: SpecialDetailProps) {
   return (
     <div className="flex min-h-screen w-full flex-col bg-white font-pretendard tracking-[-0.02em] text-[#1F1F1F]">
       <Header active="program" sub="단기특강" crumbs={crumbs} />
-      <main className="flex-[1_0_auto] pb-12 lg:pb-24">
+      {/* 마지막 블록이 전체 폭 색 띠(학습 효과)면 아래 여백 없이 푸터에 바로 붙임 */}
+      <main className={`flex-[1_0_auto] ${cur.blocks[cur.blocks.length - 1]?.kind === "effects" ? "pb-0" : "pb-12 lg:pb-24"}`}>
         {hasTabs && (
           // 과정 탭: 고른 과정은 강조색 바탕 + 흰 글자
           <div className="mx-auto box-border flex max-w-[1200px] justify-center px-5 pt-5 pb-4 lg:pt-8 lg:pb-6" role="tablist" aria-label="과정 선택">

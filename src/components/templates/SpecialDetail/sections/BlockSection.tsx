@@ -192,7 +192,15 @@ export default function BlockSection({ b, t, idx, centered = false }: { b: Speci
             {b.subEm && b.sub.includes(b.subEm) ? (
               <>
                 {b.sub.slice(0, b.sub.indexOf(b.subEm))}
-                <strong className="font-extrabold" style={{ color: b.emColor ?? ink }}>
+                <strong className="font-extrabold whitespace-nowrap" style={{ color: b.emColor ?? ink }}>
+                  {/* 경고 아이콘(삼각형 + 느낌표): 글자와 같은 색, 글자 높이에 맞춤 */}
+                  {b.subAlert && (
+                    <svg className="mr-1 inline-block h-[1.15em] w-[1.15em] -translate-y-[0.12em] align-middle" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 2.5 1.5 21h21z" fill="currentColor" strokeLinejoin="round" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M12 9.5v5" stroke="#FFFFFF" strokeWidth="2.2" strokeLinecap="round" />
+                      <circle cx="12" cy="17.6" r="1.3" fill="#FFFFFF" />
+                    </svg>
+                  )}
                   {b.subEm}
                 </strong>
                 {b.sub.slice(b.sub.indexOf(b.subEm) + b.subEm.length)}
@@ -371,7 +379,12 @@ export default function BlockSection({ b, t, idx, centered = false }: { b: Speci
                 <span className="text-[13px] font-extrabold tracking-[0.04em] lg:text-[15px]" style={{ color: ink }}>
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="m-0 text-[15px] leading-[1.55] font-semibold break-keep text-[#333333] lg:text-[17px]">{withEm(it.text, it.em)}</p>
+                {it.title && (
+                  <strong className="text-[17px] leading-[1.4] font-extrabold break-keep text-[#1F1F1F] lg:text-[21px]">{it.title}</strong>
+                )}
+                <p className="m-0 text-[15px] leading-[1.55] font-semibold break-keep text-[#333333] lg:text-[17px]">
+                  {it.em ? withEm(it.text, it.em) : it.text}
+                </p>
               </div>
             </li>
           ))}
@@ -426,6 +439,16 @@ export default function BlockSection({ b, t, idx, centered = false }: { b: Speci
         <SectionLabel color={ink} bg={t.soft}>
           {b.label}
         </SectionLabel>
+        {/* 라벨 아래 큰 제목(있을 때): 줄마다 나눔, 첫 줄은 강조 글자색 */}
+        {b.heading && (
+          <h2 className="m-0 text-center text-[22px] leading-[1.4] font-extrabold break-keep text-[#1F1F1F] lg:text-[32px]">
+            {b.heading.split("\n").map((l, li) => (
+              <span key={li} className="block" style={li === 0 && b.heading!.includes("\n") ? { color: ink } : undefined}>
+                {l}
+              </span>
+            ))}
+          </h2>
+        )}
         <ol className="m-0 flex w-full list-none flex-col gap-3 p-0 lg:gap-4">
           {b.items.map((s) => (
             <li
@@ -437,14 +460,14 @@ export default function BlockSection({ b, t, idx, centered = false }: { b: Speci
                 className="flex w-[104px] flex-none flex-col items-center justify-center gap-1 px-2 py-4 text-center text-white lg:w-[200px] lg:py-6"
                 style={{ background: t.dark }}
               >
-                <span className="text-[11px] leading-[1.35] break-keep text-white/85 lg:text-[14px]">{s.pre}</span>
+                {s.pre && <span className="text-[11px] leading-[1.35] break-keep text-white/85 lg:text-[14px]">{s.pre}</span>}
                 <strong className="text-[24px] leading-none font-extrabold lg:text-[34px]">{s.step}</strong>
               </div>
               <div className="flex min-w-0 flex-col justify-center gap-1.5 bg-white px-4 py-4 lg:px-7 lg:py-6">
                 <strong className="text-[16px] font-extrabold break-keep lg:text-[21px]" style={{ color: ink }}>
                   {s.title}
                 </strong>
-                <p className="m-0 text-[13px] leading-[1.6] break-keep text-[#444444] lg:text-[16px]">{s.desc}</p>
+                {s.desc && <p className="m-0 text-[13px] leading-[1.6] break-keep text-[#444444] lg:text-[16px]">{s.desc}</p>}
               </div>
             </li>
           ))}
