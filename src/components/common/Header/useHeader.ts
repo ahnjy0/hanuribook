@@ -60,6 +60,16 @@ const THIRD_MAP: Record<string, [string, string, string][]> = {
     ["중등", PATHS.DetailSocrates, "소크라테스"],
     ["고등", PATHS.DetailLiterature, "소클 고등 문학"],
   ],
+  // 단기특강: 메뉴 이름은 분야(목록 카드 분야 라벨과 같음), 페이지 이름은 상세 페이지 브레드크럼 마지막 항목(specialData SPECIAL_PAGES.crumb)
+  // 한국사봄 | 한국사람(역사)은 상세 페이지가 아직 없어 메뉴에 넣지 않음
+  단기특강: [
+    ["전체", PATHS.Special, ""],
+    ["한글", PATHS.SpecialHangul, "참깨한글"],
+    ["어휘", PATHS.SpecialVocab, "다다어휘"],
+    ["비문학", PATHS.SpecialNonfiction, "똑독해"],
+    ["문학", PATHS.SpecialLiterature, "별별문학독해 | 교과문학탐독"],
+    ["통합사회", PATHS.SpecialSociety, "소클 고등 통합사회"],
+  ],
 };
 
 const toItems = (arr: [string, string][]) => arr.map(([label, href]) => ({ label, href }));

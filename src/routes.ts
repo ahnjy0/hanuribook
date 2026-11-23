@@ -31,6 +31,12 @@ export const PATHS = {
   DetailWorld: "/detail-world",
   DetailSocrates: "/detail-socrates",
   DetailLiterature: "/detail-literature",
+  // 단기특강 상세(SpecialDetail 템플릿)
+  SpecialHangul: "/special-hangul",
+  SpecialVocab: "/special-vocab",
+  SpecialNonfiction: "/special-nonfiction",
+  SpecialLiterature: "/special-literature",
+  SpecialSociety: "/special-society",
 } as const;
 
 export type PageName = keyof typeof PATHS;
