@@ -35,7 +35,7 @@ const ITEMS: {
   { id: "vocab", age: "초등", field: "어휘", title: "다다어휘", desc: "교과서 필수 어휘 집중 학습", ...toneOf("vocab"), href: PATHS.SpecialVocab },
   { id: "nonfiction", age: "초등", field: "비문학", title: "똑독해", desc: "사회, 과학, 경제 11가지 비문학 독해 원리 학습", ...toneOf("nonfiction"), href: PATHS.SpecialNonfiction },
   { id: "history", age: "초등", field: "역사", title: "한국사봄 | 한국사람", desc: "한국사 집중 대비", tint: "#FFF1E0", line: "#F6D9B5", badge: "#B45309", badgeFg: "#FFFFFF", ink: "#B45309", href: "#" },
-  { id: "literature", age: "중·고등", field: "문학", title: "별별문학독해 | 교과문학탐독", desc: "중등 교과 및 수능 연계 작품 분석", ...toneOf("litMiddle"), href: PATHS.SpecialLiterature },
+  { id: "literature", age: "중·고등", field: "문학", title: "별별문학독해 | 교과문학탐독", desc: "중등 교과 및 수능 연계 작품 분석", ...toneOf("literature"), href: PATHS.SpecialLiterature },
   { id: "society", age: "고등", field: "통합사회", title: "소클 고등 통합사회", desc: "통합사회 교과 대비", ...toneOf("society"), href: PATHS.SpecialSociety },
 ];
 

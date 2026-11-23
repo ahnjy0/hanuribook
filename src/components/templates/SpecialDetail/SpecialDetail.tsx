@@ -45,7 +45,8 @@ export default function SpecialDetail(props: SpecialDetailProps) {
         )}
         <HeroSection p={cur} />
         {cur.blocks.map((b, i) => (
-          <BlockSection key={`${cur.name}-${i}`} b={b} t={t} idx={i} centered={cur.centered} />
+          // 블록에 색(theme)이 있으면 그 색으로(문학 통합 페이지의 과정별 색)
+          <BlockSection key={`${cur.name}-${i}`} b={b} t={b.theme ?? t} idx={i} centered={cur.centered} />
         ))}
       </main>
       <Footer />
