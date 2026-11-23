@@ -1,4 +1,4 @@
-import SectionLabel from "@/components/common/SectionLabel";
+import SectionTitle from "./SectionTitle";
 
 /**
  * 소크라테스 수업 내용: 월 4차시
@@ -37,19 +37,18 @@ export default function ClassSection() {
       className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 pt-13 lg:gap-5 lg:pt-24"
       aria-labelledby="m-class"
     >
-      <div className="text-center">
-        <SectionLabel color="#5B4596" bg="#F3F0FA">
-          수업 내용
-        </SectionLabel>
-        <h2 className="mx-0 my-1.5 text-[24px] font-extrabold break-keep lg:text-[34px]" id="m-class">
-          독해 원리, 독해 심화, 독해 융합
-        </h2>
-        <p className="m-0 text-[14px] leading-[1.6] break-keep text-[#333333] lg:text-[18px]">
-          교과서 읽기에 필요한 기본 독해부터
-          <br />
-          심화, 수능형 융합 독해까지 체계적으로 익힙니다.
-        </p>
-      </div>
+      {/* 제목: 과정 안내와 같은 모양(왼쪽 정렬 + 보라 타일 아이콘 — 펼친 책) */}
+      <SectionTitle
+        id="m-class"
+        icon={
+          <>
+            <path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z" />
+            <path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z" />
+          </>
+        }
+      >
+        수업 내용
+      </SectionTitle>
       <ol className="mx-0 mt-1.5 mb-0 grid list-none grid-cols-1 gap-2.5 p-0 lg:grid-cols-2 lg:gap-4">
         {LESSONS.map((l, i) => (
           <li key={l.title} className="flex gap-3 rounded-[18px] bg-[#F5F5F7] p-5 lg:gap-4 lg:rounded-[22px] lg:p-8">

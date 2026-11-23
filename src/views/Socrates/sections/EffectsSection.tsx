@@ -1,7 +1,7 @@
-import SectionLabel from "@/components/common/SectionLabel";
+import SectionTitle from "./SectionTitle";
 
 /**
- * 소크라테스 학습 효과: 보라 배경 띠 + 반투명 흰 타일 4개(아이콘 + 설명 + 굵은 효과)
+ * 소크라테스 학습 효과: 보라 배경 띠 + 연보라 카드 4개(흰 동그라미 아이콘 + 진한 설명 두 줄 + 진한 보라 효과 문구)
  * 모바일 2열, 데스크톱 4열
  */
 const EFFECTS: { lines: [string, string]; strong: string; icon: React.ReactNode }[] = [
@@ -59,41 +59,47 @@ export default function EffectsSection() {
   return (
     <section className="relative mt-13 bg-[#5B4596] px-0 py-10 text-white lg:mt-24 lg:pt-16 lg:pb-20" aria-labelledby="m-eff">
       <div className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-4 px-5 lg:gap-7">
-        <div className="text-center">
-          <SectionLabel color="#5B4596" bg="#FFFFFF">
-            학습 효과
-          </SectionLabel>
-          <h2 className="mx-0 my-1.5 text-[24px] font-extrabold break-keep lg:text-[34px]" id="m-eff">
-            독해력 완성, 내신 · 입시 대비
-          </h2>
-          <p className="m-0 text-[14px] leading-[1.6] break-keep text-white/85 lg:text-[18px]">
-            중학생에게 필요한 필수 독해력과 국어 교과 지식,
-            <br />
-            평가와 입시 대비 능력을 키웁니다.
-          </p>
-        </div>
+        {/* 제목: 과정 안내와 같은 모양(왼쪽 정렬 + 타일 아이콘 — 올라가는 그래프). 보라 띠 위라 흰 타일 + 흰 글자 */}
+        <SectionTitle
+          id="m-eff"
+          onDark
+          icon={
+            <>
+              <path d="M3 17l6-6 4 4 8-8" />
+              <path d="M15 7h6v6" />
+            </>
+          }
+        >
+          학습 효과
+        </SectionTitle>
         <ul className="m-0 grid list-none grid-cols-2 gap-2.5 p-0 lg:grid-cols-4 lg:gap-4">
           {EFFECTS.map((e) => (
             <li
               key={e.strong}
-              className="flex flex-col items-center gap-3 rounded-[20px] bg-white/12 px-3 py-6 text-center lg:gap-4 lg:rounded-[24px] lg:py-9"
+              // 연보라 카드 + 은은한 그림자: 보라 띠 위에서 또렷하게. 아이콘은 흰 동그라미 안에
+              className="flex flex-col items-center gap-3 rounded-[20px] bg-[#F3F0FA] px-3 py-6 text-center shadow-[0_8px_20px_rgba(30,15,70,0.18)] lg:gap-4 lg:rounded-[24px] lg:py-9"
             >
-              <svg
-                className="h-10 w-10 lg:h-12 lg:w-12"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#FFFFFF"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+              <span
+                className="flex h-16 w-16 flex-none items-center justify-center rounded-full bg-white lg:h-20 lg:w-20"
                 aria-hidden="true"
               >
-                {e.icon}
-              </svg>
-              <p className="m-0 flex flex-col text-[15px] leading-[1.45] break-keep lg:text-[17px]">
-                <span className="text-white/90">{e.lines[0]}</span>
-                <span className="text-white/90">{e.lines[1]}</span>
-                <strong className="font-extrabold text-white">{e.strong}</strong>
+                <svg
+                  className="h-8 w-8 lg:h-10 lg:w-10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#6A54A6"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {e.icon}
+                </svg>
+              </span>
+              {/* 설명 두 줄(진한 글자) → 효과(진한 보라, 크게 굵게) */}
+              <p className="m-0 flex flex-col items-center text-[14px] leading-[1.45] font-semibold break-keep text-[#1F1F1F] lg:text-[16px]">
+                <span>{e.lines[0]}</span>
+                <span>{e.lines[1]}</span>
+                <strong className="mt-1.5 text-[16px] font-extrabold text-[#45366F] lg:mt-2 lg:text-[19px]">{e.strong}</strong>
               </p>
             </li>
           ))}

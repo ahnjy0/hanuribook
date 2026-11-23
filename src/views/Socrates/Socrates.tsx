@@ -3,6 +3,7 @@ import ProgramFaqSection, { type FaqItem } from "@/components/common/ProgramFaqS
 import HeroSection from "./sections/HeroSection";
 import CoursesSection from "./sections/CoursesSection";
 import FeaturesSection from "./sections/FeaturesSection";
+import KitSection from "./sections/KitSection";
 import ClassSection from "./sections/ClassSection";
 import EffectsSection from "./sections/EffectsSection";
 import Footer from "@/components/common/Footer/Footer";
@@ -37,6 +38,7 @@ export default function Socrates() {
         <HeroSection />
         <CoursesSection />
         <FeaturesSection />
+        <KitSection />
         <ClassSection />
         <EffectsSection />
         {/* FAQ: 라벨·강조 색을 중등 페이지 주요 색(부드러운 퍼플)으로. 학습 효과 보라 띠 바로 아래에 붙임(flush) */}

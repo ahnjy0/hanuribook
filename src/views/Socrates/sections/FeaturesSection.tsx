@@ -1,4 +1,4 @@
-import SectionLabel from "@/components/common/SectionLabel";
+import SectionTitle from "./SectionTitle";
 
 /**
  * 중등(소크라테스) 프로그램의 특징: 3가지를 아이콘 카드로
@@ -50,18 +50,13 @@ export default function FeaturesSection() {
   return (
     <section className="mt-12 bg-[#F7F5FC] px-0 py-10 lg:mt-24 lg:pt-16 lg:pb-20" aria-labelledby="m-feat">
       <div className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 lg:gap-7">
-        {/* 제목 영역: 공통 섹션 라벨(수업 내용·학습 효과와 같은 모양) → 보조 문구 → 제목('중등 독해력' 보라 강조) */}
-        <div className="text-center">
-          <SectionLabel color="#5B4596" bg="#FFFFFF">
-            프로그램 특징
-          </SectionLabel>
-          <p className="mx-0 mt-1.5 mb-0 text-[14px] leading-[1.6] break-keep text-[#333333] lg:text-[18px]">
-            원리 이해부터 수능형 지문까지
-          </p>
-          <h2 className="mx-0 mt-0.5 mb-1.5 text-[24px] font-extrabold break-keep lg:text-[34px]" id="m-feat">
-            단계별 <span style={{ color: ACCENT }}>중등 독해력</span> 완성하기
-          </h2>
-        </div>
+        {/* 제목: 과정 안내와 같은 모양(왼쪽 정렬 + 보라 타일 아이콘 — 별) */}
+        <SectionTitle
+          id="m-feat"
+          icon={<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z" />}
+        >
+          프로그램 특징
+        </SectionTitle>
         <ol className="m-0 grid list-none grid-cols-1 gap-3 p-0 md:grid-cols-3 lg:gap-5">
           {ITEMS.map((it, i) => (
             <li
