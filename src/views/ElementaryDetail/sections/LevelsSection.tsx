@@ -2,7 +2,7 @@ import SectionLabel from "@/components/common/SectionLabel";
 import CheckIcon from "@/components/common/CheckIcon";
 import type { ElementaryCourse } from "../elementaryData";
 
-/** 학습 목표: 과정(1·2단계) 공통 목표 */
+/** 주요 특징(구 학습 목표): 과정(1·2단계) 공통 목표 */
 export default function LevelsSection({ d }: { d: ElementaryCourse }) {
   return (
     <section
@@ -11,7 +11,7 @@ export default function LevelsSection({ d }: { d: ElementaryCourse }) {
     >
       <div className="text-center">
         <SectionLabel color={d.accent} bg={d.soft}>
-          학습 목표
+          주요 특징
         </SectionLabel>
         <h2 className="mx-0 my-1.5 text-[24px] font-extrabold break-keep lg:text-[34px]" id="v-levels">
           {typeof d.goalTitle === "string" ? (

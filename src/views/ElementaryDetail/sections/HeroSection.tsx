@@ -16,7 +16,7 @@ export default function HeroSection({ d }: { d: ElementaryCourse }) {
         aria-hidden="true"
       />
       <div className="relative mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 text-center lg:gap-5">
-        {/* 섹션 라벨: 아래 섹션들(학습 목표 등)과 같은 공통 라벨 */}
+        {/* 섹션 라벨: 아래 섹션들(주요 특징 등)과 같은 공통 라벨 */}
         <SectionLabel color={d.accent} bg={d.soft}>
           초등 정규 프로그램
         </SectionLabel>

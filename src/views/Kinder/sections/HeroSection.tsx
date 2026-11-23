@@ -63,7 +63,7 @@ export default function HeroSection() {
         aria-hidden="true"
       />
       <div className="relative mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 text-center lg:gap-5">
-        {/* 섹션 라벨: 아래 섹션들(학습 목표 등)과 같은 공통 라벨, 흰 배경 */}
+        {/* 섹션 라벨: 아래 섹션들(주요 특징 등)과 같은 공통 라벨, 흰 배경 */}
         <SectionLabel>유아 정규 프로그램</SectionLabel>
         <h1 className="m-0" id="k-hero">
           {/* 교재 로고(타이틀) 모션: 페이지가 열릴 때 통통 튀듯 나타남(pop-in) → 이어서 교재 카드가 떠오름 */}

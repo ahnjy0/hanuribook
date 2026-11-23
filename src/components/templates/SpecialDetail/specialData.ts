@@ -25,20 +25,34 @@ export type SpecialBlock =
       kind: "points";
       title: string;
       sub?: string;
-      // label: 'Point.1' 같은 작은 라벨 / title: 굵은 제목 / desc: 설명 / em: 형광펜으로 강조하는 문장(설명 뒤)
-      items: { label: string; title?: string; desc?: string; em?: string }[];
+      // label: 'Point.1' 같은 작은 라벨 / title: 굵은 제목 / desc: 설명 / descEm: 설명 안에서 강조할 부분 / em: 강조 문장(설명 뒤)
+      items: { label: string; title?: string; desc?: string; descEm?: string; em?: string }[];
     }
   | { kind: "steps"; title: string; sub?: string; items: { title: string; desc?: string }[] }
   | { kind: "flow"; title: string; sub?: string; groups: { label: string; note?: string; items: string[] }[] }
   // 고민 말풍선: 가운데 제목(\n 줄바꿈) + 채팅처럼 좌우 번갈아 놓는 말풍선(icon: 말하는 사람 아이콘)
   // em: 제목 속 강조할 부분(강조 글자색 + 형광펜 밑줄)
-  | { kind: "bubbles"; title: string; em?: string; items: { text: string; icon?: SpecialImage }[] }
+  // answer: 고민 말풍선 아래 선생님 답변 말풍선(em 부분은 강조)
+  | {
+      kind: "bubbles";
+      title: string;
+      em?: string;
+      items: { text: string; icon?: SpecialImage }[];
+      answer?: { text: string; em?: string; icon?: SpecialImage };
+    }
   // 학습 효과 띠: 진한 배경 띠 + 가운데 라벨 · 노란 제목 · 설명 + 노란 카드(카드 문장 속 em 부분을 굵게)
   | { kind: "effects"; label: string; title: string; desc: string; items: { text: string; em: string }[] }
   // 과정 카드: 가운데 라벨 + 3열 카드(과정 로고 → 회색 대상 설명(\n 줄바꿈) → 구분선 → 굵은 과정명)
   | { kind: "courses"; label: string; items: { name: string; logo: SpecialImage; desc: string; title: string }[] }
   // 단계 카드: 왼쪽 진한 칸(작은 문구 + 'N단계') + 오른쪽 제목 · 설명
   | { kind: "stages"; label: string; items: { pre: string; step: string; title: string; desc: string }[] }
+  // 수업 흐름 박스(초등심화 '…수업은 이렇게 진행돼요'와 같은 모양): 제목(em 부분 강조색) + 호(단계)별 열 → 차시별 활동명 · 설명
+  | {
+      kind: "lessons";
+      title: string;
+      em?: string;
+      cols: { head: string; sub?: string; items: { session: string; title: string; desc: string }[] }[];
+    }
   | {
       kind: "tables";
       title: string;
@@ -95,16 +109,27 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
           { text: "스스로 읽고 쓰는 단계까지 갔으면 좋겠어요!", icon: { src: "https://cdn.hanuribook.com/img/icon/mom_03.png", w: 1024, h: 1024 } },
           { text: "선생님이 직접 밀착 지도하는 수업 없을까요?", icon: { src: "https://cdn.hanuribook.com/img/icon/mom_04.png", w: 1024, h: 1024 } },
         ],
+        answer: {
+          text: "참깨 한글은 한글을 처음 배우는 유아도 맥락 속에서 자연스럽게 익히며, 읽고 이해하는 힘의 기초를 다질 수 있어요.",
+          em: "참깨 한글",
+          icon: { src: "https://cdn.hanuribook.com/img/icon/teacher.png", w: 1024, h: 1024 },
+        },
       },
       {
-        // 주요 특징: 아래 학습 과정 · 수업 내용 · 차시 안내 · 학습 효과에 있는 내용을 4가지로 정리
         kind: "points",
         title: "주요 특징",
         items: [
-          { label: "Point.1", title: "3단계 맞춤 과정", desc: "5세 2학기부터 7세 후반까지, 아이 수준에 맞춰 단계별로 체계적으로 배워요." },
-          { label: "Point.2", title: "필독서 연계 학습", desc: "필독서를 읽으며 기본 자모음부터 겹받침까지 자연스럽게 익혀요." },
-          { label: "Point.3", title: "주제별 한글 해득 활동", desc: "주제별 활동으로 복잡한 한글도 쉽고 재미있게 이해해요." },
-          { label: "Point.4", title: "읽기 · 쓰기 기본기", desc: "낱말 익히기부터 문장 짓기까지, 초등 입학 전 스스로 읽고 쓰는 힘을 길러요." },
+          { label: "Point.1", desc: "한글 떼는 것은 물론 글을 읽고 이해하는 기초 능력을 갖출 수 있어요.", descEm: "글을 읽고 이해하는 기초 능력" },
+          {
+            label: "Point.2",
+            desc: "필독서를 읽고 주제별 수업을 통해 맥락 속에서 한글을 배우며 생각하는 힘을 키울 수 있어요.",
+            descEm: "맥락 속에서 한글을 배우며 생각하는 힘",
+          },
+          {
+            label: "Point.3",
+            desc: "아이의 수준에 따라 단계를 선택해 배울 수 있고, 한우리 유치·초등 프로그램으로의 연결 학습이 가능해요.",
+            descEm: "한우리 유치·초등 프로그램으로의 연결 학습",
+          },
         ],
       },
       {
@@ -167,34 +192,38 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         ],
       },
       {
-        kind: "tables",
-        title: "단계별 차시 안내",
-        tables: [
+        kind: "lessons",
+        title: "단계별 수업은 이렇게 진행돼요",
+        em: "단계별",
+        cols: [
           {
-            caption: "1단계 · 한글의 기초를 다지는 '기본 자모음 알기'",
-            head: SESSIONS,
-            rows: [
-              { label: "차시 성격", cells: ["필독서", "필독서", "주제별 한글\n해득 활동", "주제별 한글\n해득 활동"] },
-              { label: "주요 내용", cells: ["기본모음\n('ㅏ'~'ㅣ')", "기본자음\n('ㄱ'~'ㅎ')", "기본 자모음 알기", "쌍자음"] },
-              { label: "활동명", cells: ["<숨바꼭질\nㅏㅑㅓㅕ>", "<랄랄라\nㄱㄴㄷ>", "하마의 가방은\n어디 있을까?", "색깔 나라에서\n생긴 일"] },
+            head: "1호",
+            sub: "기본 자모음 알기",
+            items: [
+              { session: "1차시", title: "《숨바꼭질 ㅏㅑㅓㅕ》", desc: "모음자를 알아 보아요." },
+              { session: "2차시", title: "《랄랄라 ㄱㄴㄷ》", desc: "자음자를 알아 보아요." },
+              { session: "3차시", title: "하마의 가방은 어디 있을까?", desc: "자음자와 모음자를 합쳐 보아요." },
+              { session: "4차시", title: "꽃밭에서 까르륵", desc: "똑같은 자음자끼리 만난 자음자를 알아 보아요." },
             ],
           },
           {
-            caption: "2단계 · 한글의 이해를 높이는 '글자의 짜임 알기'",
-            head: SESSIONS,
-            rows: [
-              { label: "차시 성격", cells: ["필독서", "필독서", "주제별 한글\n해득 활동", "주제별 한글\n해득 활동"] },
-              { label: "주요 내용", cells: ["글자의\n짜임 알기", "받침이\n있는 글자", "기본 자모음 알기", "쌍자음"] },
-              { label: "활동명", cells: ["<나랑 만나, ㅏ>", "<주무르고\n늘리고>", "모음과 모음이\n만나면", "자음끼리\n만난 받침"] },
+            head: "2호",
+            sub: "글자의 짜임 알기",
+            items: [
+              { session: "1차시", title: "《나랑 만나, ㅏ》", desc: "글자의 짜임을 알아 보아요." },
+              { session: "2차시", title: "《주무르고 늘리고》", desc: "받침이 있는 글자를 알아 보아요." },
+              { session: "3차시", title: "모음과 모음이 만나면", desc: "여러 가지 모음자를 알아 보아요." },
+              { session: "4차시", title: "자음자끼리 만난 받침", desc: "자음자끼리 만난 받침을 알아 보아요." },
             ],
           },
           {
-            caption: "3단계 · 한글의 자신감을 기르는 '유창하게 읽고 쓰기'",
-            head: SESSIONS,
-            rows: [
-              { label: "차시 성격", cells: ["필독서", "필독서", "주제별 한글\n해득 활동", "주제별 한글\n해득 활동"] },
-              { label: "주요 내용", cells: ["여러 가지\n낱말 익히기", "낱말을 활용하여\n문장 짓기", "또박또박 읽기", "또박또박 쓰기"] },
-              { label: "활동명", cells: ["<어서 오세요!\nㄱㄴㄷ 뷔페>", "<구름 한 숟가락\nㄱㄴㄷ>", "바르게 읽어요", "바르게 써요"] },
+            head: "3호",
+            sub: "유창하게 읽고 쓰기",
+            items: [
+              { session: "1차시", title: "《어서 오세요! ㄱㄴㄷ뷔페》", desc: "여러 낱말을 읽고 써 보아요." },
+              { session: "2차시", title: "《구름 한 숟가락 ㄱㄴㄷ》", desc: "문장을 짓고 읽어 보아요." },
+              { session: "3차시", title: "바르게 읽어요", desc: "낱말과 문장을 알맞게 읽어요." },
+              { session: "4차시", title: "바르게 써요", desc: "낱말과 문장을 알맞게 써 보아요." },
             ],
           },
         ],

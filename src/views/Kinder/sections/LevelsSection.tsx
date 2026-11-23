@@ -31,7 +31,7 @@ const LEVELS: Level[] = [
   },
 ];
 
-/** 학습 목표: 꿈꾸는 새싹 1·2 누리과정·초등교과 연계 학습 내용 */
+/** 주요 특징(구 학습 목표): 꿈꾸는 새싹 1·2 누리과정·초등교과 연계 학습 내용 */
 export default function LevelsSection() {
   return (
     <section
@@ -39,7 +39,7 @@ export default function LevelsSection() {
       aria-labelledby="k-levels"
     >
       <div className="text-center">
-        <SectionLabel>학습 목표</SectionLabel>
+        <SectionLabel>주요 특징</SectionLabel>
         <h2 className="mx-0 my-1.5 text-[24px] font-extrabold lg:text-[34px]" id="k-levels">
           누리과정·초등교과 연계 학습
         </h2>
