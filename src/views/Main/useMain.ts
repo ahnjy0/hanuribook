@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { PATHS } from "@/routes";
 import { ELEMENTARY } from "@/views/ElementaryDetail/elementaryData";
+import { ADVANCED } from "@/views/AdvancedDetail/advancedData";
+
+/** 정규 심화 탭: 연령 박스 안에 글자 대신 넣는 프로그램 아이콘(그림은 sections/ProgramsSection 에 있음) */
+export type ProgIcon = "science" | "history" | "geo" | "world";
 
 type TabKey = "regular" | "advanced" | "special";
 
@@ -34,6 +38,11 @@ const PAGE_TONE = {
   logic: { soft: ELEMENTARY.logic.soft, ink: ELEMENTARY.logic.accent },
   socrates: { soft: "#F3F0FA", ink: "#5B4596" },
   literature: { soft: "#EEF1F6", ink: "#2B3A5C" },
+  // 정규 심화: 초등심화 상세 페이지 데이터(ADVANCED)와 연결
+  science: { soft: ADVANCED.science.soft, ink: ADVANCED.science.accent },
+  history: { soft: ADVANCED.history.soft, ink: ADVANCED.history.accent },
+  geo: { soft: ADVANCED.geo.soft, ink: ADVANCED.geo.accent },
+  world: { soft: ADVANCED.world.soft, ink: ADVANCED.world.accent },
 } satisfies Record<string, Tone>;
 
 const stageOf = (age: string): Stage =>
@@ -41,8 +50,8 @@ const stageOf = (age: string): Stage =>
 
 // desc: 각 프로그램 상세·소개 화면의 기존 문구를 그대로 사용
 // sub: 카드에 보이는 한 줄 설명(정규·정규 심화 탭) / field: 프로그램 분야(특강 탭)
-// tone: 카드 색(없으면 연령대 색 STAGE_TONE)
-const PROGRAMS: Record<TabKey, { age: string; title: string; sub?: string; field?: string; desc: string; href: string; tone?: Tone }[]> = {
+// tone: 카드 색(없으면 연령대 색 STAGE_TONE) / icon: 있으면 연령 박스에 아이콘, 학년은 제목 위 글자로
+const PROGRAMS: Record<TabKey, { age: string; title: string; sub?: string; field?: string; desc: string; href: string; tone?: Tone; icon?: ProgIcon }[]> = {
   regular: [
     { age: "유아 6~7세", title: "꿈꾸는 새싹", sub: "누리과정·초등교과 연계 학습", desc: "듣기·말하기·읽기·쓰기 생각하기 기본 다지기", href: PATHS.Kinder, tone: PAGE_TONE.kinder },
     { age: "초등 1·2학년", title: "어휘리더", sub: "교과 학습 대비 필수 어휘 익히기", desc: "책 읽기의 즐거움과 교과 기초 어휘·표현력 다지기", href: PATHS.DetailVocab, tone: PAGE_TONE.vocab },
@@ -52,10 +61,10 @@ const PROGRAMS: Record<TabKey, { age: string; title: string; sub?: string; field
     { age: "고등", title: "소클 고등 문학", sub: "심층 독서·논구술로 내신·입시 대비", desc: "교과서·수능 문학 작품을 깊이 읽고 해석하는 힘", href: PATHS.DetailLiterature, tone: PAGE_TONE.literature },
   ],
   advanced: [
-    { age: "초등 3학년", title: "과학탐탐", sub: "비주얼씽킹을 통한 과학 핵심 개념 및 어휘 이해", desc: "궁금증을 탐구로, 탐구를 글로", href: PATHS.DetailScience },
-    { age: "초등 4학년", title: "똑똑 한국사", sub: "한국사 진도 대비 전체 역사 흐름 정복", desc: "이야기로 읽고 흐름으로 이해하는 우리 역사", href: PATHS.DetailHistory },
-    { age: "초등 5학년", title: "세계 문화·지리", sub: "세계 주요 나라 질, 정치, 경제, 사회, 문화 이해", desc: "지도를 펼치면 세계가 보여요", href: PATHS.DetailGeo },
-    { age: "초등 6학년", title: "세계사", sub: "중학교 역사 교육 과정 반영 세계 곳곳의 환경과 생활모습 이해", desc: "세계의 흐름 속에서 오늘을 읽다", href: PATHS.DetailWorld },
+    { age: "초등 3학년", title: "과학탐탐", sub: "비주얼씽킹을 통한 과학 핵심 개념 및 어휘 이해", desc: "궁금증을 탐구로, 탐구를 글로", href: PATHS.DetailScience, tone: PAGE_TONE.science, icon: "science" },
+    { age: "초등 4학년", title: "똑똑 한국사", sub: "한국사 진도 대비 전체 역사 흐름 정복", desc: "이야기로 읽고 흐름으로 이해하는 우리 역사", href: PATHS.DetailHistory, tone: PAGE_TONE.history, icon: "history" },
+    { age: "초등 5학년", title: "세계 문화·지리", sub: "세계 주요 나라 질, 정치, 경제, 사회, 문화 이해", desc: "지도를 펼치면 세계가 보여요", href: PATHS.DetailGeo, tone: PAGE_TONE.geo, icon: "geo" },
+    { age: "초등 6학년", title: "세계사", sub: "중학교 역사 교육 과정 반영 세계 곳곳의 환경과 생활모습 이해", desc: "세계의 흐름 속에서 오늘을 읽다", href: PATHS.DetailWorld, tone: PAGE_TONE.world, icon: "world" },
   ],
   special: [
     { age: "유아", title: "참깨한글", field: "한글", desc: "그림책과 놀이로 자음·모음을 익히고 읽기 독립을 준비하는 유아 맞춤 한글 과정.", href: PATHS.Special },

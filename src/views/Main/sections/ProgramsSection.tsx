@@ -1,8 +1,12 @@
 import SmartLink from "@/components/common/SmartLink";
 import Link from "next/link";
-import type { MainVals } from "../useMain";
+import { CourseIcon } from "@/views/Advanced/sections/CourseExplorerSection";
+import type { MainVals, ProgIcon } from "../useMain";
 
 type Props = Pick<MainVals, "progTabs" | "progs">;
+
+/** 정규 심화 탭 연령 박스 아이콘: 초등심화 페이지 과정 카드와 같은 아이콘(CourseIcon)을 씀 — 메인 키 → 초등심화 과정 id */
+const ADVANCED_ICON_ID: Record<ProgIcon, string> = { science: "sci", history: "kh", geo: "geo", world: "wh" };
 
 export default function ProgramsSection({ progTabs, progs }: Props) {
   return (
@@ -63,8 +67,14 @@ export default function ProgramsSection({ progTabs, progs }: Props) {
                 <span
                   className="flex size-16 flex-none flex-col items-center justify-center rounded-[16px] text-center text-[13px] leading-[1.25] font-extrabold tracking-[-0.03em] lg:size-18 lg:text-[14px]"
                   style={{ background: p.tone.soft, color: p.tone.ink }}
+                  aria-hidden={p.icon ? true : undefined}
                 >
-                  {(() => {
+                  {/* 아이콘이 있으면(정규 심화) 아이콘만, 학년은 제목 위 글자로 */}
+                  {p.icon ? (
+                    <span className="flex [&_svg]:size-8 lg:[&_svg]:size-9">
+                      <CourseIcon id={ADVANCED_ICON_ID[p.icon]} color={p.tone.ink} />
+                    </span>
+                  ) : (() => {
                     const dot = p.age.indexOf("·");
                     const [first, ...rest] =
                       !p.age.includes(" ") && p.age.length > 4 && dot > 0
@@ -79,10 +89,10 @@ export default function ProgramsSection({ progTabs, progs }: Props) {
                   })()}
                 </span>
                 <span className="flex min-w-0 flex-1 flex-col gap-1">
-                  {/* 프로그램 분야(특강 탭): 제목 위에 연령 박스와 같은 색 글자로 */}
-                  {p.field && (
+                  {/* 제목 위 작은 글자(연령 박스와 같은 색): 특강 탭은 프로그램 분야, 정규 심화 탭은 학년 */}
+                  {(p.field || p.icon) && (
                     <span className="text-[13px] leading-[1.3] font-bold lg:text-[14px]" style={{ color: p.tone.ink }}>
-                      {p.field}
+                      {p.field ?? p.age}
                     </span>
                   )}
                   <span className="text-[17px] leading-[1.35] font-extrabold lg:text-[18px]">{p.title}</span>

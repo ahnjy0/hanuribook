@@ -3,8 +3,11 @@ import type { AdvancedVals } from "../useAdvanced";
 
 type Props = Pick<AdvancedVals, "tabs">;
 
-/** 과정 분야별 아이콘(과정색 선): 과학=실험 플라스크, 한국사=전통 기와지붕, 지리=접힌 지도, 세계사=지구본 */
-function CourseIcon({ id, color }: { id: string; color: string }) {
+/**
+ * 과정 분야별 아이콘(과정색 선): 과학=실험 플라스크, 한국사=전통 기와지붕, 지리=접힌 지도, 세계사=지구본
+ * id: sci · kh · geo · wh(useAdvanced 과정 id). 메인 '한우리 프로그램' 정규 심화 탭에서도 같은 아이콘을 씀
+ */
+export function CourseIcon({ id, color }: { id: string; color: string }) {
   const common = {
     width: 22,
     height: 22,
