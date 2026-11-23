@@ -37,7 +37,12 @@ export type SpecialBlock =
       kind: "bubbles";
       title: string;
       em?: string;
-      items: { text: string; icon?: SpecialImage }[];
+      sub?: string; // 제목 아래 작은 문구(subEm 부분은 강조 글자색)
+      subEm?: string;
+      emColor?: string; // 제목 아래 문구 · 말풍선 강조 글자색(없으면 강조 글자색 ink)
+      bubbleBg?: [string, string]; // 말풍선 바탕(왼쪽 줄, 오른쪽 줄) — 없으면 강조색을 옅게
+      figures?: SpecialImage[]; // 있으면 모아 보기: 2열 칸마다 말풍선 + 그 아래 고민하는 인물(figures[i])
+      items: { text: string; em?: string; icon?: SpecialImage }[]; // em: 말풍선 안 강조 부분
       answer?: { text: string; em?: string; icon?: SpecialImage };
     }
   // 학습 효과 띠: 진한 배경 띠 + 가운데 라벨 · 노란 제목 · 설명 + 노란 카드(카드 문장 속 em 부분을 굵게)
@@ -46,6 +51,8 @@ export type SpecialBlock =
   | { kind: "courses"; label: string; items: { name: string; logo: SpecialImage; desc: string; title: string }[] }
   // 단계 카드: 왼쪽 진한 칸(작은 문구 + 'N단계') + 오른쪽 제목 · 설명
   | { kind: "stages"; label: string; items: { pre: string; step: string; title: string; desc: string }[] }
+  // 교재 구성: 가운데 라벨 + 연한 박스 안 교재 이미지(없으면 생략) → 아래 구성 목록 가로 한 줄
+  | { kind: "kit"; label: string; image?: SpecialImage; items: string[] }
   // 수업 흐름 박스(초등심화 '…수업은 이렇게 진행돼요'와 같은 모양): 제목(em 부분 강조색) + 호(단계)별 열 → 차시별 활동명 · 설명
   | {
       kind: "lessons";
@@ -64,6 +71,8 @@ export type SpecialBlock =
 export type SpecialProgram = {
   name: string; // 탭 · 브레드크럼에 쓰는 이름
   tag: string; // 히어로 대상 태그
+  logoCls?: string; // 로고 높이 조정(없으면 h-24 lg:h-36)
+  tagTone?: { bg: string; fg: string }; // 태그 색(없으면 강조색 바탕 + 강조색 위 글자색)
   eyebrow?: string; // 제목 위 문구(없으면 표시 안 함)
   title: string;
   logo?: SpecialImage; // 있으면 히어로 제목 자리에 로고 이미지(대체 글 = title)
@@ -84,14 +93,15 @@ const SESSIONS = ["1차시", "2차시", "3차시", "4차시"];
 export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
   hangul: {
     name: "참깨한글",
-    tag: "5~7세",
+    tag: "유아 한글 프로그램",
+    // 태그: 로고 '참깨'의 살구 핑크 바탕 + 흰 글자
+    tagTone: { bg: "#E0654F", fg: "#FFFFFF" },
     title: "참깨 한글",
     logo: { src: "https://cdn.hanuribook.com/img/hanuribook/logo_ko.png", w: 572, h: 380 },
     slogan: "책을 읽으며 한글을 재미있게 깨치는 한글 프로그램",
     info: [
       ["대상", "5~7세"],
       ["학습 기간", "3개월"],
-      ["구성", "필독서 각 2권, 워크북, 붙임딱지, 복습용 쓰기 공책"],
     ],
     // 주요 색: 학습 과정 카드의 베이지 바탕
     // 포인트 색: 노랑(accent — 위 글자는 진한 색) + 로고 '참깨'의 살구 핑크(dark — 진한 띠 · 단계 칸 · 말풍선, ink — 라벨 · 강조 글자)
@@ -116,23 +126,6 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         },
       },
       {
-        kind: "points",
-        title: "주요 특징",
-        items: [
-          { label: "Point.1", desc: "한글 떼는 것은 물론 글을 읽고 이해하는 기초 능력을 갖출 수 있어요.", descEm: "글을 읽고 이해하는 기초 능력" },
-          {
-            label: "Point.2",
-            desc: "필독서를 읽고 주제별 수업을 통해 맥락 속에서 한글을 배우며 생각하는 힘을 키울 수 있어요.",
-            descEm: "맥락 속에서 한글을 배우며 생각하는 힘",
-          },
-          {
-            label: "Point.3",
-            desc: "아이의 수준에 따라 단계를 선택해 배울 수 있고, 한우리 유치·초등 프로그램으로의 연결 학습이 가능해요.",
-            descEm: "한우리 유치·초등 프로그램으로의 연결 학습",
-          },
-        ],
-      },
-      {
         kind: "courses",
         label: "학습 과정",
         items: [
@@ -155,6 +148,29 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
             title: "한글 자신감 기르기",
           },
         ],
+      },
+      {
+        kind: "points",
+        title: "주요 특징",
+        items: [
+          { label: "Point.1", desc: "한글 떼는 것은 물론 글을 읽고 이해하는 기초 능력을 갖출 수 있어요.", descEm: "글을 읽고 이해하는 기초 능력" },
+          {
+            label: "Point.2",
+            desc: "필독서를 읽고 주제별 수업을 통해 맥락 속에서 한글을 배우며 생각하는 힘을 키울 수 있어요.",
+            descEm: "맥락 속에서 한글을 배우며 생각하는 힘",
+          },
+          {
+            label: "Point.3",
+            desc: "아이의 수준에 따라 단계를 선택해 배울 수 있고, 한우리 유치·초등 프로그램으로의 연결 학습이 가능해요.",
+            descEm: "한우리 유치·초등 프로그램으로의 연결 학습",
+          },
+        ],
+      },
+      {
+        kind: "kit",
+        label: "교재 구성",
+        image: { src: "https://www.hanuribook.com/resources/img/program/special5_img4.png", w: 900, h: 544 },
+        items: ["워크북 3권", "필독서 6권", "쓰기 공책 3권", "붙임딱지"],
       },
       {
         kind: "effects",
@@ -233,21 +249,59 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
 
   vocab: {
     name: "다다어휘",
-    tag: "초등 2~4학년",
-    eyebrow: "교과서를 제대로 읽게 만드는",
+    // 참깨한글과 같은 구성: 프로그램 구분 태그 → 정보 타일 2개(대상 · 수업 기간) → 가운데 라벨 섹션들
+    tag: "어휘력 집중 향상 프로그램",
     title: "다다어휘",
-    slogan: "초등 2~4학년 교과 어휘 특강",
+    logo: { src: "https://cdn.hanuribook.com/img/hanuribook/logo_special6.png", w: 518, h: 183 },
+    // 가로로 긴 로고라 기본보다 조금 작게
+    logoCls: "h-20 lg:h-28",
+    slogan: "교과서 필수 어휘 집중 학습",
     info: [
       ["대상", "초등 2~4학년"],
       ["수업 기간", "2개월(8차시)"],
-      ["구성", "각 호당 교재 1권, 필독서 2권"],
     ],
-    // 베이지 + 노랑: 베이지 바탕, 노란 형광펜. 강조색은 흰 글자가 읽히도록 진한 황토색
-    theme: { accent: "#A0670F", dark: "#5C4310", soft: "#F7EEDC", hi: "#FFD43B" },
+    // 주요 색: 연한 크림 노랑(soft) / 포인트 색: 로고 '어휘'의 주황 #EA5608(accent · dark — 위 글자는 흰색)
+    // 흰 바탕 위 강조 글자(ink)는 한 톤 진한 주황
+    theme: { accent: "#EA5608", onAccent: "#FFFFFF", ink: "#C94400", dark: "#EA5608", soft: "#FFF8E1", hi: "#FFE066" },
+    centered: true,
     blocks: [
       {
+        kind: "bubbles",
+        title: "글을 읽는데, 뜻을 모르는 아이?\n문제는 바로 '어휘력 부족'입니다.",
+        em: "'어휘력 부족'",
+        sub: "놓치면 안 되는 아이의 어휘력 '빨간불' 신호",
+        subEm: "'빨간불'",
+        // '빨간불' 신호 · 고민 강조는 붉은색
+        emColor: "#E03131",
+        // 말풍선: 연한 노랑 두 톤을 번갈아
+        bubbleBg: ["#FFF3C4", "#FFEBA6"],
+        // 슬라이드: 질문마다 말풍선 + 그 아래 고민하는 엄마(질문 순서대로 mom_06 · 07 · 03 · 04)
+        figures: [
+          { src: "https://cdn.hanuribook.com/img/icon/mom_06.png", w: 1024, h: 1024 },
+          { src: "https://cdn.hanuribook.com/img/icon/mom_07.png", w: 1024, h: 1024 },
+          { src: "https://cdn.hanuribook.com/img/icon/mom_03.png", w: 1024, h: 1024 },
+          { src: "https://cdn.hanuribook.com/img/icon/mom_04.png", w: 1024, h: 1024 },
+        ],
+        items: [
+          { text: "교과서를 다 읽고도 단어 뜻을 자꾸 물어봐요", em: "단어 뜻을 자꾸 물어봐요" },
+          { text: "단어 뜻은 아는데, 막상 문장으로는 못 써요", em: "막상 문장으로는 못 써요" },
+          { text: "선생님이 그러는데, 수업 시간에 자꾸 멍하니 있대요", em: "수업 시간에 자꾸 멍하니" },
+          { text: "모르는 단어가 많으니 아예 공부를 질려 해요", em: "공부를 질려 해요" },
+        ],
+        answer: {
+          text: "암기식 단어장으로는 절대 해결할 수 없습니다. 문맥으로 이해하고 스스로 활용하는 진짜 어휘력, 지금, 한우리 다다어휘를 만나세요!",
+          em: "지금, 한우리 다다어휘를 만나세요!",
+          icon: { src: "https://cdn.hanuribook.com/img/icon/teacher.png", w: 1024, h: 1024 },
+        },
+      },
+      {
+        kind: "steps",
+        title: "다다어휘 살펴보기",
+        items: [{ title: "어휘를 문맥과 상황에 맞게 체득하기" }, { title: "필독서 어휘 익히기" }, { title: "어휘를 통합하여 표현하기" }],
+      },
+      {
         kind: "points",
-        title: "프로그램 특징",
+        title: "주요 특징",
         items: [
           { label: "Point.1", desc: "교과서 이해에 꼭 필요한", em: "어휘 285개 수록" },
           { label: "Point.2", desc: "읽으면서 뜻이 잡히는", em: "맥락 중심 학습" },
@@ -255,9 +309,9 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         ],
       },
       {
-        kind: "steps",
-        title: "다다어휘 살펴보기",
-        items: [{ title: "어휘를 문맥과 상황에 맞게 체득하기" }, { title: "필독서 어휘 익히기" }, { title: "어휘를 통합하여 표현하기" }],
+        kind: "kit",
+        label: "교재 구성",
+        items: ["각 호당 교재 1권", "필독서 2권"],
       },
       {
         kind: "steps",

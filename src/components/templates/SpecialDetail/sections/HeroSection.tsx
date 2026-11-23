@@ -12,7 +12,7 @@ export default function HeroSection({ p }: { p: SpecialProgram }) {
         {/* 대상 태그: 강조색 바탕 + 강조색 위 글자색 */}
         <span
           className="inline-flex items-center rounded-full px-3.5 py-1.5 text-[13px] leading-[1.5] font-extrabold lg:px-4.5 lg:py-2 lg:text-[16px]"
-          style={{ background: t.accent, color: onAccentOf(t) }}
+          style={p.tagTone ? { background: p.tagTone.bg, color: p.tagTone.fg } : { background: t.accent, color: onAccentOf(t) }}
         >
           {p.tag}
         </span>
@@ -25,7 +25,7 @@ export default function HeroSection({ p }: { p: SpecialProgram }) {
         >
           {p.logo ? (
             <img
-              className="mx-auto block h-24 w-auto max-w-full lg:h-36"
+              className={`mx-auto block w-auto max-w-full ${p.logoCls ?? "h-24 lg:h-36"}`}
               src={p.logo.src}
               width={p.logo.w}
               height={p.logo.h}
@@ -51,7 +51,53 @@ export default function HeroSection({ p }: { p: SpecialProgram }) {
             ))}
           </ul>
         )}
-        {/* 수업 정보: 흰 박스 안에 줄마다 왼쪽 알약 라벨 · 오른쪽 내용(다른 상세 히어로 정보 박스와 같은 모양) */}
+        {/* 수업 정보가 2개 이하(예: 참깨한글 대상 · 학습 기간): 가로로 나란한 흰 타일
+            타일마다 강조색 동그라미 아이콘(대상: 사람 / 기간: 달력) + 작은 라벨 + 큰 굵은 값 */}
+        {p.info.length <= 2 ? (
+          <dl className="mx-0 mt-3 mb-0 box-border grid w-full max-w-[520px] grid-cols-2 gap-2.5 lg:mt-5 lg:gap-4">
+            {p.info.map(([k, v]) => (
+              <div
+                key={k}
+                className="box-border flex items-center gap-3 rounded-[18px] bg-white px-4 py-3.5 text-left shadow-[0_6px_16px_rgba(0,0,0,0.05)] lg:gap-4 lg:rounded-[22px] lg:px-6 lg:py-5"
+              >
+                <span
+                  className="flex h-10 w-10 flex-none items-center justify-center rounded-full lg:h-13 lg:w-13"
+                  style={{ background: t.accent }}
+                  aria-hidden="true"
+                >
+                  <svg
+                    className="h-5 w-5 lg:h-6.5 lg:w-6.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke={onAccentOf(t)}
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {k.includes("기간") ? (
+                      <>
+                        <rect x="3" y="5" width="18" height="16" rx="2" />
+                        <path d="M3 10h18M8 3v4M16 3v4" />
+                      </>
+                    ) : (
+                      <>
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 21a8 8 0 0 1 16 0" />
+                      </>
+                    )}
+                  </svg>
+                </span>
+                <div className="flex min-w-0 flex-col">
+                  <dt className="text-[12px] leading-[1.4] font-bold lg:text-[14px]" style={{ color: inkOf(t) }}>
+                    {k}
+                  </dt>
+                  <dd className="m-0 text-[17px] leading-[1.3] font-extrabold break-keep text-[#1F1F1F] lg:text-[22px]">{v}</dd>
+                </div>
+              </div>
+            ))}
+          </dl>
+        ) : (
+        /* 수업 정보: 흰 박스 안에 줄마다 왼쪽 알약 라벨 · 오른쪽 내용(다른 상세 히어로 정보 박스와 같은 모양) */
         <dl className="mx-0 mt-3 mb-0 box-border grid w-full max-w-[600px] grid-cols-1 gap-2.5 rounded-[18px] bg-white px-4 py-4 shadow-[0_6px_16px_rgba(0,0,0,0.05)] lg:mt-4 lg:gap-3 lg:rounded-[20px] lg:px-6 lg:py-5">
           {p.info.map(([k, v]) => (
             <div key={k} className="box-border flex items-center gap-3 text-left lg:gap-4">
@@ -71,6 +117,7 @@ export default function HeroSection({ p }: { p: SpecialProgram }) {
             </div>
           ))}
         </dl>
+        )}
       </div>
     </section>
   );

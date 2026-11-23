@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import SectionTitle from "@/views/Socrates/sections/SectionTitle";
 import SectionLabel from "@/components/common/SectionLabel";
 import { inkOf, onAccentOf, type SpecialBlock, type SpecialTheme } from "../specialData";
@@ -52,6 +52,94 @@ const EFFECT_ICONS: ReactNode[] = [
   <path key="pencil" d="M4 20l1-4L16 5l3 3L8 19zM14 7l3 3" />,
 ];
 
+/**
+ * 고민 슬라이드: 한 번에 하나씩 크게 보여 주고, 1초 동안 옆으로 밀려 넘어간 뒤 1초 멈춤(마지막 다음은 처음으로)
+ * - 화면에 보일 때만 자동으로 넘어가고, 마우스를 올리거나 키보드 포커스가 있으면 멈춤
+ * - 아래 점(●)을 눌러 원하는 장으로 이동. '동작 줄이기' 설정이면 자동 넘김 · 밀림 모션 없음
+ */
+function WorrySlider({ slides, dot }: { slides: { key: string; node: ReactNode }[]; dot: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [cur, setCur] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [reduce, setReduce] = useState(false);
+  useEffect(() => {
+    setReduce(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.4 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  useEffect(() => {
+    if (!visible || paused || reduce) return;
+    // 넘김 모션 1초 + 멈춤 1초 = 2초마다 다음 장
+    const id = window.setTimeout(() => setCur((c) => (c + 1) % slides.length), 2000);
+    return () => window.clearTimeout(id);
+  }, [cur, visible, paused, reduce, slides.length]);
+  return (
+    <div
+      ref={ref}
+      className="flex w-full max-w-[840px] flex-col items-center gap-4 lg:gap-6"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="엄마들의 고민"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
+      <div className="w-full overflow-hidden pb-1">
+        <ul
+          className={`m-0 flex list-none p-0 ${reduce ? "" : "transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]"}`}
+          style={{ transform: `translateX(-${cur * 100}%)` }}
+        >
+          {slides.map((s, i) => (
+            <li
+              key={s.key}
+              className="flex w-full flex-none justify-center"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} / ${slides.length}`}
+              aria-hidden={i !== cur}
+            >
+              {s.node}
+            </li>
+          ))}
+        </ul>
+      </div>
+      {/* 장 표시 점: 현재 장은 길쭉한 강조색 */}
+      <div className="flex items-center gap-2">
+        {slides.map((s, i) => (
+          <button
+            key={s.key}
+            type="button"
+            className="h-2.5 cursor-pointer rounded-full border-0 p-0 transition-[width,background-color] duration-300"
+            style={{ width: i === cur ? 28 : 10, background: i === cur ? dot : "#D9D9D9" }}
+            aria-label={`${i + 1}번째 고민 보기`}
+            aria-current={i === cur}
+            onClick={() => setCur(i)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** 문장 속 em 부분만 굵게 + 지정한 글자색 */
+function emText(text: string, em: string | undefined, color: string) {
+  const i = em ? text.indexOf(em) : -1;
+  if (!em || i < 0) return text;
+  return (
+    <>
+      {text.slice(0, i)}
+      <strong className="font-extrabold" style={{ color }}>
+        {em}
+      </strong>
+      {text.slice(i + em.length)}
+    </>
+  );
+}
+
 /** 문장 속 em 부분만 굵고 크게 */
 function withEm(text: string, em: string) {
   const i = text.indexOf(em);
@@ -98,10 +186,67 @@ export default function BlockSection({ b, t, idx, centered = false }: { b: Speci
             );
           })}
         </h2>
+        {/* 제목 아래 작은 문구(있을 때): subEm 부분은 강조 글자색 */}
+        {b.sub && (
+          <p className="m-0 -mt-3 text-center text-[15px] leading-[1.5] font-semibold break-keep text-[#333333] lg:-mt-5 lg:text-[19px]">
+            {b.subEm && b.sub.includes(b.subEm) ? (
+              <>
+                {b.sub.slice(0, b.sub.indexOf(b.subEm))}
+                <strong className="font-extrabold" style={{ color: b.emColor ?? ink }}>
+                  {b.subEm}
+                </strong>
+                {b.sub.slice(b.sub.indexOf(b.subEm) + b.subEm.length)}
+              </>
+            ) : (
+              b.sub
+            )}
+          </p>
+        )}
+        {b.figures ? (
+          // 슬라이드(figures 있을 때, 예: 다다어휘): 질문 하나씩 크게(말풍선 → 그 아래 고민하는 엄마), 자동으로 옆으로 넘어감
+          <WorrySlider
+            slides={b.items.map((q, i) => {
+              const bg = b.bubbleBg ? b.bubbleBg[i % 2] : i % 2 ? `${t.dark}1F` : `${t.accent}40`;
+              const f = b.figures?.[i];
+              return {
+                key: q.text,
+                node: (
+                  <div className="box-border flex w-full flex-col items-center gap-5 px-1 lg:gap-7">
+                    <p
+                      className="relative m-0 box-border w-full max-w-[640px] rounded-[24px] px-6 py-6 text-center text-[18px] leading-[1.5] font-semibold break-keep text-[#1F1F1F] lg:rounded-[32px] lg:px-12 lg:py-9 lg:text-[28px]"
+                      style={{ background: bg }}
+                    >
+                      “{emText(q.text, q.em, b.emColor ?? ink)}”
+                      {/* 꼬리: 아래 엄마 쪽을 향한 삼각형(가운데 아래) */}
+                      <span
+                        className="absolute -bottom-2.5 left-1/2 h-5 w-5 -translate-x-1/2 rotate-45 lg:-bottom-3 lg:h-6 lg:w-6"
+                        style={{ background: bg }}
+                        aria-hidden="true"
+                      />
+                    </p>
+                    {f && (
+                      // 엄마: 틀 없이 이미지 전체(잘라 내지 않음). 그림 둘레 투명 여백만큼 위아래 음수 여백으로 간격을 줄임
+                      <img
+                        className="-my-6 block h-48 w-48 flex-none lg:-my-8 lg:h-64 lg:w-64"
+                        src={f.src}
+                        width={f.w}
+                        height={f.h}
+                        alt=""
+                        aria-hidden="true"
+                        loading="lazy"
+                      />
+                    )}
+                  </div>
+                ),
+              };
+            })}
+            dot={ink}
+          />
+        ) : (
         <ul className="m-0 flex w-full max-w-[840px] list-none flex-col gap-4 p-0 lg:gap-6">
           {b.items.map((q, i) => {
             const right = i % 2 === 1; // 오른쪽 줄: 아이콘이 오른쪽
-            const bg = right ? `${t.dark}1F` : `${t.accent}40`;
+            const bg = b.bubbleBg ? b.bubbleBg[right ? 1 : 0] : right ? `${t.dark}1F` : `${t.accent}40`;
             return (
               <li key={q.text} className={`flex items-end gap-3 lg:gap-4 ${right ? "flex-row-reverse" : ""}`}>
                 {q.icon && (
@@ -119,12 +264,25 @@ export default function BlockSection({ b, t, idx, centered = false }: { b: Speci
                   }`}
                   style={{ background: bg }}
                 >
-                  “{q.text}”
+                  {/* em 부분(있을 때)은 굵게 + 강조 글자색 */}“
+                  {q.em && q.text.includes(q.em) ? (
+                    <>
+                      {q.text.slice(0, q.text.indexOf(q.em))}
+                      <strong className="font-extrabold" style={{ color: b.emColor ?? ink }}>
+                        {q.em}
+                      </strong>
+                      {q.text.slice(q.text.indexOf(q.em) + q.em.length)}
+                    </>
+                  ) : (
+                    q.text
+                  )}
+                  ”
                 </p>
               </li>
             );
           })}
         </ul>
+        )}
         {/* 선생님 답변: 진한 살구 핑크 말풍선 안에 선생님 아이콘 + 흰 굵은 글자로 눈에 띄게. em 부분은 노랑 강조 */}
         {b.answer && (
           // 말풍선 하나 안에 왼쪽 선생님 아이콘(흰 동그라미) + 오른쪽 답변 글
@@ -225,10 +383,10 @@ export default function BlockSection({ b, t, idx, centered = false }: { b: Speci
   // 학습 과정(과정 카드): 가운데 라벨 + 3열 카드(흰 카드: 과정 로고 → 대상 설명 → 구분선 → 굵은 과정명)
   if (b.kind === "courses") {
     return (
-      // 배경 띠 없음(흰 바탕) — 라벨 · 카드는 연한 색 바탕, 카드는 연한 테두리(그림자 없음)
-      <section className="mx-auto my-0 box-border flex max-w-[960px] flex-col items-center gap-4 px-5 pt-13 lg:gap-5 lg:pt-24" aria-label={b.label}>
-        <div className="flex w-full flex-col items-center gap-4 lg:gap-5">
-        <SectionLabel color={ink} bg={t.soft}>
+      // 배경: 연한 색 띠(전체 폭) — 그 위 라벨은 흰 바탕, 카드는 흰 카드 + 연한 테두리(그림자 없음)
+      <section className="mt-13 px-0 py-10 lg:mt-24 lg:py-16" style={{ background: t.soft }} aria-label={b.label}>
+        <div className="mx-auto my-0 box-border flex max-w-[960px] flex-col items-center gap-4 px-5 lg:gap-5">
+        <SectionLabel color={ink} bg="#FFFFFF">
           {b.label}
         </SectionLabel>
         <ul className="m-0 grid w-full list-none grid-cols-3 gap-2 p-0 lg:gap-5">
@@ -236,7 +394,7 @@ export default function BlockSection({ b, t, idx, centered = false }: { b: Speci
             <li
               key={c.name}
               className="flex flex-col items-center gap-2 rounded-[16px] border border-solid px-2 pt-5 pb-4 text-center lg:gap-3 lg:rounded-[22px] lg:px-5 lg:pt-8 lg:pb-6"
-              style={{ borderColor: "#EFE6D6", background: t.soft }}
+              style={{ borderColor: "#EFE6D6", background: "#FFFFFF" }}
             >
               {/* 과정 로고: 비율이 달라 높이를 맞춤 */}
               <img
@@ -291,6 +449,41 @@ export default function BlockSection({ b, t, idx, centered = false }: { b: Speci
             </li>
           ))}
         </ol>
+      </section>
+    );
+  }
+
+  // 교재 구성: 중고등정규(소크라테스) 교재 구성과 같은 모양 — 가운데 라벨 + 연한 박스 안 이미지(가운데) → 아래 구성 목록 가로 한 줄
+  if (b.kind === "kit") {
+    return (
+      <section className="mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 pt-13 lg:gap-5 lg:pt-24" aria-label={b.label}>
+        <SectionLabel color={ink} bg={t.soft}>
+          {b.label}
+        </SectionLabel>
+        <div
+          className="box-border flex w-full flex-col items-center gap-4 rounded-[20px] px-4 py-6 lg:gap-6 lg:rounded-[24px] lg:px-8 lg:py-10"
+          style={{ background: t.soft }}
+        >
+          {b.image && (
+            <img
+              className="block h-auto w-full max-w-[560px]"
+              src={b.image.src}
+              width={b.image.w}
+              height={b.image.h}
+              alt={`${b.label}: ${b.items.join(", ")}`}
+              loading="lazy"
+            />
+          )}
+          {/* 구성 목록: 좁은 화면에서는 다음 줄로 넘어감 */}
+          <ul className="m-0 flex list-none flex-wrap justify-center gap-x-4 gap-y-2 p-0 lg:gap-x-7">
+            {b.items.map((it) => (
+              <li key={it} className="flex items-center gap-1.5 whitespace-nowrap">
+                <span className="h-1.5 w-1.5 flex-none rounded-[50%]" style={{ background: t.dark }} aria-hidden="true" />
+                <strong className="text-[14px] text-[#1F1F1F] lg:text-[16px]">{it}</strong>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
     );
   }
@@ -363,18 +556,16 @@ export default function BlockSection({ b, t, idx, centered = false }: { b: Speci
     );
   }
 
-  // 가운데 라벨 페이지(참깨한글)의 특징 카드는 연한 색 배경 띠(전체 폭) 위에 — 라벨은 흰 바탕
-  const band = centered && b.kind === "points";
-  const body = (
+  return (
     <section
-      className={`mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 lg:gap-5 ${band ? "" : "pt-13 lg:pt-24"}`}
+      className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 pt-13 lg:gap-5 lg:pt-24"
       aria-labelledby={centered ? undefined : id}
       aria-label={centered ? b.title : undefined}
     >
       {centered ? (
         // 가운데 라벨(초등정규 상세와 같은 SectionLabel) + 보조 문구
         <div className="flex flex-col items-center gap-1.5 text-center lg:gap-2">
-          <SectionLabel color={ink} bg={band ? "#FFFFFF" : t.soft}>
+          <SectionLabel color={ink} bg={t.soft}>
             {b.title}
           </SectionLabel>
           {b.sub && <p className="m-0 text-[14px] leading-[1.6] break-keep text-[#555555] lg:text-[17px]">{b.sub}</p>}
@@ -396,8 +587,9 @@ export default function BlockSection({ b, t, idx, centered = false }: { b: Speci
           {b.items.map((it) => (
             <li
               key={it.label}
-              className="flex flex-col items-start gap-2 rounded-[20px] border border-solid bg-white p-5 lg:gap-2.5 lg:rounded-[24px] lg:p-7"
-              style={{ borderColor: `${t.accent}33` }}
+              className="flex flex-col items-start gap-2 rounded-[20px] border border-solid p-5 lg:gap-2.5 lg:rounded-[24px] lg:p-7"
+              // 카드 바탕: 가운데 라벨 페이지(참깨한글)는 연한 색, 그 외는 흰색
+              style={{ borderColor: `${t.accent}33`, background: centered ? t.soft : "#FFFFFF" }}
             >
               <span
                 className="rounded-[6px] px-2 py-0.5 text-[12px] font-extrabold tracking-[0.02em] text-white lg:text-[13px]"
@@ -529,12 +721,5 @@ export default function BlockSection({ b, t, idx, centered = false }: { b: Speci
         </div>
       )}
     </section>
-  );
-  return band ? (
-    <div className="mt-13 px-0 py-10 lg:mt-24 lg:py-16" style={{ background: t.soft }}>
-      {body}
-    </div>
-  ) : (
-    body
   );
 }
