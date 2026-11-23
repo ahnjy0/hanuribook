@@ -1,8 +1,6 @@
 import Header from "@/components/common/Header/Header";
-import ProgramFaqSection from "@/components/common/ProgramFaqSection";
 import IntroSection from "./sections/IntroSection";
 import CourseListSection from "./sections/CourseListSection";
-import InfoSection from "./sections/InfoSection";
 import Footer from "@/components/common/Footer/Footer";
 import BottomNav from "@/components/common/BottomNav/BottomNav";
 import { useSpecial } from "./useSpecial";
@@ -15,8 +13,6 @@ export default function Special() {
       <main className="flex-[1_0_auto]">
         <IntroSection />
         <CourseListSection items={items} />
-        <InfoSection />
-        <ProgramFaqSection last />
       </main>
       <Footer />
       <div className="sticky bottom-0 z-20">
