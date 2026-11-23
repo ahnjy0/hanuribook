@@ -15,8 +15,16 @@ export type ProgCard = {
   ink: string; // 학년 라벨·브랜드명·버튼 색
 };
 
-/** cols: 데스크톱·태블릿 열 수(기본 3 — 초등정규 3과정, 중고등정규는 2) */
-type Props = { progs: ProgCard[]; cols?: 2 | 3 };
+/**
+ * cols: 데스크톱·태블릿 열 수(기본 3 — 초등정규 3과정, 중고등정규는 2)
+ * iconImg: 카드 오른쪽 위에 아이콘 네모 대신 넣을 이미지(주소·크기). 없으면 기본 아이콘 네모(펼친 책)
+ *          초등정규는 '생각하는 나무' 로고 이미지
+ */
+type Props = {
+  progs: ProgCard[];
+  cols?: 2 | 3;
+  iconImg?: { src: string; width: number; height: number };
+};
 
 /**
  * 카드별 강조색(학년 라벨·브랜드명 글자, 상세보기 버튼)
@@ -25,7 +33,7 @@ type Props = { progs: ProgCard[]; cols?: 2 | 3 };
  */
 const ACCENT_OF: Record<string, string> = { vocab: "#C2410C" };
 
-export default function ProgramsSection({ progs, cols = 3 }: Props) {
+export default function ProgramsSection({ progs, cols = 3, iconImg }: Props) {
   return (
     <section
       // 위 타이틀 영역(IntroSection) 바로 아래 카드 목록 — 초등심화 과정 카드 영역과 같은 위 간격
@@ -53,6 +61,18 @@ export default function ProgramsSection({ progs, cols = 3 }: Props) {
                   style={{ background: p.accent }}
                   aria-hidden="true"
                 />
+                {/* 오른쪽 위: iconImg가 있으면 그 이미지(장식용), 없으면 아이콘 네모(펼친 책) */}
+                {iconImg ? (
+                  <img
+                    className="absolute top-4.5 right-4.5 h-auto w-16 lg:top-7 lg:right-7 lg:w-[88px]"
+                    src={iconImg.src}
+                    width={iconImg.width}
+                    height={iconImg.height}
+                    loading="lazy"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                ) : (
                 <span
                   className="absolute top-4.5 right-4.5 flex h-11 w-11 items-center justify-center rounded-[14px] lg:top-7 lg:right-7 lg:h-14 lg:w-14 lg:rounded-[16px] lg:[&_svg]:h-7 lg:[&_svg]:w-7"
                   style={{ background: p.accent }}
@@ -72,6 +92,7 @@ export default function ProgramsSection({ progs, cols = 3 }: Props) {
                     <path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z" />
                   </svg>
                 </span>
+                )}
                 {/* 학년 라벨: 공통 섹션 라벨(SectionLabel)과 같은 크기·여백(모바일 13px·데스크톱 16px), 카드 왼쪽 정렬 */}
                 <span
                   className="inline-flex items-center self-start rounded-full bg-white px-3.5 py-1.5 text-[13px] leading-[1.5] font-bold lg:px-4.5 lg:py-2 lg:text-[16px]"

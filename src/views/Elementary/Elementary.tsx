@@ -16,7 +16,11 @@ export default function Elementary() {
       <Header active="program" sub="초등정규" crumbs={"프로그램 > 초등정규"} />
       <main className="flex-[1_0_auto]">
         <IntroSection />
-        <ProgramsSection progs={progs} />
+        {/* 카드 오른쪽 위: '생각하는 나무' 로고 이미지(239×167) */}
+        <ProgramsSection
+          progs={progs}
+          iconImg={{ src: "https://cdn.hanuribook.com/img/hanuribook/ele_logo2.png", width: 239, height: 167 }}
+        />
         <FeaturesSection />
         <SelfCheckSection />
       </main>

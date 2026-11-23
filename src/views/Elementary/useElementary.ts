@@ -33,11 +33,11 @@ const PALETTE: Record<ProgId, { soft: string; line: string; accent: string; ink:
   logic: { soft: ELEMENTARY.logic.soft, line: "#CFE3FD", accent: ELEMENTARY.logic.heroBg, ink: ELEMENTARY.logic.accent, iconFg: "#FFFFFF", btnBg: ELEMENTARY.logic.accent, btnFg: "#FFFFFF" },
 };
 
-// brand: 카드 제목 위에 붙는 브랜드명(생각하는 나무 어휘리더/독서리더/논리리더)
-const PROGS = DEFS.map((d) => ({ ...d, ...PALETTE[d.id], brand: "생각하는 나무", href: LINKS[d.id][0], short: LINKS[d.id][1] }));
+// brand: 카드 제목 위 브랜드명 — 카드 오른쪽 위 '생각하는 나무' 로고 이미지와 겹쳐 비워 둠(빈 값이면 표시 안 함)
+const PROGS = DEFS.map((d) => ({ ...d, ...PALETTE[d.id], brand: "", href: LINKS[d.id][0], short: LINKS[d.id][1] }));
 
 export function useElementary() {
-  // 원본에도 선택 상태만 있고 변경 UI는 없습니다.
+
   const [sel] = useState<ProgId>("vocab");
   const c = DEFS.find((d) => d.id === sel) ?? DEFS[0];
   return { progs: PROGS, cur: { ...c, steps: c.steps.map((t, i) => ({ n: i + 1, t })) } };
