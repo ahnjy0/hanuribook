@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PATHS } from "@/routes";
+import { ELEMENTARY } from "@/views/ElementaryDetail/elementaryData";
 
 type TabKey = "regular" | "advanced" | "special";
 
@@ -19,19 +20,36 @@ const STAGE_TONE: Record<Stage, { soft: string; ink: string }> = {
   high: { soft: "#E3EDFC", ink: "#1E4E9C" },
 };
 
+type Tone = { soft: string; ink: string };
+
+/**
+ * 정규 탭 카드 색: 프로그램별 해당 페이지의 주요 색(soft: 연령 박스 배경, ink: 연령 글자)
+ * - 초등 3과정은 상세 페이지 데이터(ELEMENTARY)와 연결 — 상세 색을 바꾸면 메인 카드도 함께 바뀜
+ * - 꿈꾸는 새싹: 유아정규 분홍 / 소크라테스: 중등 퍼플 / 고등 문학: 중고등정규 전체의 고등 남색
+ */
+const PAGE_TONE = {
+  kinder: { soft: "#FDF0F5", ink: "#C7336E" },
+  vocab: { soft: ELEMENTARY.vocab.soft, ink: ELEMENTARY.vocab.accent },
+  reading: { soft: ELEMENTARY.reading.soft, ink: ELEMENTARY.reading.accent },
+  logic: { soft: ELEMENTARY.logic.soft, ink: ELEMENTARY.logic.accent },
+  socrates: { soft: "#F3F0FA", ink: "#5B4596" },
+  literature: { soft: "#EEF1F6", ink: "#2B3A5C" },
+} satisfies Record<string, Tone>;
+
 const stageOf = (age: string): Stage =>
   age.startsWith("유아") ? "kinder" : age.startsWith("초등") ? "elementary" : age.startsWith("고") ? "high" : "middle";
 
 // desc: 각 프로그램 상세·소개 화면의 기존 문구를 그대로 사용
 // sub: 카드에 보이는 한 줄 설명(정규·정규 심화 탭) / field: 프로그램 분야(특강 탭)
-const PROGRAMS: Record<TabKey, { age: string; title: string; sub?: string; field?: string; desc: string; href: string }[]> = {
+// tone: 카드 색(없으면 연령대 색 STAGE_TONE)
+const PROGRAMS: Record<TabKey, { age: string; title: string; sub?: string; field?: string; desc: string; href: string; tone?: Tone }[]> = {
   regular: [
-    { age: "유아 6~7세", title: "꿈꾸는 새싹", sub: "누리과정·초등교과 연계 학습", desc: "듣기·말하기·읽기·쓰기 생각하기 기본 다지기", href: PATHS.Kinder },
-    { age: "초등 1·2학년", title: "어휘리더", sub: "교과 학습 대비 필수 어휘 익히기", desc: "책 읽기의 즐거움과 교과 기초 어휘·표현력 다지기", href: PATHS.DetailVocab },
-    { age: "초등 3·4학년", title: "독서리더", sub: "교과 배경지식을 쌓는 문학·비문학 읽기", desc: "과목별 심화 배경지식 확장 및 갈래별 글쓰기 기초 훈련", href: PATHS.DetailReading },
-    { age: "초등 5·6학년", title: "논리리더", sub: "근거로 설득하는 서술형 글쓰기 학습", desc: "비판적 미디어 읽기, 실전 찬반토론 및 중등 서술형 완벽 대비", href: PATHS.DetailLogic },
-    { age: "중등", title: "소크라테스", sub: "중등 내신 대비 단계별 독해 훈련", desc: "질문하고 토론하며 논리를 세우는 중등 독서토론", href: PATHS.DetailSocrates },
-    { age: "고등", title: "소클 고등 문학", sub: "심층 독서·논구술로 내신·입시 대비", desc: "교과서·수능 문학 작품을 깊이 읽고 해석하는 힘", href: PATHS.DetailLiterature },
+    { age: "유아 6~7세", title: "꿈꾸는 새싹", sub: "누리과정·초등교과 연계 학습", desc: "듣기·말하기·읽기·쓰기 생각하기 기본 다지기", href: PATHS.Kinder, tone: PAGE_TONE.kinder },
+    { age: "초등 1·2학년", title: "어휘리더", sub: "교과 학습 대비 필수 어휘 익히기", desc: "책 읽기의 즐거움과 교과 기초 어휘·표현력 다지기", href: PATHS.DetailVocab, tone: PAGE_TONE.vocab },
+    { age: "초등 3·4학년", title: "독서리더", sub: "교과 배경지식을 쌓는 문학·비문학 읽기", desc: "과목별 심화 배경지식 확장 및 갈래별 글쓰기 기초 훈련", href: PATHS.DetailReading, tone: PAGE_TONE.reading },
+    { age: "초등 5·6학년", title: "논리리더", sub: "근거로 설득하는 서술형 글쓰기 학습", desc: "비판적 미디어 읽기, 실전 찬반토론 및 중등 서술형 완벽 대비", href: PATHS.DetailLogic, tone: PAGE_TONE.logic },
+    { age: "중등", title: "소크라테스", sub: "중등 내신 대비 단계별 독해 훈련", desc: "질문하고 토론하며 논리를 세우는 중등 독서토론", href: PATHS.DetailSocrates, tone: PAGE_TONE.socrates },
+    { age: "고등", title: "소클 고등 문학", sub: "심층 독서·논구술로 내신·입시 대비", desc: "교과서·수능 문학 작품을 깊이 읽고 해석하는 힘", href: PATHS.DetailLiterature, tone: PAGE_TONE.literature },
   ],
   advanced: [
     { age: "초등 3학년", title: "과학탐탐", sub: "비주얼씽킹을 통한 과학 핵심 개념 및 어휘 이해", desc: "궁금증을 탐구로, 탐구를 글로", href: PATHS.DetailScience },
@@ -66,7 +84,7 @@ export function useMain() {
 
   const progs = PROGRAMS[tab].map((p) => {
     const stage = stageOf(p.age);
-    return { ...p, stage, tone: STAGE_TONE[stage] };
+    return { ...p, stage, tone: p.tone ?? STAGE_TONE[stage] };
   });
 
   return { progTabs, progs };
