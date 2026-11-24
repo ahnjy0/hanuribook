@@ -419,18 +419,23 @@ export default function BlockSection({
           }`}
         >
           {b.items.map((it, i) =>
-            !centered ? (
-              // 왼쪽 정렬 페이지(문학 특강): 아이콘 없이 번호 + 설명 중심 카드
-              // 흰 카드 + 연한 강조색 테두리, 위 왼쪽 큰 번호(강조색) → 짧은 구분선 → 설명
+            !centered || b.numbered ? (
+              // 번호 강조 카드(왼쪽 정렬 페이지 · numbered): 아이콘 없이 번호 + 설명 중심
+              // 흰 카드 + 연한 테두리, 위 왼쪽 큰 번호 → 짧은 구분선 → 설명
+              // 번호 색: 왼쪽 정렬 페이지는 강조색, 진한 띠 위(참깨한글)는 띠 색(dark)
               <li
                 key={it.text}
                 className="flex animate-card-rise flex-col items-start gap-3 rounded-[20px] border-[1.5px] border-solid bg-white px-5 py-6 motion-reduce:animate-none lg:gap-4 lg:rounded-[24px] lg:px-7 lg:py-8"
                 style={{ borderColor: `${t.accent}33`, animationDelay: `${i * 120}ms`, animationFillMode: "both" }}
               >
-                <span className="text-[30px] leading-none font-extrabold tracking-[-0.02em] lg:text-[44px]" style={{ color: t.accent }} aria-hidden="true">
+                <span
+                  className="text-[30px] leading-none font-extrabold tracking-[-0.02em] lg:text-[44px]"
+                  style={{ color: centered ? t.dark : t.accent }}
+                  aria-hidden="true"
+                >
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="h-[3px] w-8 rounded-full lg:w-10" style={{ background: t.accent }} aria-hidden="true" />
+                <span className="h-[3px] w-8 rounded-full lg:w-10" style={{ background: centered ? t.dark : t.accent }} aria-hidden="true" />
                 {it.title && (
                   <strong className="text-[17px] leading-[1.4] font-extrabold break-keep text-[#1F1F1F] lg:text-[21px]">{it.title}</strong>
                 )}
@@ -1052,28 +1057,59 @@ export default function BlockSection({
           {b.items.map((it) => (
             <li
               key={it.label}
-              className="flex flex-col items-start gap-2 rounded-[20px] border border-solid p-5 lg:gap-2.5 lg:rounded-[24px] lg:p-7"
+              // b.center: 카드 안 글 가운데 정렬(다다어휘)
+              className={`flex flex-col gap-2 rounded-[20px] border border-solid p-5 lg:gap-2.5 lg:rounded-[24px] lg:p-7 ${b.center ? "items-center text-center" : "items-start"}`}
               // 카드 바탕: 가운데 라벨 페이지(참깨한글)는 연한 색, 그 외는 흰색
               style={{ borderColor: `${t.accent}33`, background: centered && !band ? t.soft : "#FFFFFF" }}
             >
-              <span
-                className="rounded-[6px] px-2 py-0.5 text-[12px] font-extrabold tracking-[0.02em] text-white lg:text-[13px]"
-                style={{ background: t.dark }}
-              >
-                {it.label}
-              </span>
+              {/* 아이콘(있을 때): 진한 포인트색 선 아이콘 — 카드 가운데
+                  b.iconBg(다다어휘 · 참깨한글)면 아이콘색을 옅게 깐 동그라미(그림자 없음), 아니면 흰 동그라미 + 그림자 */}
+              {it.icon && (
+                <span
+                  className="mb-1 flex h-14 w-14 flex-none items-center justify-center self-center rounded-full lg:mb-1.5 lg:h-[72px] lg:w-[72px]"
+                  style={
+                    b.iconBg
+                      ? { background: `${t.dark}1F`, color: t.dark }
+                      : { background: "#FFFFFF", boxShadow: `0 6px 14px ${t.dark}1F`, color: t.dark }
+                  }
+                  aria-hidden="true"
+                >
+                  <svg
+                    className="h-7 w-7 lg:h-9 lg:w-9"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {POINT_ICONS[it.icon]}
+                  </svg>
+                </span>
+              )}
+              {/* 'Point.1' 라벨: 아이콘 카드(참깨한글)에서는 아이콘이 대신하므로 생략 */}
+              {!it.icon && (
+                <span
+                  className="rounded-[6px] px-2 py-0.5 text-[12px] font-extrabold tracking-[0.02em] text-white lg:text-[13px]"
+                  style={{ background: t.dark }}
+                >
+                  {it.label}
+                </span>
+              )}
               {it.title && (
                 <strong className="text-[17px] leading-[1.4] font-extrabold break-keep lg:text-[21px]" style={{ color: ink }}>
                   {it.title}
                 </strong>
               )}
-              {/* 설명: descEm 부분은 더 굵게(색은 같은 진한 글자) */}
+              {/* 설명: descEm 부분은 더 굵게(b.accentEm 이면 강조 글자색, 아니면 같은 진한 글자) */}
               {it.desc && (
                 <p className="m-0 text-[15px] leading-[1.6] font-semibold break-keep text-[#1F1F1F] lg:text-[17px]">
                   {it.descEm && it.desc.includes(it.descEm) ? (
                     <>
                       {it.desc.slice(0, it.desc.indexOf(it.descEm))}
-                      <strong className="font-extrabold">{it.descEm}</strong>
+                      <strong className="font-extrabold" style={b.accentEm ? { color: ink } : undefined}>
+                        {it.descEm}
+                      </strong>
                       {it.desc.slice(it.desc.indexOf(it.descEm) + it.descEm.length)}
                     </>
                   ) : (

@@ -79,6 +79,9 @@ type SpecialBlockBody =
       sub?: string;
       band?: boolean; // true 면 연한 색 배경 띠(전체 폭) 위에 — 라벨 · 카드는 흰 바탕
       heading?: string; // 라벨 아래 큰 제목(줄바꿈 시 마지막 줄은 강조 글자색)
+      center?: boolean; // true 면 카드 안 글을 가운데 정렬
+      accentEm?: boolean; // true 면 descEm(강조 부분)을 강조 글자색으로
+      iconBg?: boolean; // true 면 아이콘 동그라미를 아이콘색(dark)을 옅게 깐 바탕(그림자 없음), 아니면 흰 바탕 + 그림자
       // label: 'Point.1' 같은 작은 라벨 / title: 굵은 제목 / desc: 설명 / descEm: 설명 안에서 강조할 부분 / em: 강조 문장(설명 뒤)
       // icon: 짧은 문구 카드(주요 정보 띠 안)에 쓰는 아이콘 이름 — BlockSection 의 POINT_ICONS
       items: { label: string; title?: string; desc?: string; descEm?: string; em?: string; icon?: PointIcon }[];
@@ -107,7 +110,16 @@ type SpecialBlockBody =
   // items.title: 카드 굵은 제목(있으면 번호 아래 · 설명 위) / em: 설명 안 굵게 할 부분(빈 문자열이면 없음)
   // eyebrow: 제목 위 작은 문구(없으면 생략)
   // title · desc 는 없으면 생략(라벨 바로 아래 카드)
-  | { kind: "effects"; label: string; eyebrow?: string; title?: string; desc?: string; items: { title?: string; text: string; em: string }[] }
+  // numbered: true 면 아이콘 없이 번호를 강조한 카드(큰 번호 → 짧은 선 → 설명)
+  | {
+      kind: "effects";
+      label: string;
+      eyebrow?: string;
+      title?: string;
+      desc?: string;
+      numbered?: boolean;
+      items: { title?: string; text: string; em: string }[];
+    }
   // 과정 카드: 가운데 라벨 + 3열(2개면 2열) 카드(과정 로고(없으면 과정명 글자) → 대상 설명(\n 줄바꿈) → 구분선 → 굵은 제목)
   // href: 카드를 누르면 이동할 같은 페이지 안 위치(#id, 없으면 링크 없음) / color: 과정명 글자색(없으면 강조 글자색)
   | {
@@ -261,17 +273,26 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
       {
         kind: "points",
         title: "주요 특징",
+        iconBg: true,
         items: [
-          { label: "Point.1", desc: "한글 떼는 것은 물론 글을 읽고 이해하는 기초 능력을 갖출 수 있어요.", descEm: "글을 읽고 이해하는 기초 능력" },
+          // icon: 카드 위 아이콘(책 · 전구 · 층)
+          {
+            label: "Point.1",
+            desc: "한글 떼는 것은 물론 글을 읽고 이해하는 기초 능력을 갖출 수 있어요.",
+            descEm: "글을 읽고 이해하는 기초 능력",
+            icon: "book",
+          },
           {
             label: "Point.2",
             desc: "필독서를 읽고 주제별 수업을 통해 맥락 속에서 한글을 배우며 생각하는 힘을 키울 수 있어요.",
             descEm: "맥락 속에서 한글을 배우며 생각하는 힘",
+            icon: "bulb",
           },
           {
             label: "Point.3",
             desc: "아이의 수준에 따라 단계를 선택해 배울 수 있고, 한우리 유치·초등 프로그램으로의 연결 학습이 가능해요.",
             descEm: "한우리 유치·초등 프로그램으로의 연결 학습",
+            icon: "layers",
           },
         ],
       },
@@ -347,6 +368,7 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         label: "학습 효과",
         title: "한글 완전 정복",
         desc: "한글 기초부터 완전 학습까지,\n초등 입학 전 필요한 읽기 역량을 확실히 길러요.",
+        numbered: true,
         items: [
           { text: "체계적인 한글 학습으로 문해력 기초를 다져요.", em: "문해력 기초" },
           { text: "필독서와 연계한 주제별 한글 해득 활동으로 복잡한 한글도 쉽게 이해해요.", em: "한글도 쉽게" },
@@ -420,11 +442,15 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         title: "주요 특징",
         band: true,
         heading: "교과서를 제대로 읽게 만드는\n어휘력 집중 향상 프로그램",
+        center: true,
+        accentEm: true,
+        iconBg: true,
         items: [
           // 설명과 강조 문구를 한 줄로(강조 부분만 더 굵게)
-          { label: "Point.1", desc: "교과서 이해에 꼭 필요한 어휘 285개 수록", descEm: "어휘 285개 수록" },
-          { label: "Point.2", desc: "읽으면서 뜻이 잡히는 맥락 중심 학습", descEm: "맥락 중심 학습" },
-          { label: "Point.3", desc: "평가에 바로 적용 가능한 쓰기 / 말하기 훈련", descEm: "쓰기 / 말하기 훈련" },
+          // icon: 카드 위 아이콘(책 · 돋보기 · 연필) — 아이콘이 있으면 Point 라벨은 생략
+          { label: "Point.1", desc: "교과서 이해에 꼭 필요한 어휘 285개 수록", descEm: "어휘 285개 수록", icon: "book" },
+          { label: "Point.2", desc: "읽으면서 뜻이 잡히는 맥락 중심 학습", descEm: "맥락 중심 학습", icon: "search" },
+          { label: "Point.3", desc: "평가에 바로 적용 가능한 쓰기 / 말하기 훈련", descEm: "쓰기 / 말하기 훈련", icon: "pen" },
         ],
       },
       {
@@ -449,6 +475,7 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         label: "학습 효과",
         title: "교과서 필수 어휘학습",
         desc: "어휘력이 자라면 독해력과\n교과 자신감이 함께 올라갑니다.",
+        numbered: true,
         items: [
           { title: "학교 교과서가 쉬워져요", text: "교과 어휘를 미리 익혀 수업 내용을 쉽게 이해해요.", em: "" },
           { title: "독해력이 함께 자라나요", text: "문장을 읽고 파악하는 힘이 눈에 띄게 좋아져요.", em: "" },
