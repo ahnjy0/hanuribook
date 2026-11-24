@@ -46,17 +46,16 @@ export default function CourseListSection({ items }: Props) {
               {/* 아래쪽: 한 줄 설명(왼쪽) + 상세보기 버튼(오른쪽). 좁은 화면에서 넘치면 버튼이 다음 줄 오른쪽으로.
                   데스크톱 3열은 카드가 좁아 설명을 한 줄 전체로, 버튼은 그 아래 오른쪽 */}
               <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-3 px-5 pt-1 pb-5 lg:px-7 lg:pb-7">
-                <p className="m-0 min-w-0 flex-1 text-[15px] leading-[1.55] font-extrabold break-keep text-[#222222] lg:basis-full lg:text-[17px]">
+                <p className="m-0 min-w-0 flex-1 text-[15px] leading-[1.55] font-normal break-keep text-[#222222] lg:basis-full lg:text-[17px]">
                   {c.desc}
                 </p>
                 {/* 상세 페이지로 이동(데이터 href — 상세 페이지가 생기기 전까지는 자리표시 "#").
-                    버튼 색은 카드마다 다르지 않게 무채색(진회색, 마우스오버 시 검정)으로 통일 */}
+                    버튼 색은 카드마다 다르지 않게 진한 베이지(마우스오버 시 더 진하게)로 통일, 버튼명은 '프로그램명 상세보기' */}
                 <SmartLink
-                  className="ml-auto inline-flex h-10 flex-none items-center justify-center gap-1 rounded-full bg-[#333333] px-5 text-[14px] font-bold text-white no-underline transition-colors duration-300 hover:bg-[#111111] lg:h-11 lg:px-6 lg:text-[15px]"
+                  className="ml-auto inline-flex h-10 flex-none items-center justify-center gap-1 rounded-full bg-[#8C6E4A] px-5 text-[14px] font-bold text-white no-underline transition-colors duration-300 hover:bg-[#6E5436] lg:h-11 lg:px-6 lg:text-[15px]"
                   href={c.href}
-                  aria-label={`${c.title} 상세보기`}
                 >
-                  상세보기 ›
+                  {c.cta ?? c.title} 상세보기 ›
                 </SmartLink>
               </div>
             </article>

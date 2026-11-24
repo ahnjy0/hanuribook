@@ -21,7 +21,10 @@ function localImg(img: StaticImageData): SpecialImage {
  * - onAccent: accent 바탕 위 글자색(기본 흰색 — 노랑처럼 밝은 강조색이면 진한 색)
  * - ink: 흰 바탕 위에 쓰는 강조 글자색(기본 accent — 밝은 강조색이면 같은 계열의 진한 색)
  */
-export type SpecialTheme = { accent: string; dark: string; soft: string; hi: string; onAccent?: string; ink?: string };
+/** 주요 특징 짧은 문구 카드 아이콘 이름 */
+export type PointIcon = "book" | "layers" | "link" | "pen" | "bulb" | "search" | "target";
+
+export type SpecialTheme ={ accent: string; dark: string; soft: string; hi: string; onAccent?: string; ink?: string };
 
 /** 테마 기본값을 채운 글자색 */
 export const onAccentOf = (t: SpecialTheme) => t.onAccent ?? "#FFFFFF";
@@ -66,6 +69,7 @@ type SpecialBlockBody =
       children?: SpecialBlockBody[]; // 소개 박스 안에 이어서 보여 줄 블록들(주요 특징 · 수업 흐름 등 — 박스 안이라 흰 바탕으로)
       titleSub?: string;
       slogan: string;
+      desc?: string; // 핵심 문구 아래 소개글
       badges?: string[];
       info: [string, string][];
     }
@@ -76,9 +80,11 @@ type SpecialBlockBody =
       band?: boolean; // true 면 연한 색 배경 띠(전체 폭) 위에 — 라벨 · 카드는 흰 바탕
       heading?: string; // 라벨 아래 큰 제목(줄바꿈 시 마지막 줄은 강조 글자색)
       // label: 'Point.1' 같은 작은 라벨 / title: 굵은 제목 / desc: 설명 / descEm: 설명 안에서 강조할 부분 / em: 강조 문장(설명 뒤)
-      items: { label: string; title?: string; desc?: string; descEm?: string; em?: string }[];
+      // icon: 짧은 문구 카드(주요 정보 띠 안)에 쓰는 아이콘 이름 — BlockSection 의 POINT_ICONS
+      items: { label: string; title?: string; desc?: string; descEm?: string; em?: string; icon?: PointIcon }[];
     }
-  | { kind: "steps"; title: string; sub?: string; items: { title: string; desc?: string }[] }
+  // items.em: true 면 그 단계 카드를 강조(강조색 바탕 + 흰 글자)
+  | { kind: "steps"; title: string; sub?: string; items: { title: string; desc?: string; em?: boolean }[] }
   // boxed: true 면 단계를 › 로 잇는 대신 번호 붙은 박스로(순서별 박스)
   | { kind: "flow"; title: string; sub?: string; boxed?: boolean; groups: { label: string; note?: string; items: string[] }[] }
   // 고민 말풍선: 가운데 제목(\n 줄바꿈) + 채팅처럼 좌우 번갈아 놓는 말풍선(icon: 말하는 사람 아이콘)
@@ -582,6 +588,16 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
     tag: "문학 집중 프로그램",
     title: "문학 특강",
     slogan: "중등 교과 및 수능 연계 작품 분석",
+    // 히어로 배경 패턴: 별별 문학 독해 교재 표지를 45도 회전해 옅게(5%) 반복 — 다른 단기특강 히어로와 같은 방식
+    heroBg: {
+      src: "https://cdn.hanuribook.com/img/hanuribook/special2_01.png",
+      size: "300px auto",
+      position: "left top",
+      repeat: "repeat-x",
+      rotate: 45,
+      band: 394,
+      opacity: 0.05,
+    },
     info: [],
     // 히어로: 초등정규 어휘리더처럼 두 과정 카드(누르면 아래 과정 소개로 이동)
     heroCards: [
@@ -621,16 +637,18 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
           id: "lit-middle",
           tag: "예비 중1",
           name: "별별 문학 독해",
-          slogan: "중학교 입학 전, 교과서 수록 문학 70여 편을 미리 만나자!",
-          info: [["각 호 구성", "필독서 2권, 교재 1권"]],
+          slogan: "중등 국어 교과서 수록 작품 분석",
+          info: [["교재 구성", "워크북 3권, 필독서 6권, 활동 자료(어휘력 · 문해력 별지/글쓰기 별지)"]],
           children: [
             {
               kind: "points",
               title: "주요 특징",
               items: [
-                { label: "Point.1", desc: "갈래별(소설, 시, 수필, 고전 등) 문학 기본 개념 이해" },
-                { label: "Point.2", desc: "중등 국어과 문학 성취 기준에 맞춘 감상 · 독해 훈련" },
-                { label: "Point.3", desc: "비문학 제시문과 연계, 전반적인 독해력 향상" },
+                // 짧은 문구 카드(아이콘 + 문구) — 주요 정보 띠 안이라 BlockSection 의 nested 모양
+                { label: "Point.1", title: "중등 교과 수록 문학 읽기", icon: "book" },
+                { label: "Point.2", title: "갈래별 주제별 작품 탐구", icon: "layers" },
+                { label: "Point.3", title: "비문학 제시문 연계", icon: "link" },
+                { label: "Point.4", title: "서술 · 논술형 평가 훈련", icon: "pen" },
               ],
             },
           ],
@@ -700,8 +718,9 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
           tag: "예비고",
           tagSub: "(중2~3)",
           name: "교과 문학 탐독",
-          slogan: "국어의 승부처는 문학",
-          badges: ["26년 8월 신규 출시", "교과서, 수능 연계 작품 중심", "2022 개정 교육과정 성취기준 기반"],
+          slogan: "중등 교과 및 수능 연계 작품 독해",
+          desc: "국어 · 수능 연계 문학을 깊이 읽고, 조건 글쓰기 활동을 통해 수행평가와 국어 내신을 대비하고, 수능 문학 독해의 기초를 체계적으로 다집니다.",
+          badges: ["교과서, 수능 연계 작품 중심", "2022 개정 교육과정 성취기준 기반"],
           info: [
             ["교재 구성", "교재, 필독서, 교재 내 별지 포함\n*수능 및 내신 대비 문항 별지 외 다수"],
             ["필독서", "우소탐 개정증보판 1~3권 +\n교과서로 시작하는 고등학교 소설 읽기 2 (해냄에듀)"],
@@ -711,31 +730,24 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
               kind: "points",
               title: "주요 특징",
               items: [
-                {
-                  label: "Point.1",
-                  desc: "2022 개정 교육과정, 수행평가가 달라졌습니다.",
-                  em: "단순 암기가 아닌, 작품을 깊이 읽고 글로 써내는 표현력을 요구합니다.",
-                },
-                { label: "Point.2", desc: "수능 국어의 핵심 변별력은 결국 문학.", em: "작품을 끝까지 읽고 해석해 본 아이가 고등 국어에서 흔들리지 않습니다." },
-                {
-                  label: "Point.3",
-                  desc: "숏폼과 짧은 글에 익숙한 아이일수록 긴 글 읽기에서 무너집니다.",
-                  em: "문해력, 예비고 시기가 마지막 골든타임입니다.",
-                },
+                { label: "Point.1", title: "교과/수능 연계 문학 읽기", icon: "book" },
+                { label: "Point.2", title: "어휘 및 배경지식 확장", icon: "bulb" },
+                { label: "Point.3", title: "주제와 맥락을 읽는 탐독", icon: "search" },
+                { label: "Point.4", title: "내신 및 평가 실전 대비", icon: "target" },
               ],
             },
           ],
         },
         {
           kind: "steps",
-          title: "교과 문학 탐독 6단계 과정",
+          title: "6단계 문학 탐독 과정",
           items: [
             { title: "미리 보기", desc: "배경지식 활성화" },
             { title: "어휘 충전", desc: "작품 핵심 어휘 습득" },
             { title: "이해와 감상", desc: "인물 · 갈등 · 주제로 작품 종합 분석" },
             { title: "문학과 시대", desc: "시대 맥락 이해로 작품 입체 해석" },
             { title: "문학과 사회", desc: "현대 사회와의 연결" },
-            { title: "수행평가", desc: "내신 · 평가 실전 대비" },
+            { title: "수행평가", desc: "내신 · 평가 실전 대비", em: true },
           ],
         },
         {

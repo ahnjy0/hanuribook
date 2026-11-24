@@ -2,7 +2,31 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import SectionTitle from "@/views/Socrates/sections/SectionTitle";
 import SectionLabel from "@/components/common/SectionLabel";
 import CheckIcon from "@/components/common/CheckIcon";
-import { inkOf, onAccentOf, type SpecialBlock, type SpecialTheme } from "../specialData";
+import { inkOf, onAccentOf, type PointIcon, type SpecialBlock, type SpecialTheme } from "../specialData";
+
+/** 주요 특징 짧은 문구 카드 아이콘(24×24 선) */
+const POINT_ICONS: Record<PointIcon, ReactNode> = {
+  // 펼친 책
+  book: <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5zM20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z" />,
+  // 겹친 층(갈래 · 주제별)
+  layers: <path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5M3 17.5l9 5 9-5" />,
+  // 고리(연계)
+  link: <path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" />,
+  // 연필(서술 · 논술)
+  pen: <path d="M4 20l1-4L16 5l3 3L8 19zM14 7l3 3" />,
+  // 전구(어휘 · 배경지식)
+  bulb: <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" />,
+  // 돋보기(탐독)
+  search: <path d="M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.5 15.5L20 20" />,
+  // 과녁(실전 대비)
+  target: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <circle cx="12" cy="12" r="4.5" />
+      <circle cx="12" cy="12" r="0.8" />
+    </>
+  ),
+};
 
 /** 블록 종류별 제목 아이콘(24×24 선) — 왼쪽 정렬 섹션 제목을 쓰는 블록만 */
 const ICONS: Record<"points" | "steps" | "flow" | "tables", ReactNode> = {
@@ -394,7 +418,27 @@ export default function BlockSection({
             b.items.length === 4 ? "md:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-3"
           }`}
         >
-          {b.items.map((it, i) => (
+          {b.items.map((it, i) =>
+            !centered ? (
+              // 왼쪽 정렬 페이지(문학 특강): 아이콘 없이 번호 + 설명 중심 카드
+              // 흰 카드 + 연한 강조색 테두리, 위 왼쪽 큰 번호(강조색) → 짧은 구분선 → 설명
+              <li
+                key={it.text}
+                className="flex animate-card-rise flex-col items-start gap-3 rounded-[20px] border-[1.5px] border-solid bg-white px-5 py-6 motion-reduce:animate-none lg:gap-4 lg:rounded-[24px] lg:px-7 lg:py-8"
+                style={{ borderColor: `${t.accent}33`, animationDelay: `${i * 120}ms`, animationFillMode: "both" }}
+              >
+                <span className="text-[30px] leading-none font-extrabold tracking-[-0.02em] lg:text-[44px]" style={{ color: t.accent }} aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="h-[3px] w-8 rounded-full lg:w-10" style={{ background: t.accent }} aria-hidden="true" />
+                {it.title && (
+                  <strong className="text-[17px] leading-[1.4] font-extrabold break-keep text-[#1F1F1F] lg:text-[21px]">{it.title}</strong>
+                )}
+                <p className="m-0 text-[15px] leading-[1.6] font-semibold break-keep text-[#1F1F1F] lg:text-[18px]">
+                  {it.em ? withEm(it.text, it.em) : it.text}
+                </p>
+              </li>
+            ) : (
             <li
               key={it.text}
               className="flex animate-card-rise flex-row items-center gap-4 rounded-[20px] px-5 py-5 motion-reduce:animate-none md:flex-col md:gap-4 md:px-6 md:py-8 md:text-center lg:rounded-[24px] lg:py-10"
@@ -430,7 +474,8 @@ export default function BlockSection({
                 </p>
               </div>
             </li>
-          ))}
+            ),
+          )}
         </ol>
       </section>
     );
@@ -563,13 +608,18 @@ export default function BlockSection({
           </div>
           {b.titleSub && <p className="m-0 -mt-1 text-[14px] font-semibold break-keep text-[#555555] lg:text-[17px]">{b.titleSub}</p>}
           <p className="m-0 text-[17px] leading-[1.45] font-extrabold break-keep text-[#1F1F1F] lg:text-[24px]">{b.slogan}</p>
+          {/* 소개글(있을 때): 핵심 문구 아래 보통 굵기 */}
+          {b.desc && (
+            <p className="m-0 max-w-[720px] text-center text-[14px] leading-[1.65] break-keep text-[#444444] lg:text-[17px]">{b.desc}</p>
+          )}
           {b.badges && (
-            <ul className="m-0 mt-1 flex list-none flex-wrap justify-center gap-1.5 p-0 lg:gap-2">
+            // 뱃지: 크게 강조 — 강조색으로 채운 알약 + 흰 굵은 글자
+            <ul className="m-0 mt-2 flex list-none flex-wrap justify-center gap-2 p-0 lg:mt-3 lg:gap-3">
               {b.badges.map((bd) => (
                 <li
                   key={bd}
-                  className="rounded-full border-[1.5px] border-solid bg-white px-3 py-1 text-[12px] font-bold lg:px-4 lg:py-1.5 lg:text-[14px]"
-                  style={{ borderColor: t.accent, color: ink }}
+                  className="rounded-full px-4.5 py-2 text-[15px] leading-[1.4] font-extrabold break-keep lg:px-7 lg:py-3 lg:text-[19px]"
+                  style={{ background: t.accent, color: onA }}
                 >
                   ★ {bd}
                 </li>
@@ -961,7 +1011,41 @@ export default function BlockSection({
         </div>
       )}
 
-      {b.kind === "points" && (
+      {b.kind === "points" && nested && (
+        // 주요 정보 띠 안(문학 특강): 짧은 문구 카드 — 모바일 2열 · 데스크톱 한 줄, 아이콘(연한 과정색 동그라미) + 굵은 문구(가운데)
+        <ul className="m-0 mt-1.5 grid list-none grid-cols-2 gap-2.5 p-0 lg:grid-cols-4 lg:gap-4">
+          {b.items.map((it) => (
+            <li
+              key={it.label}
+              className="flex flex-col items-center justify-center gap-2.5 rounded-[18px] border-[1.5px] border-solid bg-white px-3 py-5 text-center lg:gap-3.5 lg:rounded-[22px] lg:px-5 lg:py-8"
+              style={{ borderColor: `${t.accent}40` }}
+            >
+              {it.icon && (
+                <span
+                  className="flex h-12 w-12 flex-none items-center justify-center rounded-full lg:h-16 lg:w-16"
+                  style={{ background: `${t.accent}1A`, color: t.accent }}
+                  aria-hidden="true"
+                >
+                  <svg
+                    className="h-6 w-6 lg:h-8 lg:w-8"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {POINT_ICONS[it.icon]}
+                  </svg>
+                </span>
+              )}
+              <strong className="text-[15px] leading-[1.4] font-extrabold break-keep text-[#1F1F1F] lg:text-[20px]">{it.title ?? it.desc}</strong>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {b.kind === "points" && !nested && (
         <ul
           className={`m-0 mt-1.5 grid list-none grid-cols-1 gap-3 p-0 lg:gap-4 ${b.items.length === 4 ? "md:grid-cols-2" : "md:grid-cols-3"}`}
         >
@@ -1014,16 +1098,30 @@ export default function BlockSection({
           }`}
         >
           {b.items.map((it, i) => (
-            <li key={it.title} className="flex flex-col items-start gap-2 rounded-[18px] p-5 lg:rounded-[22px] lg:p-6" style={{ background: t.soft }}>
+            // 강조 단계(it.em): 강조색 바탕 + 흰 글자, 번호 칸은 반대로(흰 바탕 + 강조색 글자)
+            <li
+              key={it.title}
+              className="flex flex-col items-start gap-2 rounded-[18px] p-5 lg:rounded-[22px] lg:p-6"
+              style={{ background: it.em ? t.accent : t.soft }}
+            >
               <span
                 className="flex h-8 w-8 flex-none items-center justify-center rounded-[9px] text-[15px] font-extrabold lg:h-10 lg:w-10 lg:rounded-[11px] lg:text-[18px]"
-                style={{ background: t.accent, color: onA }}
+                style={it.em ? { background: "#FFFFFF", color: t.accent } : { background: t.accent, color: onA }}
                 aria-hidden="true"
               >
                 {i + 1}
               </span>
-              <strong className="text-[16px] leading-[1.4] font-extrabold break-keep text-[#1F1F1F] lg:text-[19px]">{it.title}</strong>
-              {it.desc && <p className="m-0 text-[14px] leading-[1.55] break-keep text-[#444444] lg:text-[16px]">{it.desc}</p>}
+              <strong
+                className="text-[16px] leading-[1.4] font-extrabold break-keep lg:text-[19px]"
+                style={{ color: it.em ? onA : "#1F1F1F" }}
+              >
+                {it.title}
+              </strong>
+              {it.desc && (
+                <p className="m-0 text-[14px] leading-[1.55] break-keep lg:text-[16px]" style={{ color: it.em ? onA : "#444444" }}>
+                  {it.desc}
+                </p>
+              )}
             </li>
           ))}
         </ol>
@@ -1044,19 +1142,20 @@ export default function BlockSection({
                 className={`m-0 grid list-none grid-cols-2 gap-2 p-0 lg:gap-3 ${g.items.length >= 5 ? "lg:grid-cols-5" : "lg:grid-cols-4"}`}
               >
                 {g.items.map((s, i) => (
+                  // 글 중심: 번호는 작고 흐리게(연한 강조색 바탕 + 강조색 글자), 단계명은 크고 굵게. 테두리도 옅게
                   <li
                     key={s}
-                    className="flex items-center gap-2.5 rounded-[14px] border border-solid bg-white px-3 py-3 lg:flex-col lg:items-start lg:gap-2 lg:rounded-[16px] lg:px-4 lg:py-4"
-                    style={{ borderColor: `${t.accent}40` }}
+                    className="flex items-center gap-2.5 rounded-[14px] border border-solid bg-white px-3 py-3.5 lg:flex-col lg:items-start lg:gap-2.5 lg:rounded-[16px] lg:px-5 lg:py-5"
+                    style={{ borderColor: `${t.accent}26` }}
                   >
                     <span
-                      className="flex h-7 w-7 flex-none items-center justify-center rounded-full text-[13px] font-extrabold lg:h-8 lg:w-8 lg:text-[15px]"
-                      style={{ background: t.accent, color: onA }}
+                      className="flex h-6 w-6 flex-none items-center justify-center rounded-full text-[12px] font-bold lg:h-7 lg:w-7 lg:text-[13px]"
+                      style={{ background: `${t.accent}14`, color: `${t.accent}B3` }}
                       aria-hidden="true"
                     >
                       {i + 1}
                     </span>
-                    <span className="text-[14px] leading-[1.4] font-bold break-keep text-[#1F1F1F] lg:text-[16px]">{s}</span>
+                    <span className="text-[15px] leading-[1.4] font-extrabold break-keep text-[#1F1F1F] lg:text-[18px]">{s}</span>
                   </li>
                 ))}
               </ol>
