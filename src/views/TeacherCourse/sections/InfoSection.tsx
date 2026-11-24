@@ -99,14 +99,11 @@ export default function InfoSection() {
   return (
     <>
       {/* 과정 안내: 항목마다 카드(모바일 1열 · 데스크톱 2열) */}
-      <section className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 pt-12 lg:gap-5 lg:pt-24" aria-labelledby="tc-guide">
+      {/* 첫 섹션: 바로 위 타이틀과 가깝게(위 여백 축소) */}
+      <section className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 pt-8 lg:gap-5 lg:pt-14" aria-labelledby="tc-guide">
         <Title id="tc-guide" icon="guide">
           과정 안내
         </Title>
-        {/* 과정 소개 문구(프로그램 소개 페이지처럼 제목 아래 설명) */}
-        <p className="m-0 text-[14px] leading-[1.7] break-keep text-[#333333] lg:text-[17px]">
-          <strong className="font-extrabold text-[#1F1F1F]">한우리 지도교사로 활동하기 위해 반드시 수강해야 하는 교육</strong>으로 교사활동을 시작하기 직전 신청하여 진행합니다. (1회 진행)
-        </p>
         <dl className="m-0 grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-4">
           {GUIDE.map((g) => (
             <div key={g.k} className="flex flex-col gap-2 rounded-[18px] border border-solid border-[#FBE7DA] bg-[#FFF7F1] p-5 lg:p-6">
@@ -212,7 +209,7 @@ export default function InfoSection() {
       </section>
 
       {/* 입문과정 신청(한우리 교육 사이트 · 새 창) */}
-      <section className="mx-auto my-0 box-border flex max-w-[1200px] flex-col px-5 pt-10 pb-16 lg:pt-14 lg:pb-24" aria-label="입문과정 신청">
+      <section className="mx-auto my-0 box-border flex max-w-[1200px] flex-col px-5 pt-10 pb-0 lg:pt-14" aria-label="입문과정 신청">
         <a
           className="flex h-13 items-center justify-center gap-1.5 rounded-[14px] bg-[#F26522] text-[16px] font-bold text-white no-underline hover:bg-[#E0561A] lg:h-14 lg:w-[360px] lg:self-center lg:text-[17px]"
           href="https://edu.hanuribook.com/start/index.jsp"

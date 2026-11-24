@@ -1,31 +1,25 @@
-"use client";
-
 import Header from "@/components/common/Header/Header";
 import HeroSection from "./sections/HeroSection";
-import WhySection from "./sections/WhySection";
-import TypesSection from "./sections/TypesSection";
-import ProcessSection from "./sections/ProcessSection";
+import InfoSection from "./sections/InfoSection";
 import InquirySection from "./sections/InquirySection";
 import Footer from "@/components/common/Footer/Footer";
-import BottomNav from "@/components/common/BottomNav/BottomNav";
-import { useFranchise } from "./useFranchise";
 
+/**
+ * 센터모집: 온라인 설명회와 같은 레이아웃
+ * 흰 타이틀 띠 → 연한 살구색 본문(왼쪽 개설 절차 · 개설 비용 · 교육 과정 안내 + 오른쪽 개설 문의, 데스크톱 가로)
+ */
 export default function Franchise() {
-  const { done, submit } = useFranchise();
   return (
     <div className="flex min-h-screen w-full flex-col bg-white font-pretendard tracking-[-0.02em] text-[#1F1F1F]">
       <Header active="teacher" sub="센터모집" crumbs={"한우리선생님 > 센터모집"} />
-      <main className="flex-[1_0_auto]">
+      <main className="flex-[1_0_auto] bg-[#FFFAF7]">
         <HeroSection />
-        <WhySection />
-        <TypesSection />
-        <ProcessSection />
-        <InquirySection done={done} submit={submit} />
+        <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-1 px-5 pb-16 lg:grid-cols-2 lg:items-start lg:gap-8 lg:pb-24">
+          <InfoSection />
+          <InquirySection />
+        </div>
       </main>
       <Footer />
-      <div className="sticky bottom-0 z-20">
-        <BottomNav cta="센터 개설 문의하기" ctaHref="#f-form" showCenter={false} />
-      </div>
     </div>
   );
 }

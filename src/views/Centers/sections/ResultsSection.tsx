@@ -186,7 +186,7 @@ export default function ResultsSection({ centers }: Props) {
   // '위치보기'로 고른 센터(있으면 지도 시트가 열림)
   const [sel, setSel] = useState<Center | null>(null);
   return (
-    <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-1 gap-4 px-5 pt-3.5 pb-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-start lg:gap-6">
+    <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-1 gap-4 px-5 pt-3.5 pb-12 lg:grid-cols-2 lg:items-start lg:gap-6">
       <MapSheet center={sel} onClose={() => setSel(null)} />
       {/* 지도: 항상 표시(첫 센터 강조) */}
       <MapView

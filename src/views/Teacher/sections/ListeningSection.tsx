@@ -1,31 +1,16 @@
+/** 아이의 마음에 귀 기울이는 선생님: 연한 살구색 띠 카드(교사특별반 약속 문구와 같은 모양) */
 export default function ListeningSection() {
   return (
-    <section className="bg-[#E8590C] px-5 py-12 text-center text-white" aria-labelledby="t-ear">
-      <div className="mx-auto my-0 flex max-w-[520px] flex-col items-center gap-4">
-        <span
-          className="h-10 font-[family-name:Georgia,serif] text-[72px] leading-[0.6] font-black text-white"
-          aria-hidden="true"
-        >
+    <section className="mx-auto my-0 box-border max-w-[1200px] px-5 pt-12 lg:pt-24" aria-labelledby="t-ear">
+      <div className="flex flex-col items-center gap-3 rounded-[24px] bg-[#FFEDE0] px-5 py-9 text-center lg:gap-4 lg:py-12">
+        <span className="text-[40px] leading-none font-extrabold text-[#F26522]" aria-hidden="true">
           “
         </span>
-        <span className="h-6 w-0.25 bg-[rgba(255,255,255,0.6)]" aria-hidden="true" />
-        <h2 className="m-0 text-[21px] leading-[1.6] font-semibold lg:text-[24px]" id="t-ear">
-          한우리 선생님은
-          <br />
-          <span className="font-extrabold text-[#FFE45C]">
-            아이 눈과 마음에
-            <br />귀 기울이며
-          </span>
+        <h2 className="m-0 text-[21px] leading-[1.55] font-bold break-keep text-[#1F1F1F] lg:text-[30px]" id="t-ear">
+          한우리 선생님은 <span className="font-extrabold text-[#D94E0F]">아이 눈과 마음에 귀 기울이며</span>
           <br />
           답을 채워 나갑니다.
         </h2>
-        <span className="h-6 w-0.25 bg-[rgba(255,255,255,0.6)]" aria-hidden="true" />
-        <span
-          className="h-10 font-[family-name:Georgia,serif] text-[72px] leading-[0.6] font-black text-white"
-          aria-hidden="true"
-        >
-          ”
-        </span>
       </div>
     </section>
   );

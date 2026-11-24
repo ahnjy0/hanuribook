@@ -9,7 +9,6 @@ import ListeningSection from "./sections/ListeningSection";
 import ReviewsSection from "./sections/ReviewsSection";
 import MeetSection from "./sections/MeetSection";
 import Footer from "@/components/common/Footer/Footer";
-import BottomNav from "@/components/common/BottomNav/BottomNav";
 import { useTeacher } from "./useTeacher";
 
 export default function Teacher() {
@@ -27,9 +26,6 @@ export default function Teacher() {
         <MeetSection />
       </main>
       <Footer />
-      <div className="sticky bottom-0 z-20">
-        <BottomNav ctaHref="/consult" />
-      </div>
     </div>
   );
 }

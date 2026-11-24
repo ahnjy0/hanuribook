@@ -88,7 +88,7 @@ export default function ApplySection({
       {notDone && (
         // 데스크톱: 자녀 학년 선택(왼쪽) · 보호자 연락처 정보(오른쪽) 가로 배치, 위쪽 맞춤
         <form
-          className="flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:items-start lg:gap-5"
+          className="flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:items-start lg:gap-5"
           aria-label="무료 상담 신청서"
         >
           <fieldset className="m-0 flex flex-col gap-3.5 rounded-[24px] border border-[#EEEEEE] bg-white px-5 py-5.5">
