@@ -792,9 +792,21 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
 
   society: {
     name: "소클 고등 통합사회",
-    tag: "예비고 · 고1",
-    eyebrow: "통합사회 1등급을 위한 첫걸음",
+    tag: "통합사회 특강 프로그램",
     title: "소클 고등 통합사회",
+    // 제목 자리 로고 이미지(대체 글 = title)
+    logo: { src: "https://cdn.hanuribook.com/img/hanuribook/logo_special4.png", w: 921, h: 277 },
+    logoCls: "h-16 lg:h-24",
+    // 히어로 배경 패턴: 교재 표지를 45도 회전해 옅게(5%) 반복 — 다른 단기특강 히어로와 같은 방식
+    heroBg: {
+      src: "https://cdn.hanuribook.com/img/hanuribook/special4.png",
+      size: "300px auto",
+      position: "left top",
+      repeat: "repeat-x",
+      rotate: 45,
+      band: 365,
+      opacity: 0.05,
+    },
     slogan: "통합사회 교과 대비",
     badges: ["2022 개정 교육과정 적용", "2028 수능 <통합사회> 대비"],
     info: [
@@ -802,15 +814,71 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
       ["각 호 구성", "교재 · 필독서 · 별책 각 1권, 교재 내 별지 포함\n(수능형 문제, 완독 문답, 원고지)"],
       ["수업 기간", "3개 호 구성(3개월 과정 · 총 12차시)"],
     ],
-    theme: { accent: "#E8541E", dark: "#3A3D36", soft: "#F7F1E6", hi: "#FFD28A" },
+    // 주요 색(accent): 로고 '소클'의 하늘색 #7FAFDE — 위 글자는 흰색 / 포인트 색(dark): 로고의 진회색 #595757
+    // 흰 바탕 위 강조 글자(ink)는 읽기 쉽게 한 톤 진한 파랑
+    theme: { accent: "#7FAFDE", onAccent: "#FFFFFF", ink: "#3F7FBF", dark: "#595757", soft: "#F7F1E6", hi: "#FFD28A" },
     blocks: [
       {
         kind: "points",
         title: "프로그램 특징",
         items: [
-          { label: "POINT 1", title: "탄탄한 개념 학습", desc: "교과 핵심 개념을 체계적으로 이해해요." },
-          { label: "POINT 2", title: "내신 + 수능 동시 대비", desc: "지필 / 수행 / 수능형 문항을 미리 연습해요." },
-          { label: "POINT 3", title: "고등 통합 사고력 향상", desc: "교과 연계 독서로 응용력과 문제 해결력을 키워요." },
+          {
+            label: "POINT 1",
+            title: "탄탄한 개념 학습",
+            desc: "단편적인 개념 확인에 머물지 않고, 교과 개념을 사회 현상이나 실제 삶과 연결하여 문제 해결력과 비판적 사고력을 기릅니다.",
+          },
+          {
+            label: "POINT 2",
+            title: "내신 + 수능 동시 대비",
+            desc: "2022 개정 교육과정 분석을 토대로 고등학교 공통과목인 《통합사회》의 교과 개념을 꼼꼼하게 학습하며 고등학교 1학년 내신에 대비합니다. 또한, 수능까지 대비하도록 수능 유형 문제를 제시하였습니다.",
+          },
+          {
+            label: "POINT 3",
+            title: "고등 통합 사고력 향상",
+            desc: "교과 개념과 연계된 문학 · 비문학 필독서를 독해 및 분석하여 교과 내용을 심화하고 확장하며, 이를 바탕으로 주요 대학의 구술형 면접에도 효과적으로 대비합니다.",
+          },
+        ],
+      },
+      {
+        // 표(가로 스크롤) 대신 호별 칸(모바일은 위아래로 쌓임) — 차시마다 내용(title) + 영역(desc)
+        kind: "lessons",
+        label: "수업 내용",
+        cols: [
+          {
+            head: "1호",
+            items: [
+              { session: "1차시", title: "통합적 관점 /\n인간, 사회, 환경과 행복", desc: "통합사회 교과 개념 1" },
+              { session: "2차시", title: "자연환경과 인간", desc: "통합사회 교과 개념 2" },
+              { session: "3차시", title: "생활공간과 사회", desc: "통합사회 교과 개념 3" },
+              { session: "4차시", title: "《별난 사회 선생님의 한국 지리네요》", desc: "통합사회 독서" },
+            ],
+          },
+          {
+            head: "2호",
+            items: [
+              { session: "1차시", title: "사회 정의와 불평등", desc: "통합사회 교과 개념 1" },
+              { session: "2차시", title: "시장 경제와 지속가능 발전", desc: "통합사회 교과 개념 2" },
+              { session: "3차시", title: "세계화와 평화", desc: "통합사회 교과 개념 3" },
+              { session: "4차시", title: "《경제학이 그렇게 어려운가요?》", desc: "통합사회 독서" },
+            ],
+          },
+          {
+            head: "3호",
+            items: [
+              { session: "1차시", title: "문화와 다양성", desc: "통합사회 교과 개념 1" },
+              { session: "2차시", title: "인권 보장과 헌법", desc: "통합사회 교과 개념 2" },
+              { session: "3차시", title: "미래와 지속가능한 삶", desc: "통합사회 교과 개념 3" },
+              { session: "4차시", title: "《멋진 신세계》", desc: "통합사회 독서" },
+            ],
+          },
+        ],
+      },
+      {
+        kind: "effects",
+        label: "학습 효과",
+        items: [
+          { text: "고등학교 통합사회 교과의 핵심 개념 학습과 심화 · 확장", em: "" },
+          { text: "사회탐구 영역의 고교 내신과 수능 준비력 UP!", em: "" },
         ],
       },
     ],

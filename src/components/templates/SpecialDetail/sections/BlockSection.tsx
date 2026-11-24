@@ -415,7 +415,7 @@ export default function BlockSection({
             모바일: 아이콘 왼쪽 · 글 오른쪽 / 태블릿 이상: 3열, 세로 가운데 정렬. 아래에서 차례로 떠오름 */}
         <ol
           className={`mx-auto mb-0 box-border grid max-w-[1200px] list-none grid-cols-1 gap-3 px-5 lg:gap-5 ${centered ? "mt-6 lg:mt-10" : "mt-5 lg:mt-7"} ${
-            b.items.length === 4 ? "md:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-3"
+            b.items.length === 4 ? "md:grid-cols-2 lg:grid-cols-4" : b.items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
           }`}
         >
           {b.items.map((it, i) =>
