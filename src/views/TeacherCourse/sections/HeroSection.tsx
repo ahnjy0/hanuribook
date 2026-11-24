@@ -1,22 +1,19 @@
+import SectionLabel from "@/components/common/SectionLabel";
+
+/**
+ * 히어로: 프로그램 소개 페이지 첫 섹션과 같은 모양
+ * 연한 살구색 배경 + 아래 둥근 모서리, 흰 라운드 라벨 → 제목(안내 문구는 본문 '과정 안내' 제목 아래)
+ */
 export default function HeroSection() {
   return (
-    <section
-      className="mx-auto my-0 box-border flex max-w-[1200px] flex-col gap-3.5 px-5 pt-8"
-      aria-labelledby="tc-h"
-    >
-      <p className="m-0 text-[13px] font-bold text-[#C2410C]">한우리 독서지도사 양성 과정</p>
-      <h1 className="m-0 text-[28px] leading-[1.35] font-extrabold lg:text-[40px]" id="tc-h">
-        처음이어도 괜찮아요
-        <br />
-        {"독서지도사 "}
-        <span className="text-[#D94E0F]">입문과정</span>
-      </h1>
-      <p className="m-0 text-[15px] leading-[1.7] text-[#333333]">
-        독서교육 경험이 없어도 체계적인 커리큘럼과 실습으로 아이들을 가르치는 전문 독서지도사가 될 수
-        있습니다.
-      </p>
-      <div className="flex h-47.5 items-center justify-center rounded-[24px] bg-[#FFF4EC] text-center text-[13px] text-[#8A5A3C]">
-        [이미지] 연수 강의실에서 수업을 듣는 예비 선생님들
+    <section className="rounded-t-none rounded-b-[32px] bg-[#FFEDE0] px-0 pt-9 pb-10 lg:pt-16 lg:pb-20" aria-labelledby="tc-h">
+      <div className="mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-2 px-5 text-center lg:gap-3">
+        <SectionLabel color="#C2410C" bg="#FFFFFF">
+          한우리 지도교사가 되기 위한 필수 코스
+        </SectionLabel>
+        <h1 className="m-0 text-[28px] font-extrabold text-[#1F1F1F] lg:text-[40px]" id="tc-h">
+          지도교사 입문과정
+        </h1>
       </div>
     </section>
   );

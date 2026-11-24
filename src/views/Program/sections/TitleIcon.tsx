@@ -1,5 +1,5 @@
 /** 프로그램 소개 페이지 섹션 타이틀 앞에 붙는 아이콘 타일 */
-export type TitleIconKind = "features" | "how" | "who" | "where" | "start" | "results";
+export type TitleIconKind = "features" | "how" | "who" | "where" | "start" | "results" | "guide" | "calendar";
 
 const PATHS: Record<TitleIconKind, React.ReactNode> = {
   // 특징: 반짝이는 별
@@ -32,6 +32,20 @@ const PATHS: Record<TitleIconKind, React.ReactNode> = {
     <>
       <path d="M5 21V4" />
       <path d="M5 4h11l-2 3.5 2 3.5H5" />
+    </>
+  ),
+  // 안내: 목록 문서(지도교사 입문과정 '과정 안내')
+  guide: (
+    <>
+      <rect x="5" y="3" width="14" height="18" rx="2" />
+      <path d="M9 8h6M9 12h6M9 16h4" />
+    </>
+  ),
+  // 일정: 달력(지도교사 입문과정 '교육 일정 안내')
+  calendar: (
+    <>
+      <rect x="3.5" y="5" width="17" height="15.5" rx="2" />
+      <path d="M3.5 10h17M8 3v4M16 3v4" />
     </>
   ),
   // 성과: 상승 그래프
