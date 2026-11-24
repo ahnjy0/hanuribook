@@ -8,22 +8,23 @@ import BottomNav from "@/components/common/BottomNav/BottomNav";
 import { useConsult } from "./useConsult";
 
 export default function Consult() {
-  const { agree, done, faqs, grade, grades, notDone, steps, submit, toggleAgree, phoneAuth, address, hopeTimes } =
+  const { agree, agreeThird, done, grade, grades, notDone, submit, toggleAgree, toggleAgreeThird, phoneAuth, address, hopeTimes } =
     useConsult();
   return (
     <div className="flex min-h-screen w-full flex-col bg-white font-pretendard tracking-[-0.02em] text-[#1F1F1F]">
       <Header active="consult" sub="" crumbs="수업상담" />
       <main className="flex-[1_0_auto] bg-[#FFFAF7]">
-        <HeroSection steps={steps} />
+        <HeroSection />
         <ApplySection
           agree={agree}
           done={done}
-          faqs={faqs}
           grade={grade}
           grades={grades}
           notDone={notDone}
           submit={submit}
           toggleAgree={toggleAgree}
+          agreeThird={agreeThird}
+          toggleAgreeThird={toggleAgreeThird}
           phoneAuth={phoneAuth}
           address={address}
           hopeTimes={hopeTimes}

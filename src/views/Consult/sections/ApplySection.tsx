@@ -1,16 +1,18 @@
 import Link from "next/link";
 import type { ConsultVals } from "../useConsult";
+import PrivacyModal, { PRIVACY_DOC, THIRD_PARTY_DOC } from "./PrivacyModal";
 
 type Props = Pick<
   ConsultVals,
   | "agree"
   | "done"
-  | "faqs"
   | "grade"
   | "grades"
   | "notDone"
   | "submit"
   | "toggleAgree"
+  | "agreeThird"
+  | "toggleAgreeThird"
   | "phoneAuth"
   | "address"
   | "hopeTimes"
@@ -21,23 +23,26 @@ const INPUT =
 // 입력칸 오른쪽 보조 버튼(인증번호 받기·확인·주소 검색): 모두 같은 너비(88px)로 고정해
 // 휴대폰 번호·인증번호·주소 입력칸의 너비도 서로 같아지게 함. 좌우 여백을 줄이려고 글자 13px
 const SIDE_BTN =
-  "h-13 w-[88px] flex-none cursor-pointer rounded-[12px] border border-[#F26522] bg-white px-0 font-[family-name:inherit] text-[13px] font-bold whitespace-nowrap text-[#C2410C] disabled:cursor-default disabled:border-[#E4E4E4] disabled:text-[#8A8A8A]";
+  // 색: 테두리 없이 옅은 주황 바탕 + 진한 주황 글자(누를 수 없을 때는 회색 바탕)
+  "h-13 w-[88px] flex-none cursor-pointer rounded-[12px] border-0 bg-[#FFDCC7] px-0 font-[family-name:inherit] text-[13px] font-bold whitespace-nowrap text-[#C2410C] disabled:cursor-default disabled:bg-[#E4E4E4] disabled:text-[#8A8A8A]";
 
 export default function ApplySection({
   agree,
   done,
-  faqs,
   grade,
   grades,
   notDone,
   submit,
   toggleAgree,
+  agreeThird,
+  toggleAgreeThird,
   phoneAuth: pa,
   address,
   hopeTimes,
 }: Props) {
   return (
-    <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-1 gap-4 px-5 pt-5 pb-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-start lg:gap-7">
+    // 자주 묻는 질문 영역을 없애 신청 양식만 한 열로
+    <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-1 gap-4 px-5 pt-5 pb-10">
       {done && (
         <section
           className="flex flex-col items-center gap-3.5 rounded-[24px] border border-[#EEEEEE] bg-white px-6 py-9 text-center"
@@ -81,7 +86,11 @@ export default function ApplySection({
         </section>
       )}
       {notDone && (
-        <form className="flex flex-col gap-4" aria-label="무료 상담 신청서">
+        // 데스크톱: 자녀 학년 선택(왼쪽) · 보호자 연락처 정보(오른쪽) 가로 배치, 위쪽 맞춤
+        <form
+          className="flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:items-start lg:gap-5"
+          aria-label="무료 상담 신청서"
+        >
           <fieldset className="m-0 flex flex-col gap-3.5 rounded-[24px] border border-[#EEEEEE] bg-white px-5 py-5.5">
             <legend className="float-left flex w-full items-center justify-between p-0">
               <span className="flex items-center gap-2 text-[20px] font-extrabold">
@@ -90,11 +99,16 @@ export default function ApplySection({
                 <span className="text-[13px] font-medium text-[#555555]">중복 선택 가능</span>
               </span>
             </legend>
-            <div className="grid grid-cols-4 gap-2" role="group" aria-label="자녀 학년 (중복 선택 가능)">
+            {/* 데스크톱: 왼쪽 열이라 4열 유지, 버튼은 작게(높이 44px) */}
+            <div
+              className="grid grid-cols-4 gap-2 lg:gap-1.5"
+              role="group"
+              aria-label="자녀 학년 (중복 선택 가능)"
+            >
               {grades.map((g, i) => (
                 <button
                   key={i}
-                  className="h-13 cursor-pointer rounded-[14px] font-[family-name:inherit] text-[15px]"
+                  className="h-13 cursor-pointer rounded-[14px] font-[family-name:inherit] text-[15px] lg:h-11 lg:rounded-[10px] lg:text-[14px]"
                   style={{ border: g.border, background: g.bg, color: g.fg, fontWeight: g.weight }}
                   type="button"
                   aria-pressed={g.sel}
@@ -108,7 +122,7 @@ export default function ApplySection({
           <fieldset className="m-0 flex flex-col gap-3.5 rounded-[24px] border border-[#EEEEEE] bg-white px-5 py-5.5">
             <legend className="float-left flex w-full items-center gap-2 p-0 text-[20px] font-extrabold">
               <span className="h-2 w-2 rounded-[50%] bg-[#F26522]" aria-hidden="true" />
-              보호자 연락처 정보<span className="text-[13px] font-semibold text-[#C2410C]">(필수)</span>
+              보호자 정보<span className="text-[13px] font-semibold text-[#C2410C]">(필수)</span>
             </legend>
             <p className="m-0 text-[14px] text-[#333333]">
               가까운 지역 센터 또는 전담 지도교사가 배정됩니다.
@@ -184,10 +198,19 @@ export default function ApplySection({
                   {pa.expired ? "입력 시간이 지났습니다. 인증번호를 다시 받아 주세요." : pa.msg}
                 </p>
               )}
+              {/* 인증 안내: 작은 회색 글자, 줄마다 · */}
+              <ul className="m-0 mt-0.5 flex list-none flex-col gap-0.5 p-0 text-[12px] leading-[1.55] break-keep text-[#6B6B6B] lg:text-[13px]">
+                <li>· 인증번호는 기재하신 휴대폰에 문자로 전송됩니다.</li>
+                <li>· 본인 휴대폰번호가 아닐 경우, 인증에 제약이 있을 수 있습니다.</li>
+                <li>
+                  · 인증번호가 정상 수신되지 않을 때에는 스팸 문자함을 확인해주시고, 계속해서 안 될 경우 02-6276-2656 (평일
+                  9시~18시)으로 전화 주시기 바랍니다.
+                </li>
+              </ul>
             </div>
             {/* 거주 지역: 주소 검색으로 입력 */}
             <div className="flex flex-col gap-1.5">
-              <span className="text-[13px] font-semibold text-[#222222]">거주 지역 (가까운 지점 연결)</span>
+              <span className="text-[13px] font-semibold text-[#222222]">거주 지역</span>
               <div className="flex gap-2">
                 <label className="block min-w-0 flex-1">
                   <span className="absolute h-0.25 w-0.25 overflow-hidden [clip:rect(0_0_0_0)]">주소</span>
@@ -228,7 +251,8 @@ export default function ApplySection({
                 {hopeTimes.map((t) => (
                   <label
                     key={t.label}
-                    className={`flex h-12 cursor-pointer items-center gap-2.5 rounded-[12px] border px-3.5 text-[15px] ${
+                    // 좁은 화면 2열에서도 한 줄로: 모바일 글자 13px · 줄바꿈 없음 · 여백 축소, 데스크톱은 15px
+                    className={`flex h-12 cursor-pointer items-center gap-2 rounded-[12px] border px-3 text-[13px] whitespace-nowrap lg:gap-2.5 lg:px-3.5 lg:text-[15px] ${
                       t.sel ? "border-[#F26522] bg-[#FFF1E8] font-bold text-[#C2410C]" : "border-[#E4E4E4] bg-white text-[#1F1F1F]"
                     }`}
                   >
@@ -247,27 +271,39 @@ export default function ApplySection({
                 ※ 담당교사가 수업 중이거나 최초 연락 시 연결되지 않은 경우, 희망 시간 외에 연락드릴 수 있습니다.
               </p>
             </div>
-            <label className="flex cursor-pointer items-start gap-3 rounded-[14px] bg-[#F7F7F8] p-4">
-              <input
-                className="mx-0 mt-0.25 mb-0 h-5.5 w-5.5 flex-none accent-[#F26522] placeholder:text-[#8A8A8A]"
-                type="checkbox"
-                checked={agree}
-                onChange={toggleAgree}
-              />
-              <span className="flex flex-col gap-1.5">
-                <span className="text-[14px] leading-[1.5] font-semibold">
-                  [필수] 개인정보 수집 및 상담 안내를 위한 연락에 동의합니다.
-                </span>
-                <span className="flex flex-col gap-0.5 text-[12px] leading-[1.5] text-[#555555]">
-                  <span>
-                    개인정보 수집·이용목적: 한우리독서토론논술 교육서비스 상담 및 무료체험 안내, 경품제공,
-                    수강등록여부 확인, 무료체험 신청이력 관리
-                  </span>
-                  <span>수집하려는 개인정보의 항목: 보호자성명, 보호자휴대전화번호, 자녀학년, 거주지역</span>
-                  <span>개인정보의 보유 및 이용 기간: 상담 신청일로부터 1년</span>
-                </span>
-              </span>
-            </label>
+            {/* 동의 체크 + '자세히보기'(안내 내용은 모달로) — 버튼은 label 밖이라 눌러도 체크가 바뀌지 않음
+                한 회색 박스 안에 두 동의(수집·이용 / 제3자 제공)를 줄로 나눠 표시 */}
+            <div className="flex flex-col gap-3 rounded-[14px] bg-[#F7F7F8] p-4">
+              {[
+                {
+                  key: "collect",
+                  checked: agree,
+                  toggle: toggleAgree,
+                  text: "[필수] 개인정보 수집 및 상담 안내를 위한 연락에 동의합니다.",
+                  doc: PRIVACY_DOC,
+                },
+                {
+                  key: "third",
+                  checked: agreeThird,
+                  toggle: toggleAgreeThird,
+                  text: "[필수] 개인정보 제3자 제공에 동의합니다.",
+                  doc: THIRD_PARTY_DOC,
+                },
+              ].map((a) => (
+                <div key={a.key} className="flex items-center gap-3">
+                  <label className="flex min-w-0 flex-1 cursor-pointer items-start gap-3">
+                    <input
+                      className="mx-0 mt-0.25 mb-0 h-5.5 w-5.5 flex-none accent-[#F26522]"
+                      type="checkbox"
+                      checked={a.checked}
+                      onChange={a.toggle}
+                    />
+                    <span className="text-[14px] leading-[1.5] font-semibold">{a.text}</span>
+                  </label>
+                  <PrivacyModal id={`privacy-${a.key}`} doc={a.doc} checked={a.checked} toggle={a.toggle} />
+                </div>
+              ))}
+            </div>
             <p className="m-0 flex items-center gap-2.5 rounded-[14px] bg-[#EAF2FF] px-4 py-3.5 text-[13px] leading-[1.5] text-[#2A4A80]">
               <svg
                 className="flex-none"
@@ -292,43 +328,6 @@ export default function ApplySection({
           </fieldset>
         </form>
       )}
-      <aside
-        className="flex flex-col gap-3 rounded-[24px] border border-[#EEEEEE] bg-white px-5 py-5.5"
-        aria-labelledby="faq-h"
-      >
-        <h2 className="m-0 flex items-center gap-2 text-[18px] font-extrabold" id="faq-h">
-          <svg
-            aria-hidden="true"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#D94E0F"
-            strokeWidth="2"
-            strokeLinecap="round"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01" />
-          </svg>
-          신청 전 자주 묻는 질문
-        </h2>
-        {faqs.map((f, i) => (
-          <div key={i} className="rounded-[16px] bg-[#F7F7F8]">
-            <button
-              className="flex min-h-13 w-full cursor-pointer items-center justify-between gap-2.5 border-0 bg-transparent px-4 py-3.5 text-left font-[family-name:inherit] text-[15px] font-bold text-[#1F1F1F]"
-              type="button"
-              aria-expanded={f.exp}
-              onClick={f.toggle}
-            >
-              {`Q. ${f.q}`}
-              <span className="text-[#555555]" aria-hidden="true">
-                {f.icon}
-              </span>
-            </button>
-            {f.open && <p className="m-0 px-4 pt-0 pb-4 text-[14px] leading-[1.7] text-[#333333]">{f.a}</p>}
-          </div>
-        ))}
-      </aside>
     </div>
   );
 }

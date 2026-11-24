@@ -11,8 +11,7 @@ import type { CenterKind } from "@/components/common/CenterKindIcon";
 
 const ALL_CENTERS: {
   name: string; kind: CenterKind; badges: { t: string; bg: string; fg: string }[];
-  addr: string; hours: string; extra: string; tags: FilterKey[];
-}[] = [
+  addr: string; hours: string; extra: string; tags: FilterKey[];}[] = [
   { name: "서초북지부", kind: "branch", badges: [{ t: "우수 센터", ...O }, { t: "전문 지도교사 8명", ...B }, { t: "소그룹 / 1:1", ...G }], addr: "서울 서초구 신반포로 194 본관 4층 (고속터미널역 8-1번 출구 280m)", hours: "화~토 10:00 - 19:30 (일·월 정기휴무)", extra: "건물 지하 2시간 무료 주차 지원", tags: ["near", "parking", "small"] },
   { name: "서초남지부", kind: "branch", badges: [{ t: "심화 논술 특화", ...O }, { t: "전문 지도교사 12명", ...B }], addr: "서울 강남구 남부순환로 2936 원빌딩 5층", hours: "월~토 10:00 - 20:30 (일요일 휴무)", extra: "초등 독서력 평가실 & 중등 토론룸 구비", tags: ["near"] },
   { name: "서초중앙독서교실", kind: "room", badges: [{ t: "우수 러닝센터", ...O }, { t: "체험수업 가능", ...T }], addr: "경기 성남시 분당구 성남대로 385 분당클리닉빌딩 3층", hours: "화~토 09:30 - 18:30", extra: "지하 주차장 완비 (방문 등록 시 90분 무료)", tags: ["parking", "trial"] },
@@ -27,7 +26,6 @@ const FILTER_DEFS: [FilterKey, string][] = [
 ];
 
 export function useCenters() {
-  const [view, setView] = useState<"map" | "list">("map");
   const [f, setF] = useState<Partial<Record<FilterKey, boolean>>>({ near: true });
 
   const filters = FILTER_DEFS.map(([k, label]) => {
@@ -44,19 +42,11 @@ export function useCenters() {
   // "내 주변" 필터는 정렬 기준일 뿐 목록을 거르지 않습니다 (원본 동작 유지)
   const active = (Object.keys(f) as FilterKey[]).filter((k) => f[k] && k !== "near");
   const centers = ALL_CENTERS.filter((c) => active.every((k) => c.tags.includes(k)));
-  const isMap = view === "map";
 
   return {
     filters,
     centers,
     count: centers.length,
-    isMap,
-    mapSel: isMap,
-    listSel: !isMap,
-    mapBg: isMap ? "#FFFFFF" : "transparent",
-    listBg: isMap ? "transparent" : "#FFFFFF",
-    showMap: () => setView("map"),
-    showList: () => setView("list"),
   };
 }
 
