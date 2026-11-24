@@ -147,6 +147,7 @@ export type SpecialProgram = {
   // rotate: 회전 각도(있으면 띠(band 높이 px, 이미지 아래쪽만)를 여러 줄 쌓은 큰 판을 회전해 깔기)
   // opacityLg: 데스크톱 불투명도(없으면 opacity)
   heroBg?: { src: string; size: string; position: string; repeat?: string; opacity: number; opacityLg?: number; rotate?: number; band?: number };
+  heroColor?: string; // 히어로 바탕색(없으면 theme.soft)
   tagTone?: { bg: string; fg: string }; // 태그 색(없으면 강조색 바탕 + 강조색 위 글자색)
   eyebrow?: string; // 제목 위 문구(없으면 표시 안 함)
   title: string;
@@ -205,8 +206,8 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
       ["대상", "5~7세"],
       ["학습 기간", "3개월"],
     ],
-    // 주요 색: 학습 과정 카드의 베이지 바탕
     // 포인트 색: 노랑(accent — 위 글자는 진한 색) + 로고 '참깨'의 살구 핑크(dark — 진한 띠 · 단계 칸 · 말풍선, ink — 라벨 · 강조 글자)
+    // soft(주요 색 · 히어로 바탕 포함): 단기특강 공통 베이지
     theme: { accent: "#FFC61A", onAccent: "#3A2A00", ink: "#C24E3B", dark: "#E0654F", soft: "#F7F1E6", hi: "#FFD84D" },
     centered: true,
     blocks: [
@@ -373,9 +374,9 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
       ["대상", "초등 2~4학년"],
       ["수업 기간", "2개월(8차시)"],
     ],
-    // 주요 색: 연한 크림 노랑(soft) / 포인트 색: 초록 #3AB26F(accent · dark — 위 글자는 흰색, 교재 지면 테두리와 같은 색)
+    // 주요 색: 베이지(soft) / 포인트 색: 초록 #3AB26F(accent · dark — 위 글자는 흰색, 교재 지면 테두리와 같은 색)
     // 흰 바탕 위 강조 글자(ink)는 한 톤 진한 초록
-    theme: { accent: "#3AB26F", onAccent: "#FFFFFF", ink: "#23864F", dark: "#3AB26F", soft: "#FFF8E1", hi: "#FFE066" },
+    theme: { accent: "#3AB26F", onAccent: "#FFFFFF", ink: "#23864F", dark: "#3AB26F", soft: "#F7F1E6", hi: "#FFE066" },
     centered: true,
     blocks: [
       {
@@ -474,9 +475,9 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
       ["대상", "초등 고학년(4~6학년)"],
       ["수업 기간", "3개월(12차시)"],
     ],
-    // 주요 색: 로고의 주황 #F26532(accent · dark — 위 글자는 흰색) + 연한 주황 바탕(soft)
+    // 주요 색: 로고의 주황 #F26532(accent · dark — 위 글자는 흰색) + 단기특강 공통 베이지 바탕(soft)
     // 흰 바탕 위 강조 글자(ink)는 한 톤 진한 주황
-    theme: { accent: "#F26532", onAccent: "#FFFFFF", ink: "#D2471A", dark: "#F26532", soft: "#FFF1EA", hi: "#FFE14D" },
+    theme: { accent: "#F26532", onAccent: "#FFFFFF", ink: "#D2471A", dark: "#F26532", soft: "#F7F1E6", hi: "#FFE14D" },
     centered: true,
     blocks: [
       {
@@ -607,8 +608,8 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         href: "#lit-high",
       },
     ],
-    // 페이지 주요 색(히어로 배경 등): 연한 그레이 — 두 과정 색(복숭아 · 하늘)을 모두 받쳐 주는 중립색. 강조색은 별별(코랄)
-    theme: { ...LIT_MIDDLE_THEME, soft: "#F3F3F4" },
+    // 페이지 주요 색(히어로 배경 등): 단기특강 공통 베이지. 강조색은 별별(짙은 갈색)
+    theme: { ...LIT_MIDDLE_THEME, soft: "#F7F1E6" },
     // 중고등정규 중등(소크라테스) 페이지와 같은 구성: 섹션 제목은 왼쪽 정렬 + 타일 아이콘
     centered: false,
     blocks: [
@@ -762,7 +763,7 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
       ["각 호 구성", "교재 · 필독서 · 별책 각 1권, 교재 내 별지 포함\n(수능형 문제, 완독 문답, 원고지)"],
       ["수업 기간", "3개 호 구성(3개월 과정 · 총 12차시)"],
     ],
-    theme: { accent: "#E8541E", dark: "#3A3D36", soft: "#F3F3EF", hi: "#FFD28A" },
+    theme: { accent: "#E8541E", dark: "#3A3D36", soft: "#F7F1E6", hi: "#FFD28A" },
     blocks: [
       {
         kind: "points",

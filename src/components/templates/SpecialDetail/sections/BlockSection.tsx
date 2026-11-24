@@ -635,10 +635,13 @@ export default function BlockSection({
                     {c.name}
                   </strong>
                 )}
-                {/* 대상 설명: 진한 글자 · 굵게(강조) */}
-                <p className="m-0 mt-1 text-[12px] leading-[1.5] font-bold break-keep text-[#333333] lg:mt-2 lg:text-[16px]">{lines(c.desc)}</p>
+                {/* 대상 설명 영역: 남는 높이를 채우고 글은 세로 가운데 — 카드마다 구분선 · 강조글 위치가 같아짐 */}
+                <div className="flex w-full flex-1 items-center justify-center">
+                  <p className="m-0 text-[12px] leading-[1.5] font-bold break-keep text-[#333333] lg:text-[16px]">{lines(c.desc)}</p>
+                </div>
                 <span className="h-px w-full bg-[#EFE6D6]" aria-hidden="true" />
-                <strong className="text-[13px] leading-[1.35] font-extrabold break-keep lg:text-[18px]" style={{ color }}>
+                {/* 강조글 영역: 최소 높이를 맞춰 두 줄이 되어도 카드끼리 균일 */}
+                <strong className="flex min-h-[2.7em] items-center justify-center text-[13px] leading-[1.35] font-extrabold break-keep lg:min-h-[1.35em] lg:text-[18px]" style={{ color }}>
                   {c.title}
                 </strong>
                 {/* 같은 페이지 안 과정 소개로 이동(href 있을 때) */}
@@ -650,7 +653,8 @@ export default function BlockSection({
               </>
             );
             const cls =
-              "flex h-full flex-col items-center gap-2 rounded-[16px] border border-solid px-2 pt-5 pb-4 text-center lg:gap-3 lg:rounded-[22px] lg:px-5 lg:pt-8 lg:pb-6";
+              // 높이: li(flex)가 늘려 줌 — h-full 을 쓰면 카드가 띠 아래 여백 쪽으로 넘쳐 위아래 여백이 달라 보임
+              "flex flex-col items-center gap-2 rounded-[16px] border border-solid px-2 py-5 text-center lg:gap-3 lg:rounded-[22px] lg:px-5 lg:py-8";
             return (
               <li key={c.name} className="flex">
                 {c.href ? (

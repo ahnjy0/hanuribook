@@ -10,7 +10,7 @@ export default function HeroSection({ p }: { p: SpecialProgram }) {
   return (
     <section
       className="relative overflow-hidden rounded-t-none rounded-b-[32px] px-0 pt-9 pb-10 lg:pt-16 lg:pb-20"
-      style={{ background: t.soft }}
+      style={{ background: p.heroColor ?? t.soft }}
       aria-labelledby="sp-h"
     >
       {/* 배경 패턴(heroBg, 있을 때): 연한 바탕 위에 확대한 이미지를 옅게 깔기 — 장식이라 화면 읽기 프로그램에서 숨김 */}
