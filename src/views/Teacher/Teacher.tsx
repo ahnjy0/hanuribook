@@ -1,27 +1,20 @@
-"use client";
-
 import Header from "@/components/common/Header/Header";
 import GreetingSection from "./sections/GreetingSection";
-import CardSection from "./sections/CardSection";
-import SelfLearningSection from "./sections/SelfLearningSection";
-import WorksSection from "./sections/WorksSection";
-import ListeningSection from "./sections/ListeningSection";
+import FeaturesSection from "./sections/FeaturesSection";
+import RolesSection from "./sections/RolesSection";
 import ReviewsSection from "./sections/ReviewsSection";
 import MeetSection from "./sections/MeetSection";
 import Footer from "@/components/common/Footer/Footer";
-import { useTeacher } from "./useTeacher";
 
+/** 한우리선생님: 히어로 → 한우리 선생님의 특징 → 어떤 선생님이 가르치나요? → 학부모 후기 → 우리 동네 선생님 만나기 */
 export default function Teacher() {
-  const { next, prev, total, work } = useTeacher();
   return (
     <div className="flex min-h-screen w-full flex-col bg-white font-pretendard tracking-[-0.03em] text-[#1F1F1F]">
       <Header active="teacher" sub="한우리선생님" crumbs={"한우리선생님 > 한우리선생님"} />
       <main className="flex-[1_0_auto]">
         <GreetingSection />
-        <CardSection />
-        <SelfLearningSection />
-        <WorksSection next={next} prev={prev} total={total} work={work} />
-        <ListeningSection />
+        <FeaturesSection />
+        <RolesSection />
         <ReviewsSection />
         <MeetSection />
       </main>
