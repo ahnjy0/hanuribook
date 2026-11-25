@@ -8,7 +8,7 @@
 @import "tailwindcss/utilities.css" layer(utilities) source("..");
 
 @theme {
-  --font-pretendard: "Pretendard", system-ui, sans-serif;
+  --font-pretendard: "Pretendard Variable", "Pretendard", system-ui, sans-serif;
 
   /* 메인 "읽기·쓰기·말하기" 일러스트 모션 */
   --animate-way-float-a: wayFloatA 5s ease-in-out infinite; /* 책: 크게 떠오르며 좌우로 기울기 */
@@ -163,14 +163,6 @@
     opacity: 0;
     translate: 0 48px;
   }
-}
-
-/* 원본 index.html 에 base64 로 내장되어 있던 Pretendard(서브셋) 가변 폰트 */
-@font-face {
-  font-family: "Pretendard";
-  src: url("../assets/fonts/PretendardVariable.subset.woff2") format("woff2");
-  font-weight: 45 920;
-  font-display: swap;
 }
 
 @layer base {

@@ -19,7 +19,7 @@ function IsmsShield({ width, height }: { width: number; height: number }) {
         fontSize="7"
         fontWeight="800"
         fill="#FFFFFF"
-        fontFamily="Pretendard, sans-serif"
+        fontFamily="'Pretendard Variable', Pretendard, sans-serif"
       >
         ISMS
       </text>
