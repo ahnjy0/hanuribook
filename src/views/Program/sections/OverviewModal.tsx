@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ELEMENTARY } from "@/views/ElementaryDetail/elementaryData";
+import { ADVANCED } from "@/views/AdvancedDetail/advancedData";
+import { SPECIAL_TONE } from "@/views/Special/useSpecial";
 
 /**
  * 전체 커리큘럼 표(기존 이미지 curriculum_9.jpg 와 같은 내용을 HTML 로 구성)
@@ -8,17 +11,17 @@ import { useEffect, useRef, useState } from "react";
  *  1 머리줄 / 2~4 유아(5~7세) / 5 화살표 / 6~11 초등(초1~초6) / 12 화살표 / 13~15 중등(중1~중3) / 16 사이 줄 / 17 고등
  * 과정 블록은 [시작 줄, 끝 줄+1] · [시작 열, 끝 열+1] 로 자리를 지정. 줄바꿈(\n)은 그대로 줄을 나눠 표시
  */
-type Block = { r: [number, number]; c: [number, number]; label: string; sub?: string; bg: string };
+type Block = { r: [number, number]; c: [number, number]; label: string; sub?: string; bg: string; fg?: string };
 
 const GAP_ROWS = [5, 12, 16];
 const LAST_ROW = 17;
 
-// 단계 띠(1열)
+// 단계 띠(1열): 프로그램 칸 색과 겹치지 않게 모두 진한 회색 바탕 + 흰 글자
 const STAGES: Block[] = [
-  { r: [2, 5], c: [1, 2], label: "유아", bg: "#D63F8C" },
-  { r: [6, 12], c: [1, 2], label: "초등", bg: "#B04FCB" },
-  { r: [13, 16], c: [1, 2], label: "중등", bg: "#1B7FE0" },
-  { r: [17, 18], c: [1, 2], label: "고등", bg: "#0A63D6" },
+  { r: [2, 5], c: [1, 2], label: "유아", bg: "#5C5C5C", fg: "#FFFFFF" },
+  { r: [6, 12], c: [1, 2], label: "초등", bg: "#5C5C5C", fg: "#FFFFFF" },
+  { r: [13, 16], c: [1, 2], label: "중등", bg: "#5C5C5C", fg: "#FFFFFF" },
+  { r: [17, 18], c: [1, 2], label: "고등", bg: "#5C5C5C", fg: "#FFFFFF" },
 ];
 
 // 학년(2열)
@@ -29,35 +32,54 @@ const GRADES: [number, string][] = [
   [17, "고"],
 ];
 
+// 프로그램 색: 각 프로그램 페이지의 강조색과 연결(상세 데이터의 색을 바꾸면 이 표도 함께 바뀜)
+// 정규 = 유아정규 분홍 · 초등 3과정(ELEMENTARY) · 소크라테스 퍼플 · 고등 문학 남색 / 정규 심화 = ADVANCED / 단기 특강 = 단기특강 목록 색(SPECIAL_TONE)
+// fg: 블록 글자색(밝은 색 위는 진한 글자)
+const C = {
+  kinder: "#C7336E",
+  vocab: ELEMENTARY.vocab.accent,
+  reading: ELEMENTARY.reading.accent,
+  logic: ELEMENTARY.logic.accent,
+  socrates: "#5B4596",
+  literature: "#2B3A5C",
+  science: ADVANCED.science.accent,
+  history: ADVANCED.history.accent,
+  geo: ADVANCED.geo.accent,
+  world: ADVANCED.world.accent,
+};
+const sp = (id: string) => ({ bg: SPECIAL_TONE[id].badge, fg: SPECIAL_TONE[id].badgeFg });
+
 // 과정 블록(3~6열)
 const BLOCKS: Block[] = [
   // 정규
-  { r: [3, 4], c: [3, 4], label: "꿈꾸는 새싹 1", bg: "#E356A8" },
-  { r: [4, 5], c: [3, 4], label: "꿈꾸는 새싹 2", bg: "#D93D95" },
-  { r: [6, 7], c: [3, 4], sub: "생각하는 나무", label: "어휘리더 1", bg: "#FFB000" },
-  { r: [7, 8], c: [3, 4], sub: "생각하는 나무", label: "어휘리더 2", bg: "#FFA000" },
-  { r: [8, 9], c: [3, 4], sub: "생각하는 나무", label: "독서리더 1", bg: "#14BE96" },
-  { r: [9, 10], c: [3, 4], sub: "생각하는 나무", label: "독서리더 2", bg: "#0FA779" },
-  { r: [10, 11], c: [3, 4], sub: "생각하는 나무", label: "논리리더 1", bg: "#B44DD0" },
-  { r: [11, 12], c: [3, 4], sub: "생각하는 나무", label: "논리리더 2", bg: "#A13CC3" },
-  { r: [13, 14], c: [3, 4], label: "소크라테스 1", bg: "#0AA6E0" },
-  { r: [14, 15], c: [3, 4], label: "소크라테스 2", bg: "#1397E8" },
-  { r: [15, 16], c: [3, 4], label: "소크라테스 3", bg: "#1A88F0" },
-  { r: [17, 18], c: [3, 4], label: "소클고등문학", bg: "#0A5ED8" },
+  { r: [3, 4], c: [3, 4], label: "꿈꾸는 새싹 1", bg: C.kinder },
+  { r: [4, 5], c: [3, 4], label: "꿈꾸는 새싹 2", bg: C.kinder },
+  { r: [6, 7], c: [3, 4], sub: "생각하는 나무", label: "어휘리더 1", bg: C.vocab },
+  { r: [7, 8], c: [3, 4], sub: "생각하는 나무", label: "어휘리더 2", bg: C.vocab },
+  { r: [8, 9], c: [3, 4], sub: "생각하는 나무", label: "독서리더 1", bg: C.reading },
+  { r: [9, 10], c: [3, 4], sub: "생각하는 나무", label: "독서리더 2", bg: C.reading },
+  { r: [10, 11], c: [3, 4], sub: "생각하는 나무", label: "논리리더 1", bg: C.logic },
+  { r: [11, 12], c: [3, 4], sub: "생각하는 나무", label: "논리리더 2", bg: C.logic },
+  { r: [13, 14], c: [3, 4], label: "소크라테스 1", bg: C.socrates },
+  { r: [14, 15], c: [3, 4], label: "소크라테스 2", bg: C.socrates },
+  { r: [15, 16], c: [3, 4], label: "소크라테스 3", bg: C.socrates },
+  { r: [17, 18], c: [3, 4], label: "소클고등문학", bg: C.literature },
   // 정규 심화
-  { r: [8, 9], c: [4, 5], label: "과학탐탐", bg: "#22A89A" },
-  { r: [9, 10], c: [4, 5], sub: "한우리 통합사회1", label: "똑똑 한국사", bg: "#6E6EEA" },
-  { r: [10, 11], c: [4, 5], sub: "한우리 통합사회2", label: "세계문화 · 지리", bg: "#5B5BDE" },
-  { r: [11, 12], c: [4, 5], sub: "한우리 통합사회3", label: "세계사", bg: "#4A47C9" },
+  { r: [8, 9], c: [4, 5], label: "과학탐탐", bg: C.science },
+  { r: [9, 10], c: [4, 5], sub: "한우리 통합사회1", label: "똑똑 한국사", bg: C.history },
+  { r: [10, 11], c: [4, 5], sub: "한우리 통합사회2", label: "세계문화 · 지리", bg: C.geo },
+  { r: [11, 12], c: [4, 5], sub: "한우리 통합사회3", label: "세계사", bg: C.world },
   // 단기 특강
-  { r: [2, 5], c: [5, 6], label: "참깨\n한글", bg: "#D38BB0" },
-  { r: [7, 10], c: [5, 6], label: "다다\n어휘", bg: "#C7AA7C" },
-  { r: [10, 12], c: [5, 6], label: "한국사\n봄", bg: "#B98A6A" },
-  { r: [16, 17], c: [5, 6], label: "교과\n문학\n탐독", bg: "#7B87B5" },
-  { r: [9, 12], c: [6, 7], label: "똑독해", bg: "#5F7A5C" },
-  { r: [12, 13], c: [6, 7], label: "갈래별\n주제별\n문학\n독해", bg: "#5A8378" },
-  { r: [13, 16], c: [6, 7], label: "한국\n사람", bg: "#646888" },
-  { r: [16, 18], c: [6, 7], label: "소클\n고등\n통합\n사회", bg: "#4A4A74" },
+  { r: [2, 5], c: [5, 6], label: "참깨\n한글", ...sp("hangul") },
+  { r: [7, 10], c: [5, 6], label: "다다\n어휘", ...sp("vocab") },
+  { r: [10, 12], c: [5, 6], label: "한국사\n봄", ...sp("history") },
+  // 교과 문학 탐독: 문학 특강 페이지의 교과 문학 탐독 파랑
+  { r: [16, 17], c: [5, 6], label: "교과\n문학\n탐독", bg: "#3769B2" },
+  { r: [9, 12], c: [6, 7], label: "똑독해", ...sp("nonfiction") },
+  // 갈래별 주제별 문학 독해(별별 문학 독해): 문학 특강 페이지의 짙은 갈색
+  { r: [12, 13], c: [6, 7], label: "갈래별\n주제별\n문학\n독해", ...sp("literature") },
+  { r: [13, 16], c: [6, 7], label: "한국\n사람", ...sp("history") },
+  { r: [16, 18], c: [6, 7], label: "소클\n고등\n통합\n사회", ...sp("society") },
 ];
 
 const HEADS: { c: [number, number]; lines: string[] }[] = [
@@ -116,8 +138,8 @@ function CurriculumChart() {
         {STAGES.map((s) => (
           <div
             key={s.label}
-            className="flex items-center justify-center text-[15px] font-bold tracking-[0.2em] text-white [writing-mode:vertical-rl] sm:text-[20px] lg:text-[20px]"
-            style={{ ...area(s.r, s.c), background: s.bg }}
+            className="flex items-center justify-center text-[15px] font-extrabold tracking-[0.2em] [writing-mode:vertical-rl] sm:text-[20px] lg:text-[20px]"
+            style={{ ...area(s.r, s.c), background: s.bg, color: s.fg }}
           >
             {s.label}
           </div>
@@ -138,8 +160,9 @@ function CurriculumChart() {
         {BLOCKS.map((b) => (
           <div
             key={b.label}
-            className="flex flex-col items-center justify-center px-0.5 py-1 leading-[1.25] break-keep text-white"
-            style={{ ...area(b.r, b.c), background: b.bg }}
+            className="flex flex-col items-center justify-center px-0.5 py-1 leading-[1.25] break-keep"
+            // 칸 색: 프로그램 색을 흰색과 섞어 조금 흐리게(75%)
+            style={{ ...area(b.r, b.c), background: `color-mix(in srgb, ${b.bg} 75%, #FFFFFF)`, color: b.fg ?? "#FFFFFF" }}
           >
             {b.sub && <span className="text-[9px] text-black/55 sm:text-[11px] lg:text-[11px]">{b.sub}</span>}
             <span className={`font-bold ${b.c[0] >= 5 ? "text-[10px] sm:text-[12px] lg:text-[12px]" : "text-[12px] sm:text-[15px] lg:text-[15px]"}`}>

@@ -66,14 +66,16 @@ export default function ProgramsSection({ progTabs, progs }: Props) {
                     띄어쓰기 없이 긴 연령('예비중·중등')은 가운뎃점 뒤에서 나눔 → 예비중· / 중등 */}
                 <span
                   className="flex size-16 flex-none flex-col items-center justify-center rounded-[16px] text-center text-[13px] leading-[1.25] font-extrabold tracking-[-0.03em] lg:size-18 lg:text-[14px]"
-                  style={{ background: p.tone.soft, color: p.tone.ink }}
+                  style={{ background: p.tone.soft, color: p.tone.fg ?? p.tone.ink }}
                   aria-hidden={p.icon ? true : undefined}
                 >
-                  {/* 아이콘이 있으면(정규 심화) 아이콘만, 학년은 제목 위 글자로 */}
+                  {/* 아이콘이 있으면(정규 심화) 아이콘만, 분야가 있으면(특강) 분야 글자만 — 둘 다 학년은 제목 위 글자로 */}
                   {p.icon ? (
                     <span className="flex [&_svg]:size-8 lg:[&_svg]:size-9">
                       <CourseIcon id={ADVANCED_ICON_ID[p.icon]} color={p.tone.ink} />
                     </span>
+                  ) : p.field ? (
+                    <span className="px-1 text-[14px] leading-[1.2] break-keep lg:text-[15px]">{p.field}</span>
                   ) : (() => {
                     const dot = p.age.indexOf("·");
                     const [first, ...rest] =
@@ -89,10 +91,10 @@ export default function ProgramsSection({ progTabs, progs }: Props) {
                   })()}
                 </span>
                 <span className="flex min-w-0 flex-1 flex-col gap-1">
-                  {/* 제목 위 작은 글자(연령 박스와 같은 색): 특강 탭은 프로그램 분야, 정규 심화 탭은 학년 */}
+                  {/* 제목 위 작은 글자(연령 박스와 같은 색): 정규 심화 · 특강 탭은 학년(박스에는 아이콘 · 분야) */}
                   {(p.field || p.icon) && (
                     <span className="text-[13px] leading-[1.3] font-bold lg:text-[14px]" style={{ color: p.tone.ink }}>
-                      {p.field ?? p.age}
+                      {p.age}
                     </span>
                   )}
                   <span className="text-[17px] leading-[1.35] font-extrabold lg:text-[18px]">{p.title}</span>

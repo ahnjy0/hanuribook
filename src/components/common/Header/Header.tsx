@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import Link from "next/link";
 import logoImg from "@/assets/images/logo.webp";
 import SmartLink from "@/components/common/SmartLink";
+import { PATHS } from "@/routes";
 import { useHeader, type HeaderProps } from "./useHeader";
 
 export default function Header(props: HeaderProps) {
@@ -22,6 +23,7 @@ export default function Header(props: HeaderProps) {
     subs,
     tabs,
     toggleMenu,
+    closeMenu,
   } = useHeader(props);
   return (
     <header className="w-full border-b border-b-[#EFEFEF] bg-white font-pretendard text-[#1F1F1F]">
@@ -66,39 +68,105 @@ export default function Header(props: HeaderProps) {
         </button>
       </div>
       {menuOpen && (
-        <nav className="border-t border-t-[#F3F3F3] bg-white" aria-label="전체 메뉴">
-          <div className="mx-auto my-0 box-border flex max-w-[1200px] flex-col px-5 pt-2 pb-5">
-            <Link
-              className="flex min-h-13 items-center border-b border-b-[#F1F1F1] text-[17px] font-extrabold text-[#1F1F1F] no-underline"
-              href="/"
-            >
-              메인 홈
-            </Link>
-            {menuGroups.map((g, i) => (
-              <div key={i} className="flex flex-col gap-2 border-b border-b-[#F1F1F1] px-0 py-3">
-                <SmartLink
-                  className="flex min-h-8 items-center text-[17px] font-extrabold text-[#1F1F1F] no-underline"
-                  href={g.href}
-                >
-                  {g.label}
-                </SmartLink>
-                {g.hasItems && (
-                  <div className="grid grid-cols-2 gap-1.5">
-                    {g.items.map((it, j) => (
-                      <SmartLink
-                        key={j}
-                        className="flex min-h-11 items-center rounded-[10px] bg-[#F7F7F8] px-3 py-0 text-[14px] font-medium text-[#222222] no-underline"
-                        href={it.href}
-                      >
-                        {it.label}
-                      </SmartLink>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </nav>
+        // 전체 메뉴: 화면 위에 덮는 창(어두운 배경 클릭 · Esc · X 로 닫힘, 열린 동안 뒤 페이지 스크롤 잠금)
+        // 모바일 · 태블릿: 오른쪽에서 들어오는 서랍 / 데스크톱: 위에서 내려오는 4열 패널
+        <div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-label="전체 메뉴">
+          <button
+            type="button"
+            className="absolute inset-0 cursor-default border-0 bg-black/45 p-0"
+            aria-label="전체 메뉴 닫기"
+            onClick={closeMenu}
+          />
+          <nav
+            className="absolute top-0 right-0 flex h-full w-[86%] max-w-[400px] animate-menu-in flex-col overflow-y-auto overscroll-contain bg-white shadow-[-12px_0_32px_rgba(0,0,0,0.15)] motion-reduce:animate-none lg:right-0 lg:left-0 lg:h-auto lg:max-h-[85dvh] lg:w-full lg:max-w-none lg:animate-menu-down lg:rounded-b-[28px] lg:shadow-[0_16px_40px_rgba(0,0,0,0.15)]"
+            aria-label="전체 메뉴"
+          >
+            {/* 머리: 로고 · 닫기 */}
+            <div className="mx-auto box-border flex h-15 w-full max-w-[1200px] flex-none items-center justify-between border-0 border-b border-solid border-[#F1F1F1] px-5">
+              <Link className="flex items-center no-underline" href="/" onClick={closeMenu}>
+                <img className="block h-7 w-auto" src={logoImg.src} alt="한우리독서토론논술 홈" />
+              </Link>
+              <button
+                type="button"
+                className="-mr-2.5 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border-0 bg-transparent hover:bg-[#F5F5F5]"
+                aria-label="전체 메뉴 닫기"
+                onClick={closeMenu}
+              >
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1F1F1F" strokeWidth="2" strokeLinecap="round">
+                  <path d="M6 6l12 12M18 6 6 18" />
+                </svg>
+              </button>
+            </div>
+            {/* 메뉴 묶음: 모바일 위아래 / 데스크톱 4열 */}
+            <div className="mx-auto box-border grid w-full max-w-[1200px] flex-auto grid-cols-1 content-start gap-0 px-5 py-3 lg:grid-cols-4 lg:gap-8 lg:py-8">
+              {menuGroups.map((g, i) => (
+                <div key={i} className="flex flex-col gap-2 border-0 border-b border-solid border-[#F3F3F3] py-4 last:border-b-0 lg:border-b-0 lg:py-0">
+                  <SmartLink
+                    className="flex items-center justify-between text-[18px] font-extrabold text-[#1F1F1F] no-underline lg:border-0 lg:border-b-2 lg:border-solid lg:pb-3 lg:text-[20px]"
+                    style={{ borderColor: accent }}
+                    href={g.href}
+                    onClick={closeMenu}
+                  >
+                    {g.label}
+                    <svg className="lg:hidden" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={accent} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="m9 6 6 6-6 6" />
+                    </svg>
+                  </SmartLink>
+                  {g.hasItems && (
+                    <ul className="m-0 grid list-none grid-cols-2 gap-x-2 gap-y-1 p-0 lg:mt-1 lg:grid-cols-1 lg:gap-y-2">
+                      {g.items.map((it, j) => (
+                        <li key={j} className="flex flex-col">
+                          <SmartLink
+                            className="flex min-h-10 items-center rounded-[10px] px-2 text-[15px] font-semibold text-[#333333] no-underline hover:bg-[#FFF4EC] lg:min-h-0 lg:px-0 lg:py-1 lg:text-[16px] lg:hover:bg-transparent lg:hover:text-[#D94E0F]"
+                            href={it.href}
+                            onClick={closeMenu}
+                          >
+                            {it.label}
+                          </SmartLink>
+                          {/* 3뎁스: 데스크톱에서만 작게 */}
+                          {it.thirds.length > 0 && (
+                            <ul className="m-0 hidden list-none flex-col gap-1 p-0 pb-1 pl-3 lg:flex">
+                              {it.thirds.map((t, k) => (
+                                <li key={k}>
+                                  <SmartLink
+                                    className="text-[13px] text-[#8A8A8A] no-underline hover:text-[#1F1F1F]"
+                                    href={t.href}
+                                    onClick={closeMenu}
+                                  >
+                                    · {t.label}
+                                  </SmartLink>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+            {/* 아래 바로가기: 수업상담 신청 · 센터찾기 */}
+            <div className="mx-auto box-border grid w-full max-w-[1200px] flex-none grid-cols-2 gap-2 px-5 pt-2 pb-6 lg:max-w-[560px] lg:pb-8">
+              <SmartLink
+                className="flex h-12 items-center justify-center rounded-[12px] border-[1.5px] border-solid bg-white text-[15px] font-bold no-underline"
+                style={{ borderColor: accent, color: accentText }}
+                href={PATHS.Centers}
+                onClick={closeMenu}
+              >
+                센터찾기
+              </SmartLink>
+              <SmartLink
+                className="flex h-12 items-center justify-center rounded-[12px] text-[15px] font-bold text-white no-underline"
+                style={{ background: accentFill }}
+                href={PATHS.Consult}
+                onClick={closeMenu}
+              >
+                수업상담 신청하기
+              </SmartLink>
+            </div>
+          </nav>
+        </div>
       )}
       <nav className="border-t border-t-[#F3F3F3]" aria-label="주 메뉴">
         <div className="mx-auto my-0 box-border grid max-w-[1200px] grid-cols-4 px-2 py-0">

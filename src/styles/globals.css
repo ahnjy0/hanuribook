@@ -20,6 +20,30 @@
   --animate-icon-bob: iconBob 4s ease-in-out infinite;
   /* 상세 페이지 히어로 교재 로고: 페이지가 열릴 때 작게 → 살짝 커졌다가 제자리(통통 튀듯 나타남) */
   --animate-pop-in: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  /* 헤더 전체 메뉴: 모바일은 오른쪽에서 들어오는 서랍, 데스크톱은 위에서 내려오는 패널 */
+  --animate-menu-in: menuIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-menu-down: menuDown 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes menuIn {
+    from {
+      translate: 100% 0;
+    }
+    to {
+      translate: 0 0;
+    }
+  }
+
+  @keyframes menuDown {
+    from {
+      translate: 0 -24px;
+      opacity: 0;
+    }
+    to {
+      translate: 0 0;
+      opacity: 1;
+    }
+  }
+
   /* 한우리선생님 '학부모 후기': 카드 줄이 왼쪽으로 끝없이 흘러감(목록을 두 번 이어 붙여 -50% 이동) */
   --animate-marquee: marquee 45s linear infinite;
 

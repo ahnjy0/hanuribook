@@ -4,7 +4,6 @@ import Header from "@/components/common/Header/Header";
 import SearchSection from "./sections/SearchSection";
 import ResultsSection from "./sections/ResultsSection";
 import Footer from "@/components/common/Footer/Footer";
-import BottomNav from "@/components/common/BottomNav/BottomNav";
 import { useCenters } from "./useCenters";
 
 export default function Centers() {
@@ -17,9 +16,6 @@ export default function Centers() {
         <ResultsSection centers={centers} />
       </main>
       <Footer />
-      <div className="sticky bottom-0 z-20">
-        <BottomNav cta={"무료 수업 & 상담 신청하기"} ctaHref="/consult" centerActive={true} />
-      </div>
     </div>
   );
 }

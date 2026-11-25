@@ -40,6 +40,11 @@ const ITEMS: {
   { id: "society", age: "고등", field: "통합사회", title: "소클 고등 통합사회", desc: "통합사회 교과 대비", ...toneOf("society"), href: PATHS.SpecialSociety },
 ];
 
+/** 특강 id → 카드 색(메인 페이지 특강 탭 카드에서도 같은 색을 씀) */
+export const SPECIAL_TONE: Record<string, { badge: string; badgeFg: string; ink: string }> = Object.fromEntries(
+  ITEMS.map((it) => [it.id, { badge: it.badge, badgeFg: it.badgeFg, ink: it.ink }]),
+);
+
 export function useSpecial() {
   return { items: ITEMS };
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PATHS } from "@/routes";
 import { ELEMENTARY } from "@/views/ElementaryDetail/elementaryData";
 import { ADVANCED } from "@/views/AdvancedDetail/advancedData";
+import { SPECIAL_TONE } from "@/views/Special/useSpecial";
 
 /** 정규 심화 탭: 연령 박스 안에 글자 대신 넣는 프로그램 아이콘(그림은 sections/ProgramsSection 에 있음) */
 export type ProgIcon = "science" | "history" | "geo" | "world";
@@ -17,14 +18,18 @@ const TAB_DEFS: [TabKey, string][] = [
   ["special", "특강"],
 ];
 
-const STAGE_TONE: Record<Stage, { soft: string; ink: string }> = {
+const STAGE_TONE: Record<Stage, Tone> = {
   kinder: { soft: "#FFF3C9", ink: "#8A5A00" },
   elementary: { soft: "#FFE7D9", ink: "#C2410C" },
   middle: { soft: "#E2F3E7", ink: "#1E7334" },
   high: { soft: "#E3EDFC", ink: "#1E4E9C" },
 };
 
-type Tone = { soft: string; ink: string };
+// fg: 연령(분야) 박스 글자색(없으면 ink) — 특강 탭은 진한 특강색 박스에 흰(또는 진한) 글자
+type Tone = { soft: string; ink: string; fg?: string };
+
+/** 특강 탭 카드 색: 단기특강 목록 카드 색 기준 — 분야 박스 = 특강 강조색을 연하게(15%), 글자 · 학년 = 특강 강조 글자색 */
+const sp = (id: string): Tone => ({ soft: `${SPECIAL_TONE[id].badge}26`, ink: SPECIAL_TONE[id].ink });
 
 /**
  * 정규 탭 카드 색: 프로그램별 해당 페이지의 주요 색(soft: 연령 박스 배경, ink: 연령 글자)
@@ -67,12 +72,12 @@ const PROGRAMS: Record<TabKey, { age: string; title: string; sub?: string; field
     { age: "초등 6학년", title: "세계사", sub: "중학교 역사 교육 과정 반영 세계 곳곳의 환경과 생활모습 이해", desc: "세계의 흐름 속에서 오늘을 읽다", href: PATHS.DetailWorld, tone: PAGE_TONE.world, icon: "world" },
   ],
   special: [
-    { age: "유아", title: "참깨한글", field: "한글", desc: "그림책과 놀이로 자음·모음을 익히고 읽기 독립을 준비하는 유아 맞춤 한글 과정.", href: PATHS.Special },
-    { age: "초등", title: "다다어휘", field: "어휘", desc: "교과서 필수 어휘와 한자어를 집중적으로 익혀 독해의 기초 체력을 다집니다.", href: PATHS.Special },
-    { age: "초등", title: "똑독해", field: "비문학", desc: "문단 구조와 핵심어 찾기로 비문학 지문을 정확하게 읽는 독해 전략 특강.", href: PATHS.Special },
-    { age: "초·중등", title: "한국사봄 | 한국사람", field: "역사", desc: "시대 흐름과 인물 중심으로 한국사를 정리하고 탐구 활동으로 기억에 남깁니다.", href: PATHS.Special },
-    { age: "중등", title: "별별문학독해 | 교과문학탐독", field: "문학", desc: "교과서 수록 문학 작품을 갈래별로 깊이 읽고 내신 서술형까지 대비합니다.", href: PATHS.Special },
-    { age: "고등", title: "소클 고등 통합사회", field: "통합사회", desc: "통합사회 핵심 개념을 시사 이슈와 연결해 읽고 토론·논술로 정리합니다.", href: PATHS.Special },
+    { age: "유아", title: "참깨한글", field: "한글", tone: sp("hangul"), desc: "그림책과 놀이로 자음·모음을 익히고 읽기 독립을 준비하는 유아 맞춤 한글 과정.", href: PATHS.Special },
+    { age: "초등", title: "다다어휘", field: "어휘", tone: sp("vocab"), desc: "교과서 필수 어휘와 한자어를 집중적으로 익혀 독해의 기초 체력을 다집니다.", href: PATHS.Special },
+    { age: "초등", title: "똑독해", field: "비문학", tone: sp("nonfiction"), desc: "문단 구조와 핵심어 찾기로 비문학 지문을 정확하게 읽는 독해 전략 특강.", href: PATHS.Special },
+    { age: "초·중등", title: "한국사봄 | 한국사람", field: "역사", tone: sp("history"), desc: "시대 흐름과 인물 중심으로 한국사를 정리하고 탐구 활동으로 기억에 남깁니다.", href: PATHS.Special },
+    { age: "중등", title: "별별문학독해 | 교과문학탐독", field: "문학", tone: sp("literature"), desc: "교과서 수록 문학 작품을 갈래별로 깊이 읽고 내신 서술형까지 대비합니다.", href: PATHS.Special },
+    { age: "고등", title: "소클 고등 통합사회", field: "통합사회", tone: sp("society"), desc: "통합사회 핵심 개념을 시사 이슈와 연결해 읽고 토론·논술로 정리합니다.", href: PATHS.Special },
   ],
 };
 

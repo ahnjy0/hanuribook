@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PATHS } from "@/routes";
 
 export type HeaderProps = {
@@ -72,7 +72,13 @@ const THIRD_MAP: Record<string, [string, string, string][]> = {
   ],
 };
 
-const toItems = (arr: [string, string][]) => arr.map(([label, href]) => ({ label, href }));
+// 전체 메뉴 항목: 2뎁스 + 그 아래 3뎁스('전체' 제외 — 2뎁스 링크가 곧 전체 페이지)
+const toItems = (arr: [string, string][]) =>
+  arr.map(([label, href]) => ({
+    label,
+    href,
+    thirds: (THIRD_MAP[label] || []).filter(([l]) => l !== "전체").map(([l, h]) => ({ label: l, href: h })),
+  }));
 
 const MENU_GROUPS = [
   { label: "프로그램", href: PATHS.Program, items: toItems(SUB_MAP.program) },
@@ -87,6 +93,21 @@ export function useHeader(props: HeaderProps) {
   const crumbStr = props.crumbs ?? "프로그램 > 유아정규";
   const pink = (props.theme ?? "orange") === "pink";
   const [open, setOpen] = useState(false);
+
+  // 전체 메뉴가 열려 있는 동안: 뒤 페이지 스크롤 잠금 + Esc 로 닫기
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
 
   const tabs = TAB_DEFS.map((t) => ({ ...t, on: t.key === active, off: t.key !== active }));
   const subs = (SUB_MAP[active] || []).map(([label, href]) => ({
@@ -115,6 +136,7 @@ export function useHeader(props: HeaderProps) {
     menuExp: open,
     menuLabel: open ? "전체 메뉴 닫기" : "전체 메뉴 열기",
     toggleMenu: () => setOpen((v) => !v),
+    closeMenu: () => setOpen(false),
     menuGroups: MENU_GROUPS,
     tabs,
     subs,
