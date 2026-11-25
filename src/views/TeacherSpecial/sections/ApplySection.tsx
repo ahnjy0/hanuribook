@@ -41,15 +41,12 @@ export default function ApplySection() {
   };
 
   return (
-    <div className="pb-16 lg:pb-24">
+    <div>
       <Section id="ts-apply-h">
         <div id="ts-apply" className="scroll-mt-4" />
         <Title id="ts-apply-h" icon="start">
           교사특별반 상담 신청
         </Title>
-        <p className="m-0 text-[14px] leading-[1.7] break-keep text-[#333333] lg:text-[17px]">
-          망설이지 말고, 지금! <strong className="font-extrabold text-[#1F1F1F]">한우리 선생님으로 넥스트 커리어를 시작하세요!</strong>
-        </p>
         {done ? (
           <div className="flex flex-col items-center gap-3.5 rounded-[24px] border border-[#EEEEEE] bg-white px-6 py-9 text-center" role="status">
             <span className="flex h-16 w-16 items-center justify-center rounded-[50%] bg-[#FFF1E7]" aria-hidden="true">

@@ -21,7 +21,7 @@ export default function RolesSection() {
   return (
     <Section id="t-role">
       <Title id="t-role" icon="who">
-        어떤 선생님이 가르치나요?
+        한우리 선생님의 전문 분야
       </Title>
       <p className="m-0 text-[14px] leading-[1.7] break-keep text-[#333333] lg:text-[17px]">
         전문적인 교육을 받고 자격증을 취득한 한우리 선생님이 가르칩니다. 한우리 선생님은 독서토론논술 전문가입니다.

@@ -4,10 +4,12 @@ import ReasonsSection from "./sections/ReasonsSection";
 import StepsSection from "./sections/StepsSection";
 import PromiseSection from "./sections/PromiseSection";
 import ApplySection from "./sections/ApplySection";
+import ProgramFaqSection from "@/components/common/ProgramFaqSection";
+import { TEACHER_FAQS } from "@/views/TeacherCourse/teacherFaqs";
 import Footer from "@/components/common/Footer/Footer";
 
 /**
- * 교사특별반: 히어로(한우리 지도교사 소개 + 사진) → 한우리에서 시작해야 하는 이유 5가지 → 되는 방법(단계) → 약속 → 상담 신청서
+ * 교사특별반: 히어로(한우리 지도교사 소개 + 사진) → 한우리에서 시작해야 하는 이유 7가지 → 되는 방법(단계) → 약속 → 상담 신청서 → FAQ
  */
 export default function TeacherSpecial() {
   return (
@@ -19,6 +21,7 @@ export default function TeacherSpecial() {
         <StepsSection />
         <PromiseSection />
         <ApplySection />
+        <ProgramFaqSection items={TEACHER_FAQS} last />
       </main>
       <Footer />
     </div>

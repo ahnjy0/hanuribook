@@ -1,31 +1,8 @@
 import Header from "@/components/common/Header/Header";
 import HeroSection from "./sections/HeroSection";
 import InfoSection from "./sections/InfoSection";
-import ProgramFaqSection, { type FaqItem } from "@/components/common/ProgramFaqSection";
-
-/** 지도교사 입문과정 FAQ(프로그램 상세 페이지와 같은 아코디언) — 답변 안 \n 은 문단 나눔 */
-const FAQS: FaqItem[] = [
-  {
-    q: "지도교사로 활동하려면 자격요건이 어떻게 되나요?",
-    a: "(사)한우리독서문화운동본부에서 진행하는 한우리 독서지도사 양성과정, 논술지도 전문 과정 수료 또는 자격시험에 합격한 경우가 자격요건에 부합합니다.\n성별, 나이, 학력에 대한 별도의 제한은 없으나 모든 교사는 활동하고자 하는 지역센터장님의 면담 후 승인받아야 합니다.",
-  },
-  {
-    q: "타 업체 자격증, 수료증, 타 업체 경력으로도 활동할 수 있나요?",
-    a: "한우리 이외의 기관에서 독서지도사 또는 논술지도사 과정을 수료하였거나 관련 전공(국문학, 국어교육과, 문예창작과 등)을 졸업(예정)하신 분도 자격요건에는 부합하나 활동하고자 하는 지역센터장님과의 면담을 통해 결정됩니다.",
-  },
-  {
-    q: "입문과정은 무엇인가요?",
-    a: "입문과정은 한우리 지도교사로 활동하기 위해서 반드시 수강하셔야 하며 매월 진행됩니다.\n입문과정 신청은 한우리 독서 토론 논술 홈페이지(www.hanuribook.com)에서 온라인 접수할 수 있습니다.\n(※교육 형태 및 일정은 변경될 수 있음)",
-  },
-  {
-    q: "입문과정 수료 후 추가 교육이 있나요?",
-    a: "지도교사의 역량 향상을 위하여 정기 / 비정기적으로 무상 교육이 제공됩니다. 교육 수강 시기에 맞춰 본사에서 대상자에게 별도 연락합니다.",
-  },
-  {
-    q: "입문과정 수료 후 바로 활동이 가능한가요?",
-    a: "입문과정을 수료하면 바로 한우리 지도교사로 등록됩니다. 따라서 입문과정은 실질적으로 활동이 가능한 시기에 맞춰 신청하셔야 합니다.",
-  },
-];
+import ProgramFaqSection from "@/components/common/ProgramFaqSection";
+import { TEACHER_FAQS } from "./teacherFaqs";
 import Footer from "@/components/common/Footer/Footer";
 
 /** 지도교사 입문과정: 타이틀 · 설명 → 과정 안내 · 진행 절차 · 교육 일정 · 신청 버튼 → FAQ */
@@ -36,7 +13,7 @@ export default function TeacherCourse() {
       <main className="flex-[1_0_auto]">
         <HeroSection />
         <InfoSection />
-        <ProgramFaqSection items={FAQS} last />
+        <ProgramFaqSection items={TEACHER_FAQS} last />
       </main>
       <Footer />
     </div>
