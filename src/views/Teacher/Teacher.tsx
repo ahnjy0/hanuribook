@@ -3,9 +3,10 @@ import GreetingSection from "./sections/GreetingSection";
 import FeaturesSection from "./sections/FeaturesSection";
 import RolesSection from "./sections/RolesSection";
 import ReviewsSection from "./sections/ReviewsSection";
+import MeetSection from "./sections/MeetSection";
 import Footer from "@/components/common/Footer/Footer";
 
-/** 한우리선생님: 히어로 → 한우리 선생님의 특징 → 한우리 선생님의 전문 분야 → 학부모 후기 */
+/** 한우리선생님: 히어로 → 한우리 선생님의 특징 → 한우리 선생님의 전문 분야 → 학부모 후기 → 우리 동네 선생님 배너(수업상담) */
 export default function Teacher() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-white font-pretendard tracking-[-0.03em] text-[#1F1F1F]">
@@ -15,6 +16,7 @@ export default function Teacher() {
         <FeaturesSection />
         <RolesSection />
         <ReviewsSection />
+        <MeetSection />
       </main>
       <Footer />
     </div>
