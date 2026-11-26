@@ -702,8 +702,8 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         ],
         // 선생님 답변 박스(다른 특강 고민 섹션과 같은 모양)
         answer: {
-          text: "어렵고 방대한 역사!\n사건 연표부터 쟁점 토론까지 한우리가 역사를 새겨 드립니다!",
-          em: "한우리가 역사를 새겨 드립니다!",
+          text: "나날이 중요해지는 한국사!\n한우리 역사 특강과 함께라면 한국사가 쉬워집니다.",
+          em: "한우리 역사 특강과 함께라면 한국사가 쉬워집니다.",
           icon: { src: "https://cdn.hanuribook.com/img/icon/teacher.png", w: 1024, h: 1024 },
         },
       },
@@ -902,8 +902,14 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
           { text: "어떤 작품을 선택해야 할지 모르겠어요!" },
           { text: "교과서 속 문학 작품, 읽을 시간이 부족해요!" },
           { text: "공부를 위한 소설 읽기, 재미가 없어요!" },
-          { text: "문학 작품 속 어휘가 너무 어려워요!" },
+          { text: "문학 작품 속 어휘가 생소하고 어려워요!" },
         ],
+        // 선생님 답변 박스(역사 특강과 같은 모양 — 첫 문장 뒤 줄바꿈, 뒷문장 노랑 강조)
+        answer: {
+          text: "점점 수준이 높아지는 문학!\n한우리 문학 특강과 함께라면 문학이 재밌어집니다.",
+          em: "한우리 문학 특강과 함께라면 문학이 재밌어집니다.",
+          icon: { src: "https://cdn.hanuribook.com/img/icon/teacher.png", w: 1024, h: 1024 },
+        },
       },
       // 별별 문학 독해(짙은 갈색)
       ...withTheme(LIT_MIDDLE_THEME, [
