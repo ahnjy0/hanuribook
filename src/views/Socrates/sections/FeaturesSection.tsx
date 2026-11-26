@@ -1,16 +1,19 @@
 import SectionTitle from "./SectionTitle";
 
 /**
- * 중등(소크라테스) 프로그램의 특징: 3가지를 아이콘 카드로
- * 카드 = 흰 바탕 + 연보라 동그라미 안 아이콘(중등 보라 선) + 번호 + 특징 문구(굵게)
- * 모바일: 아이콘 왼쪽·글 오른쪽(가로) / 태블릿 이상: 3열, 가운데 정렬(세로)
+ * 중등(소크라테스) 프로그램 특징: 영역별 4가지 — 문학 · IB 탐구 · 비문학 · 사회
+ * 카드 = 흰 바탕 + 위: 연보라 사각 아이콘 · 영역 알약 / 가운데: 키우는 사고력(보라 굵은 제목) / 아래: 설명
+ * 모바일 1열, 데스크톱 2열(2×2). 설명이 길어 왼쪽 정렬
+ * ※ 영역(area) · 제목(title)은 각 설명 문구 안의 말(문학 독해, IB, 비문학 독해, 사회 현상 / ○○적 사고력)에서 뽑음
  */
 const ACCENT = "#6A54A6";
 const SOFT = "#F3F0FA";
 
-const ITEMS: { text: string; icon: React.ReactNode }[] = [
+const ITEMS: { area: string; title: string; text: string; icon: React.ReactNode }[] = [
   {
-    text: "문학 · 비문학 독해로 내신 및 수능 대비",
+    area: "문학",
+    title: "추론적 사고력",
+    text: "문학 독해의 기본 원리부터 심화, 융합까지 체계적으로 익힙니다. 이를 토대로 중학생 필독 단편소설을 분석 · 감상하며 추론적 사고력을 키웁니다. 어떤 문학 지문에도 자신 있는 탄탄한 독해력을 키웁니다.",
     // 펼친 책
     icon: (
       <>
@@ -20,8 +23,29 @@ const ITEMS: { text: string; icon: React.ReactNode }[] = [
     ),
   },
   {
-    text: "추론적 · 대안적 · 비판적 · 통합적 사고력 향상",
-    // 생각 지도(가운데 생각에서 네 갈래로 뻗음 — 네 가지 사고력)
+    area: "IB 탐구 · 논술",
+    title: "대안적 사고력",
+    text: "IB(국제 바칼로레아) 교육 방향을 ‘독서-토론-논술’의 기본 교육법을 기반으로 하는 한우리 중등 프로그램에 접목하여 깊이 있는 지식 탐구 활동을 합니다. 교과서와 관련된 배경지식을 확장하고 체계적인 탐구 과정을 거쳐, 탐구 질문에 대한 나만의 해결 방안을 도출하며, 논술 실력과 대안적 사고력을 키웁니다.",
+    // 지구본(국제 바칼로레아)
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z" />
+      </>
+    ),
+  },
+  {
+    area: "비문학",
+    title: "비판적 사고력",
+    text: "비문학 독해의 기본 원리부터 심화, 융합까지 체계적으로 익힙니다. 인문 · 사회 · 과학 등 다양한 계열의 독서를 통해 습득한 지식과 정보를 탐구 질문 해결에 활용하며 비판적 사고력을 기릅니다. 서 · 논술형 글쓰기, 수행평가 활동을 하며 학교 평가에도 대비합니다.",
+    // 돋보기(지식 · 정보를 따져 읽기)
+    icon: <path d="M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.5 15.5L20 20" />,
+  },
+  {
+    area: "사회",
+    title: "통합적 사고력",
+    text: "사회의 복잡한 사회 현상을 다양한 자료를 토대로 파악하고, 다각적으로 이해하며 통합적 사고력을 기릅니다. 토의 · 토론, 논 · 구술을 통해 지속가능한 해결책을 마련합니다.",
+    // 생각 지도(가운데에서 네 갈래 — 여러 관점을 하나로)
     icon: (
       <>
         <circle cx="12" cy="12" r="3" />
@@ -30,17 +54,6 @@ const ITEMS: { text: string; icon: React.ReactNode }[] = [
         <circle cx="4.5" cy="19" r="2" />
         <circle cx="19.5" cy="19" r="2" />
         <path d="M6 6.4 9.8 9.9M18 6.4l-3.8 3.5M6 17.6l3.8-3.5M18 17.6l-3.8-3.5" />
-      </>
-    ),
-  },
-  {
-    text: "서술 · 논술 · 구술, 수행평가 등 실전 연습",
-    // 글 쓰는 연필 + 원고
-    icon: (
-      <>
-        <path d="M4 20h7" />
-        <path d="M14.5 4.5l5 5L10 19H5v-5z" />
-        <path d="M12.5 6.5l5 5" />
       </>
     ),
   },
@@ -57,40 +70,47 @@ export default function FeaturesSection() {
         >
           프로그램 특징
         </SectionTitle>
-        <ol className="m-0 grid list-none grid-cols-1 gap-3 p-0 md:grid-cols-3 lg:gap-5">
-          {ITEMS.map((it, i) => (
+        <ul className="m-0 grid list-none grid-cols-1 gap-3 p-0 lg:grid-cols-2 lg:gap-5">
+          {ITEMS.map((it) => (
             <li
-              key={it.text}
-              className="flex flex-row items-center gap-4 rounded-[20px] bg-white px-5 py-5 shadow-[0_6px_16px_rgba(75,46,131,0.06)] md:flex-col md:gap-4 md:px-6 md:py-8 md:text-center lg:rounded-[24px] lg:py-10"
+              key={it.title}
+              className="flex flex-col gap-3 rounded-[20px] bg-white px-5 py-6 shadow-[0_6px_16px_rgba(75,46,131,0.06)] lg:gap-4 lg:rounded-[24px] lg:px-8 lg:py-8"
             >
-              <span
-                className="flex h-16 w-16 flex-none items-center justify-center rounded-full lg:h-24 lg:w-24"
-                style={{ background: SOFT }}
-                aria-hidden="true"
-              >
-                <svg
-                  className="h-8 w-8 lg:h-11 lg:w-11"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke={ACCENT}
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              {/* 머리: 아이콘 타일 + 영역 알약 */}
+              <div className="flex items-center gap-3">
+                <span
+                  className="flex h-12 w-12 flex-none items-center justify-center rounded-[14px] lg:h-14 lg:w-14 lg:rounded-[16px]"
+                  style={{ background: SOFT }}
+                  aria-hidden="true"
                 >
-                  {it.icon}
-                </svg>
-              </span>
-              <div className="flex flex-col gap-1 md:items-center lg:gap-2">
-                <span className="text-[13px] font-extrabold tracking-[0.04em] lg:text-[15px]" style={{ color: ACCENT }}>
-                  {String(i + 1).padStart(2, "0")}
+                  <svg
+                    className="h-6 w-6 lg:h-7 lg:w-7"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke={ACCENT}
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {it.icon}
+                  </svg>
                 </span>
-                <strong className="text-[17px] leading-[1.4] font-extrabold break-keep text-[#1F1F1F] lg:text-[21px]">
-                  {it.text}
-                </strong>
+                <div className="flex min-w-0 flex-col gap-1">
+                  <span
+                    className="self-start rounded-full px-2.5 py-0.5 text-[12px] leading-[1.5] font-bold lg:text-[13px]"
+                    style={{ background: SOFT, color: ACCENT }}
+                  >
+                    {it.area}
+                  </span>
+                  <strong className="text-[18px] leading-[1.35] font-extrabold break-keep lg:text-[22px]" style={{ color: ACCENT }}>
+                    {it.title}
+                  </strong>
+                </div>
               </div>
+              <p className="m-0 text-[14px] leading-[1.7] break-keep text-[#444444] lg:text-[16px]">{it.text}</p>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </section>
   );
