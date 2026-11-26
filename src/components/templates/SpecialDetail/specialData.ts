@@ -22,7 +22,9 @@ function localImg(img: StaticImageData): SpecialImage {
  * - ink: 흰 바탕 위에 쓰는 강조 글자색(기본 accent — 밝은 강조색이면 같은 계열의 진한 색)
  */
 /** 주요 특징 짧은 문구 카드 아이콘 이름 */
-export type PointIcon = "book" | "layers" | "link" | "pen" | "bulb" | "search" | "target" | "words" | "context" | "speak";
+export type PointIcon =
+  | "book" | "layers" | "link" | "pen" | "bulb" | "search" | "target" | "words" | "context" | "speak"
+  | "scroll" | "puzzle" | "idcard" | "hourglass" | "scales" | "docpen";
 
 export type SpecialTheme ={ accent: string; dark: string; soft: string; hi: string; onAccent?: string; ink?: string };
 
@@ -60,6 +62,7 @@ type SpecialBlockBody =
   | {
       kind: "intro";
       id?: string; // 같은 페이지 안 이동용(#id)
+      flush?: boolean; // true 면 위 여백 없이 바로 위 띠에 붙임(역사 특강: 한국사봄 띠 → 한국사람 띠)
       tag: string;
       tagSub?: string; // 연령 박스 안 아래 작은 보충(예: (중2~3))
       eyebrow?: string;
@@ -81,6 +84,8 @@ type SpecialBlockBody =
       heading?: string; // 라벨 아래 큰 제목(줄바꿈 시 마지막 줄은 강조 글자색)
       center?: boolean; // true 면 카드 안 글을 가운데 정렬
       accentEm?: boolean; // true 면 descEm(강조 부분)을 강조 글자색으로
+      cardBg?: string; // 과정 소개 띠 안 짧은 문구 카드의 바탕색(없으면 흰색) — 이때 아이콘 동그라미는 흰색
+      notes?: string[]; // 과정 소개 띠 안 카드 아래 부연 설명(흰 박스 안 점 목록)
       iconBg?: boolean; // true 면 아이콘 동그라미를 아이콘색(dark)을 옅게 깐 바탕(그림자 없음), 아니면 흰 바탕 + 그림자
       // label: 'Point.1' 같은 작은 라벨 / title: 굵은 제목 / desc: 설명 / descEm: 설명 안에서 강조할 부분 / em: 강조 문장(설명 뒤)
       // icon: 짧은 문구 카드(주요 정보 띠 안)에 쓰는 아이콘 이름 — BlockSection 의 POINT_ICONS
@@ -103,6 +108,8 @@ type SpecialBlockBody =
       emColor?: string; // 제목 아래 문구 · 말풍선 강조 글자색(없으면 강조 글자색 ink)
       bubbleBg?: [string, string]; // 말풍선 바탕(왼쪽 줄, 오른쪽 줄) — 없으면 강조색을 옅게
       figures?: SpecialImage[]; // 있으면 모아 보기: 2열 칸마다 말풍선 + 그 아래 고민하는 인물(figures[i])
+      perSlide?: number; // 슬라이드 한 장에 보여 줄 고민 수(기본 1, 2면 학부모 두 명이 좌우로 나란히)
+      fade?: boolean; // true 면 장이 옆으로 밀리지 않고 사라졌다 나타남
       items: { text: string; em?: string; icon?: SpecialImage }[]; // em: 말풍선 안 강조 부분
       answer?: { text: string; em?: string; icon?: SpecialImage };
     }
@@ -148,6 +155,7 @@ type SpecialBlockBody =
       label?: string;
       title?: string; // 박스 안 제목(없으면 생략)
       em?: string;
+      hideHead?: boolean; // true 면 칸 위 색 띠(head · sub) · 줄 사이 구분선 없이, 주제 글자도 보통 굵기 진회색으로 차시 목록만(head 는 구분용으로만 씀)
       cols: { head: string; sub?: string; items: { session: string; title: string; desc?: string }[] }[];
     }
   | {
@@ -187,7 +195,7 @@ export type SpecialProgram = {
 /** 학습 효과 카드 아이콘 이름(그림은 sections/BlockSection 의 EFFECT_ICON) */
 export type EffectIcon = "book" | "bulb" | "pencil" | "check" | "search";
 
-export type SpecialProgramId ="hangul" | "vocab" | "nonfiction" | "literature" | "society";
+export type SpecialProgramId = "hangul" | "vocab" | "nonfiction" | "history" | "literature" | "society";
 
 const SESSIONS = ["1차시", "2차시", "3차시", "4차시"];
 
@@ -198,6 +206,15 @@ const SESSIONS = ["1차시", "2차시", "3차시", "4차시"];
  */
 const LIT_MIDDLE_THEME: SpecialTheme = { accent: "#962F34", onAccent: "#FFFFFF", ink: "#962F34", dark: "#6E2226", soft: "#FFEDDF", hi: "#FFE27A" };
 const LIT_HIGH_THEME: SpecialTheme = { accent: "#3769B2", onAccent: "#FFFFFF", ink: "#3769B2", dark: "#413B6E", soft: "#E8F5FC", hi: "#FFE08A" };
+
+/**
+ * 한국사 통합 페이지의 과정별 색(받은 과정 표의 머리 색에서 뽑음)
+ * - 한국사봄: 베이지 #F5D88E(밝아서 위 글자는 진한 갈색 #4A3712,
+ *   흰 바탕 위 글자 · 진한 띠는 같은 계열의 진한 황갈색 #8A6516 · #8F6A1A)
+ * - 한국사람: 올리브 #8A9858(흰 바탕 위 글자는 진한 #66733A)
+ */
+const HIST_A_THEME: SpecialTheme = { accent: "#F5D88E", onAccent: "#4A3712", ink: "#8A6516", dark: "#8F6A1A", soft: "#FBF3DE", hi: "#FFE27A" };
+const HIST_B_THEME: SpecialTheme = { accent: "#8A9858", onAccent: "#FFFFFF", ink: "#66733A", dark: "#5C6833", soft: "#F1F3E6", hi: "#FFE08A" };
 
 /** 블록들에 같은 색(theme)을 붙임 — 한 페이지 안에서 과정별로 색을 나눌 때 */
 function withTheme(theme: SpecialTheme, blocks: SpecialBlockBody[]): SpecialBlock[] {
@@ -608,6 +625,215 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
     ],
   },
 
+  // 한국사 통합 페이지: 문학 통합 페이지(literature)와 같은 레이아웃
+  // 공통 히어로(두 과정 카드) → 과정별 소개 띠 → 그 과정 섹션들(과정별 색 — 한국사봄: 주황, 한국사람: 올리브)
+  history: {
+    name: "한국사봄 | 한국사람",
+    tag: "한국사 집중 프로그램",
+    title: "역사 특강",
+    // 목록 카드 설명과 같은 문구
+    slogan: "한국사 집중 대비",
+    // 히어로 배경 패턴: 한국사람 교재 표지(258×340 → 폭 600px, 높이 약 791px — 다른 특강보다 2배 크게)를 45도 회전해 옅게(5%) 반복
+    heroBg: {
+      src: "https://cdn.hanuribook.com/img/hanuribook/special1_02.png",
+      size: "600px auto",
+      position: "left top",
+      repeat: "repeat-x",
+      rotate: 45,
+      band: 791,
+      opacity: 0.05,
+    },
+    info: [],
+    // 히어로: 두 과정 카드(교재 표지 + 과정명 + 수업 정보, 누르면 아래 과정 소개로 이동)
+    heroCards: [
+      {
+        name: "한국사봄",
+        cover: { src: "https://cdn.hanuribook.com/img/hanuribook/special1_01.png", w: 258, h: 342 },
+        color: HIST_A_THEME.ink!,
+        soft: HIST_A_THEME.soft,
+        info: [
+          ["대상", "초등 5~6학년"],
+          ["학습 기간", "3개월(12주)"],
+        ],
+        href: "#hist-a",
+      },
+      {
+        name: "한국사람",
+        cover: { src: "https://cdn.hanuribook.com/img/hanuribook/special1_02.png", w: 258, h: 340 },
+        color: HIST_B_THEME.ink!,
+        soft: HIST_B_THEME.soft,
+        info: [
+          ["대상", "중학생"],
+          ["학습 기간", "2개월(8주)"],
+        ],
+        href: "#hist-b",
+      },
+    ],
+    // 페이지 주요 색(히어로 배경 등): 단기특강 공통 베이지. 강조색은 한국사봄(주황)
+    theme: { ...HIST_A_THEME, soft: "#F7F1E6" },
+    centered: false,
+    // 받은 내용(과정 표 · 과정별 특징 4개)만으로 구성: 과정별 소개 띠(대상 · 과정명 · 핵심 문구 · 학습 기간) → 주요 특징(4개)
+    // 수업 내용 · 수업 흐름 · 교재 구성 등은 받으면 문학 페이지처럼 블록을 더할 것
+    blocks: [
+      // 학부모 고민: 다다어휘 고민 섹션과 같은 구성(제목 → 말풍선 슬라이드 + 고민하는 엄마)
+      // 받은 문구에 강조 · 답변 박스가 없어 생략(받으면 em · answer 추가)
+      {
+        kind: "bubbles",
+        title: "우리 아이, 역사를 힘들어해요!",
+        em: "역사를 힘들어해요!",
+        // 말풍선: 한국사봄 베이지 · 한국사람 올리브를 옅게 번갈아
+        bubbleBg: ["#FBEDC6", "#ECEFD9"],
+        // 한 장에 학부모 두 명을 좌우로(4개 고민 → 2장)
+        perSlide: 2,
+        // 넘김 모션: 사라졌다 나타남
+        fade: true,
+        // 질문 순서대로 child_01 · 02 · 03 · 04
+        figures: [
+          { src: "https://cdn.hanuribook.com/img/icon/child_01.png", w: 1024, h: 1024 },
+          { src: "https://cdn.hanuribook.com/img/icon/child_02.png", w: 1024, h: 1024 },
+          { src: "https://cdn.hanuribook.com/img/icon/child_03.png", w: 1024, h: 1024 },
+          { src: "https://cdn.hanuribook.com/img/icon/child_04.png", w: 1024, h: 1024 },
+        ],
+        items: [
+          { text: "역사 시기별 순서가 헷갈려요!" },
+          { text: "외워야 할 내용이 너무 많아요!" },
+          { text: "지루하고 재미가 없어요!" },
+          { text: "인물과 용어가 어려워요!" },
+        ],
+        // 선생님 답변 박스(다른 특강 고민 섹션과 같은 모양)
+        answer: {
+          text: "어렵고 방대한 역사!\n사건 연표부터 쟁점 토론까지 한우리가 역사를 새겨 드립니다!",
+          em: "한우리가 역사를 새겨 드립니다!",
+          icon: { src: "https://cdn.hanuribook.com/img/icon/teacher.png", w: 1024, h: 1024 },
+        },
+      },
+      // 한국사봄(주황)
+      ...withTheme(HIST_A_THEME, [
+        {
+          kind: "intro",
+          id: "hist-a",
+          tag: "초등 5~6학년",
+          name: "한국사봄",
+          slogan: "한국사 집중 학습",
+          info: [["교재 구성", "워크북 3권, 필독서 6권, 부교재 1권, 별책, 부록(학생용 역사 인물 카드)"]],
+          // 주요 특징: 문학 특강처럼 소개 띠 안 짧은 문구 카드(라벨 + 아이콘 + 문구)
+          children: [
+            {
+              kind: "points",
+              title: "주요 특징",
+              // 카드 바탕: 한국사봄 주요 색(베이지)
+              cardBg: "#F5D88E",
+              items: [
+                { label: "Point.1", title: "교과 내용 맞춤 연표 학습", icon: "scroll" },
+                { label: "Point.2", title: "다양한 입체적 탐구 활동", icon: "puzzle" },
+                { label: "Point.3", title: "주요 인물과 개념 정리", icon: "idcard" },
+              ],
+              notes: [
+                "초등 5~6학년 수준에서 한국사의 흐름을 큰 줄기로 이해할 수 있습니다.",
+                "주요 사건이 일어나게 된 시대적 배경과 그 사건의 역사적 의의를 유기적으로 이해할 수 있습니다.",
+                "지도의 투명 필름 위에 직접 따라 그리거나 표기하며 역사 지도 학습을 합니다.",
+                "다양한 읽기 자료를 통해 배경지식을 확장하고 역사 관련 상식을 쌓을 수 있습니다.",
+              ],
+            },
+            {
+              // 수업 내용: 소개 띠 안에 작게(문학 특강 수업 내용 모양을 줄인 것) — 받은 표(1~12차시 주제)를 4차시씩 세 칸으로
+              kind: "lessons",
+              label: "수업 내용",
+              // 칸 위 차시 색 띠 · 줄 사이 구분선 없이(차시는 줄마다 표시)
+              hideHead: true,
+              cols: [
+                {
+                  head: "1~4차시",
+                  items: [
+                    { session: "1차시", title: "구석기 시대부터 철기 시대까지" },
+                    { session: "2차시", title: "삼국의 성립부터 신라의 삼국 통일까지" },
+                    { session: "3차시", title: "남북국 시대부터 고려 전기까지" },
+                    { session: "4차시", title: "혼란했던 시기를 지나 공민왕의 개혁까지" },
+                  ],
+                },
+                {
+                  head: "5~8차시",
+                  items: [
+                    { session: "5차시", title: "조선이 세워지고 발전하기까지" },
+                    { session: "6차시", title: "왜란과 호란의 아픔을 겪으면서" },
+                    { session: "7차시", title: "변화를 맞이하는 조선 후기 사회 1" },
+                    { session: "8차시", title: "변화를 맞이하는 조선 후기 사회 2" },
+                  ],
+                },
+                {
+                  head: "9~12차시",
+                  items: [
+                    { session: "9차시", title: "근대 국가 수립을 위한 노력" },
+                    { session: "10차시", title: "나라를 되찾기 위한 노력" },
+                    { session: "11차시", title: "광복부터 6.25 전쟁까지" },
+                    { session: "12차시", title: "시련을 딛고 발전하는 대한민국" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ]),
+      // 한국사람(올리브)
+      ...withTheme(HIST_B_THEME, [
+        {
+          kind: "intro",
+          id: "hist-b",
+          flush: true,
+          tag: "중학생",
+          name: "한국사람",
+          slogan: "내신 · 수능 한국사 집중 준비",
+          info: [["교재 구성", "워크북 2권, 필독서 2권, 보조 필독서 1권, 부록(수불석권(手不釋卷)/좌도우사(左圖右史: 교사 제공용))"]],
+          children: [
+            {
+              kind: "points",
+              title: "주요 특징",
+              // 카드 바탕: 한국사람 올리브를 연하게(진한 글자가 잘 읽히는 밝기)
+              cardBg: "#DCE2C3",
+              items: [
+                { label: "Point.1", title: "시대별 주요 사건 정리", icon: "hourglass" },
+                { label: "Point.2", title: "역사적 쟁점 찬반 토론", icon: "scales" },
+                { label: "Point.3", title: "유형별 글쓰기로 수행평가 대비", icon: "docpen" },
+              ],
+              notes: [
+                "교과 개념 이해와 역사적 사고력 향상, 두 가지를 한꺼번에 잡습니다.",
+                "한국사와 미술사를 연계해 이해합니다.",
+                "한국사 논쟁 토론과 다양한 표현 활동을 통해 창의적인 사고를 확장합니다.",
+                "사료와 지도를 활용하여 이해의 깊이를 더하고 이해의 폭을 넓힙니다.",
+              ],
+            },
+            {
+              // 수업 내용(한국사봄과 같은 모양): 받은 표(워크북 1권 1~4차시 · 2권 5~8차시)를 권별 두 칸으로
+              kind: "lessons",
+              label: "수업 내용",
+              hideHead: true,
+              cols: [
+                {
+                  head: "워크북 1권",
+                  items: [
+                    { session: "1차시", title: "우리 역사가 시작되다" },
+                    { session: "2차시", title: "고대 국가가 형성되다" },
+                    { session: "3차시", title: "새로운 통일 왕조, 고려가 서다" },
+                    { session: "4차시", title: "아침의 나라, 조선이 서다" },
+                  ],
+                },
+                {
+                  head: "워크북 2권",
+                  items: [
+                    { session: "5차시", title: "조선 후기, 변화의 바람이 불다" },
+                    { session: "6차시", title: "위기의 조선, 지주와 개화의 갈림길에 서다" },
+                    { session: "7차시", title: "대한 제국, 제국주의의 소용돌이 속에서 국권을 외치다" },
+                    { session: "8차시", title: "시대의 아픔을 넘어 통일을 꿈꾸다" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ]),
+    ],
+  },
+
   // 문학 통합 페이지: 별별문학독해(예비 중1) + 교과문학탐독(예비고)을 탭 없이 한 페이지에(참깨한글과 같은 가운데 라벨 구성)
   // 공통 히어로 → 학습 과정(두 과정 카드) → 과정별 소개 띠 + 그 과정 섹션들(과정별 색 — 별별: 주황, 교과: 초록)
   literature: {
@@ -656,6 +882,29 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
     // 중고등정규 중등(소크라테스) 페이지와 같은 구성: 섹션 제목은 왼쪽 정렬 + 타일 아이콘
     centered: false,
     blocks: [
+      // 학부모 고민 슬라이드(역사 특강과 같은 구성): 한 장에 학생 두 명을 좌우로(4개 고민 → 2장), 사라졌다 나타나는 넘김
+      {
+        kind: "bubbles",
+        title: "문학 때문에 고민이신가요?",
+        em: "고민이신가요?",
+        // 말풍선: 별별 복숭아빛 · 교과 하늘색을 옅게 번갈아
+        bubbleBg: ["#FBE3D6", "#DDEEF8"],
+        perSlide: 2,
+        fade: true,
+        // 질문 순서대로 junior_01 · 05 · 03 · 04
+        figures: [
+          { src: "https://cdn.hanuribook.com/img/icon/junior_01.png", w: 1024, h: 1024 },
+          { src: "https://cdn.hanuribook.com/img/icon/junior_05.png", w: 1024, h: 1024 },
+          { src: "https://cdn.hanuribook.com/img/icon/junior_03.png", w: 1024, h: 1024 },
+          { src: "https://cdn.hanuribook.com/img/icon/junior_04.png", w: 1024, h: 1024 },
+        ],
+        items: [
+          { text: "어떤 작품을 선택해야 할지 모르겠어요!" },
+          { text: "교과서 속 문학 작품, 읽을 시간이 부족해요!" },
+          { text: "공부를 위한 소설 읽기, 재미가 없어요!" },
+          { text: "문학 작품 속 어휘가 너무 어려워요!" },
+        ],
+      },
       // 별별 문학 독해(짙은 갈색)
       ...withTheme(LIT_MIDDLE_THEME, [
         {
@@ -886,12 +1135,13 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
 };
 
 /** 상세 페이지: 라우트마다 보여 줄 과정(여러 개면 위쪽 탭으로 전환) */
-export type SpecialPageId = "hangul" | "vocab" | "nonfiction" | "literature" | "society";
+export type SpecialPageId = "hangul" | "vocab" | "nonfiction" | "history" | "literature" | "society";
 
 export const SPECIAL_PAGES: Record<SpecialPageId, { crumb: string; programs: SpecialProgramId[] }> = {
   hangul: { crumb: "참깨한글", programs: ["hangul"] },
   vocab: { crumb: "다다어휘", programs: ["vocab"] },
   nonfiction: { crumb: "똑독해", programs: ["nonfiction"] },
+  history: { crumb: "한국사봄 | 한국사람", programs: ["history"] },
   literature: { crumb: "별별문학독해 | 교과문학탐독", programs: ["literature"] },
   society: { crumb: "소클 고등 통합사회", programs: ["society"] },
 };

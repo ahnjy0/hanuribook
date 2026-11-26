@@ -112,7 +112,8 @@ export default function HeroSection({ p }: { p: SpecialProgram }) {
         {p.heroCards ? (
           // 과정 카드(어휘리더 히어로의 교재 카드와 같은 모양): 2열, 페이지가 열릴 때 차례로 떠오름
           // 카드 = 흰 카드 안 연한 과정색 영역(표지) → 과정명 → 수업 정보 줄. 카드를 누르면 같은 페이지 안 과정 소개로 이동
-          <div className="mt-2 grid w-full max-w-[720px] grid-cols-2 gap-3 lg:mt-3 lg:gap-5">
+          // 두 칸 폭 고정(minmax(0,1fr)): 긴 교재 구성 글이 칸을 넓혀 화면 밖으로 넘치지 않게
+          <div className="mt-2 grid w-full max-w-[720px] grid-cols-[repeat(2,minmax(0,1fr))] gap-3 lg:mt-3 lg:gap-5">
             {p.heroCards.map((c, i) => (
               <div
                 key={c.name}
@@ -152,11 +153,18 @@ export default function HeroSection({ p }: { p: SpecialProgram }) {
                   )}
                   <dl className="m-0 flex flex-col gap-1.5 px-1 pt-3 pb-3 lg:gap-2 lg:px-3 lg:pt-4 lg:pb-4">
                     {c.info.map(([k, v]) => (
-                      <div key={k} className="flex flex-col items-center gap-0.5 lg:flex-row lg:justify-center lg:gap-2">
-                        <dt className="text-[12px] font-bold lg:text-[15px]" style={{ color: c.color }}>
+                      // 긴 값(교재 구성 등)은 데스크톱에서도 라벨 아래 줄에(라벨이 세로로 꺾이지 않게)
+                      <div key={k} className={`flex flex-col items-center gap-0.5 ${v.length > 14 ? "" : "lg:flex-row lg:justify-center lg:gap-2"}`}>
+                        <dt className="flex-none text-[12px] font-bold whitespace-nowrap lg:text-[15px]" style={{ color: c.color }}>
                           {k}
                         </dt>
-                        <dd className="m-0 text-[15px] font-extrabold break-keep text-[#1F1F1F] lg:text-[18px]">{v}</dd>
+                        <dd
+                          className={`m-0 max-w-full text-center font-extrabold break-keep [overflow-wrap:anywhere] text-[#1F1F1F] ${
+                            v.length > 14 ? "text-[13px] leading-[1.5] lg:text-[16px]" : "text-[15px] lg:text-[18px]"
+                          }`}
+                        >
+                          {v}
+                        </dd>
                       </div>
                     ))}
                   </dl>

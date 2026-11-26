@@ -21,9 +21,16 @@ export default function SpecialDetail(props: SpecialDetailProps) {
     <div className="flex min-h-screen w-full flex-col bg-white font-pretendard tracking-[-0.02em] text-[#1F1F1F]">
       <Header active="program" sub="단기특강" crumbs={crumbs} />
       {/* 마지막 블록이 전체 폭 색 띠(가운데 정렬 페이지의 학습 효과)면 아래 여백 없이 푸터에 바로 붙임.
-          왼쪽 정렬 페이지(문학 특강)의 학습 효과는 띠가 없어 아래 여백을 둠 */}
+          왼쪽 정렬 페이지(문학 특강)의 학습 효과는 띠가 없어 아래 여백을 둠. 과정 소개 띠(intro)로 끝나는 페이지(역사 특강)도 띠라서 바로 붙임 */}
       <main
-        className={`flex-[1_0_auto] ${cur.centered && cur.blocks[cur.blocks.length - 1]?.kind === "effects" ? "pb-0" : "pb-12 lg:pb-24"}`}
+        className={`flex-[1_0_auto] ${
+          (() => {
+            const last = cur.blocks[cur.blocks.length - 1];
+            return (last?.kind === "effects" && cur.centered) || last?.kind === "intro";
+          })()
+            ? "pb-0"
+            : "pb-12 lg:pb-24"
+        }`}
       >
         {hasTabs && (
           // 과정 탭: 고른 과정은 강조색 바탕 + 흰 글자

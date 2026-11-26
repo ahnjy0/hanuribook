@@ -49,6 +49,42 @@ const POINT_ICONS: Record<PointIcon, ReactNode> = {
       <circle cx="12" cy="12" r="0.8" />
     </>
   ),
+  // ── 역사 특강 ──
+  // 연표 학습: 두루마리(위아래 말린 종이 + 글줄)
+  scroll: (
+    <>
+      <path d="M18 17V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1.5h4" />
+      <path d="M7 5v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2H11v2a2 2 0 0 1-4 0" />
+      <path d="M10.5 8h4.5M10.5 11.5h4.5" />
+    </>
+  ),
+  // 입체적 탐구 활동: 퍼즐 조각(손으로 하는 활동)
+  puzzle: <path d="M5 5h4a2 2 0 1 1 4 0h4v4a2 2 0 1 1 0 4v4h-4a2 2 0 1 0-4 0H5v-4a2 2 0 1 0 0-4z" />,
+  // 인물과 개념 정리: 인물 카드(얼굴 + 정리 글줄)
+  idcard: (
+    <>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <circle cx="8.5" cy="10.5" r="2" />
+      <path d="M5.5 16a3 3 0 0 1 6 0M14 10h4M14 13h4M14 16h2" />
+    </>
+  ),
+  // 시대별 사건: 모래시계(시간의 흐름)
+  hourglass: <path d="M5 3h14M5 21h14M7 3v3l5 6-5 6v3M17 3v3l-5 6 5 6v3M9.5 18.5h5" />,
+  // 찬반 토론: 저울(양쪽을 견줌)
+  scales: (
+    <>
+      <path d="M12 4v16M8 20h8M5 7h14" />
+      <path d="M5 7l-2.5 6M5 7l2.5 6M2.5 13a2.5 2.5 0 0 0 5 0" />
+      <path d="M19 7l-2.5 6M19 7l2.5 6M16.5 13a2.5 2.5 0 0 0 5 0" />
+    </>
+  ),
+  // 유형별 글쓰기: 글 쓴 종이 + 연필
+  docpen: (
+    <>
+      <path d="M11 21H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h8l5 5v3M14 3v5h5M8 9h3M8 13h6M8 17h2" />
+      <path d="M13 21l.5-2.5 5.5-5.5 2 2-5.5 5.5z" />
+    </>
+  ),
 };
 
 /** 블록 종류별 제목 아이콘(24×24 선) — 왼쪽 정렬 섹션 제목을 쓰는 블록만 */
@@ -110,7 +146,8 @@ const EFFECT_ICONS: ReactNode[] = [EFFECT_ICON.book, EFFECT_ICON.bulb, EFFECT_IC
  * - 화면에 보일 때만 자동으로 넘어가고, 마우스를 올리거나 키보드 포커스가 있으면 멈춤
  * - 아래 점(●)을 눌러 원하는 장으로 이동. '동작 줄이기' 설정이면 자동 넘김 · 밀림 모션 없음
  */
-function WorrySlider({ slides, dot }: { slides: { key: string; node: ReactNode }[]; dot: string }) {
+// fade: true 면 옆으로 밀리지 않고 사라졌다 나타남(같은 자리에서 0.7초 페이드)
+function WorrySlider({ slides, dot, fade = false }: { slides: { key: string; node: ReactNode }[]; dot: string; fade?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const [cur, setCur] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -126,10 +163,11 @@ function WorrySlider({ slides, dot }: { slides: { key: string; node: ReactNode }
   }, []);
   useEffect(() => {
     if (!visible || paused || reduce) return;
-    // 넘김 모션 1초 + 멈춤 1초 = 2초마다 다음 장
-    const id = window.setTimeout(() => setCur((c) => (c + 1) % slides.length), 2000);
+    // 밀림: 넘김 모션 1초 + 멈춤 1초 = 2초마다 다음 장
+    // 페이드: 페이드 0.7초 + 멈춤 약 2.8초 = 3.5초마다 다음 장(한 장에 고민 2개라 읽을 시간을 더 줌)
+    const id = window.setTimeout(() => setCur((c) => (c + 1) % slides.length), fade ? 3500 : 2000);
     return () => window.clearTimeout(id);
-  }, [cur, visible, paused, reduce, slides.length]);
+  }, [cur, visible, paused, reduce, slides.length, fade]);
   return (
     <div
       ref={ref}
@@ -143,22 +181,41 @@ function WorrySlider({ slides, dot }: { slides: { key: string; node: ReactNode }
       onBlur={() => setPaused(false)}
     >
       <div className="w-full overflow-hidden pb-1">
-        <ul
-          className={`m-0 flex list-none p-0 ${reduce ? "" : "transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]"}`}
-          style={{ transform: `translateX(-${cur * 100}%)` }}
-        >
-          {slides.map((s, i) => (
-            <li
-              key={s.key}
-              className="flex w-full flex-none justify-center"
-              aria-roledescription="slide"
-              aria-label={`${i + 1} / ${slides.length}`}
-              aria-hidden={i !== cur}
-            >
-              {s.node}
-            </li>
-          ))}
-        </ul>
+        {fade ? (
+          // 페이드: 모든 장을 같은 칸에 겹쳐 두고 현재 장만 보이게(사라졌다 나타남)
+          <ul className="m-0 grid list-none p-0">
+            {slides.map((s, i) => (
+              <li
+                key={s.key}
+                className={`col-start-1 row-start-1 flex w-full justify-center ${reduce ? "" : "transition-opacity duration-700 ease-in-out"} ${
+                  i === cur ? "opacity-100" : "pointer-events-none opacity-0"
+                }`}
+                aria-roledescription="slide"
+                aria-label={`${i + 1} / ${slides.length}`}
+                aria-hidden={i !== cur}
+              >
+                {s.node}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <ul
+            className={`m-0 flex list-none p-0 ${reduce ? "" : "transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]"}`}
+            style={{ transform: `translateX(-${cur * 100}%)` }}
+          >
+            {slides.map((s, i) => (
+              <li
+                key={s.key}
+                className="flex w-full flex-none justify-center"
+                aria-roledescription="slide"
+                aria-label={`${i + 1} / ${slides.length}`}
+                aria-hidden={i !== cur}
+              >
+                {s.node}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       {/* 장 표시 점: 현재 장은 길쭉한 강조색 */}
       <div className="flex items-center gap-2">
@@ -280,16 +337,28 @@ export default function BlockSection({
         )}
         {b.figures ? (
           // 슬라이드(figures 있을 때, 예: 다다어휘): 질문 하나씩 크게(말풍선 → 그 아래 고민하는 엄마), 자동으로 옆으로 넘어감
+          // perSlide 2: 한 장에 학부모 두 명(말풍선 + 엄마)을 좌우로 나란히 — 글자 · 그림을 조금 작게
           <WorrySlider
-            slides={b.items.map((q, i) => {
-              const bg = b.bubbleBg ? b.bubbleBg[i % 2] : i % 2 ? `${t.dark}1F` : `${t.accent}40`;
-              const f = b.figures?.[i];
+            slides={Array.from({ length: Math.ceil(b.items.length / (b.perSlide ?? 1)) }, (_, si) => {
+              const per = b.perSlide ?? 1;
+              const group = b.items.slice(si * per, si * per + per);
+              const pair = per > 1;
               return {
-                key: q.text,
+                key: group.map((q) => q.text).join("|"),
                 node: (
-                  <div className="box-border flex w-full flex-col items-center gap-5 px-1 lg:gap-7">
+                  <div className={`box-border grid w-full gap-3 px-1 lg:gap-8 ${pair ? "grid-cols-2" : "grid-cols-1"}`}>
+                    {group.map((q, gi) => {
+                      const i = si * per + gi;
+                      const bg = b.bubbleBg ? b.bubbleBg[i % 2] : i % 2 ? `${t.dark}1F` : `${t.accent}40`;
+                      const f = b.figures?.[i];
+                      return (
+                  <div key={q.text} className="box-border flex w-full flex-col items-center gap-5 lg:gap-7">
                     <p
-                      className="relative m-0 box-border w-full max-w-[640px] rounded-[24px] px-6 py-6 text-center text-[18px] leading-[1.5] font-semibold break-keep text-[#1F1F1F] lg:rounded-[32px] lg:px-12 lg:py-9 lg:text-[28px]"
+                      className={`relative m-0 box-border w-full rounded-[24px] text-center leading-[1.5] font-semibold break-keep text-[#1F1F1F] lg:rounded-[32px] ${
+                        pair
+                          ? "px-3 py-4 text-[15px] lg:px-8 lg:py-7 lg:text-[22px]"
+                          : "max-w-[640px] px-6 py-6 text-[18px] lg:px-12 lg:py-9 lg:text-[28px]"
+                      }`}
                       style={{ background: bg }}
                     >
                       “{emText(q.text, q.em, b.emColor ?? ink)}”
@@ -303,7 +372,7 @@ export default function BlockSection({
                     {f && (
                       // 엄마: 틀 없이 이미지 전체(잘라 내지 않음). 그림 둘레 투명 여백만큼 위아래 음수 여백으로 간격을 줄임
                       <img
-                        className="-my-6 block h-48 w-48 flex-none lg:-my-8 lg:h-64 lg:w-64"
+                        className={`block flex-none ${pair ? "-my-4 h-32 w-32 lg:-my-7 lg:h-56 lg:w-56" : "-my-6 h-48 w-48 lg:-my-8 lg:h-64 lg:w-64"}`}
                         src={f.src}
                         width={f.w}
                         height={f.h}
@@ -313,10 +382,14 @@ export default function BlockSection({
                       />
                     )}
                   </div>
+                      );
+                    })}
+                  </div>
                 ),
               };
             })}
             dot={ink}
+            fade={b.fade}
           />
         ) : (
         <ul className="m-0 flex w-full max-w-[840px] list-none flex-col gap-4 p-0 lg:gap-6">
@@ -382,7 +455,8 @@ export default function BlockSection({
               </span>
             )}
             <div className="min-w-0">
-              <p className="m-0 text-[16px] leading-[1.55] font-bold break-keep text-white lg:text-[22px]">
+              {/* 문구 속 \n 은 줄바꿈(whitespace-pre-line) */}
+              <p className="m-0 text-[16px] leading-[1.55] font-bold break-keep whitespace-pre-line text-white lg:text-[22px]">
                 {b.answer.em && b.answer.text.includes(b.answer.em) ? (
                   <>
                     {b.answer.text.slice(0, b.answer.text.indexOf(b.answer.em))}
@@ -612,7 +686,7 @@ export default function BlockSection({
       // 배경색 있는 섹션: 연한 과정색 띠(전체 폭) 위에 가운데 내용(최대 1200px)
       <section
         id={b.id}
-        className="mt-13 box-border scroll-mt-24 px-0 py-11 lg:mt-24 lg:py-20"
+        className={`box-border scroll-mt-24 px-0 py-11 lg:py-20 ${b.flush ? "mt-0" : "mt-13 lg:mt-24"}`}
         style={{ background: t.soft }}
         aria-labelledby={id}
       >
@@ -903,15 +977,16 @@ export default function BlockSection({
       <section
         className={
           nested
-            ? "m-0 box-border flex w-full flex-col items-center gap-4 px-0 pt-9 text-left lg:gap-5 lg:pt-14"
+            ? "m-0 box-border flex w-full flex-col items-center gap-3 px-0 pt-9 text-left lg:gap-4 lg:pt-12"
             : "mx-auto my-0 box-border flex max-w-[1200px] flex-col items-center gap-4 px-5 pt-13 lg:gap-5 lg:pt-24"
         }
         aria-labelledby={b.title ? id : undefined}
         aria-label={b.title ? undefined : b.label}
       >
         {/* 박스 위 라벨(있을 때): 가운데 라벨 페이지면 가운데 둥근 라벨, 아니면 왼쪽 정렬 타일 아이콘 제목(표 아이콘) */}
+        {/* 소개 띠 안(nested, 역사 특강)은 같은 띠의 '주요 특징'처럼 왼쪽 정렬 타일 아이콘 제목 */}
         {b.label &&
-          (centered || nested ? (
+          (centered ? (
             <SectionLabel color={ink} bg={t.soft}>
               {b.label}
             </SectionLabel>
@@ -945,18 +1020,22 @@ export default function BlockSection({
               <li key={c.head} className="flex flex-col items-stretch lg:flex-1 lg:flex-row">
                 <div className="flex flex-auto flex-col overflow-hidden rounded-[16px] bg-white lg:rounded-[18px]">
                   {/* 색 띠: 진한 살구 핑크와 밝은 살구 핑크를 번갈아 */}
+                  {/* 소개 띠 안(nested)은 작게: 색 띠 · 줄 높이 · 글자를 한 단계 줄임. hideHead 면 색 띠 없음 */}
+                  {!b.hideHead && (
                   <div
-                    className="flex flex-col items-center justify-center px-2 py-3 text-center leading-[1.35] break-keep text-white"
+                    className={`flex flex-col items-center justify-center px-2 text-center leading-[1.35] break-keep text-white ${nested ? "py-2" : "py-3"}`}
                     style={{ background: i % 2 === 0 ? ink : t.dark }}
                   >
-                    <span className="text-[16px] font-extrabold lg:text-[18px]">{c.head}</span>
+                    <span className={`font-extrabold ${nested ? "text-[14px] lg:text-[16px]" : "text-[16px] lg:text-[18px]"}`}>{c.head}</span>
                     {c.sub && <span className="text-[12px] font-semibold opacity-90 lg:text-[13px]">{c.sub}</span>}
                   </div>
-                  <ul className="m-0 flex flex-auto list-none flex-col p-0">
+                  )}
+                  {/* hideHead(역사 특강): 색 띠가 없으니 카드 위아래 여백을 넉넉히 */}
+                  <ul className={`m-0 flex flex-auto list-none flex-col px-0 ${b.hideHead ? "py-3 lg:py-5" : "py-0"}`}>
                     {c.items.map((it, j) => (
                       <li
                         key={it.session}
-                        className={`flex gap-3 px-4 py-3.5 lg:px-5 lg:py-4 ${j > 0 ? "border-0 border-t border-solid border-[#EFE6D6]" : ""}`}
+                        className={`flex gap-2.5 ${nested ? "px-3.5 py-2.5 lg:px-4 lg:py-3" : "px-4 py-3.5 lg:px-5 lg:py-4"} ${j > 0 && !b.hideHead ? "border-0 border-t border-solid border-[#EFE6D6]" : ""}`}
                       >
                         <span
                           className="mt-0.5 inline-flex h-fit flex-none items-center rounded-full px-2 py-0.5 text-[11px] font-extrabold lg:text-[12px]"
@@ -965,7 +1044,11 @@ export default function BlockSection({
                           {it.session}
                         </span>
                         <div className="flex min-w-0 flex-col gap-0.5">
-                          <strong className="text-[14px] leading-[1.45] font-extrabold break-keep lg:text-[16px]" style={{ color: ink }}>
+                          {/* 주제 글자: 강조색 굵게. hideHead(역사 특강)는 보통 굵기 · 진회색 */}
+                          <strong
+                            className={`leading-[1.45] break-keep ${b.hideHead ? "font-medium" : "font-extrabold"} ${nested ? "text-[13px] lg:text-[15px]" : "text-[14px] lg:text-[16px]"}`}
+                            style={{ color: b.hideHead ? "#333333" : ink }}
+                          >
                             {it.title}
                           </strong>
                           {it.desc && <span className="text-[13px] leading-[1.55] break-keep text-[#333333] lg:text-[15px]">{it.desc}</span>}
@@ -1051,17 +1134,26 @@ export default function BlockSection({
 
       {b.kind === "points" && nested && (
         // 주요 정보 띠 안(문학 특강): 짧은 문구 카드 — 모바일 2열 · 데스크톱 한 줄, 아이콘(연한 과정색 동그라미) + 굵은 문구(가운데)
-        <ul className="m-0 mt-1.5 grid list-none grid-cols-2 gap-2.5 p-0 lg:grid-cols-4 lg:gap-4">
+        // 카드 3개(역사 특강)면 모바일부터 3열 가로 한 줄(빈 칸 없이) — 좁은 칸이라 모바일은 간격 · 안쪽 여백 · 글자를 줄임
+        <ul
+          className={`m-0 mt-1.5 grid list-none p-0 lg:gap-4 ${
+            b.items.length === 3 ? "grid-cols-3 gap-2 md:gap-2.5" : "grid-cols-2 gap-2.5 lg:grid-cols-4"
+          }`}
+        >
           {b.items.map((it) => (
             <li
               key={it.label}
-              className="flex flex-col items-center justify-center gap-2.5 rounded-[18px] border-[1.5px] border-solid bg-white px-3 py-5 text-center lg:gap-3.5 lg:rounded-[22px] lg:px-5 lg:py-8"
-              style={{ borderColor: `${t.accent}40` }}
+              className={`flex flex-col items-center justify-center gap-2.5 rounded-[18px] border-[1.5px] border-solid py-5 text-center lg:gap-3.5 lg:rounded-[22px] lg:px-5 lg:py-8 ${
+                b.items.length === 3 ? "px-1.5 md:px-3" : "px-3"
+              }`}
+              // 바탕색(cardBg, 역사 특강)이 있으면 그 색 + 테두리 없음, 없으면 흰 카드 + 연한 강조색 테두리
+              style={b.cardBg ? { background: b.cardBg, borderColor: "transparent" } : { background: "#FFFFFF", borderColor: `${t.accent}40` }}
             >
               {it.icon && (
                 <span
                   className="flex h-12 w-12 flex-none items-center justify-center rounded-full lg:h-16 lg:w-16"
-                  style={{ background: `${t.accent}1A`, color: t.accent }}
+                  // 아이콘 선: 흰 바탕 위 강조 글자색(ink) — 강조색이 밝은 과정(한국사봄 베이지)도 또렷하게
+                  style={{ background: b.cardBg ? "#FFFFFF" : `${t.accent}1A`, color: ink }}
                   aria-hidden="true"
                 >
                   <svg
@@ -1077,7 +1169,25 @@ export default function BlockSection({
                   </svg>
                 </span>
               )}
-              <strong className="text-[15px] leading-[1.4] font-extrabold break-keep text-[#1F1F1F] lg:text-[20px]">{it.title ?? it.desc}</strong>
+              <strong
+                className={`leading-[1.4] font-extrabold break-keep text-[#1F1F1F] lg:text-[20px] ${
+                  b.items.length === 3 ? "text-[13px] md:text-[15px]" : "text-[15px]"
+                }`}
+              >
+                {it.title ?? it.desc}
+              </strong>
+            </li>
+          ))}
+        </ul>
+      )}
+      {b.kind === "points" && nested && b.notes && (
+        // 카드 아래 부연 설명(한국사봄): 흰 박스 안 점 목록(점은 강조 글자색), 왼쪽 정렬
+        <ul className="m-0 mt-1 box-border flex list-none flex-col gap-2 rounded-[18px] bg-white px-5 py-4 text-left lg:gap-2.5 lg:rounded-[22px] lg:px-8 lg:py-6">
+          {b.notes.map((n) => (
+            <li key={n} className="flex items-start gap-2.5 text-[14px] leading-[1.6] font-medium break-keep text-[#333333] lg:text-[17px]">
+              {/* 점: 첫 줄 가운데(줄 높이 1.6em 의 절반 - 점 반지름 3px) */}
+              <span className="mt-[calc(0.8em-3px)] h-1.5 w-1.5 flex-none rounded-full" style={{ background: ink }} aria-hidden="true" />
+              <span className="min-w-0">{n}</span>
             </li>
           ))}
         </ul>
@@ -1169,7 +1279,7 @@ export default function BlockSection({
           {b.items.map((it, i) => (
             // 강조 단계(it.em): 강조색 바탕 + 흰 글자, 번호 칸은 반대로(흰 바탕 + 강조색 글자)
             <li
-              key={it.title}
+              key={`${i}-${it.title}`}
               className="flex flex-col items-start gap-2 rounded-[18px] p-5 lg:rounded-[22px] lg:p-6"
               style={{ background: it.em ? t.accent : t.soft }}
             >

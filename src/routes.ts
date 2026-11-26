@@ -35,6 +35,7 @@ export const PATHS = {
   SpecialHangul: "/special-hangul",
   SpecialVocab: "/special-vocab",
   SpecialNonfiction: "/special-nonfiction",
+  SpecialHistory: "/special-history",
   SpecialLiterature: "/special-literature",
   SpecialSociety: "/special-society",
 } as const;
