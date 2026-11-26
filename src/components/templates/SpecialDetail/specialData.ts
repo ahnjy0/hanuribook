@@ -22,7 +22,7 @@ function localImg(img: StaticImageData): SpecialImage {
  * - ink: 흰 바탕 위에 쓰는 강조 글자색(기본 accent — 밝은 강조색이면 같은 계열의 진한 색)
  */
 /** 주요 특징 짧은 문구 카드 아이콘 이름 */
-export type PointIcon = "book" | "layers" | "link" | "pen" | "bulb" | "search" | "target";
+export type PointIcon = "book" | "layers" | "link" | "pen" | "bulb" | "search" | "target" | "words" | "context" | "speak";
 
 export type SpecialTheme ={ accent: string; dark: string; soft: string; hi: string; onAccent?: string; ink?: string };
 
@@ -451,10 +451,10 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         iconBg: true,
         items: [
           // 설명과 강조 문구를 한 줄로(강조 부분만 더 굵게)
-          // icon: 카드 위 아이콘(책 · 돋보기 · 연필) — 아이콘이 있으면 Point 라벨은 생략
-          { label: "Point.1", desc: "교과서 이해에 꼭 필요한 어휘 285개 수록", descEm: "어휘 285개 수록", icon: "book" },
-          { label: "Point.2", desc: "읽으면서 뜻이 잡히는 맥락 중심 학습", descEm: "맥락 중심 학습", icon: "search" },
-          { label: "Point.3", desc: "평가에 바로 적용 가능한 쓰기 / 말하기 훈련", descEm: "쓰기 / 말하기 훈련", icon: "pen" },
+          // icon: 카드 위 아이콘(설명에 맞춤: 단어장 · 문장 속 낱말 · 말풍선 + 연필) — 아이콘이 있으면 Point 라벨은 생략
+          { label: "Point.1", desc: "교과서 이해에 꼭 필요한 어휘 285개 수록", descEm: "어휘 285개 수록", icon: "words" },
+          { label: "Point.2", desc: "읽으면서 뜻이 잡히는 맥락 중심 학습", descEm: "맥락 중심 학습", icon: "context" },
+          { label: "Point.3", desc: "평가에 바로 적용 가능한 쓰기 / 말하기 훈련", descEm: "쓰기 / 말하기 훈련", icon: "speak" },
         ],
       },
       {
@@ -477,8 +477,7 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
       {
         kind: "effects",
         label: "학습 효과",
-        title: "교과서 필수 어휘학습",
-        desc: "어휘력이 자라면 독해력과\n교과 자신감이 함께 올라갑니다.",
+        title: "어휘력이 자라면 독해력과\n교과 자신감이 함께 올라갑니다.",
         numbered: true,
         items: [
           { title: "학교 교과서가 쉬워져요", text: "교과 어휘를 미리 익혀 수업 내용을 쉽게 이해해요.", em: "" },

@@ -18,6 +18,29 @@ const POINT_ICONS: Record<PointIcon, ReactNode> = {
   bulb: <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" />,
   // 돋보기(탐독)
   search: <path d="M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.5 15.5L20 20" />,
+  // 낱말 카드 묶음(어휘 수록): 겹친 카드 두 장 + 앞 카드에 낱말 줄
+  words: (
+    <>
+      <path d="M4 8v10a2 2 0 0 0 2 2h10" />
+      <rect x="8" y="3" width="12" height="13" rx="2" />
+      <path d="M11 8h6M11 11.5h4" />
+    </>
+  ),
+  // 문장 속 낱말(맥락 학습): 글이 적힌 종이 + 가운데 줄 한 낱말에 표시 상자
+  context: (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M7 8.5h10M7 12.5h1.5M15.5 12.5H17M7 16.5h6" />
+      <rect x="10" y="10.5" width="4" height="4" rx="1" fill="currentColor" stroke="none" />
+    </>
+  ),
+  // 말풍선 + 연필(쓰기 · 말하기)
+  speak: (
+    <>
+      <path d="M4 4h16v11H10l-4 4v-4H4z" />
+      <path d="M9 12l4.5-4.5 1.5 1.5L10.5 13.5H9z" />
+    </>
+  ),
   // 과녁(실전 대비)
   target: (
     <>
@@ -403,7 +426,7 @@ export default function BlockSection({
           {b.eyebrow && <p className="m-0 -mb-2 text-[15px] font-bold break-keep text-white/90 lg:-mb-3 lg:text-[19px]">{b.eyebrow}</p>}
           {b.title ? (
             <h2 className="m-0 text-[26px] font-extrabold break-keep text-white lg:text-[38px]" id={id}>
-              {b.title}
+              {lines(b.title)}
             </h2>
           ) : (
             // 제목이 없으면 화면 읽기 프로그램용 제목만(라벨 글자)
@@ -478,8 +501,11 @@ export default function BlockSection({
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 )}
+                {/* 카드 제목: 강조 글자색(흰 바탕 위 강조색) */}
                 {it.title && (
-                  <strong className="text-[17px] leading-[1.4] font-extrabold break-keep text-[#1F1F1F] lg:text-[21px]">{it.title}</strong>
+                  <strong className="text-[17px] leading-[1.4] font-extrabold break-keep lg:text-[21px]" style={{ color: ink }}>
+                    {it.title}
+                  </strong>
                 )}
                 <p className="m-0 text-[15px] leading-[1.55] font-semibold break-keep text-[#333333] lg:text-[17px]">
                   {it.em ? withEm(it.text, it.em) : it.text}

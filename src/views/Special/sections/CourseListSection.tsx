@@ -27,7 +27,7 @@ export default function CourseListSection({ items }: Props) {
                 <div className="flex flex-wrap items-center gap-1.5 lg:gap-2">
                   <span
                     className="inline-flex items-center rounded-full px-3.5 py-1.5 text-[13px] leading-[1.5] font-extrabold lg:px-4.5 lg:py-2 lg:text-[16px]"
-                    style={{ background: c.badge, color: c.badgeFg }}
+                    style={{ background: c.fieldBg ?? c.badge, color: c.fieldFg ?? c.badgeFg }}
                   >
                     {c.field}
                   </span>

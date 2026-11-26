@@ -30,9 +30,12 @@ const ITEMS: {
   badge: string;
   badgeFg: string;
   ink: string;
+  fieldBg?: string; // 이 목록 페이지의 분야 라벨 바탕만 따로(없으면 badge) — 메인 카드 색(SPECIAL_TONE)에는 영향 없음
+  fieldFg?: string;
   href: string;
 }[] = [
-  { id: "hangul", age: "유아", field: "한글", title: "참깨한글", desc: "책을 읽으며 한글을 재미있게 깨치는 한글 프로그램", ...toneOf("hangul"), href: PATHS.SpecialHangul },
+  // 참깨한글 분야 라벨: 페이지 주요 색(로고 '참깨'의 살구 핑크, theme.dark) + 흰 글자
+  { id: "hangul", age: "유아", field: "한글", title: "참깨한글", desc: "책을 읽으며 한글을 재미있게 깨치는 한글 프로그램", ...toneOf("hangul"), fieldBg: SPECIAL_PROGRAMS.hangul.theme.dark, fieldFg: "#FFFFFF", href: PATHS.SpecialHangul },
   { id: "vocab", age: "초등", field: "어휘", title: "다다어휘", desc: "교과서 필수 어휘 집중 학습", ...toneOf("vocab"), href: PATHS.SpecialVocab },
   { id: "nonfiction", age: "초등", field: "비문학", title: "똑독해", desc: "사회, 과학, 경제 11가지 비문학 독해 원리 학습", ...toneOf("nonfiction"), href: PATHS.SpecialNonfiction },
   { id: "history", age: "초등", field: "역사", title: "한국사봄 | 한국사람", desc: "한국사 집중 대비", tint: "#FFF1E0", line: "#F6D9B5", badge: "#B45309", badgeFg: "#FFFFFF", ink: "#B45309", href: "#" },
