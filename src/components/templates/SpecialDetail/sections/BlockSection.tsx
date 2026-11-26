@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import SectionTitle from "@/views/Socrates/sections/SectionTitle";
 import SectionLabel from "@/components/common/SectionLabel";
 import CheckIcon from "@/components/common/CheckIcon";
-import { inkOf, onAccentOf, type PointIcon, type SpecialBlock, type SpecialTheme } from "../specialData";
+import { inkOf, onAccentOf, type EffectIcon, type PointIcon,type SpecialBlock, type SpecialTheme } from "../specialData";
 
 /** 주요 특징 짧은 문구 카드 아이콘(24×24 선) */
 const POINT_ICONS: Record<PointIcon, ReactNode> = {
@@ -71,12 +71,16 @@ const lines = (s: string) =>
  * - tables: 표(좁은 화면에서는 표만 가로 스크롤)
  */
 /** 학습 효과 카드 아이콘(선 아이콘): 책 · 전구 · 연필 · 체크 목록(4번째 카드가 있을 때) */
-const EFFECT_ICONS: ReactNode[] = [
-  <path key="book" d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5zM20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z" />,
-  <path key="bulb" d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" />,
-  <path key="pencil" d="M4 20l1-4L16 5l3 3L8 19zM14 7l3 3" />,
-  <path key="check" d="M6 3h12v18H6zM9 9l1.5 1.5L13 8M9 15l1.5 1.5L13 14" />,
-];
+// 학습 효과 아이콘(이름으로 고름): 항목에 icon 이 있으면 그 아이콘, 없으면 순서대로 책 · 전구 · 연필 · 체크
+const EFFECT_ICON: Record<EffectIcon, ReactNode> = {
+  book: <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5zM20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z" />,
+  bulb: <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" />,
+  pencil: <path d="M4 20l1-4L16 5l3 3L8 19zM14 7l3 3" />,
+  check: <path d="M6 3h12v18H6zM9 9l1.5 1.5L13 8M9 15l1.5 1.5L13 14" />,
+  // 탐구: 돋보기
+  search: <path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4" />,
+};
+const EFFECT_ICONS: ReactNode[] = [EFFECT_ICON.book, EFFECT_ICON.bulb, EFFECT_ICON.pencil, EFFECT_ICON.check];
 
 /**
  * 고민 슬라이드: 한 번에 하나씩 크게 보여 주고, 1초 동안 옆으로 밀려 넘어간 뒤 1초 멈춤(마지막 다음은 처음으로)
@@ -464,13 +468,16 @@ export default function BlockSection({
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  {EFFECT_ICONS[i % EFFECT_ICONS.length]}
+                  {it.icon ? EFFECT_ICON[it.icon] : EFFECT_ICONS[i % EFFECT_ICONS.length]}
                 </svg>
               </span>
               <div className="flex flex-col gap-1 md:items-center lg:gap-2">
-                <span className="text-[13px] font-extrabold tracking-[0.04em] lg:text-[15px]" style={{ color: ink }}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                {/* 번호: 항목에 아이콘을 따로 지정하면(제목에 맞춘 아이콘) 생략 */}
+                {!it.icon && (
+                  <span className="text-[13px] font-extrabold tracking-[0.04em] lg:text-[15px]" style={{ color: ink }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                )}
                 {it.title && (
                   <strong className="text-[17px] leading-[1.4] font-extrabold break-keep text-[#1F1F1F] lg:text-[21px]">{it.title}</strong>
                 )}

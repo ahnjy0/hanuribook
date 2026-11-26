@@ -118,7 +118,8 @@ type SpecialBlockBody =
       title?: string;
       desc?: string;
       numbered?: boolean;
-      items: { title?: string; text: string; em: string }[];
+      // icon: 카드 아이콘을 직접 고름(있으면 번호 생략) — 없으면 순서대로 책 · 전구 · 연필 · 체크
+      items: { title?: string; text: string; em: string; icon?: EffectIcon }[];
     }
   // 과정 카드: 가운데 라벨 + 3열(2개면 2열) 카드(과정 로고(없으면 과정명 글자) → 대상 설명(\n 줄바꿈) → 구분선 → 굵은 제목)
   // href: 카드를 누르면 이동할 같은 페이지 안 위치(#id, 없으면 링크 없음) / color: 과정명 글자색(없으면 강조 글자색)
@@ -183,7 +184,10 @@ export type SpecialProgram = {
   blocks: SpecialBlock[];
 };
 
-export type SpecialProgramId = "hangul" | "vocab" | "nonfiction" | "literature" | "society";
+/** 학습 효과 카드 아이콘 이름(그림은 sections/BlockSection 의 EFFECT_ICON) */
+export type EffectIcon = "book" | "bulb" | "pencil" | "check" | "search";
+
+export type SpecialProgramId ="hangul" | "vocab" | "nonfiction" | "literature" | "society";
 
 const SESSIONS = ["1차시", "2차시", "3차시", "4차시"];
 
@@ -592,13 +596,15 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
       {
         kind: "effects",
         label: "학습 효과",
-        eyebrow: "초등학생이 꼭 알아야 할",
-        title: "11가지 비문학 독해 원리로",
-        desc: "내신과 수능을 확실하게 대비합니다.",
+        // 섹션 제목: 아래 세 카드(읽기 · 탐구 · 생각의 힘)를 묶는 문구
+        title: "읽기 · 탐구 · 생각의 힘",
+        desc: "비문학 지문을 정확하게 읽고, 깊이 탐구하고, 스스로 생각하는 힘을 기릅니다.",
         items: [
-          { text: "초등 고학년이 알아야 할 11가지 비문학 독해 원리를 학습합니다.", em: "" },
-          { text: "학교 평가에 대비해, 교과서 지문을 활용한 서술형 평가 실전 연습을 합니다.", em: "" },
-          { text: "필독서 지문으로 2028년 개편 수능(통합사회·과학) 대비 배경지식을 습득합니다.", em: "" },
+          // 항목 제목(읽기 · 탐구 · 생각의 힘) + 설명(굵게: 키워드) — 주요 특징 · 수업 내용(11가지 독해 원리) 기준
+          // 아이콘: 읽기 = 책, 탐구 = 돋보기, 생각 = 전구 (아이콘을 지정해서 번호는 생략)
+          { title: "읽기의 힘", icon: "book", text: "사회 · 과학 · 경제 분야의 비문학 지문을 읽으며 글의 중심 내용과 구조를 정확하게 파악합니다.", em: "비문학 지문" },
+          { title: "탐구의 힘", icon: "search", text: "11가지 독해 원리로 추론하고, 질문하고, 비판하며 글을 깊이 있게 탐구합니다.", em: "독해 원리" },
+          { title: "생각의 힘", icon: "bulb", text: "교과 개념과 연계한 필독서를 읽고 생각을 정리하며 서술형 평가와 2028년 개편 수능에 대비합니다.", em: "교과 개념과 연계한" },
         ],
       },
     ],
