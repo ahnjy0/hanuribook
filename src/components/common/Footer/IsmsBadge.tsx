@@ -94,12 +94,16 @@ export default function IsmsBadge() {
             한우리열린교육 정보보호 관리체계 인증 획득
           </h2>
 
-          {/* 인증서 이미지 영역 (A4 세로 비율 794:1116) — 이미지 파일이 준비되면 아래 자리표시를 <img> 로 교체 */}
+          {/* 인증서 이미지: 높이를 화면에 맞춰 제한하고 너비는 원본 비율대로(width/height 는 불러오기 전 자리 비율 — A4 세로) */}
           <div className="flex justify-center rounded-[18px] bg-[#F1F4F9] p-3">
-            <div className="flex aspect-[794/1116] h-[min(46vh,360px)] flex-col items-center justify-center gap-3 rounded-[6px] bg-white shadow-[0_4px_14px_rgba(0,0,0,0.12)] ring-1 ring-[#D9DEE8]">
-              <IsmsShield width={64} height={73} />
-              <span className="text-[12px] text-[#8A94A6]">정보보호 관리체계 인증서</span>
-            </div>
+            <img
+              className="block h-auto max-h-[min(46vh,360px)] w-auto max-w-full rounded-[6px] bg-white shadow-[0_4px_14px_rgba(0,0,0,0.12)] ring-1 ring-[#D9DEE8]"
+              src="https://cdn.hanuribook.com/img/isms.jpg"
+              width={794}
+              height={1116}
+              alt="한우리열린교육 정보보호 관리체계(ISMS) 인증서"
+              loading="lazy"
+            />
           </div>
 
           <dl className="m-0 flex flex-col gap-3 rounded-[16px] bg-[#F7F7F8] px-4.5 py-4">
