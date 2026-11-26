@@ -487,26 +487,27 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
 
   nonfiction: {
     name: "똑독해",
-    // 다다어휘와 같은 구성: 프로그램 구분 태그 → 정보 타일 2개 → 고민 슬라이드 → 주요 특징(띠) → 교재 구성 → 수업 내용(표) → 학습 효과
-    tag: "초등 비문학 특강 프로그램",
+    // 구성: 프로그램 구분 태그 → 수업 정보(대상 · 수업 기간 · 교재 구성) → 고민 슬라이드 → 주요 특징(띠) → 수업 내용(표) → 학습 효과
+    tag: "초등 비문학 독해 프로그램",
     title: "똑독해",
     logo: { src: "https://cdn.hanuribook.com/img/hanuribook/logo_special3_01.png", w: 582, h: 248 },
     // 로고: 기본보다 작게
     logoCls: "h-16 lg:h-24",
-    // 히어로 배경 패턴: 다다어휘와 같이 45도 회전. 똑독해 표지(폭 500px, 높이 약 663px)를 통째로 띠(663px)로 가로 반복 → 띠를 쌓아 회전, 옅게(불투명도 5%)
+    // 히어로 배경 패턴: 다다어휘와 같이 45도 회전. 똑독해 3호 표지(원본 393×525 → 폭 500px, 높이 약 668px)를 통째로 띠(668px)로 가로 반복 → 띠를 쌓아 회전, 옅게(불투명도 5%)
     heroBg: {
-      src: "https://cdn.hanuribook.com/img/hanuribook/special3_02.png",
+      src: "https://cdn.hanuribook.com/img/hanuribook/special3_03.png",
       size: "500px auto",
       position: "left top",
       repeat: "repeat-x",
       rotate: 45,
-      band: 663,
+      band: 668,
       opacity: 0.05,
     },
     slogan: "사회, 과학, 경제 11가지 비문학 독해 원리 학습",
     info: [
       ["대상", "초등 고학년(4~6학년)"],
       ["수업 기간", "3개월(12차시)"],
+      ["교재 구성", "워크북 3권, 필독서 3권"],
     ],
     // 주요 색: 로고의 주황 #F26532(accent · dark — 위 글자는 흰색) + 단기특강 공통 베이지 바탕(soft)
     // 흰 바탕 위 강조 글자(ink)는 한 톤 진한 주황
@@ -542,17 +543,12 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         kind: "points",
         title: "주요 특징",
         band: true,
-        heading: "비문학 독해의 시작\n비문학 독해력 집중 향상 프로그램",
+        heading: "독해력과 사고력을 한 번에 잡는\n비문학 독해력 집중 향상 프로그램",
         items: [
           { label: "Point.1", title: "비문학 독해 원리 학습", desc: "초등 고학년이 알아야 할 11가지 비문학 독해 원리를 학습합니다." },
           { label: "Point.2", title: "서술형 평가 실전 연습", desc: "학교 평가에 대비해, 교과서 지문을 활용한 서술형 평가 실전 연습을 합니다." },
           { label: "Point.3", title: "수능 대비 배경지식 습득", desc: "필독서 지문으로 2028년 개편 수능(통합사회·과학) 대비 배경지식을 습득합니다." },
         ],
-      },
-      {
-        kind: "kit",
-        label: "교재 구성",
-        items: ["각 호당 필독서 1권", "교재 1권"],
       },
       {
         // 표(가로 스크롤) 대신 호별 칸(모바일은 위아래로 쌓임) — 칸마다 1~4차시 독해 원리
