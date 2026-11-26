@@ -11,7 +11,7 @@ export default function IntroSection() {
         <span className="text-[#D94E0F]">단기특강</span>
       </h1>
       <p className="m-0 text-[14px] leading-[1.7] text-[#333333]">
-        방학·학기 중 4~8주 과정으로 한글, 어휘, 독해, 역사, 문학, 통합사회를 집중적으로 완성합니다.
+        방학·학기 중 4~12주 과정으로 한글, 어휘, 독해, 역사, 문학, 통합사회를 집중적으로 완성합니다.
       </p>
     </section>
   );
