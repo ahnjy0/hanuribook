@@ -538,8 +538,8 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
           { text: "고학년이 되며 어려워지는 평가가 걱정돼요!" },
         ],
         answer: {
-          text: "초등학생이 꼭 알아야 할 11가지 비문학 독해 원리로 내신과 수능을 확실하게 대비합니다.",
-          em: "11가지 비문학 독해 원리",
+          text: "비문학 지문을 정확하게 읽고, 깊이 탐구하고, 스스로 생각하는 힘을 기릅니다.",
+          em: "스스로 생각하는 힘",
           icon: { src: "https://cdn.hanuribook.com/img/icon/teacher.png", w: 1024, h: 1024 },
         },
       },
@@ -598,7 +598,6 @@ export const SPECIAL_PROGRAMS: Record<SpecialProgramId, SpecialProgram> = {
         label: "학습 효과",
         // 섹션 제목: 아래 세 카드(읽기 · 탐구 · 생각의 힘)를 묶는 문구
         title: "읽기 · 탐구 · 생각의 힘",
-        desc: "비문학 지문을 정확하게 읽고, 깊이 탐구하고, 스스로 생각하는 힘을 기릅니다.",
         items: [
           // 항목 제목(읽기 · 탐구 · 생각의 힘) + 설명(굵게: 키워드) — 주요 특징 · 수업 내용(11가지 독해 원리) 기준
           // 아이콘: 읽기 = 책, 탐구 = 돋보기, 생각 = 전구 (아이콘을 지정해서 번호는 생략)
