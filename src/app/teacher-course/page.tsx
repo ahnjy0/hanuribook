@@ -3,7 +3,7 @@ import { SITE_TITLE } from "@/routes";
 import TeacherCourse from "@/views/TeacherCourse/TeacherCourse";
 
 export const metadata: Metadata = {
-  title: `05-3 지도교사 입문과정 · ${SITE_TITLE}`,
+  title: `${SITE_TITLE} - 지도교사 입문과정`,
 };
 
 export default function Page() {

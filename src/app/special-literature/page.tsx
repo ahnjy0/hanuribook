@@ -3,7 +3,7 @@ import { SITE_TITLE } from "@/routes";
 import SpecialDetail from "@/components/templates/SpecialDetail/SpecialDetail";
 
 export const metadata: Metadata = {
-  title: `상세 · 단기특강 별별문학독해 | 교과문학탐독 · ${SITE_TITLE}`,
+  title: `${SITE_TITLE} - 별별문학독해 | 교과문학탐독`,
 };
 
 export default function Page() {

@@ -3,7 +3,7 @@ import { SITE_TITLE } from "@/routes";
 import Socrates from "@/views/Socrates/Socrates";
 
 export const metadata: Metadata = {
-  title: `상세 · 중고등정규 중등 소크라테스 · ${SITE_TITLE}`,
+  title: `${SITE_TITLE} - 소크라테스`,
 };
 
 export default function Page() {

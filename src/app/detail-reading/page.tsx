@@ -3,7 +3,7 @@ import { SITE_TITLE } from "@/routes";
 import ElementaryDetail from "@/views/ElementaryDetail/ElementaryDetail";
 
 export const metadata: Metadata = {
-  title: `상세 · 초등정규 독서리더 · ${SITE_TITLE}`,
+  title: `${SITE_TITLE} - 독서리더`,
 };
 
 export default function Page() {

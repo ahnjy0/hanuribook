@@ -3,7 +3,7 @@ import { SITE_TITLE } from "@/routes";
 import Program from "@/views/Program/Program";
 
 export const metadata: Metadata = {
-  title: `02-1 프로그램 소개 · ${SITE_TITLE}`,
+  title: `${SITE_TITLE} - 프로그램 소개`,
 };
 
 export default function Page() {

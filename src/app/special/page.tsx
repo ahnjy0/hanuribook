@@ -3,7 +3,7 @@ import { SITE_TITLE } from "@/routes";
 import Special from "@/views/Special/Special";
 
 export const metadata: Metadata = {
-  title: `02-6 단기특강 · ${SITE_TITLE}`,
+  title: `${SITE_TITLE} - 단기특강`,
 };
 
 export default function Page() {

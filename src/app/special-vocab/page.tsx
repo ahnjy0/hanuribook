@@ -3,7 +3,7 @@ import { SITE_TITLE } from "@/routes";
 import SpecialDetail from "@/components/templates/SpecialDetail/SpecialDetail";
 
 export const metadata: Metadata = {
-  title: `상세 · 단기특강 다다어휘 · ${SITE_TITLE}`,
+  title: `${SITE_TITLE} - 다다어휘`,
 };
 
 export default function Page() {

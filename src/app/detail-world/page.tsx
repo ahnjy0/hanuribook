@@ -3,7 +3,7 @@ import { SITE_TITLE } from "@/routes";
 import AdvancedDetail from "@/views/AdvancedDetail/AdvancedDetail";
 
 export const metadata: Metadata = {
-  title: `상세 · 초등심화 세계사 · ${SITE_TITLE}`,
+  title: `${SITE_TITLE} - 세계사`,
 };
 
 export default function Page() {

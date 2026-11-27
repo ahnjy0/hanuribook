@@ -3,7 +3,7 @@ import { SITE_TITLE } from "@/routes";
 import SpecialDetail from "@/components/templates/SpecialDetail/SpecialDetail";
 
 export const metadata: Metadata = {
-  title: `상세 · 단기특강 똑독해 · ${SITE_TITLE}`,
+  title: `${SITE_TITLE} - 똑독해`,
 };
 
 export default function Page() {

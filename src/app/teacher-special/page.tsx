@@ -3,7 +3,7 @@ import { SITE_TITLE } from "@/routes";
 import TeacherSpecial from "@/views/TeacherSpecial/TeacherSpecial";
 
 export const metadata: Metadata = {
-  title: `05-2 교사특별반 · ${SITE_TITLE}`,
+  title: `${SITE_TITLE} - 교사특별반`,
 };
 
 export default function Page() {

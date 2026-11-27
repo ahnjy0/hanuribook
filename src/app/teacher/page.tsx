@@ -3,7 +3,7 @@ import { SITE_TITLE } from "@/routes";
 import Teacher from "@/views/Teacher/Teacher";
 
 export const metadata: Metadata = {
-  title: `05-1 한우리선생님 · ${SITE_TITLE}`,
+  title: `${SITE_TITLE} - 한우리선생님`,
 };
 
 export default function Page() {
